@@ -14,6 +14,7 @@ import java.util.List;
 
 import static com.mrigor.testTasks.department.repository.DepTestData.DEP1_ID;
 import static com.mrigor.testTasks.department.repository.EmployeeTestData.*;
+import static java.time.LocalDate.of;
 import static org.junit.Assert.*;
 
 /**
@@ -33,15 +34,15 @@ public class EmployeeRepoImplTest {
     @Test
     public void update() throws Exception {
         Employee updateEmpl=getUpdated();
-        repository.save(updateEmpl);
+        repository.save(updateEmpl,DEP1_ID);
         MATCHER.assertCollectionEquals(Arrays.asList(EMPL2,EMPL3,updateEmpl), repository.getByDep(DEP1_ID));
     }
 
     @Test
     public void create() throws Exception {
         Employee createEmpl=getCreated();
-        repository.save(createEmpl);
-        MATCHER.assertCollectionEquals(Arrays.asList(EMPL1,EMPL2,EMPL3,createEmpl), repository.getByDep(DEP1_ID));
+        repository.save(createEmpl,DEP1_ID);
+        MATCHER.assertCollectionEquals(Arrays.asList(EMPL1,createEmpl,EMPL2,EMPL3), repository.getByDep(DEP1_ID));
     }
 
     @Test
@@ -69,6 +70,10 @@ public class EmployeeRepoImplTest {
 
     @Test
     public void getBetweenDates() throws Exception {
+        MATCHER.assertCollectionEquals(Arrays.asList(EMPL5,EMPL4), repository.getBetweenDates(of(1993,1,1),null));
+    }
+    @Test
+    public void getAllWithAvgSalary() throws Exception{
 
     }
 

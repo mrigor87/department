@@ -41,24 +41,26 @@ public class EmployeeRepoImpl implements EmployeeRepo {
     }
 
     @Override
-    public Employee save(Employee employee) {
+    public Employee save(Employee employee, int departmentId) {
 
         MapSqlParameterSource map = new MapSqlParameterSource()
                 .addValue("id", employee.getId())
                 .addValue("fullName", employee.getFullName())
-                .addValue(("birthday"),Date.valueOf(employee.getBirthDay()))
+                .addValue(("birthday"), Date.valueOf(employee.getBirthDay()))
 /*                .addValue(("birthday"),employee.getBirthDay())
                 .addValue(new Date.valueOf(employee.getBirthDay()))*/
-                .addValue(("salary"),employee.getSalary())
-                ;
+                .addValue("departmentId", departmentId)
+                .addValue(("salary"), employee.getSalary());
 
         if (employee.isNew()) {
-            map.addValue("department_id")
+
             Number newKey = insertEmployee.executeAndReturnKey(map);
             employee.setId(newKey.intValue());
         } else {
             namedParameterJdbcTemplate.update(
-                    "UPDATE EMPLOYEES SET FULLNAME=:fullName, BIRTHDAY=:birthday, SALARY=:salary WHERE id=:id", map);
+                    "UPDATE EMPLOYEES " +
+                            "SET FULLNAME=:fullName, BIRTHDAY=:birthday, SALARY=:salary " +
+                            "WHERE id=:id and DEPARTMENT_ID=:departmentId", map);
         }
         return employee;
 
@@ -88,10 +90,13 @@ public class EmployeeRepoImpl implements EmployeeRepo {
 
     @Override
     public List<Employee> getBetweenDates(LocalDate from, LocalDate to) {
-        LocalDate fromDate=from==null? LocalDate.MIN:from;
-        LocalDate toDate=to==null?LocalDate.MAX:to;
+/*        LocalDate fromDate = from == null ? LocalDate.MIN : from;
+        LocalDate toDate = to == null ? LocalDate.MAX : to;*/
+        Date fromDate=Date.valueOf(from == null ? LocalDate.of(1800,1,1) : from);
+        Date toDate=Date.valueOf(to == null ? LocalDate.of(3000,1,1) : to);
 
-        return jdbcTemplate.query("SELECT * FROM EMPLOYEES  ORDER BY FULLNAME BETWEEN  ? AND ?", ROW_MAPPER, fromDate,toDate);
+        return jdbcTemplate.query("SELECT * FROM EMPLOYEES  " +
+                "WHERE (BIRTHDAY BETWEEN  ? AND ?)  ORDER by FULLNAME ", ROW_MAPPER, fromDate, toDate);
 
     }
 }

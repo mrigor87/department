@@ -1,6 +1,7 @@
 package com.mrigor.testTasks.department.repository;
 
 import com.mrigor.testTasks.department.model.Department;
+import com.mrigor.testTasks.department.to.DepartmentWithAverageSalary;
 
 import java.util.List;
 
@@ -21,4 +22,6 @@ Department save(Department user);
     List<Department> getAll();
 
     Department getWithEmployees(int id);
+
+     List<DepartmentWithAverageSalary> getAllWithAvgSalary();
 }

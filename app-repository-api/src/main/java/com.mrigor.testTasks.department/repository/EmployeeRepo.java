@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface EmployeeRepo {
 
-    Employee save(Employee user);
+    Employee save(Employee employee, int departamentId);
 
     // false if not found
     boolean delete(int id);

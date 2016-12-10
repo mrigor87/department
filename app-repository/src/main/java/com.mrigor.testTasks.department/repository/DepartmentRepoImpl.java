@@ -1,6 +1,7 @@
 package com.mrigor.testTasks.department.repository;
 
 import com.mrigor.testTasks.department.model.Department;
+import com.mrigor.testTasks.department.to.DepartmentWithAverageSalary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -20,6 +21,7 @@ import java.util.List;
 public class DepartmentRepoImpl implements DepartmentRepo {
 
     private static final BeanPropertyRowMapper<Department> ROW_MAPPER = BeanPropertyRowMapper.newInstance(Department.class);
+    private static final BeanPropertyRowMapper<DepartmentWithAverageSalary> ROW_MAPPER_TO = BeanPropertyRowMapper.newInstance(DepartmentWithAverageSalary.class);
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -28,6 +30,18 @@ public class DepartmentRepoImpl implements DepartmentRepo {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private SimpleJdbcInsert insertDep;
+
+    @Override
+    public List<DepartmentWithAverageSalary> getAllWithAvgSalary() {
+
+        return jdbcTemplate.query("SELECT d.ID, d.NAME, AVG(e.SALARY) AS averagesalary " +
+                        "FROM EMPLOYEES e " +
+                        "INNER JOIN DEPARTMENTS d ON e.DEPARTMENT_ID = d.ID " +
+                        "GROUP BY d.ID " +
+                        "ORDER  BY d.NAME"
+                , ROW_MAPPER_TO);
+
+    }
 
 
     @Autowired
@@ -41,8 +55,7 @@ public class DepartmentRepoImpl implements DepartmentRepo {
     public Department save(Department department) {
         MapSqlParameterSource map = new MapSqlParameterSource()
                 .addValue("id", department.getId())
-                .addValue("name", department.getName())
-;
+                .addValue("name", department.getName());
 
         if (department.isNew()) {
             Number newKey = insertDep.executeAndReturnKey(map);
@@ -55,8 +68,7 @@ public class DepartmentRepoImpl implements DepartmentRepo {
     }
 
     @Override
-    public boolean delete(int id)
-    {
+    public boolean delete(int id) {
         return jdbcTemplate.update("DELETE FROM DEPARTMENTS WHERE id=?", id) != 0;
     }
 

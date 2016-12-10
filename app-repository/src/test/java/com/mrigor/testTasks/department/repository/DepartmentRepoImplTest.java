@@ -61,6 +61,10 @@ public class DepartmentRepoImplTest {
         MATCHER.assertCollectionEquals(Arrays.asList(DEP1,DEP2), repository.getAll());
     }
 
-
+    @Test
+    public void getAllWithAvgSalary() throws Exception {
+        MATCHER_WITH_SALARY.assertCollectionEquals( repository.getAllWithAvgSalary(),DEP_WITH_AVG_SALARY);
+       ;
+    }
 
 }
