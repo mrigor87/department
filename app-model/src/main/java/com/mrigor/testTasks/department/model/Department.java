@@ -43,6 +43,6 @@ private Integer id;
                 '}';
     }
     public boolean isNew(){
-        return id!=null?true:false;
+        return id==null;
     }
 }

@@ -23,7 +23,13 @@ public class Employee {
     public Employee(String fullName, LocalDate birthDay, int salary, Department department) {
         this(null, fullName, birthDay, salary, department);
     }
+    public Employee(Integer id,String fullName, LocalDate birthDay, int salary) {
+        this(id, fullName, birthDay, salary, null);
+    }
 
+    public Employee(String fullName, LocalDate birthDay, int salary) {
+        this(null, fullName, birthDay, salary, null);
+    }
     public Integer getId() {
         return id;
     }
@@ -67,7 +73,7 @@ public class Employee {
     public Employee() {
     }
     public boolean isNew(){
-        return id!=null?true:false;
+        return id==null;
     }
 
     @Override

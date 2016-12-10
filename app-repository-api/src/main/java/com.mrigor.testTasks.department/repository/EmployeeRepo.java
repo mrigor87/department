@@ -20,6 +20,8 @@ public interface EmployeeRepo {
 
     List<Employee> getAll();
 
+    List<Employee> getByDep(int id);
+
     List<Employee> getBetweenDates(LocalDate from, LocalDate to);
 
    default Employee getWithDepartment(int id){
