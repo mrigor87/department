@@ -61,8 +61,10 @@ public class DepartmentRepoImpl implements DepartmentRepo {
             Number newKey = insertDep.executeAndReturnKey(map);
             department.setId(newKey.intValue());
         } else {
-            namedParameterJdbcTemplate.update(
-                    "UPDATE DEPARTMENTS SET name=:name WHERE id=:id", map);
+            if (
+                    namedParameterJdbcTemplate.update(
+                            "UPDATE DEPARTMENTS SET name=:name WHERE id=:id", map)
+                            == 0) return null;
         }
         return department;
     }

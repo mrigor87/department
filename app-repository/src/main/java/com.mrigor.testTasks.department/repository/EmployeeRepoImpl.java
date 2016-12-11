@@ -57,10 +57,12 @@ public class EmployeeRepoImpl implements EmployeeRepo {
             Number newKey = insertEmployee.executeAndReturnKey(map);
             employee.setId(newKey.intValue());
         } else {
-            namedParameterJdbcTemplate.update(
-                    "UPDATE EMPLOYEES " +
-                            "SET FULLNAME=:fullName, BIRTHDAY=:birthday, SALARY=:salary " +
-                            "WHERE id=:id and DEPARTMENT_ID=:departmentId", map);
+            if (
+                    namedParameterJdbcTemplate.update(
+                            "UPDATE EMPLOYEES " +
+                                    "SET FULLNAME=:fullName, BIRTHDAY=:birthday, SALARY=:salary " +
+                                    "WHERE id=:id AND DEPARTMENT_ID=:departmentId", map)
+                            == 0) return null;
         }
         return employee;
 
@@ -92,11 +94,11 @@ public class EmployeeRepoImpl implements EmployeeRepo {
     public List<Employee> getBetweenDates(LocalDate from, LocalDate to) {
 /*        LocalDate fromDate = from == null ? LocalDate.MIN : from;
         LocalDate toDate = to == null ? LocalDate.MAX : to;*/
-        Date fromDate=Date.valueOf(from == null ? LocalDate.of(1800,1,1) : from);
-        Date toDate=Date.valueOf(to == null ? LocalDate.of(3000,1,1) : to);
+        Date fromDate = Date.valueOf(from == null ? LocalDate.of(1800, 1, 1) : from);
+        Date toDate = Date.valueOf(to == null ? LocalDate.of(3000, 1, 1) : to);
 
         return jdbcTemplate.query("SELECT * FROM EMPLOYEES  " +
-                "WHERE (BIRTHDAY BETWEEN  ? AND ?)  ORDER by FULLNAME ", ROW_MAPPER, fromDate, toDate);
+                "WHERE (BIRTHDAY BETWEEN  ? AND ?)  ORDER BY FULLNAME ", ROW_MAPPER, fromDate, toDate);
 
     }
 }

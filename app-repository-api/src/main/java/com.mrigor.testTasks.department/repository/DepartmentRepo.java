@@ -11,7 +11,7 @@ import java.util.List;
 public interface DepartmentRepo {
 
 
-Department save(Department user);
+Department save(Department department);
 
     // false if not found
     boolean delete(int id);

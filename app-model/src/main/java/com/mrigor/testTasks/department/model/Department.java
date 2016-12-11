@@ -4,7 +4,7 @@ package com.mrigor.testTasks.department.model;
  * Created by Игорь on 10.12.2016.
  */
 public class Department {
-private Integer id;
+    private Integer id;
     private String name;
 
     public Department(Integer id, String name) {
@@ -13,7 +13,7 @@ private Integer id;
     }
 
     public Department(String name) {
-        this(null,name);
+        this(null, name);
     }
 
     public Department() {
@@ -42,7 +42,8 @@ private Integer id;
                 ", name='" + name + '\'' +
                 '}';
     }
-    public boolean isNew(){
-        return id==null;
+
+    public boolean isNew() {
+        return id == null;
     }
 }
