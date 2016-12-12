@@ -16,37 +16,43 @@ import java.util.List;
  */
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
-    @Autowired/*(required = false)*/
-    DepartmentRepo repositoryD;
+    //  @Autowired
+    private DepartmentRepo repository;
+
+    public void setRepository(DepartmentRepo repository) {
+        this.repository = repository;
+    }
+
 
     @Override
     public Department save(Department department) {
-        return repositoryD.save(department);
+        return repository.save(department);
     }
 
     @Override
     public Department update(Department department) throws NotFoundException {
         Assert.notNull(department, "department must not be null");
-        return ExceptionUtil.checkNotFoundWithId(repositoryD.save(department), department.getId());
+        return ExceptionUtil.checkNotFoundWithId(repository.save(department), department.getId());
     }
 
     @Override
     public void delete(int id) throws NotFoundException {
-        ExceptionUtil.checkNotFoundWithId(repositoryD.delete(id), id);
+        ExceptionUtil.checkNotFoundWithId(repository.delete(id), id);
     }
 
     @Override
     public Department get(int id) throws NotFoundException {
-        return ExceptionUtil.checkNotFoundWithId(repositoryD.get(id), id);
+        return ExceptionUtil.checkNotFoundWithId(repository.get(id), id);
     }
 
     @Override
     public List<Department> getAll() {
-        return repositoryD.getAll();
+        return repository.getAll();
     }
+
 
     @Override
     public List<DepartmentWithAverageSalary> getAllWithAvgSalary() {
-        return repositoryD.getAllWithAvgSalary();
+        return repository.getAllWithAvgSalary();
     }
 }

@@ -24,14 +24,15 @@ import static com.mrigor.testTasks.department.rest.DepartmentController.REST_URL
 @RequestMapping(REST_URL)
 public class DepartmentController {
     @Autowired
-    DepartmentService departmentServiceimpl;
+    DepartmentService serviceD;
 
     protected static final String REST_URL = "/rest/employees";
 
+/*    produces = "application/json"*/
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Department> getAll() {
-
-        return departmentServiceimpl.getAll();
+        List<Department> all = serviceD.getAll();
+        return all;
     }
 
 

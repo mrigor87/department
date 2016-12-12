@@ -16,46 +16,50 @@ import java.util.List;
  */
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-    @Autowired
-    EmployeeRepo repositoryE;
+   // @Autowired
+    private EmployeeRepo repository;
+
+    public void setRepository(EmployeeRepo repository) {
+        this.repository = repository;
+    }
 
     @Override
     public Employee save(Employee employee, int depId) {
-        return repositoryE.save(employee,depId);
+        return repository.save(employee,depId);
     }
 
     @Override
     public Employee update(Employee employee, int depId) throws NotFoundException {
         Assert.notNull(employee, "employee must not be null");
-        return ExceptionUtil.checkNotFoundWithId(repositoryE.save(employee,depId),employee.getId());
+        return ExceptionUtil.checkNotFoundWithId(repository.save(employee,depId),employee.getId());
     }
 
     @Override
     public void delete(int id) throws NotFoundException {
-        ExceptionUtil.checkNotFoundWithId(repositoryE.delete(id), id);
+        ExceptionUtil.checkNotFoundWithId(repository.delete(id), id);
     }
 
     @Override
     public Employee get(int id) throws NotFoundException {
-        return ExceptionUtil.checkNotFoundWithId(repositoryE.get(id), id);
+        return ExceptionUtil.checkNotFoundWithId(repository.get(id), id);
     }
 
     @Override
     public List<Employee> getAll() {
-        return repositoryE.getAll();
+        return repository.getAll();
     }
 
     @Override
     public List<Employee> getByDep(int depId) throws NotFoundException {
-        return ExceptionUtil.checkNotFoundWithId(repositoryE.getByDep(depId), depId);
+        return ExceptionUtil.checkNotFoundWithId(repository.getByDep(depId), depId);
     }
 
     @Override
     public List<Employee> getBetweenDates(LocalDate from, LocalDate to) {
-        return repositoryE.getBetweenDates(from,to);
+        return repository.getBetweenDates(from,to);
     }
     @Override
     public List<Employee> getByDate(LocalDate date) {
-        return repositoryE.getBetweenDates(date,date);
+        return repository.getBetweenDates(date,date);
     }
 }
