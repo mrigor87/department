@@ -4,20 +4,22 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!--
-        <bean class="ru.javawebinar.topjava.repository.mock.MockUserRepositoryImpl" id="mockUserRepository"/>
+<!--    <bean class="com.mrigor.testTasks.department.repository.DepartmentRepoImpl" id="repositoryD"/>
+    <bean class="com.mrigor.testTasks.department.repository.EmployeeRepoImpl" id="repositoryE"/>-->
 
-        <bean class="ru.javawebinar.topjava.service.UserServiceImpl">
+<!--    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <constructor-arg ref="dataSource"/>
+    </bean>-->
+
+<!--        <bean class="ru.javawebinar.topjava.service.UserServiceImpl">
             <property name="repository" ref="mockUserRepository"/>
-        </bean>
-    -->
+        </bean>-->
 
-    <context:annotation-config/>
+<!--    <context:annotation-config/>-->
 
-    <context:component-scan base-package="com.mrigor.testTasks.department.repository"/>
+    <!--    <context:component-scan base-package="com.mrigor.testTasks.department.repository"/>-->
 
-<!--    <context:component-scan base-package="ru.javawebinar.**.service"/>
 
-    <context:component-scan base-package="ru.javawebinar.**.web"/>-->
+
 
 </beans>

@@ -31,7 +31,7 @@
     </properties>
 
     <build>
-        <finalName>department</finalName>
+        <!--<finalName>department</finalName>-->
         <defaultGoal>package</defaultGoal>
         <plugins>
             <plugin>

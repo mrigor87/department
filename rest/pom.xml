@@ -13,10 +13,10 @@
     <packaging>war</packaging>
 
 <dependencies>
-    <dependency>
+<!--    <dependency>
         <groupId>${project.groupId}</groupId>
         <artifactId>app-core</artifactId>
-    </dependency>
+    </dependency>-->
 <!--    <dependency>
         <groupId>${project.groupId}</groupId>
         <artifactId>app-repository</artifactId>

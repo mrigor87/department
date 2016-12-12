@@ -25,9 +25,10 @@ public class Main {
         // java 7 Automatic resource management
         try (ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml","spring/spring-db.xml")) {
 
+
             System.out.println("Bean definition names: " + Arrays.toString(appCtx.getBeanDefinitionNames()));
-            DepartmentRepo dep=appCtx.getBean(DepartmentRepoImpl.class);
-            List<Department> all = dep.getAll();
+           // DepartmentRepo dep=appCtx.getBean(DepartmentRepoImpl.class);
+            //List<Department> all = dep.getAll();
             String[] beanDefinitionNames = appCtx.getBeanDefinitionNames();
             for (String string : appCtx.getBeanDefinitionNames()) {
                 System.out.println(string);
