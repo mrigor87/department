@@ -56,12 +56,15 @@ public class DepartmentController {
     }
 
     @DeleteMapping(value = "/{id}")
+   // @ResponseStatus()
     public void delete(@PathVariable("id") int id){
+
         LOG.info("delete department id={}",id);
+        service.delete(id);
     }
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@RequestBody Department department){
-        LOG.info("uodate department {}",department);
+        LOG.info("udate department {}",department);
         service.update(department);
     }
 

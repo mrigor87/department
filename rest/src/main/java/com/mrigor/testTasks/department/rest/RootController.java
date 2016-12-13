@@ -1,4 +1,4 @@
-package com.mrigor.testTasks.department;
+package com.mrigor.testTasks.department.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 ;

@@ -26,7 +26,7 @@ public class EmployeeController {
     private static final Logger LOG = LoggerFactory.getLogger(DepartmentController.class);
     @Autowired
     EmployeeService service;
-    protected static final String REST_URL = "/rest/employees";
+    public static final String REST_URL = "/rest/employees";
 
 
 /*    Employee create(Employee employee, int departamentId);
