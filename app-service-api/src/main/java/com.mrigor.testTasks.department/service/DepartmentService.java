@@ -11,18 +11,11 @@ import java.util.List;
  */
 public interface DepartmentService {
 
-    Department save(Department department);
-
-    Department update(Department department) throws NotFoundException;
-
+    Department create(Department department);
+    void update(Department department) throws NotFoundException;
     void delete(int id) throws NotFoundException;
-
     Department get(int id) throws NotFoundException;
-
     List<Department> getAll();
-
-/*    Department getWithEmployees(int id) throws NotFoundException*/;
-
     List<DepartmentWithAverageSalary> getAllWithAvgSalary();
 
 }

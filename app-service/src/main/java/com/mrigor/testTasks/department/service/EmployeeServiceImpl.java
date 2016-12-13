@@ -24,14 +24,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee save(Employee employee, int depId) {
+    public Employee create(Employee employee, int depId) {
         return repository.save(employee,depId);
     }
 
     @Override
-    public Employee update(Employee employee, int depId) throws NotFoundException {
+    public void update(Employee employee, int depId) throws NotFoundException {
         Assert.notNull(employee, "employee must not be null");
-        return ExceptionUtil.checkNotFoundWithId(repository.save(employee,depId),employee.getId());
+        ExceptionUtil.checkNotFoundWithId(repository.save(employee,depId),employee.getId());
     }
 
     @Override

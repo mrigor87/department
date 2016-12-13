@@ -9,8 +9,8 @@
     <jmxConfigurator/>
 
     <appender name="file" class="ch.qos.logback.core.FileAppender">
-        <file>{project.groupId}</file>
-
+        <file>app-repository/log/logger.log</file>
+        {project.groupId}
         <encoder>
             <charset>UTF-8</charset>
             <pattern>%date %-5level %logger{0} [%file:%line] %msg%n</pattern>

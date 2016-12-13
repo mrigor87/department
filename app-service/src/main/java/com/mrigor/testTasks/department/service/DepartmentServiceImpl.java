@@ -16,6 +16,7 @@ import java.util.List;
  */
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
+
     //  @Autowired
     private DepartmentRepo repository;
 
@@ -25,14 +26,14 @@ public class DepartmentServiceImpl implements DepartmentService {
 
 
     @Override
-    public Department save(Department department) {
+    public Department create(Department department) {
         return repository.save(department);
     }
 
     @Override
-    public Department update(Department department) throws NotFoundException {
+    public void update(Department department) throws NotFoundException {
         Assert.notNull(department, "department must not be null");
-        return ExceptionUtil.checkNotFoundWithId(repository.save(department), department.getId());
+        ExceptionUtil.checkNotFoundWithId(repository.save(department), department.getId());
     }
 
     @Override
