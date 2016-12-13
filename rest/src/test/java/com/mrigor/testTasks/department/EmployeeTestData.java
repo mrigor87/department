@@ -12,7 +12,7 @@ import static java.time.LocalDate.of;
  * Created by Игорь on 10.12.2016.
  */
 public class EmployeeTestData {
-    public static final ModelMatcher<Employee> MATCHER = new ModelMatcher<>();
+    public static final ModelMatcher<Employee> MATCHER = new ModelMatcher<>(Employee.class);
 /*    ('Ivanov Ivan', '1980-05-17', 400, 100000),
             ('Petrov Petr', '1992-12-31', 250, 100000),
             ('Sidorov Anton', '1992-11-05', 210, 100000),
