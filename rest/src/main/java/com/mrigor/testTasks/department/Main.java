@@ -1,4 +1,4 @@
-package com.mrigor.testTasks.department.rest;
+package com.mrigor.testTasks.department;
 
 //import com.mrigor.testTasks.department.repository.DepartmentRepoImpl;
 

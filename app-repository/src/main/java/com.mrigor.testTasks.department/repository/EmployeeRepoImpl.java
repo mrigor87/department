@@ -2,6 +2,7 @@ package com.mrigor.testTasks.department.repository;
 
 import com.mrigor.testTasks.department.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -41,7 +42,7 @@ public class EmployeeRepoImpl implements EmployeeRepo {
     }
 
     @Override
-    public Employee save(Employee employee, int departmentId) {
+    public Employee save(Employee employee) {
 
         MapSqlParameterSource map = new MapSqlParameterSource()
                 .addValue("id", employee.getId())
@@ -49,7 +50,7 @@ public class EmployeeRepoImpl implements EmployeeRepo {
                 .addValue(("birthday"), Date.valueOf(employee.getBirthDay()))
 /*                .addValue(("birthday"),employee.getBirthDay())
                 .addValue(new Date.valueOf(employee.getBirthDay()))*/
-                .addValue("departmentId", departmentId)
+                .addValue("departmentId", employee.getDepartmentId())
                 .addValue(("salary"), employee.getSalary());
 
         if (employee.isNew()) {

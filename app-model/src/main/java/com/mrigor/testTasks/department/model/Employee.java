@@ -10,18 +10,18 @@ public class Employee {
     private String fullName;
     private LocalDate birthDay;
     private int salary;
-    private Department department;
+    private Integer departmentId;
 
-    public Employee(Integer id, String fullName, LocalDate birthDay, int salary, Department department) {
+    public Employee(Integer id, String fullName, LocalDate birthDay, int salary, Integer departmentId) {
         this.id = id;
         this.fullName = fullName;
         this.birthDay = birthDay;
         this.salary = salary;
-        this.department = department;
+        this.departmentId = departmentId;
     }
 
-    public Employee(String fullName, LocalDate birthDay, int salary, Department department) {
-        this(null, fullName, birthDay, salary, department);
+    public Employee(String fullName, LocalDate birthDay, int salary, Integer departmentId) {
+        this(null, fullName, birthDay, salary, departmentId);
     }
     public Employee(Integer id,String fullName, LocalDate birthDay, int salary) {
         this(id, fullName, birthDay, salary, null);
@@ -62,12 +62,12 @@ public class Employee {
         this.salary = salary;
     }
 
-    public Department getDepartment() {
-        return department;
+    public Integer getDepartmentId() {
+        return departmentId;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
     }
 
     public Employee() {

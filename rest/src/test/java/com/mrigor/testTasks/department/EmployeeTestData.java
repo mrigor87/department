@@ -1,8 +1,7 @@
-package com.mrigor.testTasks.department.repository;
+package com.mrigor.testTasks.department;
 
 import com.mrigor.testTasks.department.model.Employee;
 import com.mrigor.testTasks.department.matcher.ModelMatcher;
-
 
 import java.util.Arrays;
 import java.util.List;

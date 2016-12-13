@@ -4,10 +4,14 @@ import com.mrigor.testTasks.department.model.Employee;
 import com.mrigor.testTasks.department.repository.EmployeeRepo;
 import com.mrigor.testTasks.department.util.exception.ExceptionUtil;
 import com.mrigor.testTasks.department.util.exception.NotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -16,7 +20,8 @@ import java.util.List;
  */
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-   // @Autowired
+    private static final Logger LOG = LoggerFactory.getLogger(EmployeeService.class);
+
     private EmployeeRepo repository;
 
     public void setRepository(EmployeeRepo repository) {
@@ -25,13 +30,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee create(Employee employee, int depId) {
-        return repository.save(employee,depId);
+        Assert.notNull(employee, "employee must not be null");
+        employee.setDepartmentId(depId);
+        try {
+            Employee save = repository.save(employee);
+        } catch (DataIntegrityViolationException e) {
+            throw new NotFoundException("can't create new employee because department with id=" + depId + " isn't exist");
+        }
+        return repository.save(employee);
     }
 
     @Override
     public void update(Employee employee, int depId) throws NotFoundException {
         Assert.notNull(employee, "employee must not be null");
-        ExceptionUtil.checkNotFoundWithId(repository.save(employee,depId),employee.getId());
+        ExceptionUtil.checkNotFoundWithId(repository.save(employee), employee.getId());
     }
 
     @Override
@@ -56,10 +68,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<Employee> getBetweenDates(LocalDate from, LocalDate to) {
-        return repository.getBetweenDates(from,to);
+        return repository.getBetweenDates(from, to);
     }
+
     @Override
     public List<Employee> getByDate(LocalDate date) {
-        return repository.getBetweenDates(date,date);
+        return repository.getBetweenDates(date, date);
     }
 }

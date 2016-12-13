@@ -29,7 +29,7 @@ public class DepartmentController {
     @Autowired
     DepartmentService service;
 
-    protected static final String REST_URL = "/rest/departments";
+    public static final String REST_URL = "/rest/departments";
 /*   Department save(Department department);
     Department update(Department department) throws NotFoundException;
     void delete(int id) throws NotFoundException;

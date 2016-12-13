@@ -4,10 +4,12 @@ import com.mrigor.testTasks.department.model.Employee;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -34,14 +36,24 @@ public class EmployeeRepoImplTest {
     @Test
     public void update() throws Exception {
         Employee updateEmpl=getUpdated();
-        repository.save(updateEmpl,DEP1_ID);
+        updateEmpl.setDepartmentId(DEP1_ID);
+        repository.save(updateEmpl);
         MATCHER.assertCollectionEquals(Arrays.asList(EMPL2,EMPL3,updateEmpl), repository.getByDep(DEP1_ID));
     }
 
     @Test
     public void create() throws Exception {
         Employee createEmpl=getCreated();
-        repository.save(createEmpl,DEP1_ID);
+        createEmpl.setDepartmentId(DEP1_ID);
+        repository.save(createEmpl);
+        MATCHER.assertCollectionEquals(Arrays.asList(EMPL1,createEmpl,EMPL2,EMPL3), repository.getByDep(DEP1_ID));
+    }
+
+    @Test(expected = DataIntegrityViolationException.class)
+    public void createException() throws Exception {
+        Employee createEmpl=getCreated();
+        createEmpl.setDepartmentId(8);
+        repository.save(createEmpl);
         MATCHER.assertCollectionEquals(Arrays.asList(EMPL1,createEmpl,EMPL2,EMPL3), repository.getByDep(DEP1_ID));
     }
 

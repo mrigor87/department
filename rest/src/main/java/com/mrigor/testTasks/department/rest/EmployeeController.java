@@ -72,9 +72,9 @@ public class EmployeeController {
     }
 
     @PostMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Employee> createWithLocation(@RequestBody Employee employee) {
+    public ResponseEntity<Employee> createWithLocation(@PathVariable("id")int id, @RequestBody Employee employee) {
         LOG.info("created department {}",employee);
-        Employee created = service.create(employee,)
+        Employee created = service.create(employee,id);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")
                 .buildAndExpand(created.getId())

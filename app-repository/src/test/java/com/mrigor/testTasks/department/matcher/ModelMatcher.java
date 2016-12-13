@@ -1,4 +1,4 @@
-package com.mrigor.testTasks.department.repository.matcher;
+package com.mrigor.testTasks.department.matcher;
 
 import org.junit.Assert;
 
