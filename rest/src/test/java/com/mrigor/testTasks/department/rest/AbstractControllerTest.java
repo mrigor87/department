@@ -30,19 +30,19 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)*/
 
-
+/*
 @ContextConfiguration({
         "classpath:spring/spring-app.xml",
         "classpath:spring/spring-mvc.xml",
         "classpath:spring/spring-db.xml"
 })
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)*/
 //@Sql(scripts = "classpath:db/populateDB.sql")
 
 
 abstract public class AbstractControllerTest {
 
-
+/*
     protected MockMvc mockMvc;
    @Autowired
     private DepartmentController conroller;
@@ -51,6 +51,6 @@ abstract public class AbstractControllerTest {
         mockMvc = standaloneSetup(conroller)
                 .setMessageConverters(new MappingJackson2HttpMessageConverter())
                 .build();
-    }
+    }*/
 
 }
