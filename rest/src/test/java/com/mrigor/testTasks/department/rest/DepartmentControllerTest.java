@@ -33,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 })
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
-public class DepartmentControllerTest  {
+public class DepartmentControllerTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
@@ -41,7 +41,7 @@ public class DepartmentControllerTest  {
 
     protected MockMvc mockMvc;
 
-   // private DepartmentController conroller;
+    // private DepartmentController conroller;
     @Before
     public void setUp() {
         mockMvc = MockMvcBuilders
@@ -57,7 +57,6 @@ public class DepartmentControllerTest  {
                 .andDo(print())
 // https://jira.spring.io/browse/SPR-14472
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-              //  .andExpect(MATCHER .contentMatcher(DEP1))
-        ;
+                .andExpect(MATCHER.contentMatcher(DEP1));
     }
 }
