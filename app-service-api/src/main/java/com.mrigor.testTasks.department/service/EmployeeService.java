@@ -12,7 +12,7 @@ import java.util.List;
 public interface EmployeeService {
 
     Employee create(Employee employee, int departamentId);
-    void update(Employee employee, int departamentId) throws NotFoundException;
+    void update(Employee employee) throws NotFoundException;
     void delete(int id) throws NotFoundException;
     Employee get(int id) throws NotFoundException;
     List<Employee> getAll();

@@ -56,9 +56,7 @@ public class DepartmentController {
     }
 
     @DeleteMapping(value = "/{id}")
-   // @ResponseStatus()
     public void delete(@PathVariable("id") int id){
-
         LOG.info("delete department id={}",id);
         service.delete(id);
     }

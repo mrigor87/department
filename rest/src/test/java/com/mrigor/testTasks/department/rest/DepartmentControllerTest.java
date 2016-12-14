@@ -28,6 +28,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static com.mrigor.testTasks.department.TestUtil.printContent;
 import static org.omg.PortableServer.IdAssignmentPolicyValue.USER_ID;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -69,28 +70,33 @@ public class DepartmentControllerTest {
 
     @Test
     public void testGetAll() throws Exception {
-        TestUtil.print(mockMvc.perform(get(REST_URL))
+        printContent(mockMvc.perform(get(REST_URL))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(MATCHER.contentListMatcher(DEP1, DEP2)));
+
+/*        mockMvc.perform(get((REST_URL)))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(MATCHER.contentListMatcher(DEP1, DEP2));*/
     }
 
     @Test
     public void testGet() throws Exception {
-
-        mockMvc.perform(get(REST_URL + DEP1_ID))
+        printContent(mockMvc.perform(get(REST_URL + DEP1_ID))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER.contentMatcher(DEP1));
+                .andExpect(MATCHER.contentMatcher(DEP1))
+        );
     }
 
     //@Test (expected = NotFoundException.class)
     public void testGetEx() throws Exception {
 
         //mockMvc.perform(get(REST_URL + 8))
-                //.andExpect(status().is4xxClientError())
-               // .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                ;
+        //.andExpect(status().is4xxClientError())
+        // .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+        ;
     }
 
 
@@ -122,15 +128,12 @@ public class DepartmentControllerTest {
                 .content(JsonUtil.writeValue(expected)))
                 .andDo(print())
                 .andExpect(status().isCreated());
-
         Department returned = MATCHER.fromJsonAction(action);
         expected.setId(returned.getId());
 
         MATCHER.assertEquals(expected, returned);
         MATCHER.assertCollectionEquals(Arrays.asList(DEP1, expected, DEP2), service.getAll());
     }
-
-
 
 
 }

@@ -44,6 +44,19 @@ public class EmployeeController {
         return service.getAll();
     }
 
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Employee get(@PathVariable("id") int id) {
+        LOG.info("get all employees");
+        return service.get(id);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public void delete(@PathVariable("id") int id){
+        LOG.info("delete employee id={}",id);
+        service.delete(id);
+    }
+
+
     @GetMapping(value = "/department/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Employee> getAllByDepartmentId(@PathVariable("id") int id) {
         LOG.info("get employees by department id={}", id);
@@ -54,7 +67,7 @@ public class EmployeeController {
     public List<Employee> getBetweenDates(
             @RequestParam(value = "from", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
             @RequestParam(value = "to", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to) {
-        LOG.info("get employees from dates from {} to{}", from, to);
+        LOG.info("get employees from dates from {} to {}", from, to);
         return service.getBetweenDates(from, to);
     }
 
@@ -66,9 +79,10 @@ public class EmployeeController {
     }
 
     @PutMapping( value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@PathVariable("id")int id, @RequestBody Employee employee) {
-        LOG.info("update employee {} from department id={}",employee,id);
-        service.update(employee,id);
+    public void update(@PathVariable("id")int departmentId, @RequestBody Employee employee) {
+        employee.setDepartmentId(departmentId);
+        LOG.info("update employee {} from department id={}",employee,departmentId);
+        service.update(employee);
     }
 
     @PostMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

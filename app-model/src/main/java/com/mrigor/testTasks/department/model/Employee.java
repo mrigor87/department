@@ -24,7 +24,7 @@ public class Employee {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 
    // @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
- //   @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate birthDay;
     private int salary;

@@ -32,16 +32,17 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee create(Employee employee, int depId) {
         Assert.notNull(employee, "employee must not be null");
         employee.setDepartmentId(depId);
+        Employee savedEmployee;
         try {
-            Employee save = repository.save(employee);
+            savedEmployee = repository.save(employee);
         } catch (DataIntegrityViolationException e) {
             throw new NotFoundException("can't create new employee because department with id=" + depId + " isn't exist");
         }
-        return repository.save(employee);
+        return savedEmployee;
     }
 
     @Override
-    public void update(Employee employee, int depId) throws NotFoundException {
+    public void update(Employee employee) throws NotFoundException {
         Assert.notNull(employee, "employee must not be null");
         ExceptionUtil.checkNotFoundWithId(repository.save(employee), employee.getId());
     }

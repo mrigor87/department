@@ -10,7 +10,7 @@ import java.io.UnsupportedEncodingException;
  */
 public class TestUtil {
 
-    public static ResultActions print(ResultActions action) throws UnsupportedEncodingException {
+    public static ResultActions printContent(ResultActions action) throws UnsupportedEncodingException {
         System.out.println(getContent(action));
         return action;
     }
