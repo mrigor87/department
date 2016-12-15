@@ -49,54 +49,16 @@
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>app-repository</artifactId>
+            <artifactId>app-model</artifactId>
         </dependency>
-
-
- <!--       <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
+            <artifactId>spring-web</artifactId>
             <version>4.3.2.RELEASE</version>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
 
 
-        &lt;!&ndash; Logging with SLF4J & LogBack &ndash;&gt;
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
-
-
--->
 
     </dependencies>
 </project>
