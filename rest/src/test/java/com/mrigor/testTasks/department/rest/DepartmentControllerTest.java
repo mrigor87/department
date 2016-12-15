@@ -1,12 +1,11 @@
 package com.mrigor.testTasks.department.rest;
 
 
-import com.mrigor.testTasks.department.TestUtil;
+
 import com.mrigor.testTasks.department.matcher.JsonUtil;
 import com.mrigor.testTasks.department.model.Department;
 import com.mrigor.testTasks.department.service.DepartmentService;
 
-import com.mrigor.testTasks.department.util.exception.NotFoundException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,17 +19,16 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.web.context.WebApplicationContext;
 
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
+
 
 import static com.mrigor.testTasks.department.TestUtil.printContent;
-import static com.sun.xml.internal.ws.dump.LoggingDumpTube.Position.Before;
-import static org.omg.PortableServer.IdAssignmentPolicyValue.USER_ID;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static com.mrigor.testTasks.department.DepTestData.*;

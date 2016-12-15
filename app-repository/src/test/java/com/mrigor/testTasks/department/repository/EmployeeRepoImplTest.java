@@ -9,15 +9,15 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.sql.SQLIntegrityConstraintViolationException;
+
 import java.util.Arrays;
-import java.util.List;
+
 
 
 import static com.mrigor.testTasks.department.repository.DepTestData.DEP1_ID;
 import static com.mrigor.testTasks.department.repository.EmployeeTestData.*;
 import static java.time.LocalDate.of;
-import static org.junit.Assert.*;
+
 
 /**
  * Created by Игорь on 10.12.2016.
