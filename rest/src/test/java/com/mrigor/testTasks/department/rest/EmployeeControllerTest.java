@@ -24,6 +24,7 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.Arrays;
 
 import static com.mrigor.testTasks.department.EmployeeTestData.*;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -42,7 +43,7 @@ import static com.mrigor.testTasks.department.TestUtil.printContent;
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 //@Transactional
-//@Sql(scripts = "classpath:db/populateDB.sql")
+@Sql(scripts = "classpath:db/populateDB.sql")
 public class EmployeeControllerTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
