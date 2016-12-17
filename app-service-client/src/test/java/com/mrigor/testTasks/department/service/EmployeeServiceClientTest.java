@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
  * Created by Игорь on 17.12.2016.
  */
 @ContextConfiguration({
-        "classpath:spring/spring-app.xml"
+        "classpath:spring/spring-app-test.xml"
 })
 
 
@@ -52,7 +52,7 @@ public class EmployeeServiceClientTest {
 
     @Test
     public void get() throws Exception {
-        service.get(100005);
+        service.get(100004);
     }
 
     @Test

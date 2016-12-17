@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>app-web</artifactId>
+    <packaging>war</packaging>
 <properties>
     <!-- Logging -->
     <logback.version>1.1.7</logback.version>
@@ -47,17 +48,30 @@
             <artifactId>app-core</artifactId>
         </dependency>-->
 
-        <dependency>
+<!--        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>app-model</artifactId>
+        </dependency>-->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>app-service-client</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
+<!--        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>app-service-client</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
             <version>4.3.2.RELEASE</version>
         </dependency>
-
-
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>4.3.2.RELEASE</version>
+        </dependency>
 
 
     </dependencies>

@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean class="com.mrigor.testTasks.department.repository.DepartmentRepoImpl" id="repositoryD">
+<!--    <bean class="com.mrigor.testTasks.department.repository.DepartmentRepoImpl" id="repositoryD">
         <constructor-arg ref="dataSource"/>
     </bean>
 
@@ -19,13 +19,15 @@
 
     <bean class="com.mrigor.testTasks.department.service.EmployeeServiceImpl" id="serviceE">
         <property name="repository" ref="repositoryE"/>
-    </bean>
+    </bean>-->
+    <bean class="com.mrigor.testTasks.department.service.EmployeeServiceClient"/>
+    <bean class="com.mrigor.testTasks.department.service.DepartmentServiceClient"/>
 
 
+<!--    <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>-->
 
 
-
-    <context:annotation-config/>
+<!--    <context:annotation-config/>-->
     <!--
         <context:component-scan base-package="com.mrigor.testTasks.department.repository"/>
         <context:component-scan base-package="com.mrigor.testTasks.department.service"/>

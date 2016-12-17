@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
  * Created by Игорь on 17.12.2016.
  */
 @ContextConfiguration({
-        "classpath:spring/spring-app.xml"
+        "classpath:spring/spring-app-test.xml"
 })
 
 
