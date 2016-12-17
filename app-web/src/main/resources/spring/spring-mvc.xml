@@ -7,21 +7,13 @@
 
 <!--    <bean class="com.mrigor.testTasks.department.json.JacksonObjectMapper" id="objectMapper" factory-method="getMapper"/>-->
 <!--<bean class="com.fasterxml.jackson.databind.ObjectMapper" id="objectMapper"/>-->
-<!--    <bean id="converter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>-->
 
-<!--    <bean class="org.springframework.web.client.RestTemplate">
-        <property name="messageConverters">
-            <list>
-                <ref bean="converter"/>
-            </list>
-        </property>
-    </bean>-->
     <context:component-scan base-package="com.mrigor.testTasks.department.web"/>
 <!--    <mvc:annotation-driven/>-->
     <mvc:annotation-driven>
         <mvc:message-converters>
 
-           <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+            <ref bean="converter"/>
 
         </mvc:message-converters>
     </mvc:annotation-driven>

@@ -24,6 +24,19 @@
     <bean class="com.mrigor.testTasks.department.service.DepartmentServiceClient"/>
 
 
+    <bean id="converter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+
+    <bean class="org.springframework.web.client.RestTemplate">
+        <property name="messageConverters">
+            <list>
+                <ref bean="converter"/>
+            </list>
+        </property>
+    </bean>
+    <context:annotation-config/>
+
+
+
 <!--    <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>-->
 
 
