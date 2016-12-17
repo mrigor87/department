@@ -2,8 +2,6 @@ package com.mrigor.testTasks.department;
 
 //import com.mrigor.testTasks.department.repository.DepartmentRepoImpl;
 
-import com.mrigor.testTasks.department.repository.DepartmentRepo;
-import com.mrigor.testTasks.department.repository.DepartmentRepoImpl;
 import org.slf4j.Logger;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

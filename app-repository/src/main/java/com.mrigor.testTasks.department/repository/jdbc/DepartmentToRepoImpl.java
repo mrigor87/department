@@ -1,5 +1,6 @@
-package com.mrigor.testTasks.department.repository;
+package com.mrigor.testTasks.department.repository.jdbc;
 
+import com.mrigor.testTasks.department.repository.DepartmentToRepo;
 import com.mrigor.testTasks.department.to.DepartmentWithAverageSalary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

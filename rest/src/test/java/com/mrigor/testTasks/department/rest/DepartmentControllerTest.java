@@ -20,6 +20,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 
@@ -49,6 +50,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 //@Transactional
 @Sql(scripts = "classpath:db/populateDB.sql")
+//@Transactional
 public class DepartmentControllerTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -73,6 +75,19 @@ public class DepartmentControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(MATCHER.contentListMatcher(DEP1, DEP2)));
+
+/*        mockMvc.perform(get((REST_URL)))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(MATCHER.contentListMatcher(DEP1, DEP2));*/
+    }
+
+    @Test
+    public void testGetAllWithSalary() throws Exception {
+        printContent(mockMvc.perform(get(REST_URL+"getAllWithAvgSalary"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(MATCHER_WITH_SALARY.contentListMatcher(DEP_WITH_AVG_SALARY)));
 
 /*        mockMvc.perform(get((REST_URL)))
                 .andExpect(status().isOk())

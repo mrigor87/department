@@ -51,8 +51,8 @@ public class EmployeeController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable("id") int id){
-        LOG.info("delete employee id={}",id);
+    public void delete(@PathVariable("id") int id) {
+        LOG.info("delete employee id={}", id);
         service.delete(id);
     }
 
@@ -78,24 +78,25 @@ public class EmployeeController {
         return service.getByDate(date);
     }
 
-    @PutMapping( value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@PathVariable("id")int departmentId, @RequestBody Employee employee) {
-        employee.setDepartmentId(departmentId);
-        LOG.info("update employee {} from department id={}",employee,departmentId);
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    // @PutMapping( value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void update(@RequestBody Employee employee) {
+    //public void update(@PathVariable("id")int departmentId, @RequestBody Employee employee) {
+        //employee.setDepartmentId(departmentId);
+        LOG.info("update employee {} from department id={}", employee, employee.getDepartmentId());
         service.update(employee);
     }
 
     @PostMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Employee> createWithLocation(@PathVariable("id")int id, @RequestBody Employee employee) {
-        LOG.info("created department {}",employee);
-        Employee created = service.create(employee,id);
+    public ResponseEntity<Employee> createWithLocation(@PathVariable("id") int id, @RequestBody Employee employee) {
+        LOG.info("created department {}", employee);
+        Employee created = service.create(employee, id);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")
                 .buildAndExpand(created.getId())
                 .toUri();
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
-
 
 
 }

@@ -1,6 +1,7 @@
-package com.mrigor.testTasks.department.repository;
+package com.mrigor.testTasks.department.repository.jdbc;
 
 import com.mrigor.testTasks.department.model.Department;
+import com.mrigor.testTasks.department.repository.DepartmentRepo;
 import com.mrigor.testTasks.department.to.DepartmentWithAverageSalary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;

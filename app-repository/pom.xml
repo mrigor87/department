@@ -18,10 +18,10 @@
             <groupId>com.mrigor.testTasks</groupId>
             <artifactId>app-model</artifactId>
         </dependency>
-        <dependency>
+<!--        <dependency>
             <groupId>com.mrigor.testTasks</groupId>
             <artifactId>app-repository-api</artifactId>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>com.mrigor.testTasks</groupId>
             <artifactId>app-core</artifactId>

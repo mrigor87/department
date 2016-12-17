@@ -30,12 +30,7 @@ public class DepartmentController {
     DepartmentService service;
 
     public static final String REST_URL = "/rest/departments";
-/*   Department save(Department department);
-    Department update(Department department) throws NotFoundException;
-    void delete(int id) throws NotFoundException;
-    Department get(int id) throws NotFoundException;
-    List<Department> getAll();
-    List<DepartmentWithAverageSalary> getAllWithAvgSalary();*/
+
 
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)

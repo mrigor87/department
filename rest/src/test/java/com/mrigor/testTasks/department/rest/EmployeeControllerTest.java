@@ -95,7 +95,7 @@ public class EmployeeControllerTest {
     public void testUpdate() throws Exception {
         Employee updated = getUpdated();
 
-        mockMvc.perform(put(REST_URL+DEP1_ID)
+        mockMvc.perform(put(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(updated)))
             //    .andDo(print())

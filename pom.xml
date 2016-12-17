@@ -10,13 +10,13 @@
     <modules>
 
         <module>app-model</module>
-        <module>app-repository-api</module>
         <module>app-repository</module>
         <module>core</module>
         <module>app-service</module>
         <module>app-service-api</module>
         <module>rest</module>
         <module>app-web</module>
+        <module>app-service-client</module>
     </modules>
     <name>Simple department management</name>
     <packaging>pom</packaging>

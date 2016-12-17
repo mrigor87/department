@@ -1,6 +1,7 @@
-package com.mrigor.testTasks.department.repository;
+package com.mrigor.testTasks.department.repository.jdbc;
 
 import com.mrigor.testTasks.department.model.Employee;
+import com.mrigor.testTasks.department.repository.EmployeeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

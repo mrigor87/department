@@ -4,11 +4,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean class="com.mrigor.testTasks.department.repository.DepartmentRepoImpl" id="repositoryD">
+    <bean class="com.mrigor.testTasks.department.repository.jdbc.DepartmentRepoImpl" id="repositoryD">
         <constructor-arg ref="dataSource"/>
     </bean>
 
-    <bean class="com.mrigor.testTasks.department.repository.EmployeeRepoImpl" id="repositoryE">
+    <bean class="com.mrigor.testTasks.department.repository.jdbc.EmployeeRepoImpl" id="repositoryE">
         <constructor-arg ref="dataSource"/>
     </bean>
 
