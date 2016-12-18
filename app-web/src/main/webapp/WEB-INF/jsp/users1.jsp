@@ -4,15 +4,15 @@
 
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
-<link rel="stylesheet" href="webjars/datatables/1.10.12/css/dataTables.bootstrap.min.css">
+<link rel="stylesheet" href="webjars/datatables/1.10.12/css/jquery.dataTables.min.css">
 
 <body>
-<%--<jsp:include page="fragments/bodyHeader.jsp"/>--%>
+
 
 <div class="jumbotron">
     <div class="container">
         <div class="shadow">
-            <h3>title</h3>
+
 
             <div class="view-box">
                 <a class="btn btn-sm btn-info" onclick="add()">add</a>
@@ -20,25 +20,34 @@
                 <table class="table table-striped display" id="datatable">
                     <thead>
                     <tr>
-                        <th>Nmae</th>
+                        <th>name</th>
 
-                        <th></th>
-                        <th></th>
+                        <th>edit</th>
+                        <th>delete</th>
                     </tr>
                     </thead>
+                    <c:forEach items="${departmentList}" var="department">
+                        <jsp:useBean id="department" scope="page" type="com.mrigor.testTasks.department.model.Department"/>
+                        <tr>
+                            <td><c:out value="${department.name}"/></td>
+
+                            <td><a class="btn btn-xs btn-primary edit"  onclick="update0(${department})" id="${department.id}">edit</a></td>
+                            <td><a class="btn btn-xs btn-danger delete"  id="${department.id}">delete</a></td>
+                        </tr>
+                    </c:forEach>
                 </table>
             </div>
         </div>
     </div>
 </div>
-<%--<jsp:include page="fragments/footer.jsp"/>--%>
+
 
 <div class="modal fade" id="editRow">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h2 class="modal-title">add</h2>
+                <h2 class="modal-title">edit</h2>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" method="post" id="detailsForm">
@@ -48,13 +57,17 @@
                         <label for="name" class="control-label col-xs-3">Name</label>
 
                         <div class="col-xs-9">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="name">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Name">
                         </div>
                     </div>
 
+
+
+
+
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-9">
-                            <button class="btn btn-primary"  type="button" onclick="save()">save</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
                         </div>
                     </div>
                 </form>
@@ -66,8 +79,43 @@
 <script type="text/javascript" src="webjars/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript" src="webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="webjars/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="webjars/datatables/1.10.12/js/dataTables.bootstrap.min.js"></script>
-<script type="text/javascript" src="webjars/noty/2.3.8/js/noty/packaged/jquery.noty.packaged.min.js"></script>
 <script type="text/javascript" src="resources/js/datatablesUtil.js"></script>
-<script type="text/javascript" src="resources/js/userDatatables.js"></script>
+<script type="text/javascript">
+
+    var ajaxUrl = 'departments/';
+    var datatableApi;
+
+
+    function updateTable() {
+        $.get(ajaxUrl, updateTableByData);
+    }
+    // $(document).ready(function () {
+    $(function () {
+        datatableApi = $('#datatable').dataTable({
+            "bPaginate": false,
+            "bInfo": false,
+            "aoColumns": [
+                {
+                    "mData": "name"
+                },
+
+                {
+                    "sDefaultContent": "Edit",
+                    "bSortable": false
+                },
+                {
+                    "sDefaultContent": "Delete",
+                    "bSortable": false
+                }
+            ],
+            "aaSorting": [
+                [
+                    0,
+                    "asc"
+                ]
+            ]
+        });
+        makeEditable();
+    });
+</script>
 </html>

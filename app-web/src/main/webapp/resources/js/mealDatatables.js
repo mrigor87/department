@@ -1,11 +1,10 @@
-var ajaxUrl = 'ajax/profile/meals/';
+var ajaxUrl = 'ajax/departments/';
 var datatableApi;
 
 function updateTable() {
     $.ajax({
-        type: "POST",
-        url: ajaxUrl + 'filter',
-        data: $('#filter').serialize(),
+        type: "get",
+        url: ajaxUrl,
         success: updateTableByData
     });
 }
@@ -13,6 +12,7 @@ function updateTable() {
 $(function () {
     datatableApi = $('#datatable').DataTable({
         "ajax": {
+
             "url": ajaxUrl,
             "dataSrc": ""
         },
@@ -20,20 +20,9 @@ $(function () {
         "info": true,
         "columns": [
             {
-                "data": "dateTime",
-                "render": function (date, type, row) {
-                    if (type == 'display') {
-                        return date.replace('T', ' ').substr(0, 16);
-                    }
-                    return date;
-                }
+                "data": "name"
             },
-            {
-                "data": "description"
-            },
-            {
-                "data": "calories"
-            },
+
             {
                 "defaultContent": "",
                 "orderable": false,
@@ -53,40 +42,9 @@ $(function () {
             ]
         ],
         "createdRow": function (row, data, dataIndex) {
-            $(row).addClass(data.exceed ? 'exceeded' : 'normal');
+            $(row).addClass('normal');
         },
+
         "initComplete": makeEditable
-    });
-
-    var startDate = $('#startDate');
-    var endDate = $('#endDate');
-    startDate.datetimepicker({
-        timepicker: false,
-        format: 'Y-m-d',
-        formatDate: 'Y-m-d',
-        onShow: function (ct) {
-            this.setOptions({
-                maxDate: endDate.val() ? endDate.val() : false
-            })
-        }
-    });
-    endDate.datetimepicker({
-        timepicker: false,
-        format: 'Y-m-d',
-        formatDate: 'Y-m-d',
-        onShow: function (ct) {
-            this.setOptions({
-                minDate: startDate.val() ? startDate.val() : false
-            })
-        }
-    });
-
-    $('#startTime, #endTime').datetimepicker({
-        datepicker: false,
-        format: 'H:i'
-    });
-
-    $('#dateTime').datetimepicker({
-        format: 'Y-m-d H:i'
     });
 });

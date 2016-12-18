@@ -3,31 +3,44 @@ package com.mrigor.testTasks.department.web;
 import com.mrigor.testTasks.department.model.Department;
 import com.mrigor.testTasks.department.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.mrigor.testTasks.department.web.DepartmentController.REST_URL;
+
+
 
 /**
  * Created by Игорь on 17.12.2016.
  */
 
-@RequestMapping(REST_URL)
-@Controller
+@RequestMapping(value ="ajax/departments" )
+@RestController
 public class DepartmentController2 {
+
     @Autowired
     DepartmentService service;
 
-    public static final String REST_URL = "/departments";
+  //  public static final String REST_URL = "ajax/departments";
 
-    @GetMapping
-    String getAll(Model model) {
-        List<Department> all = service.getAll();
-        model.addAttribute("departmentList", all);
-        return "users";
+
+
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Department get(@PathVariable("id") int id)
+    {
+        return service.get(id);
+    }
+
+    @GetMapping( produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Department> getAll() {
+
+        return service.getAll();
     }
 
 /*    @DeleteMapping(value = "/{id}")
@@ -38,20 +51,36 @@ public class DepartmentController2 {
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") int id) {
-
         service.delete(id);
     }
 
-    @PostMapping
-    public void createOrUpdate(@RequestParam("id") Integer id,
-                               @RequestParam("name") String name) {
 
-        Department department = new Department(id, name);
+
+
+    @PostMapping
+    public ResponseEntity<String> createOrUpdate( Department department, BindingResult result) {
+        if (result.hasErrors()) {
+            StringBuilder sb = new StringBuilder();
+            result.getFieldErrors().forEach(fe -> sb.append(fe.getField()).append(" ").append(fe.getDefaultMessage()).append("<br>"));
+            return new ResponseEntity<>(sb.toString(), HttpStatus.UNPROCESSABLE_ENTITY);
+        }
         if (department.isNew()) {
             service.create(department);
         } else {
             service.update(department);
         }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
+
+/*    @PostMapping
+    public void createOrUpdate(Department department) {
+
+       // Department department = new Department(id, name);
+        if (department.isNew()) {
+            service.create(department);
+        } else {
+            service.update(department);
+        }
+    }*/
 
 }

@@ -132,6 +132,16 @@
             <artifactId>datatables</artifactId>
             <version>${webjars-datatables.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-servlet-api</artifactId>
+            <version>9.0.0.M9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-servlet-api</artifactId>
+            <version>9.0.0.M9</version>
+        </dependency>
 
 
     </dependencies>

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
-import static com.mrigor.testTasks.department.web.DepartmentController.REST_URL;
+
 
 /**
  * Created by Игорь on 17.12.2016.
@@ -23,7 +23,7 @@ public class DepartmentController {
     @Autowired
     DepartmentService service;
 
-    public static final String REST_URL = "/departments";
+
 
     @GetMapping
     String getAll(Model model){

@@ -4,10 +4,14 @@ import com.mrigor.testTasks.department.model.Department;
 import com.mrigor.testTasks.department.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-;import java.util.List;
+;import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 
 /**
@@ -22,10 +26,22 @@ public class RootController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String root() {
         System.out.println("!!!!!!!!!!!!@@@@@@@@@@@@@@@!!!!!!!!!!!!!");
-        System.out.println(departmentService.getAll());
-        List<Department> all = departmentService.getAll();
         return "index";
     }
+
+    //go to main page Departments
+    @GetMapping(value = "/departments")
+    String departments() {
+/*        List<Department> all = departmentService.getAll();
+        model.addAttribute("departmentList", all);*/
+        return "meals";
+    }
+
+/*    @PostMapping("/department")
+    public String setUser(HttpServletRequest request) {
+        int userId = Integer.valueOf(request.getParameter("userId"));;
+        return "redirect:meals";
+    }*/
 
 
 }

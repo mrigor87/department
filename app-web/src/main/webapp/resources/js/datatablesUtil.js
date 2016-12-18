@@ -1,17 +1,26 @@
-function makeEditable() {
-    $('.delete').click(function () {
-        deleteRow($(this).attr("id"));
-    });
+var form;
 
-    $('#detailsForm').submit(function () {
-        save();
-        return false;
+function makeEditable() {
+    form = $('#detailsForm');
+    $(document).ajaxError(function (event, jqXHR, options, jsExc) {
+        failNoty(event, jqXHR, options, jsExc);
     });
 }
 
-function add() {
-    $('#id').val(null);
+function add(add_title) {
+    $('#modalTitle').html(add_title);
+    form.find(":input").val("");
     $('#editRow').modal();
+}
+
+function updateRow(id) {
+    $('#modalTitle').html(edit_title);
+    $.get(ajaxUrl + id, function (data) {
+        $.each(data, function (key, value) {
+            form.find("input[name='" + key + "']").val(value);
+        });
+        $('#editRow').modal();
+    });
 }
 
 function deleteRow(id) {
@@ -20,22 +29,29 @@ function deleteRow(id) {
         type: 'DELETE',
         success: function () {
             updateTable();
+/*            successNoty('common.deleted');*/
         }
     });
 }
 
-function updateTable() {
-    $.get(ajaxUrl, function (data) {
-        datatableApi.fnClearTable();
-        $.each(data, function (key, item) {
-            datatableApi.fnAddData(item);
-        });
-        datatableApi.fnDraw();
+/*function enable(chkbox, id) {
+    var enabled = chkbox.is(":checked");
+    $.ajax({
+        url: ajaxUrl + id,
+        type: 'POST',
+        data: 'enabled=' + enabled,
+        success: function () {
+            chkbox.closest('tr').fadeTo(300, enabled ? 1 : 0.3);
+            successNoty(enabled ? 'common.enabled' : 'common.disabled');
+        }
     });
+}*/
+
+function updateTableByData(data) {
+    datatableApi.clear().rows.add(data).draw();
 }
 
 function save() {
-    var form = $('#detailsForm');
     $.ajax({
         type: "POST",
         url: ajaxUrl,
@@ -43,6 +59,47 @@ function save() {
         success: function () {
             $('#editRow').modal('hide');
             updateTable();
+/*            successNoty('common.saved');*/
         }
     });
+}
+
+var failedNote;
+
+function closeNoty() {
+    if (failedNote) {
+        failedNote.close();
+        failedNote = undefined;
+    }
+}
+
+function successNoty(key) {
+    closeNoty();
+    noty({
+        text: 'something is done',
+        type: 'success',
+        layout: 'bottomRight',
+        timeout: true
+    });
+}
+
+function failNoty(event, jqXHR, options, jsExc) {
+    closeNoty();
+    failedNote = noty({
+        text:  ': ' + jqXHR.statusText + "<br>" + jqXHR.responseJSON,
+        type: 'error',
+        layout: 'bottomRight'
+    });
+}
+
+function renderEditBtn(data, type, row) {
+    if (type == 'display') {
+        return '<a class="btn btn-xs btn-primary" onclick="updateRow(' + row.id + ');">'+'edit'+'</a>';
+    }
+}
+
+function renderDeleteBtn(data, type, row) {
+    if (type == 'display') {
+        return '<a class="btn btn-xs btn-danger" onclick="deleteRow(' + row.id + ');">'+'delete'+'</a>';
+    }
 }
