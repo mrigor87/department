@@ -12,7 +12,7 @@
 <div class="jumbotron">
     <div class="container">
         <div class="shadow">
-            <h3>DEPARTMENT></h3>
+            <h3>EMPLOYEE></h3>
 
             <div class="view-box">
                 <%--                <form method="post" class="form-horizontal" role="form" id="filter">
@@ -52,7 +52,9 @@
                 <table class="table table-striped display" id="datatable">
                     <thead>
                     <tr>
-                        <th>Name</th>
+                        <th>Full Name</th>
+                        <th>Bithday</th>
+                        <th>salary</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -74,20 +76,42 @@
             <div class="modal-body">
                 <form class="form-horizontal" method="post" id="detailsForm">
                     <input type="hidden" id="id" name="id">
+                    <input type="hidden" id="departmentId" name="departmentId">
 
                     <div class="form-group">
-                        <label for="name" class="control-label col-xs-3">name></label>
+                        <label for="fullName" class="control-label col-xs-3">FullName></label>
 
                         <div class="col-xs-9">
-                            <input type="text" class="form-control" id="name" name="name"
-                                   placeholder="name">
-                        </div>
-                        <div class="form-group">
-                            <div class="col-xs-offset-3 col-xs-9">
-                                <button class="btn btn-primary" type="button" onclick="save()">save</button>
-                            </div>
+                            <input type="text" class="form-control" id="fullName" name="fullName"
+                                   placeholder="fullName">
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label for="birthDay" class="control-label col-xs-3">Birthday</label>
+
+                        <div class="col-xs-9">
+                            <input type="date" class="form-control" id="birthDay"
+                                   name="birthDay" placeholder="Enter day of birth">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="salary" class="control-label col-xs-3">salary</label>
+
+                        <div class="col-xs-9">
+                            <input type="number" class="form-control" id="salary" name="salary"
+                                   placeholder="100">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-xs-offset-3 col-xs-9">
+                            <button class="btn btn-primary" type="button" onclick="save()">save</button>
+                        </div>
+                    </div>
+
                 </form>
             </div>
         </div>
@@ -103,6 +127,5 @@
 <script type="text/javascript" src="webjars/datatables/1.10.12/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="webjars/noty/2.3.8/js/noty/packaged/jquery.noty.packaged.min.js"></script>
 <script type="text/javascript" src="resources/js/datatablesUtil.js"></script>
-<script type="text/javascript" src="resources/js/mealDatatables.js"></script>
-<%--<script type="text/javascript" src="resources/js/mealDatatables.js"></script>--%>
+<script type="text/javascript" src="resources/js/employeeDatatables.js"></script>
 </html>

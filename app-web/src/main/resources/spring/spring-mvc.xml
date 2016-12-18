@@ -10,7 +10,23 @@
 
     <context:component-scan base-package="com.mrigor.testTasks.department.web"/>
 <!--    <mvc:annotation-driven/>-->
-    <mvc:annotation-driven>
+
+    <bean class="org.springframework.format.support.FormattingConversionServiceFactoryBean" id="conversionService">
+        <property name="formatters">
+            <set>
+                <bean class="com.mrigor.testTasks.department.util.converter.DateTimeFormatters.LocalDateFormatter"/>
+                <!--                <bean class="ru.javawebinar.topjava.util.converter.DateTimeFormatters.LocalDateFormatter"/>-->
+            </set>
+        </property>
+    </bean>
+
+
+
+
+
+
+
+    <mvc:annotation-driven conversion-service="conversionService" >
         <mvc:message-converters>
 
             <ref bean="converter"/>
@@ -29,6 +45,10 @@
 
     <!--  all resources inside folder src/main/webapp/resources are mapped so they can be referred to inside JSP files -->
 <!--    <mvc:resources mapping="/resources/**" location="/resources/"/>-->
+
+
+
+
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/jsp/"

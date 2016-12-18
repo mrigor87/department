@@ -34,7 +34,14 @@ public class RootController {
     String departments() {
 /*        List<Department> all = departmentService.getAll();
         model.addAttribute("departmentList", all);*/
-        return "meals";
+        return "departmentPage";
+    }
+
+    @GetMapping(value = "/employees")
+    String employees() {
+/*        List<Department> all = departmentService.getAll();
+        model.addAttribute("departmentList", all);*/
+        return "employeePage";
     }
 
 /*    @PostMapping("/department")

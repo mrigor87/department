@@ -6,8 +6,10 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import org.springframework.format.annotation.DateTimeFormat;
 //import org.springframework.format.annotation.DateTimeFormat;
 
+import java.text.DateFormat;
 import java.time.LocalDate;
 
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
@@ -20,12 +22,14 @@ import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 public class Employee {
     private Integer id;
     private String fullName;
-   // @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    //@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)*/
 
    // @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd" )
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
+/*    @DateTimeFormat(pattern = "yyyy-MM-dd")*/
     private LocalDate birthDay;
     private int salary;
     //@JsonIgnore
