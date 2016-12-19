@@ -33,6 +33,30 @@ $(function () {
                 "orderable": false,
                 "render": renderDeleteBtn
 
+            },
+
+
+            /*            function deleteRow(id) {
+             $.ajax({
+             url: ajaxUrl + id,
+             type: 'DELETE',
+             success: function () {
+             updateTable();
+             /!*            successNoty('common.deleted');*!/
+             }
+             });
+             }*/
+            /*            function renderDeleteBtn(data, type, row) {
+             if (type == 'display') {
+             return '<a class="btn btn-xs btn-danger" onclick="deleteRow(' + row.id + ');">'+'delete'+'</a>';
+             }*/
+
+
+            {
+                "defaultContent": "",
+                "orderable": false,
+                "render": renderGoto
+
             }
         ],
         "order": [
@@ -48,3 +72,19 @@ $(function () {
         "initComplete": makeEditable
     });
 });
+
+function renderGoto(data, type, row) {
+    if (type == 'display') {
+        return '<a class="btn btn-xs btn-primary" onclick="goTo(' + row.id + ');">' + 'go' + '</a>';
+    }
+}
+function goTo(id) {
+    $.ajax({
+        url: ajaxUrl + id,
+        type: 'DELETE',
+        success: function () {
+            updateTable();
+
+        }
+    });
+}
