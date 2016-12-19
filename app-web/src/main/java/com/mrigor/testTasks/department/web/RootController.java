@@ -5,10 +5,7 @@ import com.mrigor.testTasks.department.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 //import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -43,6 +40,15 @@ public class RootController {
         model.addAttribute("departmentList", all);*/
         return "employeePage";
     }
+    @GetMapping(value = "/employees/department/{departId}")
+    String employeesByDepartmentId(@PathVariable("departId")int departId, Model model) {
+        model.addAttribute("departId",departId);
+/*        List<Department> all = departmentService.getAll();
+        model.addAttribute("departmentList", all);*/
+        return "employeePageNew";
+    }
+
+
     @GetMapping(value = "/employees/byDep")
     String employeesByDepartment() {
 /*        List<Department> all = departmentService.getAll();

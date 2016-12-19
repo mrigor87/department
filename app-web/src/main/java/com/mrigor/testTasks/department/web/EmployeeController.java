@@ -26,6 +26,11 @@ public class EmployeeController {
         return service.getAll();
     }
 
+    @GetMapping(value = "/department/{departId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Employee> getByDepartmentId(@PathVariable("departId") int departId){
+        return service.getByDep(departId);
+    }
+
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Employee get(@PathVariable("id") int id){
         return service.get(id);
