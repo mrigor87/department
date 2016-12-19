@@ -76,7 +76,7 @@
             <div class="modal-body">
                 <form class="form-horizontal" method="post" id="detailsForm">
                     <input type="hidden" id="id" name="id">
-                    <input type="hidden" id="departmentId" name="departmentId">
+                    <input  type="number" id="departmentId" name="departmentId">
 
                     <div class="form-group">
                         <label for="fullName" class="control-label col-xs-3">FullName></label>
@@ -108,7 +108,7 @@
 
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-9">
-                            <button class="btn btn-primary" type="button" onclick="save()">save</button>
+                            <button class="btn btn-primary" type="button" onclick="saveWrapper()">save</button>
                         </div>
                     </div>
 
@@ -120,6 +120,10 @@
 </body>
 <script type="text/javascript">
     var departId = ${departId};
+    function saveWrapper() {
+        form.find("input[name=departmentId]").val(${departId});
+        save();
+    }
 </script>
 <script type="text/javascript">
     var edit_title = 'edit';

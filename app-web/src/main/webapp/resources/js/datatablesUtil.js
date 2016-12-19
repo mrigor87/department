@@ -52,6 +52,8 @@ function updateTableByData(data) {
 }
 
 function save() {
+/*    form.find("input[name=departmentId]").val(100000);*/
+/*    form.departmentId=100000;*/
     $.ajax({
         type: "POST",
         url: ajaxUrl,

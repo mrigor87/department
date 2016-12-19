@@ -8,7 +8,7 @@
 
         <div class="collapse navbar-collapse">
             <form class="navbar-form navbar-right">
-                <a class="btn btn-info" role="button" href="users">department</a>
+                <a class="btn btn-info" role="button" href="departments">department</a>
                 <a class="btn btn-primary" role="button" href="">else</a>
             </form>
         </div>
