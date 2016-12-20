@@ -15,39 +15,37 @@
             <h3> ${department.name}</h3>
 
             <div class="view-box">
-                <%--                <form method="post" class="form-horizontal" role="form" id="filter">
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-2" for="startDate"><fmt:message key="meals.startDate"/>:</label>
+                <form method="post" class="form-horizontal" role="form" id="filter">
+                    <div class="form-group">
+                        <input type="number"  name="departmentid" value="${department.id}">
 
-                                        <div class="col-sm-2">
-                                            <input class="form-control" type="date" name="startDate" id="startDate">
-                                        </div>
+                        <label class="control-label col-sm-2" for="from">from:</label>
 
-                                        <label class="control-label col-sm-2" for="endDate"><fmt:message key="meals.endDate"/>:</label>
+                        <div class="col-sm-2">
+                            <input class="form-control" type="date" name="from" id="from">
+                        </div>
 
-                                        <div class="col-sm-2">
-                                            <input class="form-control" type="date" name="endDate" id="endDate">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-2" for="startTime"><fmt:message key="meals.startTime"/>:</label>
+                        <label class="control-label col-sm-2" for="to">to:</label>
 
-                                        <div class="col-sm-2">
-                                            <input class="form-control" type="time" name="startTime" id="startTime">
-                                        </div>
+                        <div class="col-sm-2">
+                            <input class="form-control" type="date" name="to" id="to">
+                        </div>
+                    </div>
 
-                                        <label class="control-label col-sm-2" for="endTime"><fmt:message key="meals.endTime"/>:</label>
+                    <div class="form-group">
+                        <div class="col-sm-8">
+                            <button class="btn btn-primary pull-right" type="button" onclick="updateTable2()">filter
+                            </button>
+                        </div>
+                    </div>
+                </form>
 
-                                        <div class="col-sm-2">
-                                            <input class="form-control" type="time" name="endTime" id="endTime">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-8">
-                                            <button class="btn btn-primary pull-right"  type="button" onclick="updateTable()"><fmt:message key="meals.filter"/></button>
-                                        </div>
-                                    </div>
-                                </form>--%>
+
+
+
+
+
+
                 <a class="btn btn-sm btn-info" onclick="add('add')">add</a>
                 <table class="table table-striped display" id="datatable">
                     <thead>
@@ -76,7 +74,7 @@
             <div class="modal-body">
                 <form class="form-horizontal" method="post" id="detailsForm">
                     <input type="hidden" id="id" name="id">
-                    <input  type="number" id="departmentId" name="departmentId">
+                    <input type="number" id="departmentId" name="departmentId">
 
                     <div class="form-group">
                         <label for="fullName" class="control-label col-xs-3">FullName></label>

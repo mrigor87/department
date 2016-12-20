@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -57,6 +58,14 @@ public class EmployeeController {
             service.update(employee);
         }
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/filter", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Employee> getBetween(
+            @RequestParam(value = "from", required = false) LocalDate from,
+            @RequestParam(value = "to", required = false) LocalDate to,
+            @RequestParam(value = "departmentid", required = false) Integer departmentid) {
+        return service.getFiltered(from, to, departmentid);
     }
 
 }

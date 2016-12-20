@@ -9,6 +9,26 @@ function updateTable() {
     });
 }
 
+function updateTable() {
+    $.ajax({
+        type: "post",
+        url: ajaxUrl+"filter",
+        data: $('#filter').serialize(),
+
+        success: updateTableByData
+    });
+}
+function updateTable2() {
+/*    data.add("departmentid",departId);*/
+    $.ajax({
+        type: "post",
+        url: ajaxUrl+"filter",
+        data: $('#filter').serialize(),
+
+        success: updateTableByData
+    });
+}
+
 $(function () {
     datatableApi = $('#datatable').DataTable({
         "ajax": {
