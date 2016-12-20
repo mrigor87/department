@@ -40,9 +40,13 @@ public class RootController {
         model.addAttribute("departmentList", all);*/
         return "employeePage";
     }
-    @GetMapping(value = "/employees/department/{departId}")
+    @GetMapping(value = "/employees/filtered")
+    String employeesByDepartmentId(@RequestParam(value = "departmentid") Integer departmentId,
+                                   Model model) {
+        model.addAttribute("department",departmentService.get(departmentId));
+/*    @GetMapping(value = "/employees/department/{departId}")
     String employeesByDepartmentId(@PathVariable("departId")int departId, Model model) {
-        model.addAttribute("department",departmentService.get(departId));
+        model.addAttribute("department",departmentService.get(departId));*/
 /*        List<Department> all = departmentService.getAll();
         model.addAttribute("departmentList", all);*/
         return "employeePageNew";
