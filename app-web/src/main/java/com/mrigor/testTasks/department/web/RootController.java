@@ -42,7 +42,7 @@ public class RootController {
     }
     @GetMapping(value = "/employees/department/{departId}")
     String employeesByDepartmentId(@PathVariable("departId")int departId, Model model) {
-        model.addAttribute("departId",departId);
+        model.addAttribute("department",departmentService.get(departId));
 /*        List<Department> all = departmentService.getAll();
         model.addAttribute("departmentList", all);*/
         return "employeePageNew";

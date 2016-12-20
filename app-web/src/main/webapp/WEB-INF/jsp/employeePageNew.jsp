@@ -12,7 +12,7 @@
 <div class="jumbotron">
     <div class="container">
         <div class="shadow">
-            <h3>EMPLOYEE ${departId}</h3>
+            <h3> ${department.name}</h3>
 
             <div class="view-box">
                 <%--                <form method="post" class="form-horizontal" role="form" id="filter">
@@ -119,9 +119,9 @@
 </div>
 </body>
 <script type="text/javascript">
-    var departId = ${departId};
+    var departId = ${department.id};
     function saveWrapper() {
-        form.find("input[name=departmentId]").val(${departId});
+        form.find("input[name=departmentId]").val(departId);
         save();
     }
 </script>
