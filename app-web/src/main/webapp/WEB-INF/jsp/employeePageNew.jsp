@@ -42,9 +42,11 @@
 
 
 
+                <input class="form-control" type="date" name="date" id="date">
 
+                <button class="btn btn-primary pull-right" type="button" onclick="filterByDate()" >
 
-
+                </button>
 
                 <a class="btn btn-sm btn-info" onclick="add('add')">add</a>
                 <table class="table table-striped display" id="datatable">
@@ -122,6 +124,19 @@
         form.find("input[name=departmentId]").val(departId);
         save();
     }
+    function filterByDate() {
+       var d= document.getElementById("date").value;
+
+        $.ajax({
+            type: "get",
+            url: ajaxUrl+"filtered?departmentid="+departId+"&from="+d+"&to="+d,
+/*            data: $('#filter').serialize(),*/
+
+            success: updateTableByData
+        });
+    }
+
+
 </script>
 <script type="text/javascript">
     var edit_title = 'edit';

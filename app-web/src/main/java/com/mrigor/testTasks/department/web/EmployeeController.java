@@ -15,34 +15,41 @@ import java.util.List;
 /**
  * Created by Игорь on 18.12.2016.
  */
-@RequestMapping(value ="ajax/employees" )
+@RequestMapping(value = "ajax/employees")
 @RestController
 public class EmployeeController {
 
-   @Autowired
+    @Autowired
     EmployeeService service;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Employee> getAll(){
+    public List<Employee> getAll() {
         return service.getAll();
     }
 
 
-/*    @GetMapping(value = "/department/{departId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Employee> getByDepartmentId(@PathVariable("departId") int departId){*/
+    /*    @GetMapping(value = "/department/{departId}", produces = MediaType.APPLICATION_JSON_VALUE)
+        public List<Employee> getByDepartmentId(@PathVariable("departId") int departId){*/
     @GetMapping(value = "/filtered", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Employee> getByDepartmentId(@RequestParam(value = "departmentid")  Integer departmentId){
-        return service.getByDep(departmentId);
+    public List<Employee> getByDepartmentId(@RequestParam(value = "departmentid", required = false) Integer departmentId,
+                                            @RequestParam(value = "from", required = false) LocalDate from,
+                                            @RequestParam(value = "to", required = false) LocalDate to) {
+        return service.getFiltered(from,to, departmentId);
     }
 
+/*    @GetMapping(value = "/filtered", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Employee> getByDepartmentId(@RequestParam(value = "departmentid") Integer departmentId) {
+        return service.getByDep(departmentId);
+    }*/
+
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Employee get(@PathVariable("id") int id){
+    public Employee get(@PathVariable("id") int id) {
         return service.get(id);
     }
 
-    @DeleteMapping(value = "/{id}" )
-    public void delete (@PathVariable("id") int id){
-         service.delete(id);
+    @DeleteMapping(value = "/{id}")
+    public void delete(@PathVariable("id") int id) {
+        service.delete(id);
     }
 
     @PostMapping

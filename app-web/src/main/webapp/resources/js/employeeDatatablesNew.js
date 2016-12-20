@@ -1,7 +1,7 @@
 var ajaxUrl = 'ajax/employees/';
 var datatableApi;
 
-function updateTable() {
+function updateTable8() {
     $.ajax({
         type: "get",
         url: ajaxUrl+"filtered?departmentid="+departId,
