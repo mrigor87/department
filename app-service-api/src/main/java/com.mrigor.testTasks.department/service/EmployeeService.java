@@ -11,12 +11,16 @@ import java.util.List;
  */
 public interface EmployeeService {
 
-    Employee create(Employee employee, int departamentId);
+    Employee create(Employee employee);
     void update(Employee employee) throws NotFoundException;
     void delete(int id) throws NotFoundException;
     Employee get(int id) throws NotFoundException;
     List<Employee> getAll();
-    List<Employee> getByDep(int id) throws NotFoundException;
+/*    List<Employee> getByDep(int id) throws NotFoundException;
     List<Employee> getBetweenDates(LocalDate from, LocalDate to);
-    List<Employee> getByDate(LocalDate date);
+    List<Employee> getByDate(LocalDate date);*/
+
+    List<Employee> getFiltered(LocalDate from, LocalDate to, Integer departmentId);
+    List<Employee> getByDep(int departmentId);
+
 }

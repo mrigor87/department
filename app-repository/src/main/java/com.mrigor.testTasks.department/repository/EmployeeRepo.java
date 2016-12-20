@@ -22,7 +22,7 @@ public interface EmployeeRepo {
 
     List<Employee> getByDep(int id);
 
-    List<Employee> getBetweenDates(LocalDate from, LocalDate to);
+    List<Employee> getFiltered(LocalDate from, LocalDate to, Integer departmentId);
 
    default Employee getWithDepartment(int id){
        throw  new UnsupportedOperationException();

@@ -82,7 +82,7 @@ public class EmployeeRepoImplTest {
 
     @Test
     public void getBetweenDates() throws Exception {
-        MATCHER.assertCollectionEquals(Arrays.asList(EMPL5,EMPL4), repository.getBetweenDates(of(1993,1,1),null));
+        MATCHER.assertCollectionEquals(Arrays.asList(EMPL5,EMPL4), repository.getFiltered(of(1993,1,1),null,null));
     }
     @Test
     public void getAllWithAvgSalary() throws Exception{

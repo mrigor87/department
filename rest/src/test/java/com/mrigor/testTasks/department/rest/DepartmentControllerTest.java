@@ -84,7 +84,7 @@ public class DepartmentControllerTest {
 
     @Test
     public void testGetAllWithSalary() throws Exception {
-        printContent(mockMvc.perform(get(REST_URL+"getAllWithAvgSalary"))
+        printContent(mockMvc.perform(get(REST_URL+"withAvgSalary"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(MATCHER_WITH_SALARY.contentListMatcher(DEP_WITH_AVG_SALARY)));

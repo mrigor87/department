@@ -20,6 +20,7 @@ import java.util.List;
  */
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
+
     private static final Logger LOG = LoggerFactory.getLogger(EmployeeService.class);
 
     private EmployeeRepo repository;
@@ -29,14 +30,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee create(Employee employee, int depId) {
+    public Employee create(Employee employee) {
         Assert.notNull(employee, "employee must not be null");
-        employee.setDepartmentId(depId);
+       // employee.setDepartmentId(depId);
         Employee savedEmployee;
         try {
             savedEmployee = repository.save(employee);
         } catch (DataIntegrityViolationException e) {
-            throw new NotFoundException("can't create new employee because department with id=" + depId + " isn't exist");
+            throw new NotFoundException("can't create new employee because department with id=" + employee.getDepartmentId() + " isn't exist");
         }
         return savedEmployee;
     }
@@ -63,6 +64,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public List<Employee> getByDep(int departmentId) {
+        return repository.getFiltered(null, null, departmentId);
+    }
+
+    @Override
+    public List<Employee> getFiltered(LocalDate from, LocalDate to, Integer departmentId) {
+        return repository.getFiltered(from, to, departmentId);
+    }
+/*    @Override
     public List<Employee> getByDep(int depId) throws NotFoundException {
         return ExceptionUtil.checkNotFoundWithId(repository.getByDep(depId), depId);
     }
@@ -75,5 +85,5 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<Employee> getByDate(LocalDate date) {
         return repository.getBetweenDates(date, date);
-    }
+    }*/
 }

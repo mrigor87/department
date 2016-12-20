@@ -36,7 +36,7 @@ public class EmployeeServiceClientTest {
     public void create() throws Exception {
         Employee created=EmployeeTestData.getCreated();
         created.setDepartmentId(100000);
-        service.create(created,100000);
+        service.create(created);
     }
 
     @Test
@@ -69,14 +69,14 @@ public class EmployeeServiceClientTest {
 
     @Test
     public void getBetweenDates() throws Exception {
-        List<Employee> betweenDates = service.getBetweenDates(LocalDate.of(1993, 1, 1),LocalDate.of(1993, 1, 1));
+        List<Employee> betweenDates = service.getFiltered (LocalDate.of(1993, 1, 1),LocalDate.of(1993, 1, 1),null);
         System.out.println(betweenDates);
     }
 
     @Test
     public void getByDate() throws Exception {
       //  REST_URL+"byDate?date=1993-01-01"
-        List<Employee> byDate = service.getByDate(LocalDate.of(1993, 1, 1));
+        List<Employee> byDate = service.getFiltered(LocalDate.of(1993, 1, 1),LocalDate.of(1993, 1, 1),null);
         System.out.println(byDate);
 
     }

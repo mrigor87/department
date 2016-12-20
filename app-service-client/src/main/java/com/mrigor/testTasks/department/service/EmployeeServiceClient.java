@@ -25,9 +25,9 @@ public class EmployeeServiceClient implements EmployeeService {
 //    Department created=restTemplate.postForObject(REST_URL,department,Department.class);
 
     @Override
-    public Employee create(Employee employee, int i) {
-        String currentREST=REST_URL+i;
-        employee.setDepartmentId(i);
+    public Employee create(Employee employee) {
+        String currentREST=REST_URL;
+        //employee.setDepartmentId(i);
         Employee created=restTemplate.postForObject(currentREST,employee,Employee.class);
         return created;
     }
@@ -62,8 +62,21 @@ public class EmployeeServiceClient implements EmployeeService {
     }
 
     @Override
-    public List<Employee> getByDep(int i) throws NotFoundException {
-        String currentRest=REST_URL+"department/"+i;
+    public List<Employee> getByDep(int departmentId) throws NotFoundException {
+        String currentRest=REST_URL+"filtered?departmentid="+departmentId;
+        ResponseEntity<List<Employee>> emplResponse =
+                restTemplate.exchange(currentRest,
+                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Employee>>() {
+                        });
+        List<Employee> employees = emplResponse.getBody();
+        return employees;
+    }
+
+    @Override
+    public List<Employee> getFiltered(LocalDate from, LocalDate to, Integer departmentId) {
+        String currentRest=REST_URL+"filtered?from="+from+
+                "&to="+to+
+                "&departmentid="+departmentId+"";
         ResponseEntity<List<Employee>> emplResponse =
                 restTemplate.exchange(currentRest,
                         HttpMethod.GET, null, new ParameterizedTypeReference<List<Employee>>() {
@@ -73,8 +86,7 @@ public class EmployeeServiceClient implements EmployeeService {
     }
 
 
-
-    @Override
+/*    @Override
     public List<Employee> getBetweenDates(LocalDate from, LocalDate to) {
 
         String currentRest=REST_URL+"between?from={from}&to={to}";
@@ -98,7 +110,7 @@ public class EmployeeServiceClient implements EmployeeService {
                         }, localDate);
         List<Employee> employees = emplResponse.getBody();
         return employees;
-    }
+    }*/
 
 
 }

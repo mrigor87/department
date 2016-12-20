@@ -21,7 +21,7 @@ import static com.mrigor.testTasks.department.rest.EmployeeController.REST_URL;
  * Created by Igor on 13.12.2016.
  */
 @RestController
-@RequestMapping(value = REST_URL)
+@RequestMapping(REST_URL)
 public class EmployeeController {
     private static final Logger LOG = LoggerFactory.getLogger(DepartmentController.class);
     @Autowired
@@ -57,26 +57,34 @@ public class EmployeeController {
     }
 
 
-    @GetMapping(value = "/department/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+/*    @GetMapping(value = "/withAvgSalary", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Employee> getAllByDepartmentId(@PathVariable("id") int id) {
         LOG.info("get employees by department id={}", id);
         return service.getByDep(id);
-    }
-
-    @GetMapping(value = "/between", produces = MediaType.APPLICATION_JSON_VALUE)
+    }*/
+@GetMapping(value = "/filtered", produces = MediaType.APPLICATION_JSON_VALUE)
+public List<Employee> filter(
+        @RequestParam(value = "from", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
+        @RequestParam(value = "to", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to,
+    @RequestParam(value = "departmentid", required = false)  Integer departmentId)
+{
+    LOG.info("get employees from department-{} from dates from {} to {}", departmentId, from, to);
+    return service.getFiltered(from, to, departmentId);
+}
+/*    @GetMapping(value = "/employees/between", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Employee> getBetweenDates(
             @RequestParam(value = "from", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
             @RequestParam(value = "to", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to) {
         LOG.info("get employees from dates from {} to {}", from, to);
         return service.getBetweenDates(from, to);
-    }
+    }*/
 
-    @GetMapping(value = "/byDate", produces = MediaType.APPLICATION_JSON_VALUE)
+/*    @GetMapping(value = "/employees/byDate", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Employee> getBetweenDates(
             @RequestParam(value = "date", required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         LOG.info("get employees from by date {}", date);
         return service.getByDate(date);
-    }
+    }*/
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     // @PutMapping( value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -87,12 +95,13 @@ public class EmployeeController {
         service.update(employee);
     }
 
-    @PostMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Employee> createWithLocation(@PathVariable("id") int id, @RequestBody Employee employee) {
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Employee> createWithLocation( @RequestBody Employee employee) {
         LOG.info("created department {}", employee);
-        Employee created = service.create(employee, id);
+        Employee created = service.create(employee);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(REST_URL + "/{id}")
+                .path(REST_URL)
                 .buildAndExpand(created.getId())
                 .toUri();
         return ResponseEntity.created(uriOfNewResource).body(created);

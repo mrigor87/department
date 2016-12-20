@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by Игорь on 10.12.2016.
  */
-@Repository
+//@Repository
 public class DepartmentToRepoImpl implements DepartmentToRepo {
     private static final BeanPropertyRowMapper<DepartmentWithAverageSalary> ROW_MAPPER = BeanPropertyRowMapper.newInstance(DepartmentWithAverageSalary.class);
 

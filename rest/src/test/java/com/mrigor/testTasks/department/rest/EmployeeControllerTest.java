@@ -107,7 +107,7 @@ public class EmployeeControllerTest {
     @Test
     public void testCreate() throws Exception {
         Employee expected = getCreated();
-        ResultActions action = mockMvc.perform(post(REST_URL+DEP1_ID)
+        ResultActions action = mockMvc.perform(post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(expected)))
                 .andDo(print())
@@ -121,7 +121,7 @@ public class EmployeeControllerTest {
 
 @Test
 public void testGetAllbyDepartment() throws Exception {
-    printContent(mockMvc.perform(get(REST_URL+"department/"+DEP1_ID))
+    printContent(mockMvc.perform(get(REST_URL+"/filtered?departmentid="+DEP1_ID))
             .andExpect(status().isOk())
             .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
             .andExpect(MATCHER.contentListMatcher(EMPL_D1))
@@ -130,7 +130,7 @@ public void testGetAllbyDepartment() throws Exception {
 
     @Test
     public void testGetBetweenDates() throws Exception {
-        printContent(mockMvc.perform(get(REST_URL+"between?from=1993-01-01"))
+        printContent(mockMvc.perform(get(REST_URL+"filtered?from=1993-01-01"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(MATCHER.contentListMatcher(EMPL_D2))
@@ -139,7 +139,7 @@ public void testGetAllbyDepartment() throws Exception {
 
     @Test
     public void testGetfromDate() throws Exception {
-        printContent(mockMvc.perform(get(REST_URL+"byDate?date=1993-01-01"))
+        printContent(mockMvc.perform(get(REST_URL+"filtered?from=1993-01-01&to=1993-01-01"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(MATCHER.contentListMatcher(EMPL4))

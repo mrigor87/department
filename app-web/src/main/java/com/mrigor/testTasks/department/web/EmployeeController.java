@@ -26,9 +26,12 @@ public class EmployeeController {
         return service.getAll();
     }
 
-    @GetMapping(value = "/department/{departId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Employee> getByDepartmentId(@PathVariable("departId") int departId){
-        return service.getByDep(departId);
+
+/*    @GetMapping(value = "/department/{departId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Employee> getByDepartmentId(@PathVariable("departId") int departId){*/
+    @GetMapping(value = "/filtered", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Employee> getByDepartmentId(@RequestParam(value = "departmentid")  Integer departmentId){
+        return service.getByDep(departmentId);
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -49,7 +52,7 @@ public class EmployeeController {
             return new ResponseEntity<>(sb.toString(), HttpStatus.UNPROCESSABLE_ENTITY);
         }
         if (employee.isNew()) {
-            service.create(employee,employee.getDepartmentId());
+            service.create(employee);
         } else {
             service.update(employee);
         }

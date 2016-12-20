@@ -92,14 +92,19 @@ public class EmployeeRepoImpl implements EmployeeRepo {
     }
 
     @Override
-    public List<Employee> getBetweenDates(LocalDate from, LocalDate to) {
+    public List<Employee> getFiltered(LocalDate from, LocalDate to, Integer departmentId) {
 /*        LocalDate fromDate = from == null ? LocalDate.MIN : from;
         LocalDate toDate = to == null ? LocalDate.MAX : to;*/
         Date fromDate = Date.valueOf(from == null ? LocalDate.of(1800, 1, 1) : from);
         Date toDate = Date.valueOf(to == null ? LocalDate.of(3000, 1, 1) : to);
-
-        return jdbcTemplate.query("SELECT * FROM EMPLOYEES  " +
-                "WHERE (BIRTHDAY BETWEEN  ? AND ?)  ORDER BY FULLNAME ", ROW_MAPPER, fromDate, toDate);
-
+        if (departmentId != null) {
+            return jdbcTemplate.query("SELECT * FROM EMPLOYEES  " +
+                    "WHERE ((BIRTHDAY BETWEEN  ? AND ?)" +
+                    "AND department_id=?)  " +
+                    "ORDER BY FULLNAME ", ROW_MAPPER, fromDate, toDate, departmentId);
+        } else {
+            return jdbcTemplate.query("SELECT * FROM EMPLOYEES  " +
+                    "WHERE (BIRTHDAY BETWEEN  ? AND ?)  ORDER BY FULLNAME ", ROW_MAPPER, fromDate, toDate);
+        }
     }
 }

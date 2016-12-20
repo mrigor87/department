@@ -44,7 +44,7 @@ public class DepartmentController {
         LOG.info("get department id={}",id);
         return service.get(id);
     }
-    @GetMapping(value = "/getAllWithAvgSalary", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/withAvgSalary", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<DepartmentWithAverageSalary> getAllWithAvgSalary(){
         LOG.info("get delartments with avg salary");
         return service.getAllWithAvgSalary();
@@ -57,7 +57,7 @@ public class DepartmentController {
     }
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@RequestBody Department department){
-        LOG.info("udate department {}",department);
+        LOG.info("update department {}",department);
         service.update(department);
     }
 

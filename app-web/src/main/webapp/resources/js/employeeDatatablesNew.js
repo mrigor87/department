@@ -4,7 +4,7 @@ var datatableApi;
 function updateTable() {
     $.ajax({
         type: "get",
-        url: ajaxUrl+"department/"+departId,
+        url: ajaxUrl+"filtered?departmentid="+departId,
         success: updateTableByData
     });
 }
@@ -13,7 +13,7 @@ $(function () {
     datatableApi = $('#datatable').DataTable({
         "ajax": {
 
-            "url": ajaxUrl+"department/"+departId,
+            "url": ajaxUrl+"filtered?departmentid="+departId,
             "dataSrc": ""
         },
         "paging": false,

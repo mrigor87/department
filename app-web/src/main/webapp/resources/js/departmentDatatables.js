@@ -75,7 +75,7 @@ $(function () {
 
 function renderGoto(data, type, row) {
     if (type == 'display') {
-        return '<a class="btn btn-xs btn-primary" href="/employees/department/'+row.id + '">' +'go'+  '</a>';
+        return '<a class="btn btn-xs btn-primary" href="/employees/filtered?departmentid='+row.id + '">' +'go'+  '</a>';
 /*        /employees/department{id}*/
 /*        return '<a class="btn btn-xs btn-primary" onclick="goTo(' + row.id + ');">' + 'go' + '</a>';*/
     }
