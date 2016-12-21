@@ -14,39 +14,35 @@
     <div class="container">
         <div class="shadow">
             <h3> ${department.name}</h3>
-
-
-            <%--
-                        <div class="row pull-right">
-                            <div class="col-sm-12">
-            --%>
-
             <div class="view-box">
 
                         <div class="form-group row">
                             <input type="hidden" name="departmentid" value="${department.id}">
-                            <label class="control-label col-sm-1" for="from">from:</label>
+                            <label class="control-label col-sm-7 text-right">
+                                Filter by period from / to
+                            </label>
                             <div class="col-sm-2">
                                 <input class="form-control" type="date" name="from" id="from">
                             </div>
-                            <label class="control-label col-sm-1" for="to">to:</label>
                             <div class="col-sm-2">
                                 <input class="form-control" type="date" name="to" id="to">
                             </div>
                             <div class="col-sm-1">
-                                <a class="btn btn-primary pull-left" onclick="filterByPeriod()">filter2</a>
+                                <a class="btn btn-primary pull-right" onclick="filterByPeriod()">filter</a>
                             </div>
                         </div>
 
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="control-label col-sm-1" for="date">Day:</label>
-                    <div class="col-sm-5">
+                    <label class="control-label col-sm-7  text-right" for="date">
+                        Filter by day
+                    </label>
+                    <div class="col-sm-4">
                         <input class="form-control" type="date" name="date" id="date">
                     </div>
-                    <div class="col-sm-6">
-                        <a class="btn btn-primary pull-left" onclick="filterByDate()">filter2</a>
+                    <div class="col-sm-1">
+                        <a class="btn btn-primary pull-right" onclick="filterByDate()">filter</a>
                     </div>
                 </div>
 
