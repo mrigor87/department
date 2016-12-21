@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.View;
 
 //import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -29,34 +30,28 @@ public class RootController {
     //go to main page Departments
     @GetMapping(value = "/departments")
     String departments() {
-/*        List<Department> all = departmentService.getAll();
-        model.addAttribute("departmentList", all);*/
+
         return "departmentPage";
     }
 
-    @GetMapping(value = "/employees")
-    String employees() {
-/*        List<Department> all = departmentService.getAll();
-        model.addAttribute("departmentList", all);*/
-        return "employeePage";
+    @GetMapping(value = "/employees/{departmentid}")
+    String employees(Model model, @PathVariable("departmentid")int departmentid) {
+        model.addAttribute("department",departmentService.get(departmentid));
+        return "employeePageNew";
     }
     @GetMapping(value = "/employees/filtered")
     String employeesByDepartmentId(@RequestParam(value = "departmentid") Integer departmentId,
                                    Model model) {
         model.addAttribute("department",departmentService.get(departmentId));
-/*    @GetMapping(value = "/employees/department/{departId}")
-    String employeesByDepartmentId(@PathVariable("departId")int departId, Model model) {
-        model.addAttribute("department",departmentService.get(departId));*/
-/*        List<Department> all = departmentService.getAll();
-        model.addAttribute("departmentList", all);*/
+
         return "employeePageNew";
     }
 
 
+
     @GetMapping(value = "/employees/byDep")
     String employeesByDepartment() {
-/*        List<Department> all = departmentService.getAll();
-        model.addAttribute("departmentList", all);*/
+
         return "employeePage";
     }
 
