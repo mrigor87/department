@@ -15,40 +15,76 @@
             <h3> ${department.name}</h3>
 
             <div class="view-box">
-                <form method="post" class="form-horizontal" role="form" id="filter">
-                    <div class="form-group">
-                        <input type="number"  name="departmentid" value="${department.id}">
+                <%--                <form method="post" class="form-horizontal" role="form" id="filter">
+                                    <div class="form-group">
+                                        <input type="number" name="departmentid" value="${department.id}">
 
-                        <label class="control-label col-sm-2" for="from">from:</label>
+                                        <label class="control-label col-sm-2" for="from">from:</label>
 
-                        <div class="col-sm-2">
-                            <input class="form-control" type="date" name="from" id="from">
-                        </div>
+                                        <div class="col-sm-2">
+                                            <input class="form-control" type="date" name="from" id="from">
+                                        </div>
 
-                        <label class="control-label col-sm-2" for="to">to:</label>
+                                        <label class="control-label col-sm-2" for="to">to:</label>
 
-                        <div class="col-sm-2">
-                            <input class="form-control" type="date" name="to" id="to">
-                        </div>
+                                        <div class="col-sm-2">
+                                            <input class="form-control" type="date" name="to" id="to">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-8">
+                                            <button class="btn btn-primary pull-right" type="button" onclick="updateTable2()">filter
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>--%>
+
+
+                <div class="form-group">
+                    <input type="number" name="departmentid" value="${department.id}">
+
+                    <label class="control-label col-sm-2" for="from">from:</label>
+
+                    <div class="col-sm-2">
+                        <input class="form-control" type="date" name="from" id="from">
                     </div>
 
-                    <div class="form-group">
-                        <div class="col-sm-8">
-                            <button class="btn btn-primary pull-right" type="button" onclick="updateTable2()">filter
-                            </button>
-                        </div>
+                    <label class="control-label col-sm-2" for="to">to:</label>
+
+                    <div class="col-sm-2">
+                        <input class="form-control" type="date" name="to" id="to">
                     </div>
-                </form>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-8">
+<%--                        <button class="btn btn-primary pull-right" type="button" onclick="updateTable2()">filter
+                        </button>--%>
+                        <a class="btn btn-primary pull-right" onclick="filterByPeriod()">filter2</a>
+                    </div>
+                </div>
 
 
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="to">Day:</label>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="date" name="date" id="date">
+                    </div>
+                </div>
 
-                <input class="form-control" type="date" name="date" id="date">
+                <div class="form-group">
+                    <div class="col-sm-8">
+                        <%--            <button class="btn btn-primary pull-right" type="button" onclick="updateTable2()">filter
+                                    </button>--%>
+                        <a class="btn btn-primary pull-right" onclick="filterByDate()">filter2</a>
+                    </div>
+                </div>
 
-                <button class="btn btn-primary pull-right" type="button" onclick="filterByDate()" >
 
-                </button>
-
-                <a class="btn btn-sm btn-info" onclick="add('add')">add</a>
+                <div>
+                    <a class="btn btn-sm btn-info" onclick="add('add')">add</a>
+                </div>
                 <table class="table table-striped display" id="datatable">
                     <thead>
                     <tr>
@@ -125,13 +161,20 @@
         save();
     }
     function filterByDate() {
-       var d= document.getElementById("date").value;
-
+        var date= document.getElementById("date").value;
         $.ajax({
             type: "get",
-            url: ajaxUrl+"filtered?departmentid="+departId+"&from="+d+"&to="+d,
-/*            data: $('#filter').serialize(),*/
+            url: ajaxUrl + "filtered?departmentid=" + departId + "&from=" + date + "&to=" + date,
+            success: updateTableByData
+        });
+    }
 
+    function filterByPeriod() {
+        var from= document.getElementById("date").value;
+        var to= document.getElementById("date").value;
+        $.ajax({
+            type: "get",
+            url: ajaxUrl + "filtered?departmentid=" + departId + "&from=" + from + "&to=" + to,
             success: updateTableByData
         });
     }
