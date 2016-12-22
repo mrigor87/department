@@ -1,5 +1,6 @@
 package com.mrigor.testTasks.department.service;
 
+import com.mrigor.testTasks.department.model.Department;
 import com.mrigor.testTasks.department.model.Employee;
 import com.mrigor.testTasks.department.repository.DepartmentRepo;
 import com.mrigor.testTasks.department.repository.EmployeeRepo;
@@ -37,7 +38,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee create(Employee employee) {
         Assert.notNull(employee, "employee must not be null");
-        // employee.setDepartmentId(depId);
+/*        ExceptionUtil.checkNotFoundWithId(departmentRepository.get(employee.getDepartmentId()), employee.getDepartmentId());*/
         Employee savedEmployee;
         try {
             savedEmployee = repository.save(employee);
@@ -50,6 +51,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void update(Employee employee) throws NotFoundException {
         Assert.notNull(employee, "employee must not be null");
+        ExceptionUtil.checkNotFoundWithId(departmentRepository.get(employee.getDepartmentId()), employee.getDepartmentId());
         ExceptionUtil.checkNotFoundWithId(repository.save(employee), employee.getId());
     }
 

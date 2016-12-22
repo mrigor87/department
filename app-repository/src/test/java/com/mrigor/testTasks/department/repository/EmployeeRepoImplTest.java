@@ -54,8 +54,16 @@ public class EmployeeRepoImplTest {
         Employee createEmpl=getCreated();
         createEmpl.setDepartmentId(8);
         repository.save(createEmpl);
-        MATCHER.assertCollectionEquals(Arrays.asList(EMPL1,createEmpl,EMPL2,EMPL3), repository.getByDep(DEP1_ID));
     }
+
+/*    @Test()
+    public void updateException() throws Exception {
+        Employee updateEmpl=getUpdated();
+        updateEmpl.setDepartmentId(8);
+        repository.save(updateEmpl);
+        MATCHER.assertCollectionEquals(Arrays.asList(EMPL2,EMPL3,updateEmpl), repository.getByDep(DEP1_ID));
+
+    }*/
 
     @Test
     public void delete() throws Exception {
@@ -71,10 +79,7 @@ public class EmployeeRepoImplTest {
 
     @Test
     public void getAll() throws Exception {
-
         MATCHER.assertCollectionEquals(EMPL_ALL, repository.getAll());
-       // throw  new NumberFormatException();
-
     }
 
     @Test
@@ -86,9 +91,6 @@ public class EmployeeRepoImplTest {
     public void getBetweenDates() throws Exception {
         MATCHER.assertCollectionEquals(Arrays.asList(EMPL5,EMPL4), repository.getFiltered(of(1993,1,1),null,null));
     }
-    @Test
-    public void getAllWithAvgSalary() throws Exception{
 
-    }
 
 }

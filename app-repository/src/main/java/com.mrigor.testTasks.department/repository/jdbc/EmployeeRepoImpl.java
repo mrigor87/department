@@ -62,7 +62,7 @@ public class EmployeeRepoImpl implements EmployeeRepo {
                     namedParameterJdbcTemplate.update(
                             "UPDATE EMPLOYEES " +
                                     "SET FULLNAME=:fullName, BIRTHDAY=:birthday, SALARY=:salary " +
-                                    "WHERE id=:id AND DEPARTMENT_ID=:departmentId", map)
+                                    "WHERE id=:id", map)
                             == 0) return null;
         }
         return employee;

@@ -11,8 +11,12 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
+import static com.mrigor.testTasks.department.service.DepTestData.DEP1_ID;
+import static com.mrigor.testTasks.department.service.EmployeeTestData.*;
+import static java.time.LocalDate.of;
 import static org.junit.Assert.*;
 
 /**
@@ -31,43 +35,63 @@ public class EmployeeServiceImplTest {
     EmployeeService service;
 
     @Test
-    public void save() throws Exception {
-
-    }
-
- //   @Test(expected = NotFoundException.class)
     public void update() throws Exception {
-       // service.update(new Employee(1,"fsd",LocalDate.of(2000,1,1),100),10000);
+        Employee updateEmpl=getUpdated();
+        updateEmpl.setDepartmentId(DEP1_ID);
+        service.update(updateEmpl);
+        MATCHER.assertCollectionEquals(Arrays.asList(EMPL2,EMPL3,updateEmpl), service.getByDep(DEP1_ID));
     }
 
-   // @Test(expected = NotFoundException.class)
+    @Test
+    public void create() throws Exception {
+        Employee createEmpl=getCreated();
+        createEmpl.setDepartmentId(DEP1_ID);
+        service.create(createEmpl);
+        MATCHER.assertCollectionEquals(Arrays.asList(EMPL1,createEmpl,EMPL2,EMPL3), service.getByDep(DEP1_ID));
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void createException() throws Exception {
+        Employee createEmpl=getCreated();
+        createEmpl.setDepartmentId(8);
+        service.create(createEmpl);
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void updateException() throws Exception {
+        Employee updateEmpl=getUpdated();
+        updateEmpl.setDepartmentId(8);
+        service.update(updateEmpl);
+    }
+
+
+
+    @Test
     public void delete() throws Exception {
-    //    service.delete(42);
+        service.delete(EMPL1_ID);
+        MATCHER.assertCollectionEquals(Arrays.asList(EMPL2,EMPL3), service.getByDep(DEP1_ID));
     }
 
-    //@Test(expected = NotFoundException.class)
+    @Test
     public void get() throws Exception {
-      //  service.get(42);
+        Employee empl=service.get(EMPL1_ID);
+        MATCHER.assertEquals(empl,EMPL1);
     }
 
     @Test
     public void getAll() throws Exception {
-
+        MATCHER.assertCollectionEquals(EMPL_ALL, service.getAll());
     }
 
     @Test
     public void getByDep() throws Exception {
-
+        MATCHER.assertCollectionEquals(EMPL_D1, service.getByDep(DEP1_ID));
     }
 
     @Test
     public void getBetweenDates() throws Exception {
-
+        MATCHER.assertCollectionEquals(Arrays.asList(EMPL5,EMPL4), service.getFiltered(of(1993,1,1),null,null));
     }
 
-    @Test
-    public void getByDate() throws Exception {
-
-    }
 
 }

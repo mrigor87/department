@@ -5,17 +5,25 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 
-    <bean class="org.springframework.web.client.RestTemplate">
-        <property name="messageConverters">
-            <list>
-                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" id="converter"/>
-            </list>
-        </property>
-    </bean>
+        <bean class="org.springframework.web.client.RestTemplate">
+            <property name="messageConverters">
+                <list>
+                    <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" id="converter"/>
+                </list>
+            </property>
+        </bean>
 
     <context:annotation-config/>
 
     <context:component-scan base-package="com.mrigor.testTasks.department.service"/>
+
+
+
+<!--    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate"/>-->
+
+    <bean id="departmentRest" class="org.easymock.EasyMock" factory-method="createMock">
+        <constructor-arg value="com.mrigor.testTasks.department.rest.DepartmentController"/>
+    </bean>
 
 
 

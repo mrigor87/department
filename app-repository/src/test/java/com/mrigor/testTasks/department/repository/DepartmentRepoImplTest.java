@@ -63,7 +63,7 @@ public class DepartmentRepoImplTest {
     @Test
     public void getAllWithAvgSalary() throws Exception {
         MATCHER_WITH_SALARY.assertCollectionEquals( repository.getAllWithAvgSalary(),DEP_WITH_AVG_SALARY);
-       ;
+
     }
 
 }

@@ -20,13 +20,14 @@ public class DepartmentServiceImpl implements DepartmentService {
       @Autowired
     private DepartmentRepo repository;
 
-    public void setRepository(DepartmentRepo repository) {
+/*    public void setRepository(DepartmentRepo repository) {
         this.repository = repository;
-    }
+    }*/
 
 
     @Override
     public Department create(Department department) {
+        Assert.notNull(department, "department must not be null");
         return repository.save(department);
     }
 
