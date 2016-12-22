@@ -18,8 +18,8 @@ import static com.mrigor.testTasks.department.repository.DepTestData.*;
  */
 
 @ContextConfiguration({
-        "classpath:spring/spring-app.xml",
-        "classpath:spring/spring-db.xml"
+        "classpath:spring/spring-app-test.xml",
+        "classpath:spring/spring-db-test.xml"
 })
 @RunWith(SpringJUnit4ClassRunner.class)
 @Sql(scripts = "classpath:db/populateDB.sql")

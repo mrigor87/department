@@ -87,8 +87,9 @@ public class EmployeeRepoImpl implements EmployeeRepo {
     }
 
     @Override
-    public List<Employee> getByDep(int id) {
-        return jdbcTemplate.query("SELECT * FROM EMPLOYEES WHERE DEPARTMENT_ID=? ORDER BY FULLNAME ", ROW_MAPPER, id);
+    public List<Employee> getByDep(int departmentIid) {
+
+        return jdbcTemplate.query("SELECT * FROM EMPLOYEES WHERE EMPLOYEES.DEPARTMENT_ID=? ORDER BY FULLNAME ", ROW_MAPPER, departmentIid);
     }
 
     @Override

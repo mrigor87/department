@@ -21,7 +21,5 @@ Department save(Department department);
 
     List<Department> getAll();
 
-    Department getWithEmployees(int id);
-
      List<DepartmentWithAverageSalary> getAllWithAvgSalary();
 }

@@ -88,8 +88,4 @@ public class DepartmentRepoImpl implements DepartmentRepo {
 
     }
 
-    @Override
-    public Department getWithEmployees(int id) {
-        return null;
-    }
 }

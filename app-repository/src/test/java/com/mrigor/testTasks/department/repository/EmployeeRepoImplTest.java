@@ -23,8 +23,8 @@ import static java.time.LocalDate.of;
  * Created by Игорь on 10.12.2016.
  */
 @ContextConfiguration({
-        "classpath:spring/spring-app.xml",
-        "classpath:spring/spring-db.xml"
+        "classpath:spring/spring-app-test.xml",
+        "classpath:spring/spring-db-test.xml"
 })
 @RunWith(SpringJUnit4ClassRunner.class)
 @Sql(scripts = "classpath:db/populateDB.sql")
@@ -71,7 +71,9 @@ public class EmployeeRepoImplTest {
 
     @Test
     public void getAll() throws Exception {
+
         MATCHER.assertCollectionEquals(EMPL_ALL, repository.getAll());
+       // throw  new NumberFormatException();
 
     }
 

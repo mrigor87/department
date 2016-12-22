@@ -20,7 +20,7 @@ public interface EmployeeRepo {
 
     List<Employee> getAll();
 
-    List<Employee> getByDep(int id);
+    List<Employee> getByDep(int departmentId);
 
     List<Employee> getFiltered(LocalDate from, LocalDate to, Integer departmentId);
 
