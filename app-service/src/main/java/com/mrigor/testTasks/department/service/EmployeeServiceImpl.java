@@ -71,8 +71,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<Employee> getByDep(int departmentId) {
-        if (departmentRepository.get(departmentId) == null)
-            new NotFoundException("Not found department  with id=" + departmentId);
+        ExceptionUtil.checkNotFoundWithId(departmentRepository.get(departmentId), departmentId);
         return repository.getByDep(departmentId);
     }
 
@@ -80,18 +79,5 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Employee> getFiltered(LocalDate from, LocalDate to, Integer departmentId) {
         return repository.getFiltered(from, to, departmentId);
     }
-/*    @Override
-    public List<Employee> getByDep(int depId) throws NotFoundException {
-        return ExceptionUtil.checkNotFoundWithId(repository.getByDep(depId), depId);
-    }
 
-    @Override
-    public List<Employee> getBetweenDates(LocalDate from, LocalDate to) {
-        return repository.getBetweenDates(from, to);
-    }
-
-    @Override
-    public List<Employee> getByDate(LocalDate date) {
-        return repository.getBetweenDates(date, date);
-    }*/
 }

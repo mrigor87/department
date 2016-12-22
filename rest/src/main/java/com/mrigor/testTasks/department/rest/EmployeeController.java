@@ -29,14 +29,6 @@ public class EmployeeController {
     public static final String REST_URL = "/rest/employees";
 
 
-/*    Employee create(Employee employee, int departamentId);
-    void update(Employee employee, int departamentId) throws NotFoundException;
-    void delete(int id) throws NotFoundException;
-    Employee get(int id) throws NotFoundException;
-    List<Employee> getAll();
-    List<Employee> getByDep(int id) throws NotFoundException;
-    List<Employee> getBetweenDates(LocalDate from, LocalDate to);
-    List<Employee> getByDate(LocalDate date);*/
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Employee> getAll() {
@@ -57,11 +49,7 @@ public class EmployeeController {
     }
 
 
-/*    @GetMapping(value = "/withAvgSalary", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Employee> getAllByDepartmentId(@PathVariable("id") int id) {
-        LOG.info("get employees by department id={}", id);
-        return service.getByDep(id);
-    }*/
+
 @GetMapping(value = "/filtered", produces = MediaType.APPLICATION_JSON_VALUE)
 public List<Employee> filter(
         @RequestParam(value = "from", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
@@ -71,26 +59,11 @@ public List<Employee> filter(
     LOG.info("get employees from department-{} from dates from {} to {}", departmentId, from, to);
     return service.getFiltered(from, to, departmentId);
 }
-/*    @GetMapping(value = "/employees/between", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Employee> getBetweenDates(
-            @RequestParam(value = "from", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
-            @RequestParam(value = "to", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to) {
-        LOG.info("get employees from dates from {} to {}", from, to);
-        return service.getBetweenDates(from, to);
-    }*/
 
-/*    @GetMapping(value = "/employees/byDate", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Employee> getBetweenDates(
-            @RequestParam(value = "date", required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-        LOG.info("get employees from by date {}", date);
-        return service.getByDate(date);
-    }*/
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    // @PutMapping( value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@RequestBody Employee employee) {
-    //public void update(@PathVariable("id")int departmentId, @RequestBody Employee employee) {
-        //employee.setDepartmentId(departmentId);
+
         LOG.info("update employee {} from department id={}", employee, employee.getDepartmentId());
         service.update(employee);
     }

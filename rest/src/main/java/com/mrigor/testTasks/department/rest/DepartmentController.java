@@ -1,7 +1,9 @@
 package com.mrigor.testTasks.department.rest;
 
 import com.mrigor.testTasks.department.model.Department;
+import com.mrigor.testTasks.department.model.Employee;
 import com.mrigor.testTasks.department.service.DepartmentService;
+import com.mrigor.testTasks.department.service.EmployeeService;
 import com.mrigor.testTasks.department.to.DepartmentWithAverageSalary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,9 +31,16 @@ public class DepartmentController {
     @Autowired
     DepartmentService service;
 
+    @Autowired
+    EmployeeService employeeService;
+
     public static final String REST_URL = "/rest/departments";
 
-
+    @GetMapping(value = "/{id}/employees", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Employee> getEmployeesByDepartment(@PathVariable("id") int id){
+        LOG.info("getAll employees from departments id=",id);
+        return employeeService.getByDep(id);
+    }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Department> getAll() {

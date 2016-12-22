@@ -25,22 +25,11 @@ public class DepartmentServiceClient implements DepartmentService {
 
 
 
-/*    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Department> createWithLocation(@RequestBody Department department) {
-        LOG.info("created department {}",department);
-        Department created = service.create(department);
-        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(REST_URL + "/{id}")
-                .buildAndExpand(created.getId())
-                .toUri();
-        return v.created(uriOfNewResource).body(created);
-    }
-    */
+
 
     @Override
     public Department create(Department department) {
-       // ResponseEntity<Department> departmentResponseEntity = restTemplate.postForEntity(REST_URL, department, Department.class);
-      //  restTemplate. .postForObject(REST_URL,department,Department.class);
+
         Department created=restTemplate.postForObject(REST_URL,department,Department.class);
 
         return created;
