@@ -19,10 +19,6 @@
         </dependency>
 
 
-<!--        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>app-model</artifactId>
-        </dependency>-->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>app-service-app</artifactId>
@@ -33,12 +29,7 @@
             <artifactId>app-core</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>4.3.2.RELEASE</version>
-            <scope>provided</scope>
-        </dependency>
+
 
         <dependency>
             <groupId>junit</groupId>

@@ -20,16 +20,15 @@ import static org.junit.Assert.*;
  */
 
 
-/*@ContextConfiguration({
-        "classpath:spring/mock.xml",
-        "classpath:spring/spring-db.xml"
+@ContextConfiguration({
+        "classpath:spring/spring-app-test.xml",
+        "classpath:spring/spring-db-test.xml"
 })
 @RunWith(SpringJUnit4ClassRunner.class)
-@Sql(scripts = "classpath:db/populateDB.sql")*/
-
+@Sql(scripts = "classpath:db/populateDB.sql")
 public class EmployeeServiceImplTest {
-  //  @Autowired
-  //  EmployeeService service;
+    @Autowired
+    EmployeeService service;
 
     @Test
     public void save() throws Exception {
