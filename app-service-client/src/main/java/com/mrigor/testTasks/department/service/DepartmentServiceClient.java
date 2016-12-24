@@ -18,13 +18,14 @@ import java.util.List;
  */
 @Service
 public class DepartmentServiceClient implements DepartmentService {
-    private static final String
+    public static final String
             REST_URL="http://localhost:8080/department/rest/departments/";
     @Autowired
-    RestTemplate restTemplate;
+    private RestTemplate restTemplate;
 
-
-
+    public RestTemplate getRestTemplate() {
+        return restTemplate;
+    }
 
 
     @Override
