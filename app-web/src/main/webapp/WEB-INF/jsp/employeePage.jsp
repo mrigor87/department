@@ -13,7 +13,7 @@
 <div class="jumbotron">
     <div class="container">
         <div class="shadow">
-            <h3> ${department.name}</h3>
+            <h3>Employees list from ${department.name}</h3>
             <div class="view-box">
 
                         <div class="form-group row">
@@ -51,8 +51,8 @@
                     <thead>
                     <tr>
                         <th>Full Name</th>
-                        <th>Bithday</th>
-                        <th>salary</th>
+                        <th>Birthday</th>
+                        <th>Salary</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -96,7 +96,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="salary" class="control-label col-xs-3">salary</label>
+                        <label for="salary" class="control-label col-xs-3">Salary</label>
 
                         <div class="col-xs-9">
                             <input type="number" class="form-control" id="salary" name="salary"

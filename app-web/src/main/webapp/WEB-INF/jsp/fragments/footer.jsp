@@ -3,6 +3,6 @@
 
 <div class="footer">
     <div class="container">
-        footer
+        Test task for EPAM
     </div>
 </div>

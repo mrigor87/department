@@ -4,12 +4,9 @@
 
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
-        <a href="meals" class="navbar-brand">title</a>
-
         <div class="collapse navbar-collapse">
             <form class="navbar-form navbar-right">
-                <a class="btn btn-info" role="button" href="departments">department</a>
-                <a class="btn btn-primary" role="button" href="">else</a>
+                <a class="btn btn-info" role="button" href="departments">Departments</a>
             </form>
         </div>
     </div>

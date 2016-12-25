@@ -12,48 +12,16 @@
 <div class="jumbotron">
     <div class="container">
         <div class="shadow">
-            <h3>DEPARTMENT></h3>
+            <h3>Department list></h3>
 
             <div class="view-box">
-                <%--                <form method="post" class="form-horizontal" role="form" id="filter">
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-2" for="startDate"><fmt:message key="meals.startDate"/>:</label>
 
-                                        <div class="col-sm-2">
-                                            <input class="form-control" type="date" name="startDate" id="startDate">
-                                        </div>
-
-                                        <label class="control-label col-sm-2" for="endDate"><fmt:message key="meals.endDate"/>:</label>
-
-                                        <div class="col-sm-2">
-                                            <input class="form-control" type="date" name="endDate" id="endDate">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-2" for="startTime"><fmt:message key="meals.startTime"/>:</label>
-
-                                        <div class="col-sm-2">
-                                            <input class="form-control" type="time" name="startTime" id="startTime">
-                                        </div>
-
-                                        <label class="control-label col-sm-2" for="endTime"><fmt:message key="meals.endTime"/>:</label>
-
-                                        <div class="col-sm-2">
-                                            <input class="form-control" type="time" name="endTime" id="endTime">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-8">
-                                            <button class="btn btn-primary pull-right"  type="button" onclick="updateTable()"><fmt:message key="meals.filter"/></button>
-                                        </div>
-                                    </div>
-                                </form>--%>
                 <a class="btn btn-sm btn-info" onclick="add('add')">add</a>
                 <table class="table table-striped display" id="datatable">
                     <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Avg salary</th>
+                        <th>AVG salary</th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -78,7 +46,7 @@
                     <input type="hidden" id="id" name="id">
 
                     <div class="form-group">
-                        <label for="name" class="control-label col-xs-3">name></label>
+                        <label for="name" class="control-label col-xs-3">Name</label>
 
                         <div class="col-xs-9">
                             <input type="text" class="form-control" id="name" name="name"
