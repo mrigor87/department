@@ -15,6 +15,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.client.MockMvcClientHttpRequestFactory;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -58,21 +59,26 @@ public class DepartmentServiceClientFullTest {
     @Autowired
     private RestTemplate restTemplate;
 
-
+@Autowired
+    MappingJackson2HttpMessageConverter converter;
 
     private MockMvc mockMvc;
 
-
+    public static final String
+            REST_URL="http://localhost:8080/department/rest/departments/";
 
     @Before
     public void setUp() throws Exception {
-        mockServer = MockRestServiceServer.createServer(service.getRestTemplate());
+
+       // mockServer = MockRestServiceServer.createServer(service.getRestTemplate());
         mockMvc = MockMvcBuilders
                 .webAppContextSetup(webApplicationContext)
                 .build()
         ;
 
-
+/*        restTemplate = new RestTemplate(
+                new MockMvcClientHttpRequestFactory(mockMvc));
+        restTemplate.getMessageConverters().add(converter);*/
     }
 
     @Autowired
@@ -81,6 +87,7 @@ public class DepartmentServiceClientFullTest {
     @Test
     public void create() throws Exception {
 
+        System.out.println(service.getAllWithAvgSalary());
 /*        RestTemplate rt=new RestTemplate()*/
 /*        Department createDep=getCreated();
         service.create(createDep);
@@ -92,9 +99,17 @@ public class DepartmentServiceClientFullTest {
 
     @Test
     public void get1() throws Exception {
-        //mockServer.expect(requestTo(service.REST_URL()))
-          //      .andExpect(method(HttpMethod.PUT))
-               // .andRespond(withSuccess(responseXml, MediaType.APPLICATION_XML)); // (2)
+        mockServer.expect(requestTo(REST_URL+100000))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withSuccess("{\"id\":100000,\"name\":\"Marketing\"}",MediaType.APPLICATION_JSON)); // (2)
+       // service.get(100000);
+       // mockServer.verify();
+//service.get(100000);
+        mockMvc.perform(
+                get("/rest/departments/"+ "100000")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
 /*
         mockServer.expect(
                 requestTo(service.REST_URL +

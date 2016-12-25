@@ -25,6 +25,12 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>rest</artifactId>
             <version>1.0-SNAPSHOT</version>
+       <exclusions>
+           <exclusion>
+               <groupId>${project.groupId}</groupId>
+               <artifactId>app-service</artifactId>
+           </exclusion>
+       </exclusions>
         </dependency>
 
         <dependency>
