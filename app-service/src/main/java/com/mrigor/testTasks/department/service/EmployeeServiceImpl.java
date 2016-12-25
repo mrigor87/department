@@ -37,6 +37,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee create(Employee employee) {
+        LOG.debug("create new employee {}",employee);
         Assert.notNull(employee, "employee must not be null");
 /*        ExceptionUtil.checkNotFoundWithId(departmentRepository.get(employee.getDepartmentId()), employee.getDepartmentId());*/
         Employee savedEmployee;
@@ -50,6 +51,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void update(Employee employee) throws NotFoundException {
+        LOG.debug("update employee {}",employee);
         Assert.notNull(employee, "employee must not be null");
         ExceptionUtil.checkNotFoundWithId(departmentRepository.get(employee.getDepartmentId()), employee.getDepartmentId());
         ExceptionUtil.checkNotFoundWithId(repository.save(employee), employee.getId());
@@ -57,28 +59,32 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void delete(int id) throws NotFoundException {
+        LOG.debug("delete employee, id={}",id);
         ExceptionUtil.checkNotFoundWithId(repository.delete(id), id);
     }
 
     @Override
     public Employee get(int id) throws NotFoundException {
+        LOG.debug("get employee, id={}",id);
         return ExceptionUtil.checkNotFoundWithId(repository.get(id), id);
     }
 
     @Override
     public List<Employee> getAll() {
-
+        LOG.debug("get all employees");
         return repository.getAll();
     }
 
     @Override
     public List<Employee> getByDep(int departmentId) {
+        LOG.debug("get all employees from departmentsId={}",departmentId);
         ExceptionUtil.checkNotFoundWithId(departmentRepository.get(departmentId), departmentId);
         return repository.getByDep(departmentId);
     }
 
     @Override
     public List<Employee> getFiltered(LocalDate from, LocalDate to, Integer departmentId) {
+        LOG.debug("get filteted employee, departmentId={}, from={}, to={}",departmentId,from,to);
         return repository.getFiltered(from, to, departmentId);
     }
 

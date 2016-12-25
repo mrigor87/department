@@ -2,8 +2,7 @@ package com.mrigor.testTasks.department.util.exception;
 
 
 /**
- * User: gkislin
- * Date: 14.05.2014
+ * Created by Игорь on 11.12.2016.
  */
 public class ExceptionUtil {
     private ExceptionUtil() {

@@ -48,9 +48,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 })
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
-//@Transactional
 @Sql(scripts = "classpath:db/populateDB.sql")
-//@Transactional
 public class DepartmentControllerTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -67,6 +65,7 @@ public class DepartmentControllerTest {
         mockMvc = MockMvcBuilders
                 .webAppContextSetup(webApplicationContext)
                 .build();
+
     }
 
     @Test

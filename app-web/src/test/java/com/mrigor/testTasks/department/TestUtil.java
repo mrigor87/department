@@ -1,12 +1,12 @@
-package com.mrigor.testTasks.department.service;
-
+package com.mrigor.testTasks.department;
 
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.io.UnsupportedEncodingException;
 
 /**
- * Created by Игорь on 11.12.2016.
+ * GKislin
+ * 05.01.2015.
  */
 public class TestUtil {
 
@@ -16,8 +16,6 @@ public class TestUtil {
     }
 
     public static String getContent(ResultActions action) throws UnsupportedEncodingException {
-       //ToDo
-        // action.andReturn().getResponse().getContentAsString();
-        return null;
+        return action.andReturn().getResponse().getContentAsString();
     }
 }

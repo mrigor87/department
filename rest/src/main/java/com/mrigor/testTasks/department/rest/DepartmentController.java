@@ -44,7 +44,7 @@ public class DepartmentController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Department> getAll() {
-        LOG.info("getAll employees");
+        LOG.info("getAll departments");
         return service.getAll();
     }
 

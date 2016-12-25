@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 /**
- * User: gkislin
- * Date: 22.08.2014
+ * Created by Игорь on 11.12.2016.
  */
 @Controller
 public class RootController {
@@ -18,7 +17,7 @@ public class RootController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String root() {
-        System.out.println("HURAAAAAAAAAAAAAAAAAAAAAA");
+
         return "index";
     }
 

@@ -23,18 +23,20 @@
         </encoder>
     </appender>
 
-    <logger name="com.mrigor.testTasks.department" level="info"/>
+    <logger name="com.mrigor.testTasks.department" level="debug"/>
 
 
 
     <logger name="org.springframework.jdbc.core.JdbcTemplate" level="DEBUG" additivity="false">
         <appender-ref ref="console" />
     </logger>
-    <logger name="org.springframework.jdbc.core.StatementCreatorUtils" level="TRACE" additivity="false">
+<!--    <logger name="org.springframework.jdbc.core.StatementCreatorUtils" level="TRACE" additivity="false">
         <appender-ref ref="console" />
-    </logger>
+    </logger>-->
 
+<!--
     <logger name="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver" level="debug"/>
+-->
 
     <root level="info">
         <appender-ref ref="file"/>

@@ -1,8 +1,7 @@
 package com.mrigor.testTasks.department.util.exception;
 
 /**
- * User: gkislin
- * Date: 19.08.2014
+ * Created by Игорь on 11.12.2016.
  */
 public class ErrorInfo {
     public final String url;

@@ -2,6 +2,8 @@ package com.mrigor.testTasks.department.repository.jdbc;
 
 import com.mrigor.testTasks.department.model.Employee;
 import com.mrigor.testTasks.department.repository.EmployeeRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -22,6 +24,7 @@ import java.util.List;
  */
 @Repository
 public class EmployeeRepoImpl implements EmployeeRepo {
+    private static final Logger LOG = LoggerFactory.getLogger(EmployeeRepoImpl.class);
     private static final BeanPropertyRowMapper<Employee> ROW_MAPPER = BeanPropertyRowMapper.newInstance(Employee.class);
 
 
@@ -54,10 +57,11 @@ public class EmployeeRepoImpl implements EmployeeRepo {
                 .addValue(("salary"), employee.getSalary());
 
         if (employee.isNew()) {
-
+            LOG.debug("create new employee {}",employee);
             Number newKey = insertEmployee.executeAndReturnKey(map);
             employee.setId(newKey.intValue());
         } else {
+            LOG.debug("uodate employee {}",employee);
             if (
                     namedParameterJdbcTemplate.update(
                             "UPDATE EMPLOYEES " +
@@ -71,31 +75,32 @@ public class EmployeeRepoImpl implements EmployeeRepo {
 
     @Override
     public boolean delete(int id) {
-
+        LOG.debug("delete  employee, id={}",id);
         return jdbcTemplate.update("DELETE FROM EMPLOYEES WHERE id=?", id) != 0;
     }
 
     @Override
     public Employee get(int id) {
+        LOG.debug("get  employee, id={}",id);
         List<Employee> employees = jdbcTemplate.query("SELECT * FROM EMPLOYEES WHERE id=?", ROW_MAPPER, id);
         return DataAccessUtils.singleResult(employees);
     }
 
     @Override
     public List<Employee> getAll() {
+        LOG.debug("get all  employee");
         return jdbcTemplate.query("SELECT * FROM EMPLOYEES ORDER BY FULLNAME", ROW_MAPPER);
     }
 
     @Override
     public List<Employee> getByDep(int departmentIid) {
-
+        LOG.debug("get all  employee from departmentId={}",departmentIid);
         return jdbcTemplate.query("SELECT * FROM EMPLOYEES WHERE EMPLOYEES.DEPARTMENT_ID=? ORDER BY FULLNAME ", ROW_MAPPER, departmentIid);
     }
 
     @Override
     public List<Employee> getFiltered(LocalDate from, LocalDate to, Integer departmentId) {
-/*        LocalDate fromDate = from == null ? LocalDate.MIN : from;
-        LocalDate toDate = to == null ? LocalDate.MAX : to;*/
+        LOG.debug("get filteted employee, departmentId={}, from={}, to={}",departmentId,from,to);
         Date fromDate = Date.valueOf(from == null ? LocalDate.of(1800, 1, 1) : from);
         Date toDate = Date.valueOf(to == null ? LocalDate.of(3000, 1, 1) : to);
         if (departmentId != null) {

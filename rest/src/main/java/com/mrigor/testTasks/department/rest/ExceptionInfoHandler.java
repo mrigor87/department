@@ -25,6 +25,7 @@ public class ExceptionInfoHandler {
     @ResponseBody
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public ErrorInfo handleError(HttpServletRequest req, NotFoundException e) {
+
             LOG.error("Exception at request " + req.getRequestURL(), e);
         return new ErrorInfo(req.getRequestURL(), e);
     }
