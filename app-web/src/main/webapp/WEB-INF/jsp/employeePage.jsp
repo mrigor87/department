@@ -13,7 +13,7 @@
 <div class="jumbotron">
     <div class="container">
         <div class="shadow">
-            <h3>Employees list from ${department.name}</h3>
+            <h3>Employee's list from ${department.name}</h3>
             <div class="view-box">
 
                         <div class="form-group row">

@@ -29,6 +29,12 @@ $(function () {
             {
                 "defaultContent": "",
                 "orderable": false,
+                "render": renderGoto
+
+            },
+            {
+                "defaultContent": "",
+                "orderable": false,
                 "render": renderEditBtn
             },
             {
@@ -36,17 +42,8 @@ $(function () {
                 "orderable": false,
                 "render": renderDeleteBtn
 
-            },
-
-
-
-
-            {
-                "defaultContent": "",
-                "orderable": false,
-                "render": renderGoto
-
             }
+
         ],
         "order": [
             [
@@ -64,9 +61,6 @@ $(function () {
 
 function renderGoto(data, type, row) {
     if (type == 'display') {
-/*        return '<a class="btn btn-xs btn-primary" href="/employees/filtered?departmentid='+row.id + '">' +'go'+  '</a>';*/
-        return '<a class="btn btn-xs btn-primary" href="/department/'+row.id+'/employees">' +'go'+  '</a>';
-/*        /employees/department{id}*/
-/*        return '<a class="btn btn-xs btn-primary" onclick="goTo(' + row.id + ');">' + 'go' + '</a>';*/
+        return '<a class="btn btn-xs btn-primary" href="/department/'+row.id+'/employees">' +'show employees'+  '</a>';
     }
 }

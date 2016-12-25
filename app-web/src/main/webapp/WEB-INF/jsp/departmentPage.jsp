@@ -12,7 +12,7 @@
 <div class="jumbotron">
     <div class="container">
         <div class="shadow">
-            <h3>Department list></h3>
+            <h3>Department's list</h3>
 
             <div class="view-box">
 
