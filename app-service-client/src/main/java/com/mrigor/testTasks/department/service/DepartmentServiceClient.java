@@ -18,8 +18,10 @@ import java.util.List;
  */
 @Service
 public class DepartmentServiceClient implements DepartmentService {
-    public static final String
-            REST_URL="http://localhost:8080/department/rest/departments/";
+    @Autowired
+    private String prefix;
+
+
     @Autowired
     private RestTemplate restTemplate;
 
@@ -31,7 +33,7 @@ public class DepartmentServiceClient implements DepartmentService {
     @Override
     public Department create(Department department) {
 
-        Department created=restTemplate.postForObject(REST_URL,department,Department.class);
+        Department created=restTemplate.postForObject(prefix + "/rest/departments/",department,Department.class);
 
         return created;
     }
@@ -41,21 +43,21 @@ public class DepartmentServiceClient implements DepartmentService {
 
     @Override
     public void update(Department department) throws NotFoundException {
-        restTemplate.put(REST_URL,department);
+        restTemplate.put(prefix + "/rest/departments/",department);
     }
 
 
 
     @Override
     public void delete(int i) throws NotFoundException {
-        String currentRest=REST_URL+i;
+        String currentRest=prefix + "/rest/departments/"+i;
         restTemplate.delete(currentRest);
 
     }
 
     @Override
     public Department get(int i) throws NotFoundException {
-        String currentRest=REST_URL+i;
+        String currentRest=prefix + "/rest/departments/"+i;
         Department department = restTemplate.getForObject(currentRest, Department.class);
         return department;
     }
@@ -63,7 +65,7 @@ public class DepartmentServiceClient implements DepartmentService {
     @Override
     public List<Department> getAll() {
         ResponseEntity<List<Department>> depResponse =
-                restTemplate.exchange(REST_URL,
+                restTemplate.exchange(prefix + "/rest/departments/",
                         HttpMethod.GET, null, new ParameterizedTypeReference<List<Department>>() {
                         });
         List<Department> departments = depResponse.getBody();
@@ -73,7 +75,7 @@ public class DepartmentServiceClient implements DepartmentService {
 
     @Override
     public List<DepartmentWithAverageSalary> getAllWithAvgSalary() {
-        String currentRest=REST_URL+"getAllWithAvgSalary";
+        String currentRest=prefix + "/rest/departments/"+"withAvgSalary";
         ResponseEntity<List<DepartmentWithAverageSalary>> depResponse =
                 restTemplate.exchange(currentRest,
                         HttpMethod.GET, null, new ParameterizedTypeReference<List<DepartmentWithAverageSalary>>() {

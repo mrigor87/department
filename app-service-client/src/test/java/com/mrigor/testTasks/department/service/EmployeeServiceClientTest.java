@@ -1,17 +1,23 @@
 package com.mrigor.testTasks.department.service;
 
 import com.mrigor.testTasks.department.model.Employee;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 /**
  * Created by Игорь on 17.12.2016.
@@ -21,64 +27,90 @@ import static org.junit.Assert.*;
 })
 
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
 public class EmployeeServiceClientTest {
-/*    private static final String
-            REST_URL="http://localhost:8080/department/rest/employees/";*/
+    private MockRestServiceServer mockServer;
+    @Autowired
+    String prefix;
+    /*    private static final String
+                REST_URL="http://localhost:8080/department/rest/employees/";*/
     @Autowired
     RestTemplate restTemplate;
 
     @Autowired
     EmployeeService service;
 
+    @Before
+    public void setUp() throws Exception {
+
+        mockServer = MockRestServiceServer.createServer(restTemplate);
+
+    }
+
     @Test
     public void create() throws Exception {
-        Employee created=EmployeeTestData.getCreated();
-        created.setDepartmentId(100000);
-        service.create(created);
+        mockServer.expect(requestTo(prefix + "/rest/employees/"))
+                .andExpect(method(HttpMethod.POST))
+                .andRespond(withSuccess());
+        service.create(EmployeeTestData.getCreated());
+        mockServer.verify();
     }
 
     @Test
     public void update() throws Exception {
-        Employee updated=EmployeeTestData.getUpdated();
-        service.update(updated);
+        mockServer.expect(requestTo(prefix + "/rest/employees/"))
+                .andExpect(method(HttpMethod.PUT))
+                .andRespond(withSuccess());
+        service.update(EmployeeTestData.getUpdated());
+        mockServer.verify();
     }
 
-    //@Test
+    @Test
     public void delete() throws Exception {
-        service.delete(100003);
+        mockServer.expect(requestTo(prefix + "/rest/employees/"+100002))
+                .andExpect(method(HttpMethod.DELETE))
+                .andRespond(withSuccess());
+        service.delete(100002);
+        mockServer.verify();
     }
 
     @Test
     public void get() throws Exception {
-        service.get(100004);
+        mockServer.expect(requestTo(prefix + "/rest/employees/"+100002))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withSuccess());
+        service.get(100002);
+        mockServer.verify();
     }
 
     @Test
     public void getAll() throws Exception {
+        mockServer.expect(requestTo(prefix + "/rest/employees/"))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withSuccess());
         service.getAll();
+        mockServer.verify();
 
     }
 
     @Test
     public void getByDep() throws Exception {
-        List<Employee> byDep = service.getByDep(100000);
-        System.out.println(byDep);
+        mockServer.expect(requestTo(prefix + "/rest/departments/"+100000+"/employees"))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withSuccess());
+        service.getByDep(100000);
+        mockServer.verify();
     }
 
     @Test
     public void getBetweenDates() throws Exception {
-        List<Employee> betweenDates = service.getFiltered (LocalDate.of(1993, 1, 1),LocalDate.of(1993, 1, 1),null);
-        System.out.println(betweenDates);
+        mockServer.expect(requestTo(prefix + "/rest/employees/filtered?from=1993-01-01&to=1993-01-01&departmentid=100000"))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withSuccess());
+        service.getFiltered(LocalDate.of(1993, 1, 1), LocalDate.of(1993, 1, 1), 100000);
+        mockServer.verify();
     }
 
-    @Test
-    public void getByDate() throws Exception {
-      //  REST_URL+"byDate?date=1993-01-01"
-        List<Employee> byDate = service.getFiltered(LocalDate.of(1993, 1, 1),LocalDate.of(1993, 1, 1),null);
-        System.out.println(byDate);
 
-    }
 
 }

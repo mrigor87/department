@@ -1,7 +1,7 @@
 var ajaxUrl = 'ajax/employees/';
 var datatableApi;
 
-function updateTable8() {
+function updateTable() {
     $.ajax({
         type: "get",
         url: ajaxUrl+"filtered?departmentid="+departId,
@@ -9,7 +9,7 @@ function updateTable8() {
     });
 }
 
-function updateTable() {
+/*function updateTable() {
     $.ajax({
         type: "post",
         url: ajaxUrl+"filter",
@@ -17,7 +17,7 @@ function updateTable() {
 
         success: updateTableByData
     });
-}
+}*/
 function updateTable2() {
 /*    data.add("departmentid",departId);*/
     $.ajax({
@@ -45,12 +45,7 @@ $(function () {
 
             {
                 "data": "birthDay"
-/*                "render": function (date, type, row) {
-                    if (type == 'display') {
-                        return date.replace('T', ' ').substr(0, 16);
-                    }
-                    return date;
-                }*/
+
             },
             {
                 "data": "salary"

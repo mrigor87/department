@@ -6,9 +6,9 @@ package com.mrigor.testTasks.department.to;
 public class DepartmentWithAverageSalary {
     private Integer id;
     private String name;
-    private int averageSalary;
+    private Integer averageSalary;
 
-    public DepartmentWithAverageSalary(Integer id, String name, int averageSalary) {
+    public DepartmentWithAverageSalary(Integer id, String name, Integer averageSalary) {
         this.id = id;
         this.name = name;
         this.averageSalary = averageSalary;
@@ -36,11 +36,11 @@ public class DepartmentWithAverageSalary {
         this.name = name;
     }
 
-    public int getAverageSalary() {
+    public Integer getAverageSalary() {
         return averageSalary;
     }
 
-    public void setAverageSalary(int averageSalary) {
+    public void setAverageSalary(Integer averageSalary) {
         this.averageSalary = averageSalary;
     }
 

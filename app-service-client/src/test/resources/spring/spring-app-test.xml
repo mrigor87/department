@@ -17,13 +17,13 @@
 
     <context:component-scan base-package="com.mrigor.testTasks.department.service"/>
 
+<!--    http://localhost:8080/departmen-->
 
-
-<!--    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate"/>-->
-
-    <bean id="departmentRest" class="org.easymock.EasyMock" factory-method="createMock">
-        <constructor-arg value="com.mrigor.testTasks.department.rest.DepartmentController"/>
+    <bean id="prefix" class="java.lang.String">
+    <constructor-arg value="http://localhost:8080/department"/>
     </bean>
+
+
 
 
 

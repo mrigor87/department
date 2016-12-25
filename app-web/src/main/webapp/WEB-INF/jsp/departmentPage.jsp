@@ -53,6 +53,7 @@
                     <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Avg salary</th>
                         <th></th>
                         <th></th>
                         <th></th>

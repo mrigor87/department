@@ -38,7 +38,7 @@ public class EmployeeController {
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Employee get(@PathVariable("id") int id) {
-        LOG.info("get all employees");
+        LOG.info("get employee by id={}",id);
         return service.get(id);
     }
 

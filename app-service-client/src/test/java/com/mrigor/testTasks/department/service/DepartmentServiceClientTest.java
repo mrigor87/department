@@ -41,44 +41,37 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
  * Created by Игорь on 17.12.2016.
  */
 @ContextConfiguration({
-        "classpath:spring/spring-app.xml",
+        "classpath:spring/spring-app-test.xml"
+/*        ,
         "classpath:spring/spring-mvc.xml",
-        "classpath:spring/spring-db.xml"
+        "classpath:spring/spring-db.xml"*/
 })
-@WebAppConfiguration
+/*@WebAppConfiguration*/
 @RunWith(SpringJUnit4ClassRunner.class)
 //@Transactional
-@Sql(scripts = "classpath:db/populateDB.sql")
-public class DepartmentServiceClientFullTest {
+
+
+public class DepartmentServiceClientTest {
+
+    @Autowired
+    String prefix;
 
     private MockRestServiceServer mockServer;
 
-    @Autowired
-    private WebApplicationContext webApplicationContext;
+/*    @Autowired
+    private WebApplicationContext webApplicationContext;*/
 
     @Autowired
     private RestTemplate restTemplate;
 
-@Autowired
-    MappingJackson2HttpMessageConverter converter;
 
-    private MockMvc mockMvc;
 
-    public static final String
-            REST_URL="http://localhost:8080/department/rest/departments/";
 
     @Before
     public void setUp() throws Exception {
 
-       // mockServer = MockRestServiceServer.createServer(service.getRestTemplate());
-        mockMvc = MockMvcBuilders
-                .webAppContextSetup(webApplicationContext)
-                .build()
-        ;
+        mockServer = MockRestServiceServer.createServer(restTemplate);
 
-/*        restTemplate = new RestTemplate(
-                new MockMvcClientHttpRequestFactory(mockMvc));
-        restTemplate.getMessageConverters().add(converter);*/
     }
 
     @Autowired
@@ -87,49 +80,63 @@ public class DepartmentServiceClientFullTest {
     @Test
     public void create() throws Exception {
 
-        System.out.println(service.getAllWithAvgSalary());
-/*        RestTemplate rt=new RestTemplate()*/
-/*        Department createDep=getCreated();
-        service.create(createDep);
-        MATCHER.assertCollectionEquals(Arrays.asList(DEP1,createDep,DEP2), service.getAll());*/
+        mockServer.expect(requestTo(prefix+"/rest/departments/"))
+                .andExpect(method(HttpMethod.POST))
+                .andRespond(withSuccess());
+        service.create(DepTestData.getCreated());
+        mockServer.verify();
     }
 
 
 
 
     @Test
-    public void get1() throws Exception {
-        mockServer.expect(requestTo(REST_URL+100000))
-                .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess("{\"id\":100000,\"name\":\"Marketing\"}",MediaType.APPLICATION_JSON)); // (2)
-       // service.get(100000);
-       // mockServer.verify();
-//service.get(100000);
-        mockMvc.perform(
-                get("/rest/departments/"+ "100000")
-                        .accept(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk());
-/*
-        mockServer.expect(
-                requestTo(service.REST_URL +
-                        "100000"
-                        ))
+    public void get() throws Exception {
+        mockServer.expect(requestTo(prefix+"/rest/departments/"+100000))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess());
-
-        mockMvc.perform(
-                get(service.REST_URL+ "100000")
-                        .accept(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk())
-
-                .andExpect(view().name("user"));
-*/
-
-/*        Department dep=service.get(DepTestData.DEP1_ID);
-        MATCHER.assertEquals(dep,DEP1);*/
+        service.get(100000);
+        mockServer.verify();
     }
+
+
+
+    @Test
+    public void update() throws Exception {
+        mockServer.expect(requestTo(prefix+"/rest/departments/"))
+                .andExpect(method(HttpMethod.PUT))
+                .andRespond(withSuccess());
+        service.update(DepTestData.getUpdated());
+        mockServer.verify();
+    }
+
+    @Test
+    public void delete() throws Exception {
+        mockServer.expect(requestTo(prefix+"/rest/departments/"+100000))
+                .andExpect(method(HttpMethod.DELETE))
+                .andRespond(withSuccess());
+        service.delete(100000);
+        mockServer.verify();
+    }
+
+    @Test
+    public void getAll() throws Exception {
+        mockServer.expect(requestTo(prefix+"/rest/departments/"))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withSuccess());
+        service.getAll();
+        mockServer.verify();
+    }
+
+    @Test
+    public void getAllWithAvgSalary() throws Exception {
+        mockServer.expect(requestTo(prefix+"/rest/departments/withAvgSalary"))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withSuccess());
+        service.getAllWithAvgSalary();
+        mockServer.verify();
+    }
+
 }
 
 

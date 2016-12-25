@@ -2,6 +2,7 @@ package com.mrigor.testTasks.department.web;
 
 import com.mrigor.testTasks.department.model.Department;
 import com.mrigor.testTasks.department.service.DepartmentService;
+import com.mrigor.testTasks.department.to.DepartmentWithAverageSalary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -37,10 +38,15 @@ public class DepartmentController2 {
         return service.get(id);
     }
 
-    @GetMapping( produces = MediaType.APPLICATION_JSON_VALUE)
+/*    @GetMapping( produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Department> getAll() {
 
         return service.getAll();
+    }*/
+    @GetMapping( produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<DepartmentWithAverageSalary> getAllWithAvgSalary() {
+
+        return service.getAllWithAvgSalary();
     }
 
 /*    @DeleteMapping(value = "/{id}")

@@ -44,7 +44,7 @@ public class DepartmentController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Department> getAll() {
-        LOG.info("getAll for departments");
+        LOG.info("getAll employees");
         return service.getAll();
     }
 
@@ -55,7 +55,7 @@ public class DepartmentController {
     }
     @GetMapping(value = "/withAvgSalary", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<DepartmentWithAverageSalary> getAllWithAvgSalary(){
-        LOG.info("get delartments with avg salary");
+        LOG.info("get departments with avg salary");
         return service.getAllWithAvgSalary();
     }
 

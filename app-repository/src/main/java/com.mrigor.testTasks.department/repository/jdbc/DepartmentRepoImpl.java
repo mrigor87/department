@@ -37,7 +37,7 @@ public class DepartmentRepoImpl implements DepartmentRepo {
 
         return jdbcTemplate.query("SELECT d.ID, d.NAME, AVG(e.SALARY) AS averagesalary " +
                         "FROM EMPLOYEES e " +
-                        "INNER JOIN DEPARTMENTS d ON e.DEPARTMENT_ID = d.ID " +
+                        "RIGHT JOIN DEPARTMENTS d ON e.DEPARTMENT_ID = d.ID " +
                         "GROUP BY d.ID " +
                         "ORDER  BY d.NAME"
                 , ROW_MAPPER_TO);

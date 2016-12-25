@@ -18,33 +18,36 @@ import java.util.List;
  */
 @Service
 public class EmployeeServiceClient implements EmployeeService {
-    private static final String
-            REST_URL = "http://localhost:8080/department/rest/employees/";
+    @Autowired
+    private String prefix;
+
+    /*    private static final String
+                REST_URL = "http://localhost:8080/department/rest/employees/";*/
     @Autowired
     RestTemplate restTemplate;
 
 
     @Override
     public Employee create(Employee employee) {
-        String currentREST = REST_URL;
+        String currentREST = prefix + "/rest/employees/";
         Employee created = restTemplate.postForObject(currentREST, employee, Employee.class);
         return created;
     }
 
     @Override
     public void update(Employee employee) throws NotFoundException {
-        restTemplate.put(REST_URL, employee);
+        restTemplate.put(prefix + "/rest/employees/", employee);
     }
 
     @Override
     public void delete(int i) throws NotFoundException {
-        String currentRest = REST_URL + i;
+        String currentRest = prefix + "/rest/employees/" + i;
         restTemplate.delete(currentRest);
     }
 
     @Override
     public Employee get(int i) throws NotFoundException {
-        String currentRest = REST_URL + i;
+        String currentRest = prefix + "/rest/employees/" + i;
         Employee employees = restTemplate.getForObject(currentRest, Employee.class);
         return employees;
     }
@@ -52,7 +55,7 @@ public class EmployeeServiceClient implements EmployeeService {
     @Override
     public List<Employee> getAll() {
         ResponseEntity<List<Employee>> emplResponse =
-                restTemplate.exchange(REST_URL,
+                restTemplate.exchange(prefix + "/rest/employees/",
                         HttpMethod.GET, null, new ParameterizedTypeReference<List<Employee>>() {
                         });
         List<Employee> employees = emplResponse.getBody();
@@ -61,7 +64,7 @@ public class EmployeeServiceClient implements EmployeeService {
 
     @Override
     public List<Employee> getByDep(int departmentId) throws NotFoundException {
-        String currentRest = REST_URL + "filtered?departmentid=" + departmentId;
+        String currentRest = prefix + "/rest/departments/" + departmentId+"/employees";
         ResponseEntity<List<Employee>> emplResponse =
                 restTemplate.exchange(currentRest,
                         HttpMethod.GET, null, new ParameterizedTypeReference<List<Employee>>() {
@@ -72,7 +75,7 @@ public class EmployeeServiceClient implements EmployeeService {
 
     @Override
     public List<Employee> getFiltered(LocalDate from, LocalDate to, Integer departmentId) {
-        String currentRest = REST_URL + "filtered?" +
+        String currentRest = prefix + "/rest/employees/" + "filtered?" +
                 (from != null ? ("from=" + from) : "") +
                 (to != null ? ("&to=" + to) : "") +
                 (departmentId != null ? "&departmentid=" + departmentId : "");
@@ -83,9 +86,6 @@ public class EmployeeServiceClient implements EmployeeService {
         List<Employee> employees = emplResponse.getBody();
         return employees;
     }
-
-
-
 
 
 }

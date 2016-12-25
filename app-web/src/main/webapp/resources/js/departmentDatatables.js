@@ -22,6 +22,9 @@ $(function () {
             {
                 "data": "name"
             },
+            {
+                "data": "averageSalary"
+            },
 
             {
                 "defaultContent": "",
