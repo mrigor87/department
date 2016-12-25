@@ -4,10 +4,10 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-
-    <bean class="com.mrigor.testTasks.department.service.EmployeeServiceClient"/>
-    <bean class="com.mrigor.testTasks.department.service.DepartmentServiceClient"/>
-
+    <context:annotation-config/>
+  <!--  <bean class="com.mrigor.testTasks.department.service.EmployeeServiceClient"/>
+    <bean class="com.mrigor.testTasks.department.service.DepartmentServiceClient"/>-->
+    <context:component-scan base-package="com.mrigor.testTasks.department.service"/>
 
     <bean id="converter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
 
@@ -18,7 +18,7 @@
             </list>
         </property>
     </bean>
-    <context:annotation-config/>
+
 
 
     <bean id="prefix" class="java.lang.String">

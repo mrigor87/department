@@ -4,7 +4,27 @@ var datatableApi;
 function updateTable() {
     $.ajax({
         type: "get",
-        url: ajaxUrl,
+        url: ajaxUrl+"filtered?departmentid="+departId,
+        success: updateTableByData
+    });
+}
+
+/*function updateTable() {
+    $.ajax({
+        type: "post",
+        url: ajaxUrl+"filter",
+        data: $('#filter').serialize(),
+
+        success: updateTableByData
+    });
+}*/
+function updateTable2() {
+/*    data.add("departmentid",departId);*/
+    $.ajax({
+        type: "post",
+        url: ajaxUrl+"filter",
+        data: $('#filter').serialize(),
+
         success: updateTableByData
     });
 }
@@ -13,7 +33,7 @@ $(function () {
     datatableApi = $('#datatable').DataTable({
         "ajax": {
 
-            "url": ajaxUrl,
+            "url": ajaxUrl+"filtered?departmentid="+departId,
             "dataSrc": ""
         },
         "paging": false,
@@ -24,13 +44,8 @@ $(function () {
             },
 
             {
-                "data": "birthDay",
-/*                "render": function (date, type, row) {
-                    if (type == 'display') {
-                        return date.replace('T', ' ').substr(0, 16);
-                    }
-                    return date;
-                }*/
+                "data": "birthDay"
+
             },
             {
                 "data": "salary"
