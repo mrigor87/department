@@ -4,7 +4,7 @@ var datatableApi;
 function updateTable() {
     $.ajax({
         type: "get",
-        url: "ajax/department/"+departId+"/empolyees",
+        url: "ajax/departments/"+departId+"/employees",
         success: updateTableByData
     });
 }

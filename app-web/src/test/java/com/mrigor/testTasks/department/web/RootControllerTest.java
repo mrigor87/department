@@ -67,6 +67,9 @@ public class RootControllerTest {
 
     @Test
     public void departments() throws Exception {
+        mockServer.expect(requestTo(prefix+"/rest/departments/"))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withSuccess());
         mockMvc.perform(get("/"))
                 .andDo(print())
                 .andExpect(status().isOk())

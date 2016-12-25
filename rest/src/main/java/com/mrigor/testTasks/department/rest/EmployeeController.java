@@ -56,7 +56,7 @@ public List<Employee> filter(
         @RequestParam(value = "to", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to,
     @RequestParam(value = "departmentid", required = false)  Integer departmentId)
 {
-    LOG.info("get employees from department-{} from dates from {} to {}", departmentId, from, to);
+    LOG.info("get filtered employees  departmentId={}  from={} to={}", departmentId, from, to);
     return service.getFiltered(from, to, departmentId);
 }
 

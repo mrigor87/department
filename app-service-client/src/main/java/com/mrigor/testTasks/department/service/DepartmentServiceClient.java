@@ -42,7 +42,7 @@ public class DepartmentServiceClient implements DepartmentService {
         try {
             String currentRest=prefix + "/rest/departments/";
             LOG.debug("create department ({}) by url-{}", department, currentRest);
-            Department created = restTemplate.postForObject(prefix, department, Department.class);
+            Department created = restTemplate.postForObject(currentRest, department, Department.class);
             return created;
         } catch (ResourceAccessException e) {
             LOG.error("REST API is not available: "+prefix);

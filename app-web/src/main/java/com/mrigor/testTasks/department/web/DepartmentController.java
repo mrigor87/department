@@ -1,7 +1,9 @@
 package com.mrigor.testTasks.department.web;
 
 import com.mrigor.testTasks.department.model.Department;
+import com.mrigor.testTasks.department.model.Employee;
 import com.mrigor.testTasks.department.service.DepartmentService;
+import com.mrigor.testTasks.department.service.EmployeeService;
 import com.mrigor.testTasks.department.to.DepartmentWithAverageSalary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,12 +31,13 @@ public class DepartmentController {
     private static final Logger LOG = LoggerFactory.getLogger(DepartmentController.class);
     @Autowired
     DepartmentService service;
+    @Autowired
+    EmployeeService employeeService;
 
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Department get(@PathVariable("id") int id)
     {
-
         LOG.debug("get department, id={}",id);
         return service.get(id);
     }
@@ -44,6 +47,12 @@ public class DepartmentController {
     public List<DepartmentWithAverageSalary> getAllWithAvgSalary() {
         LOG.debug("get all departments with avg salary}");
         return service.getAllWithAvgSalary();
+    }
+
+    @GetMapping( value ="/{id}/employees",  produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Employee> getEmployeesByDepartment(@PathVariable("id") int id) {
+        LOG.debug("get all employees by departmentId={}",id);
+        return employeeService.getByDep(id);
     }
 
 
