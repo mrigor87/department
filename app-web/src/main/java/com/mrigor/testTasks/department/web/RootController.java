@@ -37,14 +37,14 @@ public class RootController {
     @GetMapping(value = "/employees/{departmentid}")
     String employees(Model model, @PathVariable("departmentid")int departmentid) {
         model.addAttribute("department",departmentService.get(departmentid));
-        return "employeePageNew";
+        return "employeePage";
     }
     @GetMapping(value = "/employees/filtered")
     String employeesByDepartmentId(@RequestParam(value = "departmentid") Integer departmentId,
                                    Model model) {
         model.addAttribute("department",departmentService.get(departmentId));
 
-        return "employeePageNew";
+        return "employeePage";
     }
 
 

@@ -9,45 +9,43 @@
 <body>
 <jsp:include page="fragments/bodyHeader.jsp"/>
 
+
 <div class="jumbotron">
     <div class="container">
         <div class="shadow">
-            <h3>EMPLOYEE></h3>
-
+            <h3> ${department.name}</h3>
             <div class="view-box">
-                <%--                <form method="post" class="form-horizontal" role="form" id="filter">
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-2" for="startDate"><fmt:message key="meals.startDate"/>:</label>
 
-                                        <div class="col-sm-2">
-                                            <input class="form-control" type="date" name="startDate" id="startDate">
-                                        </div>
+                        <div class="form-group row">
+                            <input type="hidden" name="departmentid" value="${department.id}">
+                            <label class="control-label col-sm-7 text-right">
+                                Filter by period from / to
+                            </label>
+                            <div class="col-sm-2">
+                                <input class="form-control" type="date" name="from" id="from">
+                            </div>
+                            <div class="col-sm-2">
+                                <input class="form-control" type="date" name="to" id="to">
+                            </div>
+                            <div class="col-sm-1">
+                                <a class="btn btn-primary pull-right" onclick="filterByPeriod()">filter</a>
+                            </div>
+                        </div>
 
-                                        <label class="control-label col-sm-2" for="endDate"><fmt:message key="meals.endDate"/>:</label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-sm-7  text-right" for="date">
+                        Filter by day
+                    </label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="date" name="date" id="date">
+                    </div>
+                    <div class="col-sm-1">
+                        <a class="btn btn-primary pull-right" onclick="filterByDate()">filter</a>
+                    </div>
+                </div>
 
-                                        <div class="col-sm-2">
-                                            <input class="form-control" type="date" name="endDate" id="endDate">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-2" for="startTime"><fmt:message key="meals.startTime"/>:</label>
-
-                                        <div class="col-sm-2">
-                                            <input class="form-control" type="time" name="startTime" id="startTime">
-                                        </div>
-
-                                        <label class="control-label col-sm-2" for="endTime"><fmt:message key="meals.endTime"/>:</label>
-
-                                        <div class="col-sm-2">
-                                            <input class="form-control" type="time" name="endTime" id="endTime">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-8">
-                                            <button class="btn btn-primary pull-right"  type="button" onclick="updateTable()"><fmt:message key="meals.filter"/></button>
-                                        </div>
-                                    </div>
-                                </form>--%>
                 <a class="btn btn-sm btn-info" onclick="add('add')">add</a>
                 <table class="table table-striped display" id="datatable">
                     <thead>
@@ -62,6 +60,7 @@
                 </table>
             </div>
         </div>
+
     </div>
 </div>
 <jsp:include page="fragments/footer.jsp"/>
@@ -76,7 +75,7 @@
             <div class="modal-body">
                 <form class="form-horizontal" method="post" id="detailsForm">
                     <input type="hidden" id="id" name="id">
-                    <input type="hidden" id="departmentId" name="departmentId">
+                    <input type="number" id="departmentId" name="departmentId">
 
                     <div class="form-group">
                         <label for="fullName" class="control-label col-xs-3">FullName></label>
@@ -108,7 +107,7 @@
 
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-9">
-                            <button class="btn btn-primary" type="button" onclick="save()">save</button>
+                            <button class="btn btn-primary" type="button" onclick="saveWrapper()">save</button>
                         </div>
                     </div>
 
@@ -118,6 +117,36 @@
     </div>
 </div>
 </body>
+<script type="text/javascript">
+    var departId = ${department.id};
+    function saveWrapper() {
+        form.find("input[name=departmentId]").val(departId);
+        save();
+    }
+    function filterByDate() {
+        document.getElementById("from").value="";
+        document.getElementById("to").value="";
+        var date = document.getElementById("date").value;
+        $.ajax({
+            type: "get",
+            url: ajaxUrl + "filtered?departmentid=" + departId + "&from=" + date + "&to=" + date,
+            success: updateTableByData
+        });
+    }
+
+    function filterByPeriod() {
+        document.getElementById("date").value="";
+        var from = document.getElementById("from").value;
+        var to = document.getElementById("to").value;
+        $.ajax({
+            type: "get",
+            url: ajaxUrl + "filtered?departmentid=" + departId + "&from=" + from + "&to=" + to,
+            success: updateTableByData
+        });
+    }
+
+
+</script>
 <script type="text/javascript">
     var edit_title = 'edit';
 </script>
