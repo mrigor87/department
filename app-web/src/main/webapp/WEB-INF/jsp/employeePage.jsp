@@ -16,52 +16,52 @@
             <h3>Employee's list from ${department.name}</h3>
             <div class="view-box">
 
-                        <div class="form-group row">
-                            <input type="hidden" name="departmentid" value="${department.id}">
-                            <label class="control-label col-sm-7 text-right">
-                                Filter by period from / to
-                            </label>
-                            <div class="col-sm-2">
-                                <input class="form-control" type="date" name="from" id="from">
-                            </div>
-                            <div class="col-sm-2">
-                                <input class="form-control" type="date" name="to" id="to">
-                            </div>
-                            <div class="col-sm-1">
-                                <a class="btn btn-primary pull-right" onclick="filterByPeriod()">filter</a>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
                 <div class="form-group row">
-                    <label class="control-label col-sm-7  text-right" for="date">
-                        Filter by day
+                    <input type="hidden" name="departmentid" value="${department.id}">
+                    <label class="control-label col-sm-7 text-right">
+                        Filter by period from / to
                     </label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="date" name="date" id="date">
+                    <div class="col-sm-2">
+                        <input class="form-control" type="date" name="from" id="from">
+                    </div>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="date" name="to" id="to">
                     </div>
                     <div class="col-sm-1">
-                        <a class="btn btn-primary pull-right" onclick="filterByDate()">filter</a>
+                        <a class="btn btn-primary pull-right" onclick="filterByPeriod()">filter</a>
                     </div>
                 </div>
 
-                <a class="btn btn-sm btn-info" onclick="add('add')">add</a>
-                <table class="table table-striped display" id="datatable">
-                    <thead>
-                    <tr>
-                        <th>Full Name</th>
-                        <th>Birthday</th>
-                        <th>Salary</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                </table>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-sm-7  text-right" for="date">
+                Filter by day
+            </label>
+            <div class="col-sm-4">
+                <input class="form-control" type="date" name="date" id="date">
+            </div>
+            <div class="col-sm-1">
+                <a class="btn btn-primary pull-right" onclick="filterByDate()">filter</a>
             </div>
         </div>
 
+        <a class="btn btn-sm btn-info" onclick="add('add')">add</a>
+        <table class="table table-striped display" id="datatable">
+            <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>Birthday</th>
+                <th>Salary</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+        </table>
     </div>
+</div>
+
+</div>
 </div>
 <jsp:include page="fragments/footer.jsp"/>
 
@@ -75,8 +75,7 @@
             <div class="modal-body">
                 <form class="form-horizontal" method="post" id="detailsForm">
                     <input type="hidden" id="id" name="id">
-                    <input type="number" id="departmentId" name="departmentId">
-
+                    <input type="hidden" id="departmentId" name="departmentId">
                     <div class="form-group">
                         <label for="fullName" class="control-label col-xs-3">FullName></label>
 
@@ -124,8 +123,8 @@
         save();
     }
     function filterByDate() {
-        document.getElementById("from").value="";
-        document.getElementById("to").value="";
+        document.getElementById("from").value = "";
+        document.getElementById("to").value = "";
         var date = document.getElementById("date").value;
         $.ajax({
             type: "get",
@@ -135,7 +134,7 @@
     }
 
     function filterByPeriod() {
-        document.getElementById("date").value="";
+        document.getElementById("date").value = "";
         var from = document.getElementById("from").value;
         var to = document.getElementById("to").value;
         $.ajax({

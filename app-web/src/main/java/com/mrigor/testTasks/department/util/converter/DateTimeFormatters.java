@@ -1,30 +1,28 @@
 package com.mrigor.testTasks.department.util.converter;
 
-import com.mrigor.testTasks.department.util.TimeUtil;
 import org.springframework.format.Formatter;
+import org.springframework.util.StringUtils;
 
 
 import java.text.ParseException;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 /**
- * gkislin
- * 25.10.2016
+ * Created by Igor on 14.12.2016.
  */
+
 public class DateTimeFormatters {
     public static class LocalDateFormatter implements Formatter<LocalDate> {
 
         @Override
         public LocalDate parse(String text, Locale locale) throws ParseException {
-            return TimeUtil.parseLocalDate(text);
+            return StringUtils.isEmpty(text) ? null : LocalDate.parse(text);
         }
 
         @Override
         public String print(LocalDate lt, Locale locale) {
-
             return lt.format(DateTimeFormatter.ISO_LOCAL_DATE);
         }
     }

@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.View;
 
-//import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 
 /**
@@ -26,10 +23,10 @@ public class RootController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String root() {
-        //test connection
-        departmentService.getAll();
         LOG.debug("redirect to department list");
-        return "departmentPage";
+        //test connection
+       // departmentService.getAll();
+        return "redirect:departments";
     }
 
     //go to main page Departments
