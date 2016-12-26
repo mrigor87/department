@@ -38,7 +38,7 @@ public class DepartmentServiceClient implements DepartmentService {
 
 
     @Override
-    public Department create(Department department) {
+    public Department create(Department department) throws ResourceAccessException{
         try {
             String currentRest=prefix + "/rest/departments/";
             LOG.debug("create department ({}) by url-{}", department, currentRest);
@@ -89,7 +89,6 @@ public class DepartmentServiceClient implements DepartmentService {
         try {
             String currentRest = prefix + "/rest/departments/" + id;
             LOG.debug("get department, id={} by url-{}", id, currentRest);
-
             Department department = restTemplate.getForObject(currentRest, Department.class);
             return department;
         } catch (ResourceAccessException e) {
@@ -121,7 +120,7 @@ public class DepartmentServiceClient implements DepartmentService {
 
 
     @Override
-    public List<DepartmentWithAverageSalary> getAllWithAvgSalary() {
+    public List<DepartmentWithAverageSalary> getAllWithAvgSalary() throws ResourceAccessException {
         try {
             String currentRest = prefix + "/rest/departments/" + "withAvgSalary";
             LOG.debug("get all department with avg salary by url-{}", currentRest);
