@@ -2,7 +2,7 @@ package com.mrigor.testTasks.department.service;
 
 
 import com.mrigor.testTasks.department.model.Employee;
-import com.mrigor.testTasks.department.service.matcher.ModelMatcher;
+
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,12 +13,7 @@ import static java.time.LocalDate.of;
  * Created by Игорь on 10.12.2016.
  */
 public class EmployeeTestData {
-    public static final ModelMatcher<Employee> MATCHER = new ModelMatcher<>(Employee.class);
-/*    ('Ivanov Ivan', '1980-05-17', 400, 100000),
-            ('Petrov Petr', '1992-12-31', 250, 100000),
-            ('Sidorov Anton', '1992-11-05', 210, 100000),
-            ('Jon W', '1993-01-01', 250, 100001),
-            ('Bob A', '1993-06-12', 300, 100001*/
+
 
 
     public static final int EMPL1_ID = 100002;

@@ -1,6 +1,6 @@
 package com.mrigor.testTasks.department.service;
 
-import com.mrigor.testTasks.department.model.Employee;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,9 +12,7 @@ import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
-import java.util.List;
 
-import static org.junit.Assert.*;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -32,8 +30,7 @@ public class EmployeeServiceClientTest {
     private MockRestServiceServer mockServer;
     @Autowired
     String prefix;
-    /*    private static final String
-                REST_URL="http://localhost:8080/department/rest/employees/";*/
+
     @Autowired
     RestTemplate restTemplate;
 
