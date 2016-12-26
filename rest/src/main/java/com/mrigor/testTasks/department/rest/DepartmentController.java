@@ -37,8 +37,8 @@ public class DepartmentController {
     public static final String REST_URL = "/rest/departments";
 
     @GetMapping(value = "/{id}/employees", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Employee> getEmployeesByDepartment(@PathVariable("id") int id){
-        LOG.info("getAll employees from departments id=",id);
+    public List<Employee> getEmployeesByDepartment(@PathVariable("id") int id) {
+        LOG.info("getAll employees from departments id=", id);
         return employeeService.getByDep(id);
     }
 
@@ -49,30 +49,32 @@ public class DepartmentController {
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Department get (@PathVariable("id") int id){
-        LOG.info("get department id={}",id);
+    public Department get(@PathVariable("id") int id) {
+        LOG.info("get department id={}", id);
         return service.get(id);
     }
+
     @GetMapping(value = "/withAvgSalary", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<DepartmentWithAverageSalary> getAllWithAvgSalary(){
+    public List<DepartmentWithAverageSalary> getAllWithAvgSalary() {
         LOG.info("get departments with avg salary");
         return service.getAllWithAvgSalary();
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable("id") int id){
-        LOG.info("delete department id={}",id);
+    public void delete(@PathVariable("id") int id) {
+        LOG.info("delete department id={}", id);
         service.delete(id);
     }
+
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@RequestBody Department department){
-        LOG.info("update department {}",department);
+    public void update(@RequestBody Department department) {
+        LOG.info("update department {}", department);
         service.update(department);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Department> createWithLocation(@RequestBody Department department) {
-        LOG.info("created department {}",department);
+        LOG.info("created department {}", department);
         Department created = service.create(department);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")
@@ -80,11 +82,6 @@ public class DepartmentController {
                 .toUri();
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
-
-
-
-
-
 
 
 }

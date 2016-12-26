@@ -29,7 +29,6 @@ public class EmployeeController {
     public static final String REST_URL = "/rest/employees";
 
 
-
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Employee> getAll() {
         LOG.info("get all employees");
@@ -38,7 +37,7 @@ public class EmployeeController {
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Employee get(@PathVariable("id") int id) {
-        LOG.info("get employee by id={}",id);
+        LOG.info("get employee by id={}", id);
         return service.get(id);
     }
 
@@ -49,16 +48,14 @@ public class EmployeeController {
     }
 
 
-
-@GetMapping(value = "/filtered", produces = MediaType.APPLICATION_JSON_VALUE)
-public List<Employee> filter(
-        @RequestParam(value = "from", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
-        @RequestParam(value = "to", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to,
-    @RequestParam(value = "departmentid", required = false)  Integer departmentId)
-{
-    LOG.info("get filtered employees  departmentId={}  from={} to={}", departmentId, from, to);
-    return service.getFiltered(from, to, departmentId);
-}
+    @GetMapping(value = "/filtered", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Employee> filter(
+            @RequestParam(value = "from", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
+            @RequestParam(value = "to", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to,
+            @RequestParam(value = "departmentid", required = false) Integer departmentId) {
+        LOG.info("get filtered employees  departmentId={}  from={} to={}", departmentId, from, to);
+        return service.getFiltered(from, to, departmentId);
+    }
 
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -70,7 +67,7 @@ public List<Employee> filter(
 
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Employee> createWithLocation( @RequestBody Employee employee) {
+    public ResponseEntity<Employee> createWithLocation(@RequestBody Employee employee) {
         LOG.info("created department {}", employee);
         Employee created = service.create(employee);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
