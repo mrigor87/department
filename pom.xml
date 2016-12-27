@@ -9,13 +9,14 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
 
-        <module>app-model</module>
-        <module>app-repository</module>
-        <module>app-service</module>
-        <module>app-service-api</module>
-        <module>rest</module>
-        <module>app-web</module>
-        <module>app-service-client</module>
+        <module>model</module>
+        <module>repository</module>
+        <module>service-API</module>
+        <module>service-RepositoryClient</module>
+        <module>service-RestClient</module>
+        <module>server-Rest</module>
+        <module>server-Web</module>
+
     </modules>
     <name>Simple department management</name>
     <packaging>pom</packaging>
@@ -35,7 +36,6 @@
         <!--webjars-->
         <webjars-bootstrap.version>3.3.7-1</webjars-bootstrap.version>
         <webjars-jquery.version>2.2.4</webjars-jquery.version>
-        <webjars-datetimepicker.version>2.4.7</webjars-datetimepicker.version>
         <webjars-noty.version>2.3.8</webjars-noty.version>
         <webjars-datatables.version>1.10.12-1</webjars-datatables.version>
 
@@ -63,32 +63,27 @@
         <dependencies>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>app-model</artifactId>
+                <artifactId>model</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>app-repository-api</artifactId>
+                <artifactId>repository</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>app-repository</artifactId>
+                <artifactId>service-API</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>app-service-app</artifactId>
+                <artifactId>service-RestClient</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>app-service</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>app-service-api</artifactId>
+                <artifactId>service-RepositoryClient</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
 
@@ -169,19 +164,40 @@
                 <version>${tomcat.version}</version>
                 <scope>provided</scope>
             </dependency>
-
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>jstl</artifactId>
                 <version>1.2</version>
             </dependency>
 
+            <!-- Webjars (static dependencies distributed as JAR files) -->
+            <dependency>
+                <groupId>org.webjars</groupId>
+                <artifactId>bootstrap</artifactId>
+                <version>${webjars-bootstrap.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars</groupId>
+                <artifactId>jquery</artifactId>
+                <version>${webjars-jquery.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars.bower</groupId>
+                <artifactId>noty</artifactId>
+                <version>${webjars-noty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars</groupId>
+                <artifactId>datatables</artifactId>
+                <version>${webjars-datatables.version}</version>
+            </dependency>
+
+            <!--Test-->
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
             </dependency>
-
 
             <!-- Logging with SLF4J & LogBack -->
             <dependency>
@@ -189,20 +205,16 @@
                 <artifactId>slf4j-api</artifactId>
                 <version>${slf4j.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>jcl-over-slf4j</artifactId>
                 <version>${slf4j.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
                 <version>${logback.version}</version>
             </dependency>
-
-
         </dependencies>
     </dependencyManagement>
 
