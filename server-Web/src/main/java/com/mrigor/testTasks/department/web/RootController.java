@@ -24,7 +24,7 @@ public class RootController {
     public String root() {
         LOG.debug("redirect to department list");
         //test connection
-      //  departmentService.getAll();
+        departmentService.getAll();
         return "departmentPage";
     }
 

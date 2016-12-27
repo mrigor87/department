@@ -26,6 +26,6 @@ public class TestClass {
     @Test
     public void test(){
 
-        LOG.info("fdsfsf@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+
     }
 }

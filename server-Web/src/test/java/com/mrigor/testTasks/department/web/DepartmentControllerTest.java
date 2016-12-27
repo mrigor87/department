@@ -19,7 +19,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
 
 
-
 import static com.mrigor.testTasks.department.DepTestData.*;
 
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
@@ -117,11 +116,10 @@ public class DepartmentControllerTest {
                 .andExpect(method(HttpMethod.POST))
                 .andRespond(withSuccess(JsonUtil.writeValue(getUpdated()), MediaType.APPLICATION_JSON));
 
-        mockMvc.perform(
-                post("/ajax/departments/")
-                        .accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(JsonUtil.writeValue(getUpdated()))
+        mockMvc.perform(post("/ajax/departments/")
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(getUpdated()))
         )
                 .andDo(print())
                 .andExpect(status().isOk());

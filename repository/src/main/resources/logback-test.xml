@@ -9,7 +9,7 @@
     <jmxConfigurator/>
 
     <appender name="file" class="ch.qos.logback.core.FileAppender">
-        <file>d:/log/logger.log</file>
+        <file>log/logger.log</file>
         <encoder>
             <charset>UTF-8</charset>
             <pattern>%date %-5level %logger{0} [%file:%line] %msg%n</pattern>
@@ -30,13 +30,15 @@
     <logger name="org.springframework.jdbc.core.JdbcTemplate" level="DEBUG" additivity="false">
         <appender-ref ref="console" />
     </logger>
-    <logger name="org.springframework.jdbc.core.StatementCreatorUtils" level="TRACE" additivity="false">
+<!--    <logger name="org.springframework.jdbc.core.StatementCreatorUtils" level="TRACE" additivity="false">
         <appender-ref ref="console" />
-    </logger>
+    </logger>-->
 
+<!--
     <logger name="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver" level="debug"/>
+-->
 
-    <root level="debug">
+    <root level="info">
         <appender-ref ref="file"/>
         <appender-ref ref="console"/>
     </root>

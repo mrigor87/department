@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>com.mrigor.testTasks</groupId>
-            <artifactId>model</artifactId>
+            <artifactId>modelD</artifactId>
         </dependency>
 
         <!--Spring-->

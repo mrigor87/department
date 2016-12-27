@@ -1,6 +1,6 @@
 package com.mrigor.testTasks.department.web;
 
-import com.mrigor.testTasks.department.EmployeeTestData;
+
 import com.mrigor.testTasks.department.matcher.JsonUtil;
 import com.mrigor.testTasks.department.service.EmployeeService;
 import org.junit.Before;
@@ -31,8 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.junit.Assert.*;
+
 
 /**
  * Created by Игорь on 25.12.2016.
@@ -48,9 +47,6 @@ import static org.junit.Assert.*;
 
 
 public class EmployeeControllerTest {
-
-
-
 
 
     @Autowired
