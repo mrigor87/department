@@ -8,12 +8,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.ResourceAccessException;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.*;
 
 import java.util.List;
 
@@ -85,24 +84,31 @@ public class DepartmentServiceClient implements DepartmentService {
 
     @Override
     public Department get(int id) throws NotFoundException, ResourceAccessException {
+/*        restTemplate.setErrorHandler(new DefaultResponseErrorHandler(){
+            protected boolean hasError(HttpStatus statusCode) {
+                LOG.debug("{}", statusCode);
+                return false;
+            }});*/
         //Department department;
         try {
             String currentRest = prefix + "/rest/departments/" + id;
             LOG.debug("get department, id={} by url-{}", id, currentRest);
             Department department = restTemplate.getForObject(currentRest, Department.class);
             return department;
-        } catch (ResourceAccessException e) {
-            LOG.error("REST API is not available: "+prefix);
-            throw new ResourceAccessException("REST API is not available: "+prefix);
-        } catch (HttpClientErrorException e) {
+        } catch (Exception e) {
+            RestClientResponseException ee=(RestClientResponseException )e;
+            System.out.println(ee.getResponseBodyAsString());
+            LOG.error("REST API is not available {} {}: ",ee.getResponseBodyAsString(),prefix);
+            throw new NotFoundException("REST API is not available: "+prefix+" "+ee.getResponseBodyAsString());
+        } /*catch (HttpClientErrorException e) {
             LOG.error("not found department with id={}", id);
             throw new NotFoundException("not found department with id=" + id);
-        }
+        }*/
 
     }
 
     @Override
-    public List<Department> getAll() throws ResourceAccessException {
+    public List<Department> getAll()  {
         try {
             String currentRest = prefix + "/rest/departments/";
             LOG.debug("get all department by url-{}", currentRest);
@@ -112,16 +118,13 @@ public class DepartmentServiceClient implements DepartmentService {
                             });
             List<Department> departments = depResponse.getBody();
             return departments;
-        } catch (ResourceAccessException e) {
-            LOG.error("REST API is not available: "+prefix);
-            throw new ResourceAccessException("REST API is not available (resource access error): "+prefix);
-        }
-        catch (Exception e){
-            LOG.error("REST API is not available: "+prefix);
-            throw new ResourceAccessException("REST API is not available (HTTP client error): "+prefix);
+        } catch (Exception e) {
+            RestClientResponseException ee = (RestClientResponseException) e;
+            System.out.println(ee.getResponseBodyAsString());
+            LOG.error("REST API is not available {} {}: ", ee.getResponseBodyAsString(), prefix);
+            throw new NotFoundException("REST API is not available: " + prefix + " " + ee.getResponseBodyAsString());
         }
     }
-
 
     @Override
     public List<DepartmentWithAverageSalary> getAllWithAvgSalary() throws ResourceAccessException {

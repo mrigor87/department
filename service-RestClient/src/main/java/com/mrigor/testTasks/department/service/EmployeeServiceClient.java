@@ -132,7 +132,7 @@ public class EmployeeServiceClient implements EmployeeService {
                     (from != null ? ("from=" + from) : "") +
                     (to != null ? ("&to=" + to) : "") +
                     (departmentId != null ? "&departmentid=" + departmentId : "");
-            LOG.debug("get diltered employees with departmentId={}, from={}, to={} by url-{}", departmentId, from, to, currentRest);
+            LOG.debug("get filtered employees with departmentId={}, from={}, to={} by url-{}", departmentId, from, to, currentRest);
             ResponseEntity<List<Employee>> emplResponse =
                     restTemplate.exchange(currentRest,
                             HttpMethod.GET, null, new ParameterizedTypeReference<List<Employee>>() {
