@@ -61,6 +61,6 @@ $(function () {
 
 function renderGoto(data, type, row) {
     if (type == 'display') {
-        return '<a class="btn btn-xs btn-primary" href="/department/'+row.id+'/employees">' +'show employees'+  '</a>';
+        return '<a class="btn btn-xs btn-primary" href="'+prefix+'/department/'+row.id+'/employees">' +'show employees'+  '</a>';
     }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--<configuration scan="true" scanPeriod="30 seconds">-->
     <configuration>
-    <property resource="logback.property"/>
+<!--    <property resource="logback.property"/>-->
 
     <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
         <resetJUL>true</resetJUL>
@@ -11,7 +11,7 @@
     <jmxConfigurator/>
 
     <appender name="file" class="ch.qos.logback.core.FileAppender">
-        <file>${LOG_PATH}/department.log</file>
+        <file>log/logging.log</file>
         <encoder>
             <charset>UTF-8</charset>
             <pattern>%date %-5level %logger{0} [%file:%line] %msg%n</pattern>

@@ -21,6 +21,7 @@
 
 
     <bean id="prefix" class="java.lang.String">
+<!--        <constructor-arg value="http://localhost:8080/server-Rest-1.0-SNAPSHOT"/>-->
         <constructor-arg value="http://localhost:8080/department"/>
     </bean>
 

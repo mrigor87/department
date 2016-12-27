@@ -114,7 +114,11 @@ public class DepartmentServiceClient implements DepartmentService {
             return departments;
         } catch (ResourceAccessException e) {
             LOG.error("REST API is not available: "+prefix);
-            throw new ResourceAccessException("REST API is not available: "+prefix);
+            throw new ResourceAccessException("REST API is not available (resource access error): "+prefix);
+        }
+        catch (Exception e){
+            LOG.error("REST API is not available: "+prefix);
+            throw new ResourceAccessException("REST API is not available (HTTP client error): "+prefix);
         }
     }
 
@@ -134,5 +138,6 @@ public class DepartmentServiceClient implements DepartmentService {
             LOG.error("REST API is not available: "+prefix);
             throw new ResourceAccessException("REST API is not available: "+prefix);
         }
+
     }
 }
