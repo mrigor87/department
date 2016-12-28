@@ -33,7 +33,8 @@ $(function () {
     datatableApi = $('#datatable').DataTable({
         "ajax": {
 
-            "url": ajaxUrl+"filtered?departmentid="+departId,
+/*            "url": ajaxUrl+"filtered?departmentid="+departId,*/
+            url: "ajax/departments/"+departId+"/employees",
             "dataSrc": ""
         },
         "paging": false,
