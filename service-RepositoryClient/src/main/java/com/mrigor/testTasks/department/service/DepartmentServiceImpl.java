@@ -20,32 +20,32 @@ import java.util.List;
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
     private static final Logger LOG = LoggerFactory.getLogger(DepartmentServiceImpl.class);
-      @Autowired
+    @Autowired
     private DepartmentRepo repository;
 
     @Override
     public Department create(Department department) {
-        LOG.debug("create new department {}",department);
+        LOG.debug("create new department {}", department);
         Assert.notNull(department, "department must not be null");
         return repository.save(department);
     }
 
     @Override
     public void update(Department department) throws NotFoundException {
-        LOG.debug("update department {}",department);
+        LOG.debug("update department {}", department);
         Assert.notNull(department, "department must not be null");
         ExceptionUtil.checkNotFoundWithId(repository.save(department), department.getId());
     }
 
     @Override
     public void delete(int id) throws NotFoundException {
-        LOG.debug("delete department, id={}",id);
+        LOG.debug("delete department, id={}", id);
         ExceptionUtil.checkNotFoundWithId(repository.delete(id), id);
     }
 
     @Override
     public Department get(int id) throws NotFoundException {
-        LOG.debug("get department, id={}",id);
+        LOG.debug("get department, id={}", id);
         return ExceptionUtil.checkNotFoundWithId(repository.get(id), id);
     }
 
