@@ -6,20 +6,40 @@ import com.mrigor.testTasks.department.to.DepartmentWithAverageSalary;
 import java.util.List;
 
 /**
- * Created by Игорь on 10.12.2016.
+ *interface for working with database (department)
  */
 public interface DepartmentRepo {
 
+    /**
+     * update or create new record of department in database
+     * @param department
+     * @return updated or created entity
+     */
+    Department save(Department department);
 
-Department save(Department department);
-
-    // false if not found
+    /**
+     * delete record of department by id from database
+     * @param id entity identifier
+     * @return  false if not found
+     */
     boolean delete(int id);
 
-    // null if not found
+    /**
+     * get record of department by id from database
+     * @param id entity identifier
+     * @return entity or null if not found
+     */
     Department get(int id);
 
+    /**
+     * get all departments from database
+     * @return List all entities
+     */
     List<Department> getAll();
 
+    /**
+     * get all entity with information about average salary
+     * @return List all entities
+     */
      List<DepartmentWithAverageSalary> getAllWithAvgSalary();
 }

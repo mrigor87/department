@@ -1,6 +1,5 @@
 package com.mrigor.testTasks.department.rest;
 
-;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -9,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 /**
- * Created by Игорь on 11.12.2016.
+ * root controller for start page (test page)
  */
 @Controller
 public class RootController {

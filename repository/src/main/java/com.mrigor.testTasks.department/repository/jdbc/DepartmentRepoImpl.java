@@ -18,7 +18,7 @@ import javax.sql.DataSource;
 import java.util.List;
 
 /**
- * Created by Игорь on 10.12.2016.
+ * Implementation of interface by Spring JDBC Template
  */
 @Repository
 public class DepartmentRepoImpl implements DepartmentRepo {

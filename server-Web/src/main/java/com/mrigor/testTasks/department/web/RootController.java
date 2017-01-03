@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 /**
- * Created by Игорь on 17.12.2016.
+ * Created by Igor on 17.12.2016.
  */
 @Controller
 public class RootController {

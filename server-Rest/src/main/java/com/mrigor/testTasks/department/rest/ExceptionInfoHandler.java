@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Created by Игорь on 21.12.2016.
+ * Created by Igor on 21.12.2016.
  */
 @ControllerAdvice(annotations = RestController.class)
 public class ExceptionInfoHandler {
@@ -24,7 +24,6 @@ public class ExceptionInfoHandler {
     @ResponseBody
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public ErrorInfo handleError(HttpServletRequest req, NotFoundException e) {
-
         LOG.error("Exception at request " + req.getRequestURL(), e);
         return new ErrorInfo(req.getRequestURL(), e);
     }

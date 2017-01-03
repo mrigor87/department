@@ -18,7 +18,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * Created by Игорь on 17.12.2016.
+ * implementation interface of service layer with using. (department)
+ * Data access by REST API using Spring RestTemplate
  */
 @Service
 public class EmployeeServiceClient implements EmployeeService {

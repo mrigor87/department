@@ -1,6 +1,6 @@
 package com.mrigor.testTasks.department.service;
 
-import com.mrigor.testTasks.department.model.Department;
+
 import com.mrigor.testTasks.department.model.Employee;
 import com.mrigor.testTasks.department.repository.DepartmentRepo;
 import com.mrigor.testTasks.department.repository.EmployeeRepo;
@@ -13,12 +13,13 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import java.sql.SQLIntegrityConstraintViolationException;
+
 import java.time.LocalDate;
 import java.util.List;
 
 /**
- * Created by Игорь on 11.12.2016.
+ * implementation interface of service layer with using. (department)
+ * Data access by repository interface
  */
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -39,7 +40,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee create(Employee employee) {
         LOG.debug("create new employee {}",employee);
         Assert.notNull(employee, "employee must not be null");
-/*        ExceptionUtil.checkNotFoundWithId(departmentRepository.get(employee.getDepartmentId()), employee.getDepartmentId());*/
         Employee savedEmployee;
         try {
             savedEmployee = repository.save(employee);

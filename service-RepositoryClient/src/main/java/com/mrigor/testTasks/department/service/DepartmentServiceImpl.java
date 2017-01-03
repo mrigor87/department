@@ -14,7 +14,8 @@ import org.springframework.util.Assert;
 import java.util.List;
 
 /**
- * Created by Игорь on 11.12.2016.
+ * implementation interface of service layer with using. (department)
+ * Data access by repository interface
  */
 @Service
 public class DepartmentServiceImpl implements DepartmentService {

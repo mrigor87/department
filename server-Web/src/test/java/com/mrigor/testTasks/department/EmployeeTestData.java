@@ -9,7 +9,7 @@ import java.util.List;
 import static java.time.LocalDate.of;
 
 /**
- * Created by Игорь on 10.12.2016.
+ * Created by Igor on 10.12.2016.
  */
 public class EmployeeTestData {
     public static final ModelMatcher<Employee> MATCHER = new ModelMatcher<>(Employee.class);

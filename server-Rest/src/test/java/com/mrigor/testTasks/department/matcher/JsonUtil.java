@@ -7,17 +7,23 @@ import com.fasterxml.jackson.databind.ObjectReader;
 import java.io.IOException;
 import java.util.List;
 
-//import static com.mrigor.testTasks.department.json.JacksonObjectMapper.getMapper;
 
 /**
- * User: gkislin
- * Date: 30.04.2014
+ * This util class helps converting json-data to entity using Jackson
  */
 public class JsonUtil {
 
-    private static ObjectMapper MAPPER=new ObjectMapper();
+    private static ObjectMapper MAPPER = new ObjectMapper();
 
-
+    /**
+     * convert json-data to list of entitys
+     *
+     * @param json  data in json format
+     * @param clazz class of entities
+     * @param <T>   entity
+     * @return list of entity
+     * @throws IllegalArgumentException
+     */
     public static <T> List<T> readValues(String json, Class<T> clazz) {
         ObjectReader reader = MAPPER.readerFor(clazz);
         try {
@@ -27,6 +33,15 @@ public class JsonUtil {
         }
     }
 
+    /**
+     * convert json-data to entity
+     *
+     * @param json  data in json format
+     * @param clazz class of entities
+     * @param <T>   entity
+     * @return entity
+     * @throws IllegalArgumentException
+     */
     public static <T> T readValue(String json, Class<T> clazz) {
         try {
             return MAPPER.readValue(json, clazz);
@@ -35,6 +50,12 @@ public class JsonUtil {
         }
     }
 
+    /**
+     * convert entity to json
+     * @param obj data in json format
+     * @param <T> entity
+     * @return json data in String
+     */
     public static <T> String writeValue(T obj) {
         try {
             return MAPPER.writeValueAsString(obj);

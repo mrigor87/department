@@ -14,7 +14,7 @@ import static com.mrigor.testTasks.department.repository.DepTestData.*;
 
 
 /**
- * Created by Игорь on 10.12.2016.
+ * Created by Igor on 10.12.2016.
  */
 
 @ContextConfiguration({

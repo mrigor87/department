@@ -20,7 +20,9 @@ import static com.mrigor.testTasks.department.rest.DepartmentController.REST_URL
 
 
 /**
- * Created by Игорь on 11.12.2016.
+ * REST controllers for department
+ * data returns in json format
+ * Exceptions is handled with ExceptionInfoHandler
  */
 
 
@@ -36,42 +38,80 @@ public class DepartmentController {
 
     public static final String REST_URL = "/rest/departments";
 
+    /**
+     * get employee from department with @param id
+     *
+     * @param id identifier of department
+     * @return employee or exception if not found
+     */
     @GetMapping(value = "/{id}/employees", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Employee> getEmployeesByDepartment(@PathVariable("id") int id) {
         LOG.info("getAll employees from departments id=", id);
         return employeeService.getByDep(id);
     }
 
+    /**
+     * get all employees
+     *
+     * @return employee's list or empty if not found
+     */
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Department> getAll() {
         LOG.info("getAll departments");
         return service.getAll();
     }
 
+    /**
+     * get employees by id
+     *
+     * @param id identifier by employee
+     * @return employee or exception if not found
+     */
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Department get(@PathVariable("id") int id) {
         LOG.info("get department id={}", id);
         return service.get(id);
     }
 
+    /**
+     * get all employees with information about average salary
+     *
+     * @return list or empty if not found
+     */
     @GetMapping(value = "/withAvgSalary", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<DepartmentWithAverageSalary> getAllWithAvgSalary() {
         LOG.info("get departments with avg salary");
         return service.getAllWithAvgSalary();
     }
 
+    /**
+     * delete department by id
+     *
+     * @param id identifier of department
+     */
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable("id") int id) {
         LOG.info("delete department id={}", id);
         service.delete(id);
     }
 
+    /**
+     * update department
+     *
+     * @param department
+     */
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@RequestBody Department department) {
         LOG.info("update department {}", department);
         service.update(department);
     }
 
+    /**
+     * create new department
+     *
+     * @param department
+     * @return entity with response body
+     */
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Department> createWithLocation(@RequestBody Department department) {
         LOG.info("created department {}", department);

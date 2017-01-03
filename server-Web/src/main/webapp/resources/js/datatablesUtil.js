@@ -29,31 +29,18 @@ function deleteRow(id) {
         type: 'DELETE',
         success: function () {
             updateTable();
-/*            successNoty('common.deleted');*/
+            successNoty('deleted');
         }
     });
 }
 
-/*function enable(chkbox, id) {
-    var enabled = chkbox.is(":checked");
-    $.ajax({
-        url: ajaxUrl + id,
-        type: 'POST',
-        data: 'enabled=' + enabled,
-        success: function () {
-            chkbox.closest('tr').fadeTo(300, enabled ? 1 : 0.3);
-            successNoty(enabled ? 'common.enabled' : 'common.disabled');
-        }
-    });
-}*/
 
 function updateTableByData(data) {
     datatableApi.clear().rows.add(data).draw();
 }
 
 function save() {
-/*    form.find("input[name=departmentId]").val(100000);*/
-/*    form.departmentId=100000;*/
+
     $.ajax({
         type: "POST",
         url: ajaxUrl,
@@ -61,7 +48,6 @@ function save() {
         success: function () {
             $('#editRow').modal('hide');
             updateTable();
-/*            successNoty('common.saved');*/
         }
     });
 }

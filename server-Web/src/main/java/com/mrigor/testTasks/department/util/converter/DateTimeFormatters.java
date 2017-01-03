@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 /**
- * Created by Igor on 14.12.2016.
+ * Formatter for FormattingConversionServiceFactoryBean
  */
 
 public class DateTimeFormatters {

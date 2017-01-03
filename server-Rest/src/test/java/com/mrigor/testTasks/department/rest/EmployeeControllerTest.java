@@ -33,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static com.mrigor.testTasks.department.TestUtil.printContent;
 
 /**
- * Created by Игорь on 13.12.2016.
+ * Created by Igor on 13.12.2016.
  */
 @ContextConfiguration({
         "classpath:spring/spring-app.xml",

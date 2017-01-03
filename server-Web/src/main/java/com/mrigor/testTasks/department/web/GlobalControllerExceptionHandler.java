@@ -1,18 +1,20 @@
 package com.mrigor.testTasks.department.web;
 
+import com.mrigor.testTasks.department.util.exception.ErrorInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.servlet.ModelAndView;
 
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Created by Игорь on 25.12.2016.
+ * Exception handling using Spring annotation @ControllerAdvice
  */
 @ControllerAdvice
 public class GlobalControllerExceptionHandler {
@@ -21,10 +23,13 @@ public class GlobalControllerExceptionHandler {
     @ExceptionHandler(Exception.class)
     @Order(Ordered.LOWEST_PRECEDENCE)
     ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
-        LOG.error("Exception at request " + req.getRequestURL(), e);
+
+        RestClientResponseException ee = (RestClientResponseException) e;
+        ee.getResponseBodyAsString();
+        LOG.error("Exception at request " + req.getRequestURL()+" "+ee.getResponseBodyAsString(), ee);
         ModelAndView mav = new ModelAndView("exception/exception");
 
-        mav.addObject("exception", e);
+        mav.addObject("exception", ee);
 
 
         return mav;

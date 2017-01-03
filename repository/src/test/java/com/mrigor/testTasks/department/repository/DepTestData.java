@@ -8,9 +8,11 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by Игорь on 10.12.2016.
+ * test data of department
+ * @see ModelMatcher
  */
 public class DepTestData {
+
     public static final ModelMatcher<Department> MATCHER = new ModelMatcher<>();
     public static final ModelMatcher<DepartmentWithAverageSalary> MATCHER_WITH_SALARY = new ModelMatcher<>();
 

@@ -14,7 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 
 /**
- * Created by Игорь on 21.12.2016.
+ * Exception handling using Spring annotation @ControllerAdvice
+ * @see ErrorInfo
  */
 @ControllerAdvice(annotations = RestController.class)
 public class ExceptionInfoHandler {
@@ -23,7 +24,6 @@ public class ExceptionInfoHandler {
     @ExceptionHandler(Exception.class)
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public ErrorInfo handleError(HttpServletResponse req, Exception e) {
-
         LOG.error("Exception at request " + req.toString(), e);
         return new ErrorInfo(req.toString(), e);
     }

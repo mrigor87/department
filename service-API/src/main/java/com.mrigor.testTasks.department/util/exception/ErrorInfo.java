@@ -1,7 +1,7 @@
 package com.mrigor.testTasks.department.util.exception;
 
 /**
- * Created by Игорь on 11.12.2016.
+ * class contains information about exception
  */
 public class ErrorInfo {
     public final String url;

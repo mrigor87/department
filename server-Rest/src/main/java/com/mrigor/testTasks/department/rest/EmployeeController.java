@@ -18,7 +18,9 @@ import java.util.List;
 import static com.mrigor.testTasks.department.rest.EmployeeController.REST_URL;
 
 /**
- * Created by Igor on 13.12.2016.
+ * REST controllers for employees
+ * Data returns in json format.
+ * Exceptions is handled with ExceptionInfoHandler
  */
 @RestController
 @RequestMapping(REST_URL)
@@ -28,26 +30,45 @@ public class EmployeeController {
     EmployeeService service;
     public static final String REST_URL = "/rest/employees";
 
-
+    /**
+     * get all employees
+     * @return list of employees or empty if not found
+     */
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Employee> getAll() {
         LOG.info("get all employees");
         return service.getAll();
     }
 
+    /**
+     * get employee by id
+     * @param id identifier of employee
+     * @return employee or exception id not found
+     */
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Employee get(@PathVariable("id") int id) {
         LOG.info("get employee by id={}", id);
         return service.get(id);
     }
 
+    /**
+     * delete employee by id
+     * @param id identifier of employee
+     */
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable("id") int id) {
         LOG.info("delete employee id={}", id);
         service.delete(id);
     }
 
-
+    /**
+     * get filtered list of employees
+     * params for filtering:
+     * @param from day of birth
+     * @param to day of birth
+     * @param departmentId identifier of department
+     * @return list of employees or empty id not found
+     */
     @GetMapping(value = "/filtered", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Employee> filter(
             @RequestParam(value = "from", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
@@ -57,7 +78,10 @@ public class EmployeeController {
         return service.getFiltered(from, to, departmentId);
     }
 
-
+    /**
+     * update employee
+     * @param employee
+     */
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@RequestBody Employee employee) {
 
@@ -65,7 +89,11 @@ public class EmployeeController {
         service.update(employee);
     }
 
-
+    /**
+     * create new employee
+     * @param employee
+     * @return entity with response body
+     */
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Employee> createWithLocation(@RequestBody Employee employee) {
         LOG.info("created department {}", employee);

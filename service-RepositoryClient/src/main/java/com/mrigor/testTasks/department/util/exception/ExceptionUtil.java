@@ -2,7 +2,7 @@ package com.mrigor.testTasks.department.util.exception;
 
 
 /**
- * Created by Игорь on 11.12.2016.
+ * util class that encapsulates methods for NotFountException handling
  */
 public class ExceptionUtil {
     private ExceptionUtil() {

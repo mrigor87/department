@@ -8,8 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.*;
@@ -17,7 +15,8 @@ import org.springframework.web.client.*;
 import java.util.List;
 
 /**
- * Created by Игорь on 17.12.2016.
+ * implementation interface of service layer with using. (department)
+ * Data access by REST API using Spring RestTemplate
  */
 @Service
 public class DepartmentServiceClient implements DepartmentService {
@@ -37,15 +36,15 @@ public class DepartmentServiceClient implements DepartmentService {
 
 
     @Override
-    public Department create(Department department) throws ResourceAccessException{
+    public Department create(Department department) throws ResourceAccessException {
         try {
-            String currentRest=prefix + "/rest/departments/";
+            String currentRest = prefix + "/rest/departments/";
             LOG.debug("create department ({}) by url-{}", department, currentRest);
             Department created = restTemplate.postForObject(currentRest, department, Department.class);
             return created;
         } catch (ResourceAccessException e) {
-            LOG.error("REST API is not available: "+prefix);
-            throw new ResourceAccessException("REST API is not available: "+prefix);
+            LOG.error("REST API is not available: " + prefix);
+            throw new ResourceAccessException("REST API is not available: " + prefix);
         }
     }
 
@@ -53,12 +52,12 @@ public class DepartmentServiceClient implements DepartmentService {
     @Override
     public void update(Department department) throws NotFoundException, ResourceAccessException {
         try {
-            String currentRest=prefix + "/rest/departments/";
+            String currentRest = prefix + "/rest/departments/";
             LOG.debug("update department ({}) by url-{}", department, currentRest);
             restTemplate.put(currentRest, department);
         } catch (ResourceAccessException e) {
-            LOG.error("REST API is not available: "+prefix);
-            throw new ResourceAccessException("REST API is not available: "+prefix);
+            LOG.error("REST API is not available: " + prefix);
+            throw new ResourceAccessException("REST API is not available: " + prefix);
         } catch (HttpClientErrorException e) {
             LOG.error("not found department {}", department);
             throw new NotFoundException("not found department " + department);
@@ -74,8 +73,8 @@ public class DepartmentServiceClient implements DepartmentService {
 
             restTemplate.delete(currentRest);
         } catch (ResourceAccessException e) {
-            LOG.error("REST API is not available: "+prefix);
-            throw new ResourceAccessException("REST API is not available: "+prefix);
+            LOG.error("REST API is not available: " + prefix);
+            throw new ResourceAccessException("REST API is not available: " + prefix);
         } catch (HttpClientErrorException e) {
             LOG.error("not found department with id={}", id);
             throw new NotFoundException("not found department with id=" + id);
@@ -90,26 +89,23 @@ public class DepartmentServiceClient implements DepartmentService {
                 return false;
             }});*/
         //Department department;
-        try {
+      //  try {
             String currentRest = prefix + "/rest/departments/" + id;
             LOG.debug("get department, id={} by url-{}", id, currentRest);
             Department department = restTemplate.getForObject(currentRest, Department.class);
             return department;
-        } catch (Exception e) {
-            RestClientResponseException ee=(RestClientResponseException )e;
-            System.out.println(ee.getResponseBodyAsString());
-            LOG.error("REST API is not available {} {}: ",ee.getResponseBodyAsString(),prefix);
-            throw new NotFoundException("REST API is not available: "+prefix+" "+ee.getResponseBodyAsString());
-        } /*catch (HttpClientErrorException e) {
-            LOG.error("not found department with id={}", id);
-            throw new NotFoundException("not found department with id=" + id);
+/*        }catch (RestClientException e) {
+            RestClientResponseException responseException = (RestClientResponseException) e;
+            System.out.println(responseException.getResponseBodyAsString());
+            LOG.error("REST API is not available {} {}: ", responseException.getResponseBodyAsString(), prefix);
+            throw new NotFoundException("REST API is not available: " + prefix + " " + responseException.getResponseBodyAsString());
         }*/
 
     }
 
     @Override
-    public List<Department> getAll()  {
-        try {
+    public List<Department> getAll() {
+      //  try {
             String currentRest = prefix + "/rest/departments/";
             LOG.debug("get all department by url-{}", currentRest);
             ResponseEntity<List<Department>> depResponse =
@@ -118,12 +114,12 @@ public class DepartmentServiceClient implements DepartmentService {
                             });
             List<Department> departments = depResponse.getBody();
             return departments;
-        } catch (Exception e) {
+/*        } catch (RestClientResponseException e) {
             RestClientResponseException ee = (RestClientResponseException) e;
             System.out.println(ee.getResponseBodyAsString());
-            LOG.error("REST API is not available {} {}: ", ee.getResponseBodyAsString(), prefix);
-            throw new NotFoundException("REST API is not available: " + prefix + " " + ee.getResponseBodyAsString());
-        }
+            LOG.error(" {} {}: ", ee.getResponseBodyAsString(), prefix);
+            throw new NotFoundException(": " + prefix + " " + ee.getResponseBodyAsString());
+        }*/
     }
 
     @Override
@@ -138,8 +134,8 @@ public class DepartmentServiceClient implements DepartmentService {
             List<DepartmentWithAverageSalary> departments = depResponse.getBody();
             return departments;
         } catch (ResourceAccessException e) {
-            LOG.error("REST API is not available: "+prefix);
-            throw new ResourceAccessException("REST API is not available: "+prefix);
+            LOG.error("REST API is not available: " + prefix);
+            throw new ResourceAccessException("REST API is not available: " + prefix);
         }
 
     }

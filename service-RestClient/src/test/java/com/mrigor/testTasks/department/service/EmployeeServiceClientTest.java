@@ -18,7 +18,7 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 /**
- * Created by Игорь on 17.12.2016.
+ * Created by Igor on 17.12.2016.
  */
 @ContextConfiguration({
         "classpath:spring/spring-app-test.xml"
