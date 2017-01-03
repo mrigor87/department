@@ -1,10 +1,10 @@
 package com.mrigor.testTasks.department.matcher;
 
+
 import com.mrigor.testTasks.department.TestUtil;
 import org.junit.Assert;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.ResultMatcher;
-
 
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
@@ -15,9 +15,6 @@ import java.util.stream.Collectors;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
 /**
- * GKislin
- * 06.01.2015.
- * <p>
  * This class wrap every entity by Wrapper before assertEquals in order to compare them by comparator
  * Default comparator compare by String.valueOf(entity)
  *

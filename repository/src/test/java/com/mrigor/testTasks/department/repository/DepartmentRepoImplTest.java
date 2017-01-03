@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Arrays;
 
-import static com.mrigor.testTasks.department.repository.DepTestData.*;
+import static com.mrigor.testTasks.department.DepTestData.*;
 
 
 /**
@@ -50,7 +50,7 @@ public class DepartmentRepoImplTest {
 
     @Test
     public void get() throws Exception {
-        Department dep=repository.get(DepTestData.DEP1_ID);
+        Department dep=repository.get(DEP1_ID);
         MATCHER.assertEquals(dep,DEP1);
 
     }

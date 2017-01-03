@@ -16,6 +16,11 @@
             <groupId>com.mrigor.testTasks</groupId>
             <artifactId>modelD</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.mrigor.testTasks</groupId>
+            <artifactId>testUtil</artifactId>
+            <scope>test</scope>
+        </dependency>
 
         <!--Spring-->
         <dependency>
@@ -30,7 +35,7 @@
         </dependency>
 
         <!--Test-->
-        <dependency>
+<!--        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
@@ -39,7 +44,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <scope>test</scope>
-        </dependency>
+        </dependency>-->
 
         <!-- Logging with SLF4J & LogBack -->
         <dependency>

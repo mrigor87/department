@@ -1,14 +1,14 @@
 package com.mrigor.testTasks.department;
 
-import com.mrigor.testTasks.department.model.Department;
 import com.mrigor.testTasks.department.matcher.ModelMatcher;
+import com.mrigor.testTasks.department.model.Department;
 import com.mrigor.testTasks.department.to.DepartmentWithAverageSalary;
 
 import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by Igor on 10.12.2016.
+ * test data
  */
 public class DepTestData {
     public static final ModelMatcher<Department> MATCHER = new ModelMatcher<>(Department.class);

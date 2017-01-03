@@ -20,7 +20,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.web.context.WebApplicationContext;
 
 
@@ -38,7 +38,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 /**
- * Created by Igor on 13.12.2016.
+ * tests
  */
 
 @ContextConfiguration({
@@ -75,10 +75,6 @@ public class DepartmentControllerTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(MATCHER.contentListMatcher(DEP1, DEP2)));
 
-/*        mockMvc.perform(get((REST_URL)))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER.contentListMatcher(DEP1, DEP2));*/
     }
 
     @Test
@@ -88,10 +84,6 @@ public class DepartmentControllerTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(MATCHER_WITH_SALARY.contentListMatcher(DEP_WITH_AVG_SALARY)));
 
-/*        mockMvc.perform(get((REST_URL)))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER.contentListMatcher(DEP1, DEP2));*/
     }
 
     @Test
@@ -103,21 +95,13 @@ public class DepartmentControllerTest {
         );
     }
 
-    //@Test (expected = NotFoundException.class)
-    public void testGetEx() throws Exception {
 
-        //mockMvc.perform(get(REST_URL + 8))
-        //.andExpect(status().is4xxClientError())
-        // .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-        ;
-    }
 
 
     @Test
     public void testDelete() throws Exception {
 
         mockMvc.perform(delete(REST_URL + DEP1_ID))
-                //  .andDo(print())
                 .andExpect(status().isOk());
         MATCHER.assertCollectionEquals(Collections.singletonList(DEP2), service.getAll());
     }

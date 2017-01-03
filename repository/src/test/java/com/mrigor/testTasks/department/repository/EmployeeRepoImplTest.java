@@ -14,8 +14,8 @@ import java.util.Arrays;
 
 
 
-import static com.mrigor.testTasks.department.repository.DepTestData.DEP1_ID;
-import static com.mrigor.testTasks.department.repository.EmployeeTestData.*;
+import static com.mrigor.testTasks.department.DepTestData.DEP1_ID;
+import static com.mrigor.testTasks.department.EmployeeTestData.*;
 import static java.time.LocalDate.of;
 
 
