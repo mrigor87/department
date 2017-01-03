@@ -13,6 +13,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 
+import static com.mrigor.testTasks.department.EmployeeTestData.getCreated;
+import static com.mrigor.testTasks.department.EmployeeTestData.getUpdated;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -49,7 +51,7 @@ public class EmployeeServiceClientTest {
         mockServer.expect(requestTo(prefix + "/rest/employees/"))
                 .andExpect(method(HttpMethod.POST))
                 .andRespond(withSuccess());
-        service.create(EmployeeTestData.getCreated());
+        service.create(getCreated());
         mockServer.verify();
     }
 
@@ -58,7 +60,7 @@ public class EmployeeServiceClientTest {
         mockServer.expect(requestTo(prefix + "/rest/employees/"))
                 .andExpect(method(HttpMethod.PUT))
                 .andRespond(withSuccess());
-        service.update(EmployeeTestData.getUpdated());
+        service.update(getUpdated());
         mockServer.verify();
     }
 

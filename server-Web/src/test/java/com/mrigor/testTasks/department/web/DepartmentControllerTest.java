@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 /**
- * Created by Igor on 25.12.2016.
+ * tests
  */
 @ContextConfiguration({
         "classpath:spring/spring-app-test.xml",

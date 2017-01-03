@@ -19,6 +19,11 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>service-RestClient</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>testUtil</artifactId>
+            <scope>test</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -55,7 +60,7 @@
         </dependency>
 
         <!--test-->
-        <dependency>
+<!--        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
@@ -64,7 +69,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <scope>test</scope>
-        </dependency>
+        </dependency>-->
 
         <!-- Logging with SLF4J & LogBack -->
         <dependency>

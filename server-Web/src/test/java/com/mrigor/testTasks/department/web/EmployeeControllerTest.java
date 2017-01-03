@@ -34,7 +34,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 
 /**
- * Created by Igor on 25.12.2016.
+ * tests
  */
 
 @ContextConfiguration({

@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 /**
- * Created by Igor on 25.12.2016.
+ * tests
  */
 
 @ContextConfiguration({

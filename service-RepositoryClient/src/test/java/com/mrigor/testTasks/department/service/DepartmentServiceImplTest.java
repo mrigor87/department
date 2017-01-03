@@ -11,11 +11,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Arrays;
 
-import static com.mrigor.testTasks.department.service.DepTestData.*;
+import static com.mrigor.testTasks.department.DepTestData.*;
 
 
 /**
- * Created by Igor on 22.12.2016.
+ * tests
  */
 @ContextConfiguration({
         "classpath:spring/spring-app-test.xml",
@@ -56,7 +56,7 @@ public class DepartmentServiceImplTest {
 
     @Test
     public void get() throws Exception {
-        Department dep=service.get(DepTestData.DEP1_ID);
+        Department dep=service.get(DEP1_ID);
         MATCHER.assertEquals(dep,DEP1);
     }
     @Test(expected = NotFoundException.class)

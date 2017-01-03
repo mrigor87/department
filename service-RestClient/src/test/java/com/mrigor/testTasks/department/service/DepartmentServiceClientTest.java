@@ -17,6 +17,8 @@ import org.springframework.test.web.client.MockRestServiceServer;
 
 import org.springframework.web.client.RestTemplate;
 
+import static com.mrigor.testTasks.department.DepTestData.getCreated;
+import static com.mrigor.testTasks.department.DepTestData.getUpdated;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -26,7 +28,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 
 
 /**
- * Created by Igor on 17.12.2016.
+ * tests
  */
 @ContextConfiguration({
         "classpath:spring/spring-app-test.xml"
@@ -68,7 +70,7 @@ public class DepartmentServiceClientTest {
         mockServer.expect(requestTo(prefix+"/rest/departments/"))
                 .andExpect(method(HttpMethod.POST))
                 .andRespond(withSuccess());
-        service.create(DepTestData.getCreated());
+        service.create(getCreated());
         mockServer.verify();
     }
 
@@ -91,7 +93,7 @@ public class DepartmentServiceClientTest {
         mockServer.expect(requestTo(prefix+"/rest/departments/"))
                 .andExpect(method(HttpMethod.PUT))
                 .andRespond(withSuccess());
-        service.update(DepTestData.getUpdated());
+        service.update(getUpdated());
         mockServer.verify();
     }
 

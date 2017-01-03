@@ -14,13 +14,13 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.mrigor.testTasks.department.service.DepTestData.DEP1_ID;
-import static com.mrigor.testTasks.department.service.EmployeeTestData.*;
+import static com.mrigor.testTasks.department.DepTestData.DEP1_ID;
+import static com.mrigor.testTasks.department.EmployeeTestData.*;
 import static java.time.LocalDate.of;
 import static org.junit.Assert.*;
 
 /**
- * Created by Igor on 11.12.2016.
+ * tests
  */
 
 

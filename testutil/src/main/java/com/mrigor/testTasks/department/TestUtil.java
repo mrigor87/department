@@ -14,7 +14,6 @@ public class TestUtil {
     }
 
     public static String getContent(ResultActions action) throws UnsupportedEncodingException {
-        return null;
-                //action.andReturn().getResponse().getContentAsString();
+        return  action.andReturn().getResponse().getContentAsString();
     }
 }
