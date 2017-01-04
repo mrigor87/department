@@ -22,12 +22,12 @@ public class GlobalControllerExceptionHandler {
     @Order(Ordered.LOWEST_PRECEDENCE)
     ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
 
-        RestClientResponseException ee = (RestClientResponseException) e;
-        ee.getResponseBodyAsString();
-        LOG.error("Exception at request " + req.getRequestURL()+" "+ee.getResponseBodyAsString(), ee);
+        //RestClientResponseException ee = (RestClientResponseException) e;
+       // ee.getResponseBodyAsString();
+        LOG.error("Exception at request " + req.getRequestURL()+" "+e.getMessage(), e);
         ModelAndView mav = new ModelAndView("exception/exception");
 
-        mav.addObject("exception", ee);
+        mav.addObject("exception", e);
 
 
         return mav;

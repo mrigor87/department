@@ -16,7 +16,7 @@
 <%--<c:forEach items="${exception.stackTrace}" var="stackTrace">
     ${stackTrace}
 </c:forEach>--%>
-${exception.getResponseBodyAsString()}
+<%--${exception.getMessage()}--%>
 
     </div>
 </div>

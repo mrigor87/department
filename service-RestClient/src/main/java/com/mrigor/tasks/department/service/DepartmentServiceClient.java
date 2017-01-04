@@ -72,15 +72,18 @@ public class DepartmentServiceClient implements DepartmentService {
 
     @Override
     public List<Department> getAll() {
-
-            String currentRest = prefix + "/rest/departments/";
-            LOG.debug("get all department by url-{}", currentRest);
-            ResponseEntity<List<Department>> depResponse =
-                    restTemplate.exchange(currentRest,
-                            HttpMethod.GET, null, new ParameterizedTypeReference<List<Department>>() {
-                            });
-            List<Department> departments = depResponse.getBody();
-            return departments;
+try {
+    String currentRest = prefix + "/rest/departments/";
+    LOG.debug("get all department by url-{}", currentRest);
+    ResponseEntity<List<Department>> depResponse =
+            restTemplate.exchange(currentRest,
+                    HttpMethod.GET, null, new ParameterizedTypeReference<List<Department>>() {
+                    });
+    List<Department> departments = depResponse.getBody();
+    return departments;
+}catch (Exception e){
+    throw new   NotFoundException(prefix);
+}
     }
 
     @Override

@@ -21,7 +21,7 @@ public class ExceptionInfoHandler {
     Logger LOG = LoggerFactory.getLogger(ExceptionInfoHandler.class);
 
     @ExceptionHandler(Exception.class)
-    @Order(Ordered.HIGHEST_PRECEDENCE)
+    @Order(Ordered.LOWEST_PRECEDENCE)
     public ErrorInfo handleError(HttpServletResponse req, Exception e) {
         LOG.error("Exception at request " + req.toString(), e);
         return new ErrorInfo(req.toString(), e);
