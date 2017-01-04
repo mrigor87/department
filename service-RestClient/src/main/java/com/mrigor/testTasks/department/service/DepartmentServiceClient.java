@@ -31,11 +31,6 @@ public class DepartmentServiceClient implements DepartmentService {
     @Autowired
     private RestTemplate restTemplate;
 
-    public RestTemplate getRestTemplate() {
-        return restTemplate;
-    }
-
-
     @Override
     public Department create(Department department) throws ResourceAccessException {
 

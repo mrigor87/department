@@ -42,10 +42,9 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 public class DepartmentServiceClientTest {
 
     @Autowired
-    String prefix;
+    private String prefix;
 
     private MockRestServiceServer mockServer;
-
 
 
     @Autowired

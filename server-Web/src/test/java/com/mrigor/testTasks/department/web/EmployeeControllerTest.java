@@ -50,10 +50,10 @@ public class EmployeeControllerTest {
 
 
     @Autowired
-    String prefix;
+    private String prefix;
 
     @Autowired
-    EmployeeService service;
+    private EmployeeService service;
 
     private MockRestServiceServer mockServer;
 
@@ -63,7 +63,7 @@ public class EmployeeControllerTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
-    protected MockMvc mockMvc;
+    private MockMvc mockMvc;
 
     @Before
     public void setUp() {

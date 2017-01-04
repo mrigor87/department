@@ -49,11 +49,11 @@ public class EmployeeControllerTest {
     private WebApplicationContext webApplicationContext;
 
     @Autowired
-    EmployeeService service;
+    private EmployeeService service;
 
     private static final String REST_URL = EmployeeController.REST_URL + '/';
 
-    protected MockMvc mockMvc;
+    private MockMvc mockMvc;
 
 
     @Before

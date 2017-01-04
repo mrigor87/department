@@ -26,8 +26,10 @@ import static com.mrigor.testTasks.department.rest.EmployeeController.REST_URL;
 @RequestMapping(REST_URL)
 public class EmployeeController {
     private static final Logger LOG = LoggerFactory.getLogger(DepartmentController.class);
+
     @Autowired
-    EmployeeService service;
+    private EmployeeService service;
+
     public static final String REST_URL = "/rest/employees";
 
     /**

@@ -1,6 +1,6 @@
 package com.mrigor.testTasks.department.web;
 
-import com.mrigor.testTasks.department.service.DepartmentService;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,7 +38,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class RootControllerTest {
 
     @Autowired
-    String prefix;
+    private String prefix;
 
     private MockRestServiceServer mockServer;
 
@@ -48,9 +48,8 @@ public class RootControllerTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
-    @Autowired
-    DepartmentService service;
-    protected MockMvc mockMvc;
+
+    private MockMvc mockMvc;
 
     @Before
     public void setUp() {
@@ -72,8 +71,7 @@ public class RootControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("departmentPage"))
                 .andExpect(forwardedUrl("/WEB-INF/jsp/departmentPage.jsp"));
-//service.getAll();
-    //    mockServer.verify();
+
     }
 
     @Test
@@ -88,7 +86,7 @@ public class RootControllerTest {
                 .andExpect(view().name("employeePage"))
                 .andExpect(forwardedUrl("/WEB-INF/jsp/employeePage.jsp"));
 
-      //  mockServer.verify();
+
     }
 
     @Test

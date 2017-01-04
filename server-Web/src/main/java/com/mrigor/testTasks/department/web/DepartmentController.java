@@ -28,9 +28,9 @@ import java.util.List;
 public class DepartmentController {
     private static final Logger LOG = LoggerFactory.getLogger(DepartmentController.class);
     @Autowired
-    DepartmentService service;
+    private DepartmentService service;
     @Autowired
-    EmployeeService employeeService;
+    private EmployeeService employeeService;
 
     /**
      * get department

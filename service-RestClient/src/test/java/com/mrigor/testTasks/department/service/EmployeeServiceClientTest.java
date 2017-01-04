@@ -29,15 +29,17 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 
 @RunWith(SpringJUnit4ClassRunner.class)
 public class EmployeeServiceClientTest {
+
     private MockRestServiceServer mockServer;
-    @Autowired
-    String prefix;
 
     @Autowired
-    RestTemplate restTemplate;
+    private String prefix;
 
     @Autowired
-    EmployeeService service;
+    private RestTemplate restTemplate;
+
+    @Autowired
+    private EmployeeService service;
 
     @Before
     public void setUp() throws Exception {

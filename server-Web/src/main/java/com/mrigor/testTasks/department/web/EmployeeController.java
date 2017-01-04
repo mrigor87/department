@@ -22,7 +22,7 @@ import java.util.List;
 public class EmployeeController {
     private static final Logger LOG = LoggerFactory.getLogger(EmployeeController.class);
     @Autowired
-    EmployeeService service;
+    private EmployeeService service;
 
     /**
      * get filtered list of employees

@@ -17,7 +17,6 @@
 
     <context:component-scan base-package="com.mrigor.testTasks.department.service"/>
 
-<!--    http://localhost:8080/departmen-->
 
     <bean id="prefix" class="java.lang.String">
     <constructor-arg value="http://localhost:8080/department"/>

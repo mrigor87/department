@@ -29,7 +29,7 @@ public class EmployeeServiceClient implements EmployeeService {
     private String prefix;
 
     @Autowired
-    RestTemplate restTemplate;
+    private RestTemplate restTemplate;
 
 
     @Override

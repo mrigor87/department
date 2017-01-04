@@ -31,7 +31,7 @@ import static java.time.LocalDate.of;
 public class EmployeeRepoImplTest {
 
     @Autowired
-    EmployeeRepo repository;
+    private EmployeeRepo repository;
 
     @Test
     public void update() throws Exception {

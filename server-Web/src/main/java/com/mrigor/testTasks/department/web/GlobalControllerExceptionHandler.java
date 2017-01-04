@@ -1,6 +1,5 @@
 package com.mrigor.testTasks.department.web;
 
-import com.mrigor.testTasks.department.util.exception.ErrorInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.Ordered;

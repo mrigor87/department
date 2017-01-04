@@ -26,7 +26,7 @@ import static com.mrigor.testTasks.department.DepTestData.*;
 public class DepartmentRepoImplTest {
 
     @Autowired
-    DepartmentRepo repository;
+    private DepartmentRepo repository;
 
     @Test
     public void update() throws Exception {

@@ -31,10 +31,10 @@ import static com.mrigor.testTasks.department.rest.DepartmentController.REST_URL
 public class DepartmentController {
     private static final Logger LOG = LoggerFactory.getLogger(DepartmentController.class);
     @Autowired
-    DepartmentService service;
+    private DepartmentService service;
 
     @Autowired
-    EmployeeService employeeService;
+    private EmployeeService employeeService;
 
     public static final String REST_URL = "/rest/departments";
 

@@ -18,7 +18,7 @@ public class RootController {
     private static final Logger LOG = LoggerFactory.getLogger(RootController.class);
 
     @Autowired
-    DepartmentService departmentService;
+    private DepartmentService departmentService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String root() {

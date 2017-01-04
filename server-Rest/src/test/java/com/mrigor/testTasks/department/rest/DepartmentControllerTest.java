@@ -54,11 +54,11 @@ public class DepartmentControllerTest {
     private WebApplicationContext webApplicationContext;
 
     @Autowired
-    DepartmentService service;
+    private DepartmentService service;
 
     private static final String REST_URL = DepartmentController.REST_URL + '/';
 
-    protected MockMvc mockMvc;
+    private MockMvc mockMvc;
 
     @Before
     public void setUp() {

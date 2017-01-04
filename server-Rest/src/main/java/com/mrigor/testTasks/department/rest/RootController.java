@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class RootController {
-    Logger LOG = LoggerFactory.getLogger(RootController.class);
+    private static final Logger LOG  = LoggerFactory.getLogger(RootController.class);
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String root() {

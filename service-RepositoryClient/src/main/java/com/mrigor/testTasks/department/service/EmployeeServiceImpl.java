@@ -28,6 +28,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private EmployeeRepo repository;
+
     @Autowired
     private DepartmentRepo departmentRepository;
 

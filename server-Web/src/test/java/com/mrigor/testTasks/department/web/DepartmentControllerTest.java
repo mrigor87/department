@@ -45,10 +45,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 public class DepartmentControllerTest {
 
     @Autowired
-    String prefix;
+    private String prefix;
 
     @Autowired
-    DepartmentService service;
+    private DepartmentService service;
 
     private MockRestServiceServer mockServer;
 
@@ -58,7 +58,7 @@ public class DepartmentControllerTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
-    protected MockMvc mockMvc;
+    private MockMvc mockMvc;
 
     @Before
     public void setUp() {
