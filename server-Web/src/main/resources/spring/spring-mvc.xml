@@ -12,12 +12,12 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <context:component-scan base-package="com.mrigor.testTasks.department.web"/>
+    <context:component-scan base-package="com.mrigor.tasks.department.web"/>
 
     <bean class="org.springframework.format.support.FormattingConversionServiceFactoryBean" id="conversionService">
         <property name="formatters">
             <set>
-                <bean class="com.mrigor.testTasks.department.util.converter.DateTimeFormatters.LocalDateFormatter"/>
+                <bean class="com.mrigor.tasks.department.util.converter.DateTimeFormatters.LocalDateFormatter"/>
             </set>
         </property>
     </bean>

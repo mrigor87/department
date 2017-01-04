@@ -22,7 +22,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.mrigor.testTasks.department" level="debug"/>
+    <logger name="com.mrigor.tasks.department" level="debug"/>
 
 
 
