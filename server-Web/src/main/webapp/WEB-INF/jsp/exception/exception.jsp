@@ -11,12 +11,7 @@
     <div class="container">
         <br>
         <h4>Application error: </h4>
-        <h2>${exception.message}</h2>
-
-<%--<c:forEach items="${exception.stackTrace}" var="stackTrace">
-    ${stackTrace}
-</c:forEach>--%>
-<%--${exception.getMessage()}--%>
+        <div>${exception}</div>
 
     </div>
 </div>
