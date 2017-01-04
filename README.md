@@ -1,7 +1,5 @@
 #Staff accounting.
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b55fd0666fa94213934973dd0bcbceca)](https://www.codacy.com/app/mrigor87/department?utm_source=github.com&utm_medium=referral&utm_content=mrigor87/department&utm_campaign=badger)
-
 ##Description
  This is Maven multi-module project on Java 8, which contains two main parts. The first part is RESTful service (in-memory HSQLDB, Spring JDBC). The second one is web-application which uses this REST API and provides UI (Spring RestTemplate, Bootstrap, jQuery)
 
