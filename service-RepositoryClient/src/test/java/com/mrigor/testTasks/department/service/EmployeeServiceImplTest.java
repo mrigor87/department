@@ -1,7 +1,6 @@
 package com.mrigor.testTasks.department.service;
 
 import com.mrigor.testTasks.department.model.Employee;
-import com.mrigor.testTasks.department.repository.EmployeeRepo;
 import com.mrigor.testTasks.department.util.exception.NotFoundException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,14 +9,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.List;
 
 import static com.mrigor.testTasks.department.DepTestData.DEP1_ID;
 import static com.mrigor.testTasks.department.EmployeeTestData.*;
 import static java.time.LocalDate.of;
-import static org.junit.Assert.*;
 
 /**
  * tests

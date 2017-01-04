@@ -9,10 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-
 import java.util.Arrays;
-
-
 
 import static com.mrigor.testTasks.department.DepTestData.DEP1_ID;
 import static com.mrigor.testTasks.department.EmployeeTestData.*;

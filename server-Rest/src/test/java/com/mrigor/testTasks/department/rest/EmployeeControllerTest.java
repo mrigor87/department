@@ -1,13 +1,9 @@
 package com.mrigor.testTasks.department.rest;
 
-import com.mrigor.testTasks.department.service.EmployeeService;
 import com.mrigor.testTasks.department.matcher.JsonUtil;
 import com.mrigor.testTasks.department.model.Employee;
-import static com.mrigor.testTasks.department.DepTestData.DEP1_ID;
-
-
+import com.mrigor.testTasks.department.service.EmployeeService;
 import org.junit.Before;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +19,13 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Arrays;
 
+import static com.mrigor.testTasks.department.DepTestData.DEP1_ID;
 import static com.mrigor.testTasks.department.EmployeeTestData.*;
-
+import static com.mrigor.testTasks.department.TestUtil.printContent;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import static com.mrigor.testTasks.department.TestUtil.printContent;
 
 /**
  * tests

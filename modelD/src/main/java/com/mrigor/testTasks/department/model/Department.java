@@ -1,6 +1,7 @@
 package com.mrigor.testTasks.department.model;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 /**
