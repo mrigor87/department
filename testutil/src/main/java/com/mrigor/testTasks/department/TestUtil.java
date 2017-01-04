@@ -4,7 +4,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import java.io.UnsupportedEncodingException;
 
 /**
- * util class for testing
+ * util class for testing (MocMvc)
  */
 public class TestUtil {
 

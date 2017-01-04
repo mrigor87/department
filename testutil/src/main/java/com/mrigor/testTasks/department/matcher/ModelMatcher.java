@@ -19,15 +19,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Default comparator compare by String.valueOf(entity)
  *
  * @param <T> : Entity
+ * @see JsonUtil
  */
 public class ModelMatcher<T> {
     private static final Comparator DEFAULT_COMPARATOR =
             (Object expected, Object actual) -> expected == actual || String.valueOf(expected).equals(String.valueOf(actual));
 
-    private Comparator<T> comparator;
+    public Comparator<T> comparator;
     private Class<T> entityClass;
 
-    public interface Comparator<T> {
+    private interface Comparator<T> {
         boolean compare(T expected, T actual);
     }
 
@@ -40,6 +41,9 @@ public class ModelMatcher<T> {
         this.comparator = comparator;
     }
 
+    /**
+     * this class represents wrapped entity for comparing
+     */
     private class Wrapper {
         private T entity;
 
@@ -61,18 +65,39 @@ public class ModelMatcher<T> {
         }
     }
 
-    private T fromJsonValue(String json) {
+    /**
+     * convert json data to entity
+     * @param json data in format json
+     * @return entity
+     */
+    public T fromJsonValue(String json) {
         return JsonUtil.readValue(json, entityClass);
     }
 
+    /**
+     * convert json data to collection of entities
+     * @param json data in json format
+     * @return collection of entities
+     */
     private Collection<T> fromJsonValues(String json) {
         return JsonUtil.readValues(json, entityClass);
     }
 
+    /**
+     * convert json data from ResultActions to entity
+     * @param action ResultActions
+     * @return entity
+     * @throws UnsupportedEncodingException
+     */
     public T fromJsonAction(ResultActions action) throws UnsupportedEncodingException {
         return fromJsonValue(TestUtil.getContent(action));
     }
 
+    /**
+     * compare wrapped date with junit assert
+     * @param expected
+     * @param actual
+     */
     public void assertEquals(T expected, T actual) {
         Assert.assertEquals(wrap(expected), wrap(actual));
     }
@@ -81,15 +106,30 @@ public class ModelMatcher<T> {
         Assert.assertEquals(wrap(expected), wrap(actual));
     }
 
-    public Wrapper wrap(T entity) {
+    /**
+     * wrap entity
+     * @param entity
+     * @return wrapped entity
+     */
+    private Wrapper wrap(T entity) {
         return new Wrapper(entity);
     }
 
+    /**
+     * wraps collection of entities
+     * @param collection
+     * @return collection of wrapped entities
+     */
     public List<Wrapper> wrap(Collection<T> collection) {
         return collection.stream().map(this::wrap).collect(Collectors.toList());
     }
 
-    public ResultMatcher contentMatcher(T expect) {
+    /**
+     * builds ResultMatcher for expectation in MockMvc
+     * @param expect entity
+     * @return ResultMatcher
+     */
+    public final ResultMatcher contentMatcher(T expect) {
         return content().string(
                 new TestMatcher<T>(expect) {
                     @Override
@@ -101,10 +141,20 @@ public class ModelMatcher<T> {
                 });
     }
 
+    /**
+     * builds ResultMatcher for expectation in MockMvc
+     * @param expected a few entities
+     * @return ResultMatcher
+     */
     public final ResultMatcher contentListMatcher(T... expected) {
         return contentListMatcher(Arrays.asList(expected));
     }
 
+    /**
+     * builds ResultMatcher for expectation in MockMvc
+     * @param expected list of entoties
+     * @return ResultMatcher
+     */
     public final ResultMatcher contentListMatcher(List<T> expected) {
         return content().string(
                 new TestMatcher<List<T>>(expected) {

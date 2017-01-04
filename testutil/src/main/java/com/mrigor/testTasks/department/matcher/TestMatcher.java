@@ -4,8 +4,8 @@ import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 
 /**
- * GKislin
- * 05.01.2015.
+ * baseClass for all Matcher implementations.
+ * @see ModelMatcher
  */
 abstract public class TestMatcher<T> extends BaseMatcher<String> {
     protected T expected;
