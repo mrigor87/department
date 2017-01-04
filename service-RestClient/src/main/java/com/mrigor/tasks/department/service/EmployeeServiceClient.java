@@ -18,7 +18,6 @@ import java.util.List;
 /**
  * implementation interface of service layer with using. (department)
  * Data access by REST API using Spring RestTemplate
- * Exceptions are handled with ExceptionInfoHandler
  */
 @Service
 public class EmployeeServiceClient implements EmployeeService {
