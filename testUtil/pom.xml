@@ -13,7 +13,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.mrigor.tasks</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>modelD</artifactId>
         </dependency>
 

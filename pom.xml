@@ -16,7 +16,7 @@
         <module>server-Rest</module>
         <module>server-Web</module>
         <module>modelD</module>
-        <module>testutil</module>
+        <module>testUtil</module>
 
     </modules>
     <name>Simple department management</name>
