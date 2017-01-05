@@ -30,5 +30,5 @@ rest/employees/filtered/|GET|get all employees by filter with parameters:"from" 
 3.	If you will use default setting of Tomcat that 
 you can see result at the following url:
 
-  - `http://localhost:8080/ server-Rest-1.0-SNAPSHOT/rest/departments` (RESTful service)
-  - `http://localhost:8080/ server-Web-1.0-SNAPSHOT` (web-application)
+  - `http://localhost:8080/server-Rest-1.0-SNAPSHOT/rest/departments` (RESTful service)
+  - `http://localhost:8080/server-Web-1.0-SNAPSHOT` (web-application)
