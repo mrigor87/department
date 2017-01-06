@@ -23,6 +23,7 @@ $(function () {
                 "data": "name"
             },
             {
+                "defaultContent": "",
                 "data": "averageSalary"
             },
 
