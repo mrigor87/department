@@ -1,7 +1,7 @@
 #Staff accounting.
 
 ##Description
- This is Maven multi-module project on Java 8, which contains two main parts. The first part is RESTful service (in-memory HSQLDB, Spring JDBC). The second one is web-application which uses this REST API and provides UI (Spring RestTemplate, Bootstrap, jQuery)
+ This is Maven multi-module project on Java 8, which contains two main parts. The first part is RESTful service (in-memory HSQLDB, Spring JDBC, Spring MVC). The second one is web-application which uses this REST API and provides UI (Spring RestTemplate, Spring MVC, Bootstrap, jQuery)
 
 REST API:
 
@@ -30,5 +30,5 @@ rest/employees/filtered/|GET|get all employees by filter with parameters:"from" 
 3.	If you will use default setting of Tomcat that 
 you can see result at the following url:
 
-  - `http://localhost:8080/ server-Rest-1.0-SNAPSHOT/rest/departments` (RESTful service)
-  - `http://localhost:8080/ server-Web-1.0-SNAPSHOT` (web-application)
+  - `http://localhost:8080/server-Rest-1.0-SNAPSHOT/rest/departments` (RESTful service)
+  - `http://localhost:8080/server-Web-1.0-SNAPSHOT` (web-application)
