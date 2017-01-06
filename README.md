@@ -12,7 +12,7 @@ rest/departments/{id}/|GET|get department by id
 rest/departments/{id}/|DELETE|delete department by id
 rest/departments/|PUT|update department
 rest/departments/|POST|create new department
-rest/departments/withAvgSalary/|GET|get department's list with information about average salary by each department. If department don't have any employees, then AVG salary will by = 0
+rest/departments/withAvgSalary/|GET|get department's list with information about average salary by each department. If department don't have any employees, then AVG salary will be = 0
 rest/departments/{id}/employees/|GET|get all employees from particular  department
 rest/employees|GET|get employee's list
 rest/employees/{id}|GET|get employee by id
