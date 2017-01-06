@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -24,8 +25,20 @@ import java.util.List;
 public class DepartmentRepoImpl implements DepartmentRepo {
     private static final Logger LOG = LoggerFactory.getLogger(DepartmentRepoImpl.class);
     private static final BeanPropertyRowMapper<Department> ROW_MAPPER = BeanPropertyRowMapper.newInstance(Department.class);
-    private static final BeanPropertyRowMapper<DepartmentWithAverageSalary> ROW_MAPPER_TO = BeanPropertyRowMapper.newInstance(DepartmentWithAverageSalary.class);
 
+    //default mapper
+    //private static final BeanPropertyRowMapper<DepartmentWithAverageSalary> ROW_MAPPER_TO = BeanPropertyRowMapper.newInstance(DepartmentWithAverageSalary.class);
+
+    //for handling AvgSalaty==null
+    private static final RowMapper<DepartmentWithAverageSalary> ROW_MAPPER_TO = (rs, rowNum) -> {
+        DepartmentWithAverageSalary depWithSal = new DepartmentWithAverageSalary();
+        depWithSal.setId(rs.getInt("ID"));
+        depWithSal.setName(rs.getString("NAME"));
+
+        Integer salary = rs.getInt("AVERAGESALARY");
+        depWithSal.setAverageSalary(salary == null ? 0 : salary);
+        return depWithSal;
+    };
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -62,11 +75,11 @@ public class DepartmentRepoImpl implements DepartmentRepo {
                 .addValue("name", department.getName());
 
         if (department.isNew()) {
-            LOG.debug("create department {}",department);
+            LOG.debug("create department {}", department);
             Number newKey = insertDep.executeAndReturnKey(map);
             department.setId(newKey.intValue());
         } else {
-            LOG.debug("update department {}",department);
+            LOG.debug("update department {}", department);
             if (
                     namedParameterJdbcTemplate.update(
                             "UPDATE DEPARTMENTS SET name=:name WHERE id=:id", map)
@@ -77,13 +90,13 @@ public class DepartmentRepoImpl implements DepartmentRepo {
 
     @Override
     public boolean delete(int id) {
-        LOG.debug("delete department, id={}",id);
+        LOG.debug("delete department, id={}", id);
         return jdbcTemplate.update("DELETE FROM DEPARTMENTS WHERE id=?", id) != 0;
     }
 
     @Override
     public Department get(int id) {
-        LOG.debug("get department, id={}",id);
+        LOG.debug("get department, id={}", id);
         List<Department> departments = jdbcTemplate.query("SELECT * FROM DEPARTMENTS WHERE id=?", ROW_MAPPER, id);
         return DataAccessUtils.singleResult(departments);
     }
