@@ -5,32 +5,36 @@
          version="3.1">
     <display-name>department</display-name>
 
-
+    <context-param>
+        <param-name>spring.profiles.active</param-name>
+        <param-value>${type.ws}</param-value>
+    </context-param>
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
             classpath:spring/spring-app.xml
             classpath:spring/spring-db.xml
+            classpath:spring/spring-ws.xml
         </param-value>
     </context-param>
 
-    <!-- Spring MVC -->
+
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+
+
+
+
     <servlet>
-        <servlet-name>mvc-dispatcher</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:spring/spring-mvc.xml</param-value>
-        </init-param>
+        <servlet-name>CXFServlet</servlet-name>
+        <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>mvc-dispatcher</servlet-name>
-        <url-pattern>/</url-pattern>
+        <servlet-name>CXFServlet</servlet-name>
+        <url-pattern>/soap/*</url-pattern>
     </servlet-mapping>
 
 

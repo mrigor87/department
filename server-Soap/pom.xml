@@ -12,9 +12,7 @@
     <artifactId>server-Rest</artifactId>
     <packaging>war</packaging>
 
-    <properties>
-        <some.property>ssoup</some.property>
-    </properties>
+
     <dependencies>
 
         <!-- https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->

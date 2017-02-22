@@ -17,6 +17,7 @@
         <module>server-Web</module>
         <module>modelD</module>
         <module>testUtil</module>
+        <module>server-Soap</module>
 
     </modules>
     <name>Simple department management</name>
@@ -24,6 +25,7 @@
 
 
     <properties>
+
         <java.version>1.8</java.version>
         <spring.version>4.3.2.RELEASE</spring.version>
         <jackson-json.version>2.8.4</jackson-json.version>
@@ -42,6 +44,22 @@
 
 
     </properties>
+
+    <profiles>
+        <profile>
+            <id>rest</id>
+            <properties>
+            <type.ws>rest</type.ws>
+            </properties>
+        </profile>
+        <profile>
+            <id>soap</id>
+            <properties>
+                <type.ws>soap</type.ws>
+            </properties>
+
+        </profile>
+    </profiles>
 
     <build>
 

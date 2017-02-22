@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jaxws="http://cxf.apache.org/jaxws" xmlns:jaxrs="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://cxf.apache.org/jaxws
+       http://cxf.apache.org/schemas/jaxws.xsd">
+
+
+    <!--    <jaxws:endpoint id="webserviceSEI2" address="/webserviceSEI2"
+                        implementor="ru.javastudy.ws.soap.HelloSoap"/>-->
+
+    <jaxws:endpoint id="departmentSEI" address="/departmentSEI"
+                    implementor="com.mrigor.tasks.department.service.DepartmentServiceImpl"/>
+
+    <jaxws:endpoint id="employeeSEI" address="/employeeSEI"
+                    implementor="com.mrigor.tasks.department.service.EmployeeServiceImpl"/>
+
+
+<!--    <jaxrs:server id="restContainer" address="/customer">
+        <jaxrs:serviceBeans>
+            <ref bean="customersService" />
+        </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <ref bean="preInvokeHandler" />
+            <ref bean="customExceptionMapper" />
+        </jaxrs:providers>
+    </jaxrs:server>-->
+
+<!--
+    <jaxws:client id="departmentServiceSEIImpl"
+                  serviceClass="com.mrigor.tasks.department.service.DepartmentService"
+                  address="http://localhost:8082/department/soap/departmentSEI"/>
+
+    <jaxws:client id="employeeServiceSEIImpl"
+                  serviceClass="com.mrigor.tasks.department.service.EmployeeService"
+                  address="http://localhost:8082/department/soap/employeeSEI"/>
+-->
+
+
+</beans>

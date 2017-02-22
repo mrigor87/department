@@ -4,11 +4,13 @@ import com.mrigor.tasks.department.model.Department;
 import com.mrigor.tasks.department.to.DepartmentWithAverageSalary;
 import com.mrigor.tasks.department.util.exception.NotFoundException;
 
+import javax.jws.WebService;
 import java.util.List;
 
 /**
  * interface for service-layer of employees
  */
+@WebService
 public interface DepartmentService {
     /**
      * create new department
