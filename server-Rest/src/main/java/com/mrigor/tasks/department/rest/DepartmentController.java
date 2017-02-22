@@ -29,7 +29,7 @@ import static com.mrigor.tasks.department.rest.DepartmentController.REST_URL;
 
 @RestController
 @RequestMapping(REST_URL)
-@Profile("rest")
+
 public class DepartmentController {
     private static final Logger LOG = LoggerFactory.getLogger(DepartmentController.class);
     @Autowired

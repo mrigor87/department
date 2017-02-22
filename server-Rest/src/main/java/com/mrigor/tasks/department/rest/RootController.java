@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * root controller for start page (test page)
  */
 @Controller
-@Profile("rest")
+
 public class RootController {
     private static final Logger LOG  = LoggerFactory.getLogger(RootController.class);
 

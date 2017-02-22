@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
  * Created by Igor on 21.12.2016.
  */
 @ControllerAdvice(annotations = RestController.class)
-@Profile("rest")
+
 public class ExceptionInfoHandler {
     Logger LOG = LoggerFactory.getLogger(ExceptionInfoHandler.class);
 

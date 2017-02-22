@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>server-Rest</artifactId>
+    <artifactId>server-Soap</artifactId>
     <packaging>war</packaging>
 
 
@@ -28,7 +28,16 @@
             <artifactId>cxf-rt-transports-http-jetty</artifactId>
             <version>RELEASE</version>
         </dependency>-->
-
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http</artifactId>
+            <version>RELEASE</version>
+        </dependency>
 
 
         <!--Spring-->
@@ -89,7 +98,7 @@
     </dependencies>
 
 
-    <profiles>
+<!--    <profiles>
         <profile>
             <id>rest</id>
             <build>
@@ -98,7 +107,7 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-war-plugin</artifactId>
                         <configuration>
-<!--    asks\department\server-Rest\src\main\webapp\WEB-INF-->
+
                             <webXml>src\main\conf\rest\web.xml</webXml>
                         </configuration>
                     </plugin>
@@ -137,5 +146,5 @@
             </dependencies>
         </profile>
 
-    </profiles>
+    </profiles>-->
 </project>

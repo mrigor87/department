@@ -25,7 +25,7 @@ import static com.mrigor.tasks.department.rest.EmployeeController.REST_URL;
  */
 @RestController
 @RequestMapping(REST_URL)
-@Profile("rest")
+
 public class EmployeeController {
     private static final Logger LOG = LoggerFactory.getLogger(DepartmentController.class);
 
