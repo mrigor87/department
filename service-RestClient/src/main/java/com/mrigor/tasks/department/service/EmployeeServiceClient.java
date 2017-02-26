@@ -1,6 +1,7 @@
 package com.mrigor.tasks.department.service;
 
 import com.mrigor.tasks.department.model.Employee;
+import com.mrigor.tasks.department.model.adapters.LocalDateAdapter;
 import com.mrigor.tasks.department.util.exception.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -84,6 +86,7 @@ public class EmployeeServiceClient implements EmployeeService {
     }
 
     @Override
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public List<Employee> getFiltered(LocalDate from, LocalDate to, Integer departmentId) throws ResourceAccessException {
 
             String currentRest = prefix + "/rest/employees/" + "filtered?" +

@@ -5,7 +5,13 @@
          version="3.1">
     <display-name>department</display-name>
 
+    <context-param>
+        <param-name>spring.profiles.active</param-name>
 
+        <param-value>${spring.profiles.to.activate}</param-value>
+    </context-param>
+
+    <!--        <param-value>${type.ws}</param-value>-->
 
     <context-param>
         <param-name>contextConfigLocation</param-name>

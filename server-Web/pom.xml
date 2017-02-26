@@ -11,26 +11,13 @@
 
     <artifactId>server-Web</artifactId>
     <packaging>war</packaging>
-
+    <properties>
+        <ws>soap</ws>
+    </properties>
 
     <dependencies>
 
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-frontend-jaxws</artifactId>
-            <version>RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-transports-http</artifactId>
-            <version>RELEASE</version>
-        </dependency>
 
-
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>service-RestClient</artifactId>
-        </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>testUtil</artifactId>
@@ -72,16 +59,16 @@
         </dependency>
 
         <!--test-->
-<!--        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <scope>test</scope>
-        </dependency>-->
+        <!--        <dependency>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-test</artifactId>
+                    <scope>test</scope>
+                </dependency>-->
 
         <!-- Logging with SLF4J & LogBack -->
         <dependency>
@@ -100,4 +87,36 @@
             <scope>runtime</scope>
         </dependency>
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>soap</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.apache.cxf</groupId>
+                    <artifactId>cxf-rt-frontend-jaxws</artifactId>
+                    <version>RELEASE</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.cxf</groupId>
+                    <artifactId>cxf-rt-transports-http</artifactId>
+                    <version>RELEASE</version>
+                </dependency>
+                <dependency>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>service-API</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <profile>
+            <id>rest</id>
+            <dependencies>
+                <dependency>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>service-RestClient</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 </project>

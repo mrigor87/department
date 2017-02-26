@@ -48,15 +48,22 @@
     <profiles>
         <profile>
             <id>rest</id>
-            <properties>
-            <type.ws>rest</type.ws>
-            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>spring.profiles.active</name>
+                    <value>rest</value>
+                </property>
+            </activation>
         </profile>
         <profile>
             <id>soap</id>
-            <properties>
-                <type.ws>soap</type.ws>
-            </properties>
+            <activation>
+                <property>
+                    <name>spring.profiles.active</name>
+                    <value>soap</value>
+                </property>
+            </activation>
 
         </profile>
     </profiles>

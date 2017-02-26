@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 
@@ -51,7 +52,8 @@ public class DepartmentController {
     @GetMapping( produces = MediaType.APPLICATION_JSON_VALUE)
     public List<DepartmentWithAverageSalary> getAllWithAvgSalary() {
         LOG.debug("get all departments with avg salary}");
-        return service.getAllWithAvgSalary();
+        List<DepartmentWithAverageSalary> allWithAvgSalary = service.getAllWithAvgSalary();
+        return allWithAvgSalary==null?Collections.emptyList():allWithAvgSalary;
     }
 
     /**
@@ -62,7 +64,8 @@ public class DepartmentController {
     @GetMapping( value ="/{id}/employees",  produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Employee> getEmployeesByDepartment(@PathVariable("id") int id) {
         LOG.debug("get all employees by departmentId={}",id);
-        return employeeService.getByDep(id);
+        List<Employee> byDep = employeeService.getByDep(id);
+        return byDep==null?Collections.emptyList():byDep;
     }
 
     /**

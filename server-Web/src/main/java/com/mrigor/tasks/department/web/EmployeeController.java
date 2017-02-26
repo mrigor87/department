@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -36,7 +37,8 @@ public class EmployeeController {
                                       @RequestParam(value = "from", required = false) LocalDate from,
                                       @RequestParam(value = "to", required = false) LocalDate to) {
         LOG.debug("get filtered employees, departmentId={}, from={}, to={}",departmentId,from,to);
-        return service.getFiltered(from,to, departmentId);
+        List<Employee> filtered = service.getFiltered(from, to, departmentId);
+        return filtered==null? Collections.emptyList():filtered;
     }
 
 
