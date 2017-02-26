@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -35,14 +36,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 
 @ContextConfiguration({
-        "classpath:spring/spring-app-test.xml",
-        "classpath:spring/spring-mvc-test.xml"
+        "classpath:spring/spring-app.xml",
+        "classpath:spring/spring-mvc.xml"
 
 })
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 
-
+@ActiveProfiles("rest")
 public class EmployeeControllerTest {
 
 

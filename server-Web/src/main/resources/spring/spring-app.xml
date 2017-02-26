@@ -1,15 +1,3 @@
-<!--<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:jaxws="http://cxf.apache.org/jaxws"
-       xsi:schemaLocation="
-       http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://cxf.apache.org/jaxws
-       http://cxf.apache.org/schemas/jaxws.xsd
-"
->-->
-
-
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
@@ -20,13 +8,40 @@
        http://www.springframework.org/schema/context/spring-context.xsd
 
 ">
+    <!--    <beans xmlns="http://www.springframework.org/schema/beans"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xmlns:context="http://www.springframework.org/schema/context"
+               xsi:schemaLocation=
+               "http://www.springframework.org/schema/beans
+               http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">-->
+
+    <!--    <context:annotation-config/>
+        <context:component-scan base-package="com.mrigor.tasks.department.service"/>
+
+        <bean id="converter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+        <bean class="org.springframework.web.client.RestTemplate">
+            <property name="messageConverters">
+                <list>
+                    <ref bean="converter"/>
+                </list>
+            </property>
+        </bean>
+
+
+        <bean id="prefix" class="java.lang.String">
+            <constructor-arg value="http://localhost:8080/department"/>
+        </bean>-->
+
+
     <beans profile="soap,rest">
         <context:annotation-config/>
         <bean id="converter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
         <!--    URL prefix-->
         <bean id="prefix" class="java.lang.String">
             <!--            <constructor-arg value="http://localhost:8080/server-Rest-1.0-SNAPSHOT/"/>-->
-            <constructor-arg value="http://localhost:8082/department/"/>
+            <constructor-arg value="http://localhost:8082/department"/>
         </bean>
     </beans>
 
