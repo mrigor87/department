@@ -1,6 +1,7 @@
 package com.mrigor.tasks.department.web;
 
 import com.mrigor.tasks.department.matcher.JsonUtil;
+import com.mrigor.tasks.department.service.DepartmentService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,18 +52,23 @@ public class DepartmentControllerTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
+    @Autowired
+    private DepartmentService service;
+
     private MockMvc mockMvc;
 
     @Before
     public void setUp() {
         mockMvc = MockMvcBuilders
                 .webAppContextSetup(webApplicationContext)
+
                 .build();
         mockServer = MockRestServiceServer.createServer(restTemplate);
     }
 
     @Test
     public void get1() throws Exception {
+
         mockServer.expect(requestTo(prefix + "/rest/departments/" + 100000))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(MockRestResponseCreators.withSuccess(JsonUtil.writeValue(DEP1), MediaType.APPLICATION_JSON));
