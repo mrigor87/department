@@ -15,10 +15,6 @@
         <context:annotation-config/>
         <bean id="converter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
         <!--    URL prefix-->
-        <bean id="prefix" class="java.lang.String">
-            <!--            <constructor-arg value="http://localhost:8080/server-Rest-1.0-SNAPSHOT/"/>-->
-            <constructor-arg value="http://localhost:8080"/>
-        </bean>
     </beans>
 
     <beans profile="rest">
