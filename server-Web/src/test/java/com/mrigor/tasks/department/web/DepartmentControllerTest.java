@@ -39,7 +39,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("rest")
-public class DepartmentControllerTest {
+public abstract class DepartmentControllerTest {
 
     @Autowired
     private String prefix;

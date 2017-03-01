@@ -33,4 +33,5 @@ you can see result at the following url:
   - `http://localhost:8080/server-Rest-1.0-SNAPSHOT/rest/departments` (RESTful service)
   - `http://localhost:8080/server-Web-1.0-SNAPSHOT` (web-application)
 
-UPDATE:  branch "newHandlingAvgSalary" for handling null-value in RESTful service
+UPDATE: branch "newHandlingAvgSalary" for handling null-value in RESTful service
+UPDATE: SOAP web-service. To use this service you should `mvn clean install –P soap` and deploy 'server-Soap-1.0-SNAPSHOT.war'
