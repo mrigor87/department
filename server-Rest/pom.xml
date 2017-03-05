@@ -15,6 +15,139 @@
     <properties>
         <some.property>ssoup</some.property>
     </properties>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <!-- https://mvnrepository.com/artifact/com.github.kongchen/swagger-maven-plugin -->
+
+                    <groupId>com.github.kongchen</groupId>
+                    <artifactId>swagger-maven-plugin</artifactId>
+                    <version>3.1.4</version>
+
+                <configuration>
+                    <apiSources>
+                        <apiSource>
+                            <springmvc>false</springmvc>
+                            <locations>com.testcompany.testproject.rest.resource</locations>
+                            <schemes>http,https</schemes>
+                            <host>www.[host]:[port]</host>
+                            <basePath>/v2</basePath>
+                            <info>
+                                <title>Swagger spec for our REST API</title>
+                                <version>v2</version>
+                                <description>This is a sample spec for our REST API</description>
+                                <termsOfService>
+                                    http://www.testcompany.com/terms-and-conditions
+                                </termsOfService>
+                                <contact>
+                                    <email>SureshSatyam(@)testcompany.com</email>
+                                    <name>Suresh Satyam</name>
+                                    <url>http://www.testcompany.com</url>
+                                </contact>
+                                <license>
+                                    <url>http://www.testcompany.com/licenses/LICENSE-2.0.html</url>
+                                    <name>Company Licence</name>
+                                </license>
+                            </info>
+                            <swaggerDirectory>src/main/webapp/</swaggerDirectory>     <!--****************************************** swagger.yml -->
+                        </apiSource>
+                    </apiSources>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+            <plugin>
+                <groupId>io.github.robwin</groupId>
+                <artifactId>swagger2markup-maven-plugin</artifactId>
+                <version>0.9.3</version>
+                <configuration>
+                    <inputDirectory>src/main/webapp/</inputDirectory>              <!--******************************************************-->
+                    <swaggerFile>swagger.json</swaggerFile>
+                    <outputDirectory>asciidoc</outputDirectory>
+                    <markupLanguage>asciidoc</markupLanguage>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>process-swagger</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+
+
+
+            <plugin>
+                <groupId>org.asciidoctor</groupId>
+                <artifactId>asciidoctor-maven-plugin</artifactId>
+                <version>1.5.2</version>
+                <executions>
+                    <execution>
+                        <id>output-html</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <backend>html5</backend>
+                            <outputDirectory>${project.build.directory}/docs/html</outputDirectory>      <!--**********************************-->
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>output-pdf</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <backend>pdf</backend>
+                            <outputDirectory>${project.build.directory}/docs/pdf</outputDirectory>      <!--**********************************-->
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoctorj-pdf</artifactId>
+                        <version>1.5.0-alpha.8</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <sourceDirectory>src/docs/asciidoc</sourceDirectory>                      <!--**********************************-->
+                    <sourceDocumentName>index.adoc</sourceDocumentName>
+                    <attributes>
+                        <doctype>book</doctype>
+                        <toc>left</toc>
+                        <toclevels>2</toclevels>
+                        <generated>${project.build.directory}/docs/asciidoc/generated</generated>         <!--**********************************-->
+                    </attributes>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+
+
+
+
+
+
+
+
     <dependencies>
 
         <dependency>
@@ -40,17 +173,7 @@
             </exclusions>
         </dependency>
 
-        <!--        <dependency>
-                    <groupId>com.fasterxml.jackson.core</groupId>
-                    <artifactId>jackson-databind</artifactId>
-                    <version>2.5.0</version>
-                </dependency>-->
 
-        <!--        <dependency>
-                    <groupId>com.fasterxml.jackson.datatype</groupId>
-                    <artifactId>jackson-datatype-jsr310</artifactId>
-                    <version>RELEASE</version>
-                </dependency>-->
 
         <dependency>
             <groupId>io.springfox</groupId>
@@ -58,62 +181,7 @@
             <version>2.4.0</version>
         </dependency>
 
-        <!--                <dependency>
-                            <groupId>io.springfox</groupId>
-                            <artifactId>springfox-swagger-ui</artifactId>
-                            <version>2.4.0</version>
-                        </dependency>
 
-
-                <dependency>
-                    <groupId>io.springfox</groupId>
-                    <artifactId>springfox-swagger2</artifactId>
-                    <version>2.5.0</version>
-                    <exclusions>
-                        <exclusion>
-                            <artifactId>jackson-annotations</artifactId>
-                            <groupId>com.fasterxml.jackson.core</groupId>
-                        </exclusion>
-
-                    </exclusions>
-                </dependency>-->
-        <!--
-                <dependency>
-                    <groupId>com.mangofactory</groupId>
-                    <artifactId>swagger-springmvc</artifactId>
-                    <version>0.5.2</version>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>com.fasterxml.jackson.core</groupId>
-                            <artifactId>jackson-databind</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>com.fasterxml.jackson.datatype</groupId>
-                            <artifactId>jackson-datatype-jsr310</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <groupId>com.fasterxml.jackson.core</groupId>
-                            <artifactId>jackson-core</artifactId>
-                        </exclusion>
-                        <exclusion>
-                            <artifactId>jackson-module-scala</artifactId>
-                            <groupId>com.fasterxml.jackson.module</groupId>
-                        </exclusion>
-                        <exclusion>
-                            <artifactId>jackson-module-scala</artifactId>
-                            <groupId>com.fasterxml.jackson.module</groupId>
-                        </exclusion>
-                        <exclusion>
-                            <artifactId>jackson-annotations</artifactId>
-                            <groupId>com.fasterxml.jackson.core</groupId>
-                        </exclusion>
-                        <exclusion>
-                            <artifactId>slf4j-log4j12</artifactId>
-                            <groupId>org.slf4j</groupId>
-                        </exclusion>
-                    </exclusions>
-                </dependency>
-        -->
 
 
         <!--Spring-->
@@ -172,55 +240,6 @@
             <!--        <scope>runtime</scope>-->
         </dependency>
     </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.asciidoctor</groupId>
-                <artifactId>asciidoctor-maven-plugin</artifactId>
-                <version>1.5.2</version>
-                <executions>
-                    <execution>
-                        <id>output-html</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>process-asciidoc</goal>
-                        </goals>
-                        <configuration>
-                            <backend>html5</backend>
-                            <outputDirectory>${project.build.directory}/docs/html</outputDirectory>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>output-pdf</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>process-asciidoc</goal>
-                        </goals>
-                        <configuration>
-                            <backend>pdf</backend>
-                            <outputDirectory>${project.build.directory}/docs/pdf</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.asciidoctor</groupId>
-                        <artifactId>asciidoctorj-pdf</artifactId>
-                        <version>1.5.0-alpha.8</version>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <sourceDirectory>src/docs/asciidoc</sourceDirectory>
-                    <sourceDocumentName>index.adoc</sourceDocumentName>
-                    <attributes>
-                        <doctype>book</doctype>
-                        <toc>left</toc>
-                        <toclevels>2</toclevels>
-                        <generated>${project.build.directory}/docs/asciidoc/generated</generated>
-                    </attributes>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+
 
 </project>
