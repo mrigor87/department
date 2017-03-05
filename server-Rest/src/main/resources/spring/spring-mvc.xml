@@ -16,9 +16,9 @@
 
 
 
-    <context:property-placeholder location="classpath:/configuration/swagger.properties" />
+<!--    <context:property-placeholder location="classpath:/configuration/swagger.properties" />-->
     <mvc:default-servlet-handler/>
-    <bean class="com.mangofactory.swagger.configuration.DocumentationConfig" />
+    <bean class="springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration" id="swagger2Config"/>
 
 
     <mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/"/>

@@ -5,8 +5,9 @@ import com.mrigor.tasks.department.model.Employee;
 import com.mrigor.tasks.department.service.DepartmentService;
 import com.mrigor.tasks.department.service.EmployeeService;
 import com.mrigor.tasks.department.to.DepartmentWithAverageSalary;
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiOperation;
+/*import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;*/
+import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,8 @@ import static com.mrigor.tasks.department.rest.DepartmentController.REST_URL;
 
 @RestController
 @RequestMapping(REST_URL)
-@Api(value = "contacts", description = "contacts") // Swagger annotation
+@Api(value = "fdsfsf" ,description = "desxription")
+/*@Api(value = "contacts", description = "contacts")*/ // Swagger annotation
 public class DepartmentController {
     private static final Logger LOG = LoggerFactory.getLogger(DepartmentController.class);
     @Autowired
@@ -48,7 +50,7 @@ public class DepartmentController {
      * @param id identifier of department
      * @return employee or exception if not found
      */
-    @ApiOperation(value = "Resets password")
+/*    @ApiOperation(value = "Resets password")*/
     @GetMapping(value = "/{id}/employees", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Employee> getEmployeesByDepartment(@PathVariable("id") int id) {
         LOG.info("getAll employees from departments id=", id);
