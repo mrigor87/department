@@ -32,7 +32,6 @@ import static com.mrigor.tasks.department.rest.DepartmentController.REST_URL;
 
 @RestController
 @RequestMapping(REST_URL)
-@Api(value = "fdsfsf" ,description = "desxription")
 /*@Api(value = "contacts", description = "contacts")*/ // Swagger annotation
 public class DepartmentController {
     private static final Logger LOG = LoggerFactory.getLogger(DepartmentController.class);
