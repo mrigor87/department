@@ -40,7 +40,8 @@ public class EmployeeController {
      * get all employees
      * @return list of employees or empty if not found
      */
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    //@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)   //swagger-maven-plugin doesn't understand that
+    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE,method = RequestMethod.GET)
     @ApiOperation(value = "get all employees",
             response = Department.class,responseContainer = "List",notes = "get all employees")
     public List<Employee> getAll() {
@@ -53,7 +54,8 @@ public class EmployeeController {
      * @param id identifier of employee
      * @return employee or exception id not found
      */
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    //@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE,method = RequestMethod.GET)
     @ApiOperation(value = "get employee by id",
             response = Employee.class,notes = "get employee by id")
     @ApiResponses( {
@@ -69,7 +71,8 @@ public class EmployeeController {
      * delete employee by id
      * @param id identifier of employee
      */
-    @DeleteMapping(value = "/{id}")
+    //@DeleteMapping(value = "/{id}")
+    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
     @ApiOperation(value = "delete employee by id",
             response = Employee.class,notes = "delete employee by id")
     @ApiResponses( {
@@ -88,11 +91,12 @@ public class EmployeeController {
      * @param departmentId identifier of department
      * @return list of employees or empty id not found
      */
-    @GetMapping(value = "/filtered", produces = MediaType.APPLICATION_JSON_VALUE)
+    //@GetMapping(value = "/filtered", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/filtered", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @ApiOperation(value = "get filtered list of employees",
             response = Department.class,responseContainer = "List",notes = "get filtered list of employees by params")
     public List<Employee> filter(
-            @RequestParam(value = "from", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
+            @ApiParam( value = "from", required = false )   @RequestParam(value = "from", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
             @RequestParam(value = "to", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to,
             @RequestParam(value = "departmentid", required = false) Integer departmentId) {
         LOG.info("get filtered employees  departmentId={}  from={} to={}", departmentId, from, to);
@@ -103,7 +107,8 @@ public class EmployeeController {
      * update employee
      * @param employee
      */
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    //@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE,method = RequestMethod.PUT)
     @ApiOperation(value = "update employee",
             notes = "update employee"
     )
@@ -118,7 +123,8 @@ public class EmployeeController {
      * @param employee
      * @return entity with response body
      */
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    //@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE,method = RequestMethod.POST)
     @ApiOperation(value = "create employee",
             notes = "create employee"
     )

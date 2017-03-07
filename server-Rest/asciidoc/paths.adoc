@@ -1,0 +1,389 @@
+== Paths
+=== get all departments
+----
+GET /rest/departments
+----
+
+==== Description
+:hardbreaks:
+get all departments
+
+==== Responses
+[options="header"]
+|===
+|HTTP Code|Description|Schema
+|200|successful operation|<<Department>>
+|===
+
+==== Produces
+
+* application/json
+
+==== Tags
+
+* departments
+
+=== update department
+----
+PUT /rest/departments
+----
+
+==== Description
+:hardbreaks:
+update department
+
+==== Parameters
+[options="header"]
+|===
+|Type|Name|Description|Required|Schema|Default
+|BodyParameter|body|new department|false|<<Department>>|
+|===
+
+==== Responses
+[options="header"]
+|===
+|HTTP Code|Description|Schema
+|default|successful operation|No Content
+|===
+
+==== Consumes
+
+* application/json
+
+==== Tags
+
+* departments
+
+=== create new department
+----
+POST /rest/departments
+----
+
+==== Description
+:hardbreaks:
+create new department
+
+==== Parameters
+[options="header"]
+|===
+|Type|Name|Description|Required|Schema|Default
+|BodyParameter|body|new department|false|<<Department>>|
+|===
+
+==== Responses
+[options="header"]
+|===
+|HTTP Code|Description|Schema
+|200|successful operation|<<Department>>
+|===
+
+==== Consumes
+
+* application/json
+
+==== Produces
+
+* application/json
+
+==== Tags
+
+* departments
+
+=== get all employees with information about average salary
+----
+GET /rest/departments/withAvgSalary
+----
+
+==== Description
+:hardbreaks:
+get department's list with information about average salary by each department. If department don't have any employees, then AVG salary will by = 0 
+
+==== Responses
+[options="header"]
+|===
+|HTTP Code|Description|Schema
+|200|successful operation|<<DepartmentWithAverageSalary>> array
+|===
+
+==== Produces
+
+* application/json
+
+==== Tags
+
+* departments
+
+=== get department by id
+----
+GET /rest/departments/{id}
+----
+
+==== Description
+:hardbreaks:
+get department by id
+
+==== Parameters
+[options="header"]
+|===
+|Type|Name|Description|Required|Schema|Default
+|PathParameter|id|identifier of department|true|integer (int32)|
+|===
+
+==== Responses
+[options="header"]
+|===
+|HTTP Code|Description|Schema
+|200|successful operation|<<Employee>>
+|404|department with such identifier doesn't exists|No Content
+|===
+
+==== Produces
+
+* application/json
+
+==== Tags
+
+* departments
+
+=== delete department by id
+----
+DELETE /rest/departments/{id}
+----
+
+==== Description
+:hardbreaks:
+delete department by id
+
+==== Parameters
+[options="header"]
+|===
+|Type|Name|Description|Required|Schema|Default
+|PathParameter|id|identifier of department|true|integer (int32)|
+|===
+
+==== Responses
+[options="header"]
+|===
+|HTTP Code|Description|Schema
+|404|department with such identifier doesn't exists|No Content
+|===
+
+==== Tags
+
+* departments
+
+=== get employee's list from department
+----
+GET /rest/departments/{id}/employeess
+----
+
+==== Description
+:hardbreaks:
+get employee from department
+
+==== Parameters
+[options="header"]
+|===
+|Type|Name|Description|Required|Schema|Default
+|PathParameter|id|identifier of department|true|integer (int32)|
+|===
+
+==== Responses
+[options="header"]
+|===
+|HTTP Code|Description|Schema
+|200|successful operation|<<Employee>> array
+|404|department with such identifier doesn't exists|No Content
+|===
+
+==== Produces
+
+* application/json
+
+==== Tags
+
+* departments
+
+=== get all employees
+----
+GET /rest/employees
+----
+
+==== Description
+:hardbreaks:
+get all employees
+
+==== Responses
+[options="header"]
+|===
+|HTTP Code|Description|Schema
+|200|successful operation|<<Department>> array
+|===
+
+==== Produces
+
+* application/json
+
+==== Tags
+
+* employees
+
+=== update employee
+----
+PUT /rest/employees
+----
+
+==== Description
+:hardbreaks:
+update employee
+
+==== Parameters
+[options="header"]
+|===
+|Type|Name|Description|Required|Schema|Default
+|BodyParameter|body|new employee|false|<<Employee>>|
+|===
+
+==== Responses
+[options="header"]
+|===
+|HTTP Code|Description|Schema
+|default|successful operation|No Content
+|===
+
+==== Consumes
+
+* application/json
+
+==== Tags
+
+* employees
+
+=== create employee
+----
+POST /rest/employees
+----
+
+==== Description
+:hardbreaks:
+create employee
+
+==== Parameters
+[options="header"]
+|===
+|Type|Name|Description|Required|Schema|Default
+|BodyParameter|body||false|<<Employee>>|
+|===
+
+==== Responses
+[options="header"]
+|===
+|HTTP Code|Description|Schema
+|200|successful operation|<<Employee>>
+|===
+
+==== Consumes
+
+* application/json
+
+==== Produces
+
+* application/json
+
+==== Tags
+
+* employees
+
+=== get filtered list of employees
+----
+GET /rest/employees/filtered
+----
+
+==== Description
+:hardbreaks:
+get filtered list of employees by params
+
+==== Parameters
+[options="header"]
+|===
+|Type|Name|Description|Required|Schema|Default
+|QueryParameter|from|from|false|string (date)|
+|QueryParameter|to||false|string (date)|
+|QueryParameter|departmentid||false|integer (int32)|
+|===
+
+==== Responses
+[options="header"]
+|===
+|HTTP Code|Description|Schema
+|200|successful operation|<<Department>> array
+|===
+
+==== Produces
+
+* application/json
+
+==== Tags
+
+* employees
+
+=== get employee by id
+----
+GET /rest/employees/{id}
+----
+
+==== Description
+:hardbreaks:
+get employee by id
+
+==== Parameters
+[options="header"]
+|===
+|Type|Name|Description|Required|Schema|Default
+|PathParameter|id|identifier of employee|true|integer (int32)|
+|===
+
+==== Responses
+[options="header"]
+|===
+|HTTP Code|Description|Schema
+|200|successful operation|<<Employee>>
+|404|employee with such identifier doesn't exists|No Content
+|===
+
+==== Produces
+
+* application/json
+
+==== Tags
+
+* employees
+
+=== delete employee by id
+----
+DELETE /rest/employees/{id}
+----
+
+==== Description
+:hardbreaks:
+delete employee by id
+
+==== Parameters
+[options="header"]
+|===
+|Type|Name|Description|Required|Schema|Default
+|PathParameter|id|identifier of employee|true|integer (int32)|
+|===
+
+==== Responses
+[options="header"]
+|===
+|HTTP Code|Description|Schema
+|200|successful operation|<<Employee>>
+|404|employee with such identifier doesn't exists|No Content
+|===
+
+==== Tags
+
+* employees
+

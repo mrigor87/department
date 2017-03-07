@@ -1,29 +1,24 @@
-= Swagger spec for our REST API
+= Swagger spec for REST API
 
 == Overview
-This is a sample spec for our REST API
+This is a sample spec for Department REST API
 
 === Version information
-Version: v2
+Version: v1
 
 === Contact information
-Contact: Suresh Satyam
-Contact Email: SureshSatyam(@)testcompany.com
+Contact: Igor
+Contact Email: @mrigor
 
 === License information
-License: Company Licence
+License: test task for EPAM
 License URL: http://www.testcompany.com/licenses/LICENSE-2.0.html
 
 Terms of service: http://www.testcompany.com/terms-and-conditions
 
-=== URI scheme
-Host: localhost:8082/
-BasePath: /department
-Schemes: HTTP, HTTPS
-
 === Tags
 
-* departments: ndpoint for Department specific operations
+* departments: Endpoint for Department specific operations
 * employees: Endpoint for Employee specific operations
 
 

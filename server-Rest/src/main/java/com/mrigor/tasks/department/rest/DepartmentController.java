@@ -52,18 +52,17 @@ public class DepartmentController {
      * @return employee or exception if not found
      */
 
-    //@GetMapping(value = "/{id}/employees", produces = MediaType.APPLICATION_JSON_VALUE)
+    //@GetMapping(value = "/{id}/employees", produces = MediaType.APPLICATION_JSON_VALUE) //swagger-maven-plugin doesn't understand that
+    @RequestMapping(value = "/{id}/employeess", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @ApiOperation(value = "get employee's list from department",
             notes = "get employee from department",
-            response = Employee.class,responseContainer = "List")
-    @ApiResponses( {
-            @ApiResponse( code = 404, message = "department with such identifier doesn't exists" )
-    } )
-    @RequestMapping(value = "/{id}/employeess",
-            produces = {"application/json", "application/xml"},
-            method = RequestMethod.GET)
+            response = Employee.class, responseContainer = "List")
+    @ApiResponses({
+            @ApiResponse(code = 404, message = "department with such identifier doesn't exists")
+    })
+
     public List<Employee> getEmployeesByDepartment(
-            @ApiParam( value = "identifier of department", required = true ) @PathVariable("id") int id) {
+            @ApiParam(value = "identifier of department", required = true) @PathVariable("id") int id) {
         LOG.info("getAll employees from departments id=", id);
         return employeeService.getByDep(id);
     }
@@ -73,9 +72,10 @@ public class DepartmentController {
      *
      * @return department's list or empty if not found
      */
+   // @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)   //swagger-maven-plugin doesn't understand that
+    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @ApiOperation(value = "get all departments",
-            response = Department.class,notes = "get all departments")
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+            response = Department.class, notes = "get all departments")
     public List<Department> getAll() {
         LOG.info("getAll departments");
         return service.getAll();
@@ -88,13 +88,14 @@ public class DepartmentController {
      * @return department or exception if not found
      */
 
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+   // @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)  //swagger-maven-plugin doesn't understand that
+    @RequestMapping (value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @ApiOperation(value = "get department by id",
-            response = Employee.class,notes = "get department by id")
-    @ApiResponses( {
-            @ApiResponse( code = 404, message = "department with such identifier doesn't exists" )
-    } )
-    public Department get(@ApiParam( value = "identifier of department", required = true ) @PathVariable("id") int id) {
+            response = Employee.class, notes = "get department by id")
+    @ApiResponses({
+            @ApiResponse(code = 404, message = "department with such identifier doesn't exists")
+    })
+    public Department get(@ApiParam(value = "identifier of department", required = true) @PathVariable("id") int id) {
         LOG.info("get department id={}", id);
         return service.get(id);
     }
@@ -104,11 +105,12 @@ public class DepartmentController {
      *
      * @return list or empty if not found
      */
-    @GetMapping(value = "/withAvgSalary", produces = MediaType.APPLICATION_JSON_VALUE)
+    //@GetMapping(value = "/withAvgSalary", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/withAvgSalary", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @ApiOperation(value = "get all employees with information about average salary",
             response = DepartmentWithAverageSalary.class, responseContainer = "List",
             notes = "get department's list with information about average salary by each department. " +
-            "If department don't have any employees, then AVG salary will by = 0 ")
+                    "If department don't have any employees, then AVG salary will by = 0 ")
     public List<DepartmentWithAverageSalary> getAllWithAvgSalary() {
         LOG.info("get departments with avg salary");
         return service.getAllWithAvgSalary();
@@ -119,15 +121,16 @@ public class DepartmentController {
      *
      * @param id identifier of department
      */
-    @DeleteMapping(value = "/{id}")
+   // @DeleteMapping(value = "/{id}")
+    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
     @ApiOperation(value = "delete department by id",
             notes = "delete department by id"
-            )
-    @ApiResponses( {
-            @ApiResponse( code = 404, message = "department with such identifier doesn't exists" )
-    } )
+    )
+    @ApiResponses({
+            @ApiResponse(code = 404, message = "department with such identifier doesn't exists")
+    })
     public void delete(
-            @ApiParam( value = "identifier of department" ) @PathVariable("id") int id) {
+            @ApiParam(value = "identifier of department") @PathVariable("id") int id) {
         LOG.info("delete department id={}", id);
         service.delete(id);
     }
@@ -137,11 +140,12 @@ public class DepartmentController {
      *
      * @param department
      */
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    //@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE,method = RequestMethod.PUT)
     @ApiOperation(value = "update department",
             notes = "update department"
     )
-    public void update( @ApiParam( value = "new department" ) @RequestBody Department department) {
+    public void update(@ApiParam(value = "new department") @RequestBody Department department) {
         LOG.info("update department {}", department);
         service.update(department);
     }
@@ -152,9 +156,10 @@ public class DepartmentController {
      * @param department
      * @return entity with response body
      */
+    //@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE,method = RequestMethod.POST)
     @ApiOperation(value = "create new department",
             notes = "create new department")
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Department> createWithLocation(@ApiParam(value = "new department") @RequestBody Department department) {
         LOG.info("created department {}", department);
         Department created = service.create(department);
