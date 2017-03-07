@@ -2,11 +2,13 @@ package com.mrigor.tasks.department.model;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
+
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 /**
  * Created by Igor on 10.12.2016.
  */
+
 @JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, isGetterVisibility = NONE, setterVisibility = NONE)
 public class Department {
     private Integer id;

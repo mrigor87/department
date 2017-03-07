@@ -1,7 +1,9 @@
 package com.mrigor.tasks.department.rest;
 
+import com.mrigor.tasks.department.model.Department;
 import com.mrigor.tasks.department.model.Employee;
 import com.mrigor.tasks.department.service.EmployeeService;
+import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,7 @@ import static com.mrigor.tasks.department.rest.EmployeeController.REST_URL;
  */
 @RestController
 @RequestMapping(REST_URL)
-
+@Api(value = "employees", description = "Endpoint for Employee specific operations")
 public class EmployeeController {
     private static final Logger LOG = LoggerFactory.getLogger(DepartmentController.class);
 
@@ -39,6 +41,8 @@ public class EmployeeController {
      * @return list of employees or empty if not found
      */
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "get all employees",
+            response = Department.class,responseContainer = "List",notes = "get all employees")
     public List<Employee> getAll() {
         LOG.info("get all employees");
         return service.getAll();
@@ -50,7 +54,13 @@ public class EmployeeController {
      * @return employee or exception id not found
      */
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Employee get(@PathVariable("id") int id) {
+    @ApiOperation(value = "get employee by id",
+            response = Employee.class,notes = "get employee by id")
+    @ApiResponses( {
+            @ApiResponse( code = 404, message = "employee with such identifier doesn't exists" )
+    } )
+    public Employee get(
+            @ApiParam( value = "identifier of employee", required = true )@PathVariable("id") int id) {
         LOG.info("get employee by id={}", id);
         return service.get(id);
     }
@@ -60,7 +70,12 @@ public class EmployeeController {
      * @param id identifier of employee
      */
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable("id") int id) {
+    @ApiOperation(value = "delete employee by id",
+            response = Employee.class,notes = "delete employee by id")
+    @ApiResponses( {
+            @ApiResponse( code = 404, message = "employee with such identifier doesn't exists" )
+    } )
+    public void delete(@ApiParam( value = "identifier of employee", required = true ) @PathVariable("id") int id) {
         LOG.info("delete employee id={}", id);
         service.delete(id);
     }
@@ -74,6 +89,8 @@ public class EmployeeController {
      * @return list of employees or empty id not found
      */
     @GetMapping(value = "/filtered", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "get filtered list of employees",
+            response = Department.class,responseContainer = "List",notes = "get filtered list of employees by params")
     public List<Employee> filter(
             @RequestParam(value = "from", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
             @RequestParam(value = "to", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to,
@@ -87,7 +104,10 @@ public class EmployeeController {
      * @param employee
      */
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@RequestBody Employee employee) {
+    @ApiOperation(value = "update employee",
+            notes = "update employee"
+    )
+    public void update(@ApiParam( value = "new employee" )  @RequestBody Employee employee) {
 
         LOG.info("update employee {} from department id={}", employee, employee.getDepartmentId());
         service.update(employee);
@@ -99,6 +119,9 @@ public class EmployeeController {
      * @return entity with response body
      */
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "create employee",
+            notes = "create employee"
+    )
     public ResponseEntity<Employee> createWithLocation(@RequestBody Employee employee) {
         LOG.info("created department {}", employee);
         Employee created = service.create(employee);

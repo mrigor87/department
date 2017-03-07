@@ -15,7 +15,12 @@
       "url" : "http://www.testcompany.com/licenses/LICENSE-2.0.html"
     }
   },
-  "host" : "http://localhost:8082/",
-  "basePath" : "/department/rest",
+  "tags" : [ {
+    "name" : "restdepartments",
+    "description" : "ndpoint for Department specific operations"
+  }, {
+    "name" : "employees",
+    "description" : "Endpoint for Employee specific operations"
+  } ],
   "schemes" : [ "http", "https" ]
 }

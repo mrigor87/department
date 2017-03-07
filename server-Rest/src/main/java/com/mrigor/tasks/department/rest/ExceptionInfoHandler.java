@@ -2,6 +2,7 @@ package com.mrigor.tasks.department.rest;
 
 import com.mrigor.tasks.department.util.exception.ErrorInfo;
 import com.mrigor.tasks.department.util.exception.NotFoundException;
+import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
  * Created by Igor on 21.12.2016.
  */
 @ControllerAdvice(annotations = RestController.class)
-
+@Api (value = "ErrorHandler")
 public class ExceptionInfoHandler {
     Logger LOG = LoggerFactory.getLogger(ExceptionInfoHandler.class);
 

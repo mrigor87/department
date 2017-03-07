@@ -17,7 +17,13 @@ License URL: http://www.testcompany.com/licenses/LICENSE-2.0.html
 Terms of service: http://www.testcompany.com/terms-and-conditions
 
 === URI scheme
-Host: http://localhost:8082/
-BasePath: /department/rest
+Host: localhost:8082/
+BasePath: /department
 Schemes: HTTP, HTTPS
+
+=== Tags
+
+* departments: ndpoint for Department specific operations
+* employees: Endpoint for Employee specific operations
+
 

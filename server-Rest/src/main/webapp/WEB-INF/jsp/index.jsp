@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-<h1>rest server is running</h1>
+<% response.sendRedirect("swagger-ui.html"); %>
 </body>
 </html>
