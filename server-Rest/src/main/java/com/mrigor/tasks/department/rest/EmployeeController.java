@@ -38,12 +38,13 @@ public class EmployeeController {
 
     /**
      * get all employees
+     *
      * @return list of employees or empty if not found
      */
     //@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)   //swagger-maven-plugin doesn't understand that
-    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE,method = RequestMethod.GET)
+    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @ApiOperation(value = "get all employees",
-            response = Department.class,responseContainer = "List",notes = "get all employees")
+            response = Employee.class, responseContainer = "List", notes = "get all employees")
     public List<Employee> getAll() {
         LOG.info("get all employees");
         return service.getAll();
@@ -51,34 +52,36 @@ public class EmployeeController {
 
     /**
      * get employee by id
+     *
      * @param id identifier of employee
      * @return employee or exception id not found
      */
     //@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @RequestMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE,method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @ApiOperation(value = "get employee by id",
-            response = Employee.class,notes = "get employee by id")
-    @ApiResponses( {
-            @ApiResponse( code = 404, message = "employee with such identifier doesn't exists" )
-    } )
+            response = Employee.class, notes = "get employee by id")
+    @ApiResponses({
+            @ApiResponse(code = 404, message = "employee with such identifier doesn't exists")
+    })
     public Employee get(
-            @ApiParam( value = "identifier of employee", required = true )@PathVariable("id") int id) {
+            @ApiParam(value = "identifier of employee", required = true) @PathVariable("id") int id) {
         LOG.info("get employee by id={}", id);
         return service.get(id);
     }
 
     /**
      * delete employee by id
+     *
      * @param id identifier of employee
      */
     //@DeleteMapping(value = "/{id}")
-    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ApiOperation(value = "delete employee by id",
-            response = Employee.class,notes = "delete employee by id")
-    @ApiResponses( {
-            @ApiResponse( code = 404, message = "employee with such identifier doesn't exists" )
-    } )
-    public void delete(@ApiParam( value = "identifier of employee", required = true ) @PathVariable("id") int id) {
+            response = Employee.class, notes = "delete employee by id")
+    @ApiResponses({
+            @ApiResponse(code = 404, message = "employee with such identifier doesn't exists")
+    })
+    public void delete(@ApiParam(value = "identifier of employee", required = true) @PathVariable("id") int id) {
         LOG.info("delete employee id={}", id);
         service.delete(id);
     }
@@ -86,18 +89,23 @@ public class EmployeeController {
     /**
      * get filtered list of employees
      * params for filtering:
-     * @param from day of birth
-     * @param to day of birth
+     *
+     * @param from         day of birth
+     * @param to           day of birth
      * @param departmentId identifier of department
      * @return list of employees or empty id not found
      */
     //@GetMapping(value = "/filtered", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/filtered", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @ApiOperation(value = "get filtered list of employees",
-            response = Department.class,responseContainer = "List",notes = "get filtered list of employees by params")
+            response = Employee.class, responseContainer = "List", notes = "get filtered list of employees by params")
+/*    @ApiImplicitParams({
+            @ApiImplicitParam(name = "from",dataType = "string (date)",value = "like '2016-01-01' ",example = "2016-01-01"),
+*//*            @ApiImplicitParam(name = "to",example = "2016-01-01", dataType = "string (date)")*//*
+    })*/
     public List<Employee> filter(
-            @ApiParam( value = "from", required = false )   @RequestParam(value = "from", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
-            @RequestParam(value = "to", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to,
+            @ApiParam(name = "from", value = "like '2016-01-01'", example = "2016-01-01") @RequestParam(value = "from", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
+            @ApiParam(value = "like '2016-01-01'",name = "to", example = "2016-01-01") @RequestParam(value = "to", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to,
             @RequestParam(value = "departmentid", required = false) Integer departmentId) {
         LOG.info("get filtered employees  departmentId={}  from={} to={}", departmentId, from, to);
         return service.getFiltered(from, to, departmentId);
@@ -105,14 +113,15 @@ public class EmployeeController {
 
     /**
      * update employee
+     *
      * @param employee
      */
     //@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    @RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE,method = RequestMethod.PUT)
+    @RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.PUT)
     @ApiOperation(value = "update employee",
-            notes = "update employee"
+            notes = "update employee", consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public void update(@ApiParam( value = "new employee" )  @RequestBody Employee employee) {
+    public void update(@ApiParam(value = "new employee") @RequestBody Employee employee) {
 
         LOG.info("update employee {} from department id={}", employee, employee.getDepartmentId());
         service.update(employee);
@@ -120,13 +129,16 @@ public class EmployeeController {
 
     /**
      * create new employee
+     *
      * @param employee
      * @return entity with response body
      */
     //@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE,method = RequestMethod.POST)
+    @RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     @ApiOperation(value = "create employee",
-            notes = "create employee"
+            notes = "create employee",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<Employee> createWithLocation(@RequestBody Employee employee) {
         LOG.info("created department {}", employee);

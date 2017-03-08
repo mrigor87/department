@@ -429,15 +429,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_update_department">update department</a></li>
 <li><a href="#_create_new_department">create new department</a></li>
 <li><a href="#_get_all_employees_with_information_about_average_salary">get all employees with information about average salary</a></li>
-<li><a href="#_get_department_by_id">get department by id</a></li>
 <li><a href="#_delete_department_by_id">delete department by id</a></li>
+<li><a href="#_get_department_by_id">get department by id</a></li>
 <li><a href="#_get_employee_s_list_from_department">get employee&#8217;s list from department</a></li>
 <li><a href="#_get_all_employees">get all employees</a></li>
 <li><a href="#_update_employee">update employee</a></li>
 <li><a href="#_create_employee">create employee</a></li>
 <li><a href="#_get_filtered_list_of_employees">get filtered list of employees</a></li>
-<li><a href="#_get_employee_by_id">get employee by id</a></li>
 <li><a href="#_delete_employee_by_id">delete employee by id</a></li>
+<li><a href="#_get_employee_by_id">get employee by id</a></li>
 </ul>
 </li>
 <li><a href="#_definitions">Definitions</a>
@@ -807,16 +807,16 @@ License URL: <a href="http://www.testcompany.com/licenses/LICENSE-2.0.html" clas
 </div>
 </div>
 <div class="sect2">
-<h3 id="_get_department_by_id">get department by id</h3>
+<h3 id="_delete_department_by_id">delete department by id</h3>
 <div class="listingblock">
 <div class="content">
-<pre>GET /rest/departments/{id}</pre>
+<pre>DELETE /rest/departments/{id}</pre>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_description_5">Description</h4>
 <div class="paragraph">
-<p>get department by id</p>
+<p>delete department by id</p>
 </div>
 </div>
 <div class="sect3">
@@ -869,27 +869,12 @@ License URL: <a href="http://www.testcompany.com/licenses/LICENSE-2.0.html" clas
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">successful operation</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_employee">Employee</a></p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">department with such identifier doesn&#8217;t exists</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No Content</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="sect3">
-<h4 id="_produces_4">Produces</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>application/json</p>
-</li>
-</ul>
-</div>
 </div>
 <div class="sect3">
 <h4 id="_tags_6">Tags</h4>
@@ -903,16 +888,16 @@ License URL: <a href="http://www.testcompany.com/licenses/LICENSE-2.0.html" clas
 </div>
 </div>
 <div class="sect2">
-<h3 id="_delete_department_by_id">delete department by id</h3>
+<h3 id="_get_department_by_id">get department by id</h3>
 <div class="listingblock">
 <div class="content">
-<pre>DELETE /rest/departments/{id}</pre>
+<pre>GET /rest/departments/{id}</pre>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_description_6">Description</h4>
 <div class="paragraph">
-<p>delete department by id</p>
+<p>get department by id</p>
 </div>
 </div>
 <div class="sect3">
@@ -965,12 +950,27 @@ License URL: <a href="http://www.testcompany.com/licenses/LICENSE-2.0.html" clas
 </thead>
 <tbody>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">successful operation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_employee">Employee</a></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">department with such identifier doesn&#8217;t exists</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No Content</p></td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="sect3">
+<h4 id="_produces_4">Produces</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>application/json</p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_tags_7">Tags</h4>
@@ -1111,7 +1111,7 @@ License URL: <a href="http://www.testcompany.com/licenses/LICENSE-2.0.html" clas
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">successful operation</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_department">Department</a> array</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_employee">Employee</a> array</p></td>
 </tr>
 </tbody>
 </table>
@@ -1367,7 +1367,7 @@ License URL: <a href="http://www.testcompany.com/licenses/LICENSE-2.0.html" clas
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">QueryParameter</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">from</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">from</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">like '2016-01-01'</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string (date)</p></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -1375,7 +1375,7 @@ License URL: <a href="http://www.testcompany.com/licenses/LICENSE-2.0.html" clas
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">QueryParameter</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">to</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">like '2016-01-01'</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string (date)</p></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -1410,7 +1410,7 @@ License URL: <a href="http://www.testcompany.com/licenses/LICENSE-2.0.html" clas
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">successful operation</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_department">Department</a> array</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#_employee">Employee</a> array</p></td>
 </tr>
 </tbody>
 </table>
@@ -1437,16 +1437,16 @@ License URL: <a href="http://www.testcompany.com/licenses/LICENSE-2.0.html" clas
 </div>
 </div>
 <div class="sect2">
-<h3 id="_get_employee_by_id">get employee by id</h3>
+<h3 id="_delete_employee_by_id">delete employee by id</h3>
 <div class="listingblock">
 <div class="content">
-<pre>GET /rest/employees/{id}</pre>
+<pre>DELETE /rest/employees/{id}</pre>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_description_12">Description</h4>
 <div class="paragraph">
-<p>get employee by id</p>
+<p>delete employee by id</p>
 </div>
 </div>
 <div class="sect3">
@@ -1512,16 +1512,6 @@ License URL: <a href="http://www.testcompany.com/licenses/LICENSE-2.0.html" clas
 </table>
 </div>
 <div class="sect3">
-<h4 id="_produces_9">Produces</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>application/json</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
 <h4 id="_tags_13">Tags</h4>
 <div class="ulist">
 <ul>
@@ -1533,16 +1523,16 @@ License URL: <a href="http://www.testcompany.com/licenses/LICENSE-2.0.html" clas
 </div>
 </div>
 <div class="sect2">
-<h3 id="_delete_employee_by_id">delete employee by id</h3>
+<h3 id="_get_employee_by_id">get employee by id</h3>
 <div class="listingblock">
 <div class="content">
-<pre>DELETE /rest/employees/{id}</pre>
+<pre>GET /rest/employees/{id}</pre>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_description_13">Description</h4>
 <div class="paragraph">
-<p>delete employee by id</p>
+<p>get employee by id</p>
 </div>
 </div>
 <div class="sect3">
@@ -1606,6 +1596,16 @@ License URL: <a href="http://www.testcompany.com/licenses/LICENSE-2.0.html" clas
 </tr>
 </tbody>
 </table>
+</div>
+<div class="sect3">
+<h4 id="_produces_9">Produces</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>application/json</p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_tags_14">Tags</h4>

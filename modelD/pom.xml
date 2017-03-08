@@ -30,6 +30,16 @@
             <artifactId>jackson-datatype-jsr310</artifactId>
             <!--        <scope>provided</scope>-->
         </dependency>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>RELEASE</version>
+        </dependency>
 
     </dependencies>
 </project>

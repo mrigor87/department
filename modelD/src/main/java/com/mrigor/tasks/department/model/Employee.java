@@ -7,6 +7,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.mrigor.tasks.department.model.adapters.LocalDateAdapter;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiParam;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
@@ -25,7 +27,7 @@ public class Employee {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd" )
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
-
+@ApiModelProperty(dataType ="string",example = "2016-01-01")
     private LocalDate birthDay;
     private int salary;
     //@JsonIgnore
