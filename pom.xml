@@ -10,14 +10,14 @@
     <modules>
 
         <module>repository</module>
-        <module>service-API</module>
-        <module>service-RepositoryClient</module>
-        <module>service-RestClient</module>
-        <module>server-Rest</module>
-        <module>server-Web</module>
+        <module>service-api</module>
+        <module>service-repository-client</module>
+        <module>service-rest-client</module>
+        <module>server-rest</module>
+        <module>server-web</module>
         <module>modelD</module>
         <module>testUtil</module>
-        <module>server-Soap</module>
+        <module>server-soap</module>
 
     </modules>
     <name>Simple department management</name>

@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>server-Rest</artifactId>
+    <artifactId>server-rest</artifactId>
     <packaging>war</packaging>
 
     <properties>
