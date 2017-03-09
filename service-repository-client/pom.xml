@@ -19,11 +19,11 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>service-API</artifactId>
+            <artifactId>service-api</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>testUtil</artifactId>
+            <artifactId>test-util</artifactId>
             <scope>test</scope>
         </dependency>
 

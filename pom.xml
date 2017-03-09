@@ -15,8 +15,8 @@
         <module>service-rest-client</module>
         <module>server-rest</module>
         <module>server-web</module>
-        <module>modelD</module>
-        <module>testUtil</module>
+        <module>model</module>
+        <module>test-util</module>
         <module>server-soap</module>
 
     </modules>
@@ -41,32 +41,12 @@
         <webjars-jquery.version>2.2.4</webjars-jquery.version>
         <webjars-noty.version>2.3.8</webjars-noty.version>
         <webjars-datatables.version>1.10.12-1</webjars-datatables.version>
-
+        <org.apache.cxf.version>3.1.10</org.apache.cxf.version>
+        <springfox.version>2.4.0</springfox.version>
 
     </properties>
 
-<!--    <profiles>
-        <profile>
-            <id>rest</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-                <property>
-                    <name>spring.profiles.active</name>
-                    <value>rest</value>
-                </property>
-            </activation>
-        </profile>
-        <profile>
-            <id>soap</id>
-            <activation>
-                <property>
-                    <name>spring.profiles.active</name>
-                    <value>soap</value>
-                </property>
-            </activation>
 
-        </profile>
-    </profiles>-->
 
     <build>
 
@@ -89,12 +69,12 @@
         <dependencies>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>testUtil</artifactId>
+                <artifactId>test-util</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>modelD</artifactId>
+                <artifactId>model</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
@@ -104,17 +84,17 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>service-API</artifactId>
+                <artifactId>service-api</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>service-RestClient</artifactId>
+                <artifactId>service-rest-client</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>service-RepositoryClient</artifactId>
+                <artifactId>service-repository-client</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
 
@@ -246,6 +226,31 @@
                 <artifactId>logback-classic</artifactId>
                 <version>${logback.version}</version>
             </dependency>
+
+            <!--soap service-->
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-frontend-jaxws</artifactId>
+                <version>${org.apache.cxf.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-transports-http</artifactId>
+                <version>${org.apache.cxf.version}</version>
+            </dependency>
+
+            <!--Swagger documentation-->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${springfox.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${springfox.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

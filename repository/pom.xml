@@ -14,11 +14,11 @@
     <dependencies>
         <dependency>
             <groupId>com.mrigor.tasks</groupId>
-            <artifactId>modelD</artifactId>
+            <artifactId>model</artifactId>
         </dependency>
         <dependency>
             <groupId>com.mrigor.tasks</groupId>
-            <artifactId>testUtil</artifactId>
+            <artifactId>test-util</artifactId>
             <scope>test</scope>
         </dependency>
 
@@ -34,17 +34,7 @@
             <artifactId>hsqldb</artifactId>
         </dependency>
 
-        <!--Test-->
-<!--        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <scope>test</scope>
-        </dependency>-->
+
 
         <!-- Logging with SLF4J & LogBack -->
         <dependency>

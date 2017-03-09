@@ -25,7 +25,7 @@
             <dependencies>
                 <dependency>
                     <groupId>${project.groupId}</groupId>
-                    <artifactId>service-RestClient</artifactId>
+                    <artifactId>service-rest-client</artifactId>
                 </dependency>
             </dependencies>
         </profile>
@@ -38,52 +38,50 @@
                 <dependency>
                     <groupId>org.apache.cxf</groupId>
                     <artifactId>cxf-rt-frontend-jaxws</artifactId>
-                    <version>RELEASE</version>
+                    <version>3.1.10</version>
                 </dependency>
                 <dependency>
                     <groupId>org.apache.cxf</groupId>
                     <artifactId>cxf-rt-transports-http</artifactId>
-                    <version>RELEASE</version>
+                    <version>3.1.10</version>
                 </dependency>
                 <dependency>
                     <groupId>${project.groupId}</groupId>
-                    <artifactId>service-API</artifactId>
+                    <artifactId>service-api</artifactId>
                 </dependency>
             </dependencies>
         </profile>
     </profiles>
 
-<build>
-    <plugins>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-war-plugin</artifactId>
-            <configuration>
-                <webResources>
-                    <resource>
-                        <filtering>true</filtering>
-                        <directory>src/main/webapp</directory>
-                        <includes>
-                            <include>**/web.xml</include>
-                        </includes>
-                    </resource>
-                </webResources>
-                <warSourceDirectory>src/main/webapp</warSourceDirectory>
-                <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
-            </configuration>
-        </plugin>
-    </plugins>
-</build>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <filtering>true</filtering>
+                            <directory>src/main/webapp</directory>
+                            <includes>
+                                <include>**/web.xml</include>
+                            </includes>
+                        </resource>
+                    </webResources>
+                    <warSourceDirectory>src/main/webapp</warSourceDirectory>
+                    <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 
     <dependencies>
 
 
-
-
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>testUtil</artifactId>
+            <artifactId>test-util</artifactId>
             <scope>test</scope>
         </dependency>
 
@@ -121,19 +119,6 @@
             <artifactId>jstl</artifactId>
         </dependency>
 
-        <!--test-->
-        <!--        <dependency>
-                    <groupId>junit</groupId>
-                    <artifactId>junit</artifactId>
-                    <scope>test</scope>
-                </dependency>
-                <dependency>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-test</artifactId>
-                    <scope>test</scope>
-                </dependency>-->
-
-        <!-- Logging with SLF4J & LogBack -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -151,35 +136,4 @@
         </dependency>
     </dependencies>
 
-<!--    <profiles>
-        <profile>
-            <id>soap</id>
-            <dependencies>
-                <dependency>
-                    <groupId>org.apache.cxf</groupId>
-                    <artifactId>cxf-rt-frontend-jaxws</artifactId>
-                    <version>RELEASE</version>
-                </dependency>
-                <dependency>
-                    <groupId>org.apache.cxf</groupId>
-                    <artifactId>cxf-rt-transports-http</artifactId>
-                    <version>RELEASE</version>
-                </dependency>
-                <dependency>
-                    <groupId>${project.groupId}</groupId>
-                    <artifactId>service-API</artifactId>
-                </dependency>
-            </dependencies>
-        </profile>
-
-        <profile>
-            <id>rest</id>
-            <dependencies>
-                <dependency>
-                    <groupId>${project.groupId}</groupId>
-                    <artifactId>service-RestClient</artifactId>
-                </dependency>
-            </dependencies>
-        </profile>
-    </profiles>-->
 </project>

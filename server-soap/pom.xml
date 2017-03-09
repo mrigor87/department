@@ -28,15 +28,15 @@
                     <artifactId>cxf-rt-transports-http-jetty</artifactId>
                     <version>RELEASE</version>
                 </dependency>-->
+
+        <!--soap service-->
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-frontend-jaxws</artifactId>
-            <version>RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-transports-http</artifactId>
-            <version>RELEASE</version>
         </dependency>
 
 
@@ -59,7 +59,7 @@
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>service-RepositoryClient</artifactId>
+            <artifactId>service-repository-client</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -67,7 +67,7 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>testUtil</artifactId>
+            <artifactId>test-util</artifactId>
         </dependency>
 
 
@@ -83,68 +83,20 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <!--        <scope>compile</scope>-->
+
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
-            <!--        <scope>runtime</scope>-->
+
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <!--        <scope>runtime</scope>-->
+
         </dependency>
     </dependencies>
 
 
-    <!--    <profiles>
-            <profile>
-                <id>rest</id>
-                <build>
-                    <plugins>
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-war-plugin</artifactId>
-                            <configuration>
 
-                                <webXml>src\main\conf\rest\web.xml</webXml>
-                            </configuration>
-                        </plugin>
-                    </plugins>
-                </build>
-                <dependencies>
-
-
-                </dependencies>
-            </profile>
-            <profile>
-                <id>soap</id>
-                <build>
-                    <plugins>
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-war-plugin</artifactId>
-                            <configuration>
-                                <webXml>src\main\conf\soap\web.xml</webXml>
-                            </configuration>
-                        </plugin>
-                    </plugins>
-                </build>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.cxf</groupId>
-                        <artifactId>cxf-rt-frontend-jaxws</artifactId>
-                        <version>RELEASE</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.apache.cxf</groupId>
-                        <artifactId>cxf-rt-transports-http</artifactId>
-                        <version>RELEASE</version>
-                    </dependency>
-
-                </dependencies>
-            </profile>
-
-        </profiles>-->
 </project>
