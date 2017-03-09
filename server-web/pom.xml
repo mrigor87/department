@@ -79,11 +79,7 @@
     <dependencies>
 
 
-        <dependency>
-            <groupId>com.mangofactory</groupId>
-            <artifactId>swagger-springmvc</artifactId>
-            <version>0.5.2</version>
-        </dependency>
+
 
         <dependency>
             <groupId>${project.groupId}</groupId>

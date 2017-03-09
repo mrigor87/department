@@ -53,14 +53,13 @@ public class DepartmentController {
      */
 
     //@GetMapping(value = "/{id}/employees", produces = MediaType.APPLICATION_JSON_VALUE) //swagger-maven-plugin doesn't understand that
-    @RequestMapping(value = "/{id}/employeess", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}/employees", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @ApiOperation(value = "get employee's list from department",
             notes = "get employee from department",
             response = Employee.class, responseContainer = "List")
     @ApiResponses({
             @ApiResponse(code = 404, message = "department with such identifier doesn't exists")
     })
-
     public List<Employee> getEmployeesByDepartment(
             @ApiParam(value = "identifier of department", required = true) @PathVariable("id") int id) {
         LOG.info("getAll employees from departments id=", id);

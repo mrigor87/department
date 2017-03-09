@@ -1,6 +1,7 @@
 package com.mrigor.tasks.department.rest;
 
 
+import com.mrigor.tasks.department.EmployeeTestData;
 import com.mrigor.tasks.department.matcher.JsonUtil;
 import com.mrigor.tasks.department.model.Department;
 import com.mrigor.tasks.department.service.DepartmentService;
@@ -23,6 +24,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import static com.mrigor.tasks.department.DepTestData.*;
+import static com.mrigor.tasks.department.EmployeeTestData.EMPL_D1;
 import static com.mrigor.tasks.department.TestUtil.printContent;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -70,6 +72,17 @@ public class DepartmentControllerTest {
                 .andExpect(MATCHER.contentListMatcher(DEP1, DEP2)));
 
     }
+
+    @Test
+    public void testGetAll1() throws Exception {
+        printContent(mockMvc.perform(get(REST_URL+DEP1_ID+"/employees"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(EmployeeTestData. MATCHER.contentListMatcher(EMPL_D1)));
+
+    }
+
+
 
     @Test
     public void testGetAllWithSalary() throws Exception {
