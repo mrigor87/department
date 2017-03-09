@@ -68,6 +68,7 @@
 
     <dependencyManagement>
         <dependencies>
+
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>test-util</artifactId>
