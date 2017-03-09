@@ -48,8 +48,7 @@
                                 </license>
                             </info>
 
-                            <swaggerDirectory>src/main/webapp/
-                            </swaggerDirectory>
+                            <swaggerDirectory>${basedir}/swagger-ui/ </swaggerDirectory>
                         </apiSource>
                     </apiSources>
                 </configuration>
@@ -68,7 +67,7 @@
                 <artifactId>swagger2markup-maven-plugin</artifactId>
                 <version>0.9.3</version>
                 <configuration>
-                    <inputDirectory>src/main/webapp/</inputDirectory>
+                    <inputDirectory>${basedir}/swagger-ui/</inputDirectory>
                     <swaggerFile>swagger.json</swaggerFile>
                     <outputDirectory>asciidoc</outputDirectory>
                     <markupLanguage>asciidoc</markupLanguage>
@@ -83,53 +82,52 @@
                 </executions>
             </plugin>
 
-
-            <plugin>
-                <groupId>org.asciidoctor</groupId>
-                <artifactId>asciidoctor-maven-plugin</artifactId>
-                <version>1.5.2</version>
-                <executions>
-                    <execution>
-                        <id>output-html</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>process-asciidoc</goal>
-                        </goals>
-                        <configuration>
-                            <backend>html5</backend>
-                            <outputDirectory>src/main/webapp/docs/html</outputDirectory>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>output-pdf</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>process-asciidoc</goal>
-                        </goals>
-                        <configuration>
-                            <backend>pdf</backend>
-                            <outputDirectory>src/main/webapp/docs/pdf</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.asciidoctor</groupId>
-                        <artifactId>asciidoctorj-pdf</artifactId>
-                        <version>1.5.0-alpha.8</version>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <sourceDirectory>asciidoc</sourceDirectory>
-                    <sourceDocumentName>index.adoc</sourceDocumentName>
-                    <attributes>
-                        <doctype>book</doctype>
-                        <toc>left</toc>
-                        <toclevels>2</toclevels>
-                        <generated>src/main/webapp/asciidoc</generated>
-                    </attributes>
-                </configuration>
-            </plugin>
+                        <plugin>
+                            <groupId>org.asciidoctor</groupId>
+                            <artifactId>asciidoctor-maven-plugin</artifactId>
+                            <version>1.5.2</version>
+                            <executions>
+                                <execution>
+                                    <id>output-html</id>
+                                    <phase>test</phase>
+                                    <goals>
+                                        <goal>process-asciidoc</goal>
+                                    </goals>
+                                    <configuration>
+                                        <backend>html5</backend>
+                                        <outputDirectory>${basedir}/docs/html/</outputDirectory>
+                                    </configuration>
+                                </execution>
+                                <execution>
+                                    <id>output-pdf</id>
+                                    <phase>test</phase>
+                                    <goals>
+                                        <goal>process-asciidoc</goal>
+                                    </goals>
+                                    <configuration>
+                                        <backend>pdf</backend>
+                                        <outputDirectory>${basedir}/docs/pdf/</outputDirectory>
+                                    </configuration>
+                                </execution>
+                            </executions>
+                            <dependencies>
+                                <dependency>
+                                    <groupId>org.asciidoctor</groupId>
+                                    <artifactId>asciidoctorj-pdf</artifactId>
+                                    <version>1.5.0-alpha.8</version>
+                                </dependency>
+                            </dependencies>
+                            <configuration>
+                                <sourceDirectory>asciidoc</sourceDirectory>
+                                <sourceDocumentName>index.adoc</sourceDocumentName>
+                                <attributes>
+                                    <doctype>book</doctype>
+                                    <toc>left</toc>
+                                    <toclevels>2</toclevels>
+                                    <generated>src/main/webapp/asciidoc</generated>
+                                </attributes>
+                            </configuration>
+                        </plugin>
 
 
         </plugins>
