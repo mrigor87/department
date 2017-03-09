@@ -27,7 +27,9 @@
                         <apiSource>
                             <springmvc>true</springmvc>
                             <locations>
+                                     <location>
                                 com.mrigor.tasks.department.rest
+                                     </location>
                             </locations>
 
                             <info>
