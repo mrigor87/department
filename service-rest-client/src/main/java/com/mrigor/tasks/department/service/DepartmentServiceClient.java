@@ -25,77 +25,74 @@ public class DepartmentServiceClient implements DepartmentService {
 
 
     @Autowired
-    private String prefix;
+    private RestTemplate restTemplate;
 
+
+    private String prefixDepRestUrl;
 
     @Autowired
-    private RestTemplate restTemplate;
+    public DepartmentServiceClient(String prefix) {
+        prefixDepRestUrl = prefix + "/rest/departments/";
+    }
 
     @Override
     public Department create(Department department) throws ResourceAccessException {
-
-            String currentRest = prefix + "/rest/departments/";
-            LOG.debug("create department ({}) by url-{}", department, currentRest);
-            Department created = restTemplate.postForObject(currentRest, department, Department.class);
-            return created;
+        LOG.debug("create department ({}) by url-{}", department, prefixDepRestUrl);
+        Department created = restTemplate.postForObject(prefixDepRestUrl, department, Department.class);
+        return created;
 
     }
 
 
     @Override
     public void update(Department department) throws NotFoundException, ResourceAccessException {
-
-            String currentRest = prefix + "/rest/departments/";
-            LOG.debug("update department ({}) by url-{}", department, currentRest);
-            restTemplate.put(currentRest, department);
+        LOG.debug("update department ({}) by url-{}", department, prefixDepRestUrl);
+        restTemplate.put(prefixDepRestUrl, department);
     }
 
 
     @Override
     public void delete(int id) throws NotFoundException, ResourceAccessException {
-
-            String currentRest = prefix + "/rest/departments/" + id;
-            LOG.debug("delete department, id={} by url-{}", id, currentRest);
-            restTemplate.delete(currentRest);
+        String currentRest = prefixDepRestUrl + id;
+        LOG.debug("delete department, id={} by url-{}", id, currentRest);
+        restTemplate.delete(currentRest);
 
     }
 
     @Override
     public Department get(int id) throws NotFoundException, ResourceAccessException {
-
-            String currentRest = prefix + "/rest/departments/" + id;
-            LOG.debug("get department, id={} by url-{}", id, currentRest);
-            Department department = restTemplate.getForObject(currentRest, Department.class);
-            return department;
+        String currentRest = prefixDepRestUrl + id;
+        LOG.debug("get department, id={} by url-{}", id, currentRest);
+        Department department = restTemplate.getForObject(currentRest, Department.class);
+        return department;
     }
 
     @Override
     public List<Department> getAll() {
-try {
-    String currentRest = prefix + "/rest/departments/";
-    LOG.debug("get all department by url-{}", currentRest);
-    ResponseEntity<List<Department>> depResponse =
-            restTemplate.exchange(currentRest,
-                    HttpMethod.GET, null, new ParameterizedTypeReference<List<Department>>() {
-                    });
-    List<Department> departments = depResponse.getBody();
-    return departments;
-}catch (Exception e){
-    throw new   NotFoundException(prefix);
-}
+        try {
+            LOG.debug("get all department by url-{}", prefixDepRestUrl);
+            ResponseEntity<List<Department>> depResponse =
+                    restTemplate.exchange(prefixDepRestUrl,
+                            HttpMethod.GET, null, new ParameterizedTypeReference<List<Department>>() {
+                            });
+            List<Department> departments = depResponse.getBody();
+            return departments;
+        } catch (Exception e) {
+            throw new NotFoundException(prefixDepRestUrl);
+        }
     }
 
     @Override
     public List<DepartmentWithAverageSalary> getAllWithAvgSalary() throws ResourceAccessException {
 
-            String currentRest = prefix + "/rest/departments/" + "withAvgSalary";
-            LOG.debug("get all department with avg salary by url-{}", currentRest);
-            ResponseEntity<List<DepartmentWithAverageSalary>> depResponse =
-                    restTemplate.exchange(currentRest,
-                            HttpMethod.GET, null, new ParameterizedTypeReference<List<DepartmentWithAverageSalary>>() {
-                            });
-            List<DepartmentWithAverageSalary> departments = depResponse.getBody();
-            return departments;
+        String currentRest = prefixDepRestUrl + "withAvgSalary";
+        LOG.debug("get all department with avg salary by url-{}", currentRest);
+        ResponseEntity<List<DepartmentWithAverageSalary>> depResponse =
+                restTemplate.exchange(currentRest,
+                        HttpMethod.GET, null, new ParameterizedTypeReference<List<DepartmentWithAverageSalary>>() {
+                        });
+        List<DepartmentWithAverageSalary> departments = depResponse.getBody();
+        return departments;
 
     }
 }

@@ -13,12 +13,10 @@
     <packaging>war</packaging>
 
 
-
-
     <build>
         <plugins>
 
-
+            <!--  plugins for auto generating documentation  //webapp/docs          -->
             <plugin>
                 <groupId>com.github.kongchen</groupId>
                 <artifactId>swagger-maven-plugin</artifactId>
@@ -49,7 +47,7 @@
                                     <name>test task for EPAM</name>
                                 </license>
                             </info>
-                            <!--                            <outputPath>ddd</outputPath>-->
+
                             <swaggerDirectory>src/main/webapp/
                             </swaggerDirectory>
                         </apiSource>
@@ -64,7 +62,6 @@
                     </execution>
                 </executions>
             </plugin>
-
 
             <plugin>
                 <groupId>io.github.robwin</groupId>
@@ -135,8 +132,6 @@
             </plugin>
 
 
-
-
         </plugins>
     </build>
 
@@ -156,13 +151,7 @@
             <artifactId>test-util</artifactId>
         </dependency>
 
-<!--Swagger documenetation-->
-<!--        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-staticdocs</artifactId>
-            <version>2.4.0</version>
-            <scope>test</scope>
-        </dependency>-->
+        <!--swagger-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
@@ -224,11 +213,7 @@
             <artifactId>logback-classic</artifactId>
             <!--        <scope>runtime</scope>-->
         </dependency>
-<!--        <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>jsr311-api</artifactId>
-            <version>1.1.1</version>
-        </dependency>-->
+
     </dependencies>
 
 

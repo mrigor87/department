@@ -24,37 +24,45 @@ import java.util.List;
 @Service
 public class EmployeeServiceClient implements EmployeeService {
     private static final Logger LOG = LoggerFactory.getLogger(EmployeeServiceClient.class);
-    @Autowired
-    private String prefix;
+
 
     @Autowired
     private RestTemplate restTemplate;
 
 
+    private String prefixDepRestUrl;
+    private String prefixEmplRestUrl;
+
+    @Autowired
+    public EmployeeServiceClient(String prefix) {
+        prefixDepRestUrl = prefix + "/rest/departments/";
+        prefixEmplRestUrl = prefix + "/rest/employees/";
+    }
+
+
     @Override
     public Employee create(Employee employee) throws ResourceAccessException {
-            String currentREST = prefix + "/rest/employees/";
-            LOG.debug("create employee ({}) by url-{}", employee, currentREST);
-            Employee created = restTemplate.postForObject(currentREST, employee, Employee.class);
+            LOG.debug("create employee ({}) by url-{}", employee, prefixEmplRestUrl);
+            Employee created = restTemplate.postForObject(prefixEmplRestUrl, employee, Employee.class);
             return created;
     }
 
     @Override
     public void update(Employee employee) throws NotFoundException, ResourceAccessException {
-            LOG.debug("update employee ({}) by url-{}", employee, prefix + "/rest/employees/");
-            restTemplate.put(prefix + "/rest/employees/", employee);
+            LOG.debug("update employee ({}) by url-{}", employee, prefixEmplRestUrl);
+            restTemplate.put(prefixEmplRestUrl, employee);
     }
 
     @Override
     public void delete(int id) throws NotFoundException,ResourceAccessException {
-        String currentRest = prefix + "/rest/employees/" + id;
+        String currentRest = prefixEmplRestUrl + id;
         LOG.debug("delete employee, id={} by url-{}", id, currentRest);
         restTemplate.delete(currentRest);
     }
     @Override
     public Employee get(int id) throws NotFoundException,ResourceAccessException {
 
-            String currentRest = prefix + "/rest/employees/" + id;
+            String currentRest = prefixEmplRestUrl + id;
             LOG.debug("get employee, id={} by url-{}", id, currentRest);
             Employee employees = restTemplate.getForObject(currentRest, Employee.class);
             return employees;
@@ -63,9 +71,9 @@ public class EmployeeServiceClient implements EmployeeService {
     @Override
     public List<Employee> getAll() throws ResourceAccessException {
 
-            LOG.debug("get all employees by url-{}", prefix + "/rest/employees/");
+            LOG.debug("get all employees by url-{}", prefixEmplRestUrl);
             ResponseEntity<List<Employee>> emplResponse =
-                    restTemplate.exchange(prefix + "/rest/employees/",
+                    restTemplate.exchange(prefixEmplRestUrl,
                             HttpMethod.GET, null, new ParameterizedTypeReference<List<Employee>>() {
                             });
             List<Employee> employees = emplResponse.getBody();
@@ -75,7 +83,7 @@ public class EmployeeServiceClient implements EmployeeService {
     @Override
     public List<Employee> getByDep(int departmentId) throws NotFoundException,ResourceAccessException {
 
-            String currentRest = prefix + "/rest/departments/" + departmentId + "/employees";
+            String currentRest = prefixDepRestUrl + departmentId + "/employees";
             LOG.debug("get all employees from departmentId={} by url-{}", departmentId, currentRest);
             ResponseEntity<List<Employee>> emplResponse =
                     restTemplate.exchange(currentRest,
@@ -89,7 +97,7 @@ public class EmployeeServiceClient implements EmployeeService {
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public List<Employee> getFiltered(LocalDate from, LocalDate to, Integer departmentId) throws ResourceAccessException {
 
-            String currentRest = prefix + "/rest/employees/" + "filtered?" +
+            String currentRest = prefixEmplRestUrl + "filtered?" +
                     (from != null ? ("from=" + from) : "") +
                     (to != null ? ("&to=" + to) : "") +
                     (departmentId != null ? "&departmentid=" + departmentId : "");

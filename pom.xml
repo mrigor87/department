@@ -19,6 +19,7 @@
         <module>test-util</module>
         <module>server-soap</module>
 
+
     </modules>
     <name>Simple department management</name>
     <packaging>pom</packaging>

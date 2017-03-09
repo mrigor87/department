@@ -1,12 +1,12 @@
 == Paths
-=== update department
+=== create new department
 ----
-PUT /rest/departments
+POST /rest/departments
 ----
 
 ==== Description
 :hardbreaks:
-update department
+create new department
 
 ==== Parameters
 [options="header"]
@@ -19,10 +19,14 @@ update department
 [options="header"]
 |===
 |HTTP Code|Description|Schema
-|default|successful operation|No Content
+|200|successful operation|<<Department>>
 |===
 
 ==== Consumes
+
+* application/json
+
+==== Produces
 
 * application/json
 
@@ -54,14 +58,14 @@ get all departments
 
 * departments
 
-=== create new department
+=== update department
 ----
-POST /rest/departments
+PUT /rest/departments
 ----
 
 ==== Description
 :hardbreaks:
-create new department
+update department
 
 ==== Parameters
 [options="header"]
@@ -74,14 +78,10 @@ create new department
 [options="header"]
 |===
 |HTTP Code|Description|Schema
-|200|successful operation|<<Department>>
+|default|successful operation|No Content
 |===
 
 ==== Consumes
-
-* application/json
-
-==== Produces
 
 * application/json
 
@@ -204,30 +204,34 @@ get employee from department
 
 * departments
 
-=== update employee
+=== create employee
 ----
-PUT /rest/employees
+POST /rest/employees
 ----
 
 ==== Description
 :hardbreaks:
-update employee
+create employee
 
 ==== Parameters
 [options="header"]
 |===
 |Type|Name|Description|Required|Schema|Default
-|BodyParameter|body|new employee|false|<<Employee>>|
+|BodyParameter|body||false|<<Employee>>|
 |===
 
 ==== Responses
 [options="header"]
 |===
 |HTTP Code|Description|Schema
-|default|successful operation|No Content
+|200|successful operation|<<Employee>>
 |===
 
 ==== Consumes
+
+* application/json
+
+==== Produces
 
 * application/json
 
@@ -259,34 +263,30 @@ get all employees
 
 * employees
 
-=== create employee
+=== update employee
 ----
-POST /rest/employees
+PUT /rest/employees
 ----
 
 ==== Description
 :hardbreaks:
-create employee
+update employee
 
 ==== Parameters
 [options="header"]
 |===
 |Type|Name|Description|Required|Schema|Default
-|BodyParameter|body||false|<<Employee>>|
+|BodyParameter|body|new employee|false|<<Employee>>|
 |===
 
 ==== Responses
 [options="header"]
 |===
 |HTTP Code|Description|Schema
-|200|successful operation|<<Employee>>
+|default|successful operation|No Content
 |===
 
 ==== Consumes
-
-* application/json
-
-==== Produces
 
 * application/json
 

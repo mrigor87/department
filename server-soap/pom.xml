@@ -15,19 +15,6 @@
 
     <dependencies>
 
-        <!-- https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->
-        <!--        <dependency>
-                    <groupId>javax.ws.rs</groupId>
-                    <artifactId>javax.ws.rs-api</artifactId>
-                    <version>RELEASE</version>
-                </dependency>-->
-
-
-        <!--        <dependency>
-                    <groupId>org.apache.cxf</groupId>
-                    <artifactId>cxf-rt-transports-http-jetty</artifactId>
-                    <version>RELEASE</version>
-                </dependency>-->
 
         <!--soap service-->
         <dependency>

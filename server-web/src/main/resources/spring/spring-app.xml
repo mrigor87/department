@@ -40,7 +40,7 @@
 <!--
             <constructor-arg value="http://localhost:8080/server-soap-1.0-SNAPSHOT/"/>
 -->
-            <constructor-arg value="http://localhost:8081/"/>
+            <constructor-arg value="http://localhost:8081/department"/>
         </bean>
         <import resource="spring-cxf.xml"/>
     </beans>

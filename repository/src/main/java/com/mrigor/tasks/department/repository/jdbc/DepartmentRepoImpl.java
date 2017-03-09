@@ -23,6 +23,20 @@ import java.util.List;
  */
 @Repository
 public class DepartmentRepoImpl implements DepartmentRepo {
+    //***********************************  SQL EXPRESSIONS  *************************************************************
+    private static final String GET_DEPARTMENTS_WITH_AVG_SALARY_SQL =
+            "SELECT d.ID, d.NAME, AVG(e.SALARY) AS averagesalary " +
+                    "FROM EMPLOYEES e " +
+                    "RIGHT JOIN DEPARTMENTS d ON e.DEPARTMENT_ID = d.ID " +
+                    "GROUP BY d.ID " +
+                    "ORDER  BY d.NAME";
+
+    private static final String UPDATE_DEPARTMENT_SQL = "UPDATE DEPARTMENTS SET name=:name WHERE id=:id"; //named parameter
+    private static final String DELETE_DEPARTMENT_BY_ID_SQL = "DELETE FROM DEPARTMENTS WHERE id=?";
+    private static final String GET_DEPARTMENT_BY_ID_SQL = "SELECT * FROM DEPARTMENTS WHERE id=?";
+    private static final String GET_ALL_DEPARTMENTS_SQL = "SELECT * FROM DEPARTMENTS ORDER BY name";
+    //*******************************************************************************************************************
+
     private static final Logger LOG = LoggerFactory.getLogger(DepartmentRepoImpl.class);
     private static final BeanPropertyRowMapper<Department> ROW_MAPPER = BeanPropertyRowMapper.newInstance(Department.class);
 
@@ -50,12 +64,7 @@ public class DepartmentRepoImpl implements DepartmentRepo {
     @Override
     public List<DepartmentWithAverageSalary> getAllWithAvgSalary() {
         LOG.debug("get all departments with avg salary");
-        return jdbcTemplate.query("SELECT d.ID, d.NAME, AVG(e.SALARY) AS averagesalary " +
-                        "FROM EMPLOYEES e " +
-                        "RIGHT JOIN DEPARTMENTS d ON e.DEPARTMENT_ID = d.ID " +
-                        "GROUP BY d.ID " +
-                        "ORDER  BY d.NAME"
-                , ROW_MAPPER_TO);
+        return jdbcTemplate.query(GET_DEPARTMENTS_WITH_AVG_SALARY_SQL, ROW_MAPPER_TO);
 
     }
 
@@ -82,7 +91,7 @@ public class DepartmentRepoImpl implements DepartmentRepo {
             LOG.debug("update department {}", department);
             if (
                     namedParameterJdbcTemplate.update(
-                            "UPDATE DEPARTMENTS SET name=:name WHERE id=:id", map)
+                            UPDATE_DEPARTMENT_SQL, map)
                             == 0) return null;
         }
         return department;
@@ -91,20 +100,20 @@ public class DepartmentRepoImpl implements DepartmentRepo {
     @Override
     public boolean delete(int id) {
         LOG.debug("delete department, id={}", id);
-        return jdbcTemplate.update("DELETE FROM DEPARTMENTS WHERE id=?", id) != 0;
+        return jdbcTemplate.update(DELETE_DEPARTMENT_BY_ID_SQL, id) != 0;
     }
 
     @Override
     public Department get(int id) {
         LOG.debug("get department, id={}", id);
-        List<Department> departments = jdbcTemplate.query("SELECT * FROM DEPARTMENTS WHERE id=?", ROW_MAPPER, id);
+        List<Department> departments = jdbcTemplate.query(GET_DEPARTMENT_BY_ID_SQL, ROW_MAPPER, id);
         return DataAccessUtils.singleResult(departments);
     }
 
     @Override
     public List<Department> getAll() {
         LOG.debug("get all departments");
-        return jdbcTemplate.query("SELECT * FROM DEPARTMENTS ORDER BY name", ROW_MAPPER);
+        return jdbcTemplate.query(GET_ALL_DEPARTMENTS_SQL, ROW_MAPPER);
 
     }
 

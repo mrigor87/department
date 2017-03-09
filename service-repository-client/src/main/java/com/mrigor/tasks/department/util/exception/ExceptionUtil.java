@@ -2,7 +2,7 @@ package com.mrigor.tasks.department.util.exception;
 
 
 /**
- * util class that encapsulates methods for NotFountException handling
+ * util class encapsulates methods for NotFountException handling
  */
 public class ExceptionUtil {
     private ExceptionUtil() {

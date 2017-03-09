@@ -23,6 +23,17 @@ import java.util.List;
  */
 @Repository
 public class EmployeeRepoImpl implements EmployeeRepo {
+
+    //***********************************  SQL EXPRESSIONS  *************************************************************
+    private static final String UPDATE_EMPLOYEE_SQL = "UPDATE EMPLOYEES SET FULLNAME=:fullName, BIRTHDAY=:birthday, SALARY=:salary WHERE id=:id"; //named parameter
+    private static final String GET_ALL_EMPLOYEES_SQL = "SELECT * FROM EMPLOYEES ORDER BY FULLNAME";
+    private static final String DELETE_EMPLOYEES_BY_ID_SQL = "DELETE FROM EMPLOYEES WHERE id=?";
+    private static final String GET_EMPLOYEES_BY_ID_SQL = "SELECT * FROM EMPLOYEES WHERE id=?";
+    private static final String GET_EMPLOYEES_BY_DEPARTMENT_SQL = "SELECT * FROM EMPLOYEES WHERE EMPLOYEES.DEPARTMENT_ID=? ORDER BY FULLNAME ";
+    private static final String GET_ORDERED_FILTERED_EMPLOYEES_WITH_DEP_SQL = "SELECT * FROM EMPLOYEES  WHERE ((BIRTHDAY BETWEEN  ? AND ?) AND department_id=?)";
+    private static final String GET_ORDERED_FILTERED_EMPLOYEES_WITHOUT_DEP_SQL = "SELECT * FROM EMPLOYEES WHERE (BIRTHDAY BETWEEN  ? AND ?)  ORDER BY FULLNAME ";
+    //*******************************************************************************************************************
+
     private static final Logger LOG = LoggerFactory.getLogger(EmployeeRepoImpl.class);
     private static final BeanPropertyRowMapper<Employee> ROW_MAPPER = BeanPropertyRowMapper.newInstance(Employee.class);
 
@@ -50,23 +61,16 @@ public class EmployeeRepoImpl implements EmployeeRepo {
                 .addValue("id", employee.getId())
                 .addValue("fullName", employee.getFullName())
                 .addValue(("birthday"), Date.valueOf(employee.getBirthDay()))
-/*                .addValue(("birthday"),employee.getBirthDay())
-                .addValue(new Date.valueOf(employee.getBirthDay()))*/
                 .addValue("departmentId", employee.getDepartmentId())
                 .addValue(("salary"), employee.getSalary());
 
         if (employee.isNew()) {
-            LOG.debug("create new employee {}",employee);
+            LOG.debug("create new employee {}", employee);
             Number newKey = insertEmployee.executeAndReturnKey(map);
             employee.setId(newKey.intValue());
         } else {
-            LOG.debug("uodate employee {}",employee);
-            if (
-                    namedParameterJdbcTemplate.update(
-                            "UPDATE EMPLOYEES " +
-                                    "SET FULLNAME=:fullName, BIRTHDAY=:birthday, SALARY=:salary " +
-                                    "WHERE id=:id", map)
-                            == 0) return null;
+            LOG.debug("uodate employee {}", employee);
+            if (namedParameterJdbcTemplate.update(UPDATE_EMPLOYEE_SQL, map) == 0) return null;
         }
         return employee;
 
@@ -74,42 +78,38 @@ public class EmployeeRepoImpl implements EmployeeRepo {
 
     @Override
     public boolean delete(int id) {
-        LOG.debug("delete  employee, id={}",id);
-        return jdbcTemplate.update("DELETE FROM EMPLOYEES WHERE id=?", id) != 0;
+        LOG.debug("delete  employee, id={}", id);
+        return jdbcTemplate.update(DELETE_EMPLOYEES_BY_ID_SQL, id) != 0;
     }
 
     @Override
     public Employee get(int id) {
-        LOG.debug("get  employee, id={}",id);
-        List<Employee> employees = jdbcTemplate.query("SELECT * FROM EMPLOYEES WHERE id=?", ROW_MAPPER, id);
+        LOG.debug("get  employee, id={}", id);
+        List<Employee> employees = jdbcTemplate.query(GET_EMPLOYEES_BY_ID_SQL, ROW_MAPPER, id);
         return DataAccessUtils.singleResult(employees);
     }
 
     @Override
     public List<Employee> getAll() {
         LOG.debug("get all  employee");
-        return jdbcTemplate.query("SELECT * FROM EMPLOYEES ORDER BY FULLNAME", ROW_MAPPER);
+        return jdbcTemplate.query(GET_ALL_EMPLOYEES_SQL, ROW_MAPPER);
     }
 
     @Override
     public List<Employee> getByDep(int departmentIid) {
-        LOG.debug("get all  employee from departmentId={}",departmentIid);
-        return jdbcTemplate.query("SELECT * FROM EMPLOYEES WHERE EMPLOYEES.DEPARTMENT_ID=? ORDER BY FULLNAME ", ROW_MAPPER, departmentIid);
+        LOG.debug("get all  employee from departmentId={}", departmentIid);
+        return jdbcTemplate.query(GET_EMPLOYEES_BY_DEPARTMENT_SQL, ROW_MAPPER, departmentIid);
     }
 
     @Override
     public List<Employee> getFiltered(LocalDate from, LocalDate to, Integer departmentId) {
-        LOG.debug("get filteted employee, departmentId={}, from={}, to={}",departmentId,from,to);
+        LOG.debug("get filteted employee, departmentId={}, from={}, to={}", departmentId, from, to);
         Date fromDate = Date.valueOf(from == null ? LocalDate.of(1800, 1, 1) : from);
         Date toDate = Date.valueOf(to == null ? LocalDate.of(3000, 1, 1) : to);
         if (departmentId != null) {
-            return jdbcTemplate.query("SELECT * FROM EMPLOYEES  " +
-                    "WHERE ((BIRTHDAY BETWEEN  ? AND ?)" +
-                    "AND department_id=?)  " +
-                    "ORDER BY FULLNAME ", ROW_MAPPER, fromDate, toDate, departmentId);
+            return jdbcTemplate.query(GET_ORDERED_FILTERED_EMPLOYEES_WITH_DEP_SQL, ROW_MAPPER, fromDate, toDate, departmentId);
         } else {
-            return jdbcTemplate.query("SELECT * FROM EMPLOYEES  " +
-                    "WHERE (BIRTHDAY BETWEEN  ? AND ?)  ORDER BY FULLNAME ", ROW_MAPPER, fromDate, toDate);
+            return jdbcTemplate.query(GET_ORDERED_FILTERED_EMPLOYEES_WITHOUT_DEP_SQL, ROW_MAPPER, fromDate, toDate);
         }
     }
 }

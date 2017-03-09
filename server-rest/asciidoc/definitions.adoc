@@ -22,7 +22,7 @@
 |Name|Description|Required|Schema|Default
 |id||false|integer (int32)|
 |fullName||false|string|
-|birthDay||false|string|
+|birthDay||false|string (date)|
 |salary||false|integer (int32)|
 |departmentId||false|integer (int32)|
 |===

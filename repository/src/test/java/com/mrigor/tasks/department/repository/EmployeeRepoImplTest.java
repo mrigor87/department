@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.Arrays;
 
 import static java.time.LocalDate.of;
-
+import static com.mrigor.tasks.department.DepTestData.DEP2_ID;
 
 /**
  * Created by Igor on 10.12.2016.
@@ -89,5 +89,9 @@ public class EmployeeRepoImplTest {
         EmployeeTestData.MATCHER.assertCollectionEquals(Arrays.asList(EmployeeTestData.EMPL5, EmployeeTestData.EMPL4), repository.getFiltered(of(1993,1,1),null,null));
     }
 
+    @Test
+    public void getBetweenDates2() throws Exception {
+        EmployeeTestData.MATCHER.assertCollectionEquals(Arrays.asList(EmployeeTestData.EMPL5), repository.getFiltered(of(1993,6,1),null,DEP2_ID));
+    }
 
 }
