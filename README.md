@@ -46,3 +46,6 @@ Some examples of offline documentation are generated in the following paths:
  - `//server-rest/docs/html/index.html`
  - `//server-rest/docs/pdf/index.pdf`
  -  [`//server-res/asciidoc/index.adoc`](https://github.com/mrigor87/department/tree/master/server-rest/asciidoc/index.adoc)
+
+
+
