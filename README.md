@@ -4,7 +4,6 @@
  This is Maven multi-module project on Java 8, which contains two main parts. The first part is RESTful service (in-memory HSQLDB, Spring JDBC, Spring MVC). The second one is web-application which uses this REST API and provides UI (Spring RestTemplate, Spring MVC, Bootstrap, jQuery)
 
 REST API:
- [auto-generated documentation](https://github.com/mrigor87/department/tree/master/server-rest/asciidoc/index.adoc)
 
 URL	| Method	| Description
 --- | ------- | ---------------
@@ -46,7 +45,7 @@ or `http://localhost:8080/server-rest-1.0-SNAPSHOT`
 Some examples of offline documentation are generated in the following paths:
  - `//server-rest/docs/html/index.html`
  - `//server-rest/docs/pdf/index.pdf`
- - `//server-res/asciidoc/index.adoc`
+ -  [`//server-res/asciidoc/index.adoc`](https://github.com/mrigor87/department/tree/master/server-rest/asciidoc/index.adoc)
 
 
 
