@@ -24,15 +24,25 @@ rest/employees/filtered/|GET|get all employees by filter with parameters:"from" 
 
 ##Instruction
 1.	Go to the root directory and run the command `mvn clean install`
-2.	Copy war files `/server-Rest/target/server-Rest-1.0-SNAPSHOT.war` and `/server-Web/target/server-web-1.0-SNAPSHOT.war` to the `webapps` directory of Tomcat server.
+2.	Copy war files `/server-rest/target/server-rest-1.0-SNAPSHOT.war` and `/server-web/target/server-web-1.0-SNAPSHOT.war` to the `webapps` directory of Tomcat server.
 
-   **Note:** Web-application uses default prefix url for REST `http://localhost:8080/server-Rest-1.0-SNAPSHOT`, which can be changed with spring-app.xml
+   **Note:** Web-application uses default prefix url for REST `http://localhost:8080/server-rest-1.0-SNAPSHOT`, which can be changed with spring-app.xml
 3.	If you will use default setting of Tomcat that 
 you can see result at the following url:
 
-  - `http://localhost:8080/server-Rest-1.0-SNAPSHOT/rest/departments` (RESTful service)
-  - `http://localhost:8080/server-Web-1.0-SNAPSHOT` (web-application)
+  - `http://localhost:8080/server-rest-1.0-SNAPSHOT/rest/departments` (RESTful service)
+  - `http://localhost:8080/server-web-1.0-SNAPSHOT` (web-application)
 
 UPDATE: branch "newHandlingAvgSalary" for handling null-value in RESTful service
 
-UPDATE: SOAP web-service. To use this service you should `mvn clean install –P soap` and deploy `server-Soap-1.0-SNAPSHOT.war`
+UPDATE: SOAP web-service. To use this service you should `mvn clean install –P soap` and deploy `server-soap-1.0-SNAPSHOT.war`
+         Or `mvn clean install –P rest` for RESTful service
+
+UPDATE: Add Swagger-UI.
+By default settings online documentation is available on: 
+ `http://localhost:8080/server-rest-1.0-SNAPSHOT//swagger-ui.html`
+or `http://localhost:8080/server-rest-1.0-SNAPSHOT`
+Some examples of offline documentation are generated in the following paths:
+ - `//server-rest/docs/html/index.html`
+ - `//server-rest/docs/pdf/index.pdf`
+ -  [`//server-res/asciidoc/index.adoc`](https://github.com/mrigor87/department/tree/master/server-rest/asciidoc/index.adoc)

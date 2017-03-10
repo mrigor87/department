@@ -16,7 +16,7 @@
     <build>
         <plugins>
 
-            <!--  plugins for auto generating documentation  //webapp/docs          -->
+            <!--  plugins for auto generating documentation            -->
             <plugin>
                 <groupId>com.github.kongchen</groupId>
                 <artifactId>swagger-maven-plugin</artifactId>
