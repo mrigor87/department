@@ -13,22 +13,17 @@
 
     <properties>
         <camel.version>2.18.3</camel.version>
+        <logback-version>1.1.2</logback-version>
     </properties>
 
 
     <dependencies>
-        <!--JSON-->
+        <!-- use for json binding -->
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.8.4</version>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jackson</artifactId>
+            <version>${camel.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jsr310</artifactId>
-            <version>2.8.4</version>
-        </dependency>
-
 
 
         <dependency>
@@ -71,21 +66,26 @@
 
 
 
-        <!-- Logging with SLF4J & LogBack -->
+        <!-- logging -->
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <!--        <scope>compile</scope>-->
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            <!--        <scope>runtime</scope>-->
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.5</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <!--        <scope>runtime</scope>-->
+            <version>${logback-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logback-version}</version>
         </dependency>
 
         <!--DataBase-->

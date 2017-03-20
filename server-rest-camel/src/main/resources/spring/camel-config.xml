@@ -5,7 +5,7 @@
          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
          http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-    <import resource="spring-db.xml"/>
+<!--    <import resource="spring-db.xml"/>-->
 
     <!-- use camel-metrics route policy to gather metrics for all routes -->
     <bean id="metricsRoutePolicyFactory" class="org.apache.camel.component.metrics.routepolicy.MetricsRoutePolicyFactory"/>

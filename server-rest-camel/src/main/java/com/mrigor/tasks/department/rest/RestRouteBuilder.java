@@ -17,13 +17,18 @@
 package com.mrigor.tasks.department.rest;
 
 import com.mrigor.tasks.department.model.Department;
+import com.mrigor.tasks.department.service.DepartmentService;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.rest.RestBindingMode;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Define REST services using the Camel REST DSL
  */
 public class RestRouteBuilder extends RouteBuilder {
+
+    @Autowired
+    private DepartmentService departmentService;
 
     @Override
     public void configure() throws Exception {
@@ -44,7 +49,7 @@ public class RestRouteBuilder extends RouteBuilder {
         ;
 
         // this provider REST service is json only
-        rest("/rest/departments").description("Department rest service")
+        rest("/departments").description("Department rest service")
             .consumes("application/json").produces("application/json")
 
 /*            .get("/{id}").description("Get department by id").outType(Department.class)
@@ -54,7 +59,9 @@ public class RestRouteBuilder extends RouteBuilder {
                 .to("bean:providerService?method=updateProvider")*/
 
             .get().description("List all departments").outTypeList(Department.class)
-                .to("bean:departmentService2?method=getAll2");
+
+                .to("bean:departmentService?method=getAll");
+        from("direct://start").bean(myservice, "process");
                 
 /*        	.get("/search").description("Search by Zip").outTypeList(Provider.class)
         		.route().log("Incoming zip: ${header.zip}")

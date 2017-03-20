@@ -8,6 +8,7 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
+            classpath:spring/spring-db.xml
             classpath:spring/camel-config.xml
             classpath:spring/spring-app.xml
         </param-value>
@@ -28,7 +29,7 @@
     <!-- Camel servlet mapping -->
     <servlet-mapping>
         <servlet-name>CamelServlet</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/rest/*</url-pattern>
         <!--
                 <url-pattern>/camel/*</url-pattern>
         -->
