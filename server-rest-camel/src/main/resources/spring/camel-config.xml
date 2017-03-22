@@ -11,9 +11,9 @@
     <bean id="metricsRoutePolicyFactory" class="org.apache.camel.component.metrics.routepolicy.MetricsRoutePolicyFactory"/>
 
     <!-- a rest service which uses binding to/from pojos -->
-    <bean id="restRoutes" class="com.mrigor.tasks.department.rest.RestRouteBuilder"/>
+    <bean id="departmentRestRoutes" class="com.mrigor.tasks.department.rest.DepartmentRouteConfig"/>
     <camelContext xmlns="http://camel.apache.org/schema/spring">
-        <routeBuilder ref="restRoutes"/>
+        <routeBuilder ref="departmentRestRoutes"/>
 
 
 <!--        <route id="helloRoute">

@@ -100,7 +100,7 @@ public class DepartmentController {
     }
 
     /**
-     * get all employees with information about average salary
+     * get all department with information about average salary
      *
      * @return list or empty if not found
      */

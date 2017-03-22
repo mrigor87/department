@@ -18,6 +18,33 @@
 
 
     <dependencies>
+
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-swagger</artifactId>
+            <version>${camel.version}</version>
+            <!-- use the same version as your Camel core version -->
+        </dependency>
+
+
+
+        <!-- https://mvnrepository.com/artifact/org.apache.camel/camel-spring -->
+
+        <!-- https://mvnrepository.com/artifact/org.apache.camel/camel-test-spring -->
+        <!-- https://mvnrepository.com/artifact/org.apache.camel/camel-test-spring -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test-spring</artifactId>
+            <version>2.18.3</version>
+        </dependency>
+
+
+
+
+
+
+
         <!-- use for json binding -->
         <dependency>
             <groupId>org.apache.camel</groupId>
@@ -25,15 +52,34 @@
             <version>${camel.version}</version>
         </dependency>
 
-
         <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>model</artifactId>
+        </dependency>
+
+<!--        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>service-repository-client</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>repository</artifactId>
+        </dependency>-->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>test-util</artifactId>
         </dependency>
+<!--        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>-->
 
 
         <!-- camel -->
@@ -57,6 +103,16 @@
             <artifactId>camel-metrics</artifactId>
             <version>${camel.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jdbc</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-sql</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
 
         <!-- we need spring web -->
         <dependency>
@@ -66,8 +122,27 @@
 
 
 
-        <!-- logging -->
+
+        <!-- Logging with SLF4J & LogBack -->
         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <!--        <scope>compile</scope>-->
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <!--        <scope>runtime</scope>-->
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <!--        <scope>runtime</scope>-->
+        </dependency>
+
+
+        <!-- logging -->
+<!--        <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
@@ -86,7 +161,7 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
             <version>${logback-version}</version>
-        </dependency>
+        </dependency>-->
 
         <!--DataBase-->
         <dependency>
@@ -95,10 +170,10 @@
         </dependency>
 
         <!--for populate DataBase-->
-        <dependency>
+<!--        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
-        </dependency>
+        </dependency>-->
 
     </dependencies>
 </project>

@@ -17,7 +17,7 @@
 package com.mrigor.tasks.department.rest;
 
 import com.mrigor.tasks.department.model.Department;
-import com.mrigor.tasks.department.service.DepartmentService;
+
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.rest.RestBindingMode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class RestRouteBuilder extends RouteBuilder {
 
-    @Autowired
-    private DepartmentService departmentService;
+
 
     @Override
     public void configure() throws Exception {
@@ -49,19 +48,23 @@ public class RestRouteBuilder extends RouteBuilder {
         ;
 
         // this provider REST service is json only
-        rest("/departments").description("Department rest service")
+        rest("/rest/departments").description("Department rest service")
             .consumes("application/json").produces("application/json")
 
-/*            .get("/{id}").description("Get department by id").outType(Department.class)
-                .to("bean:departmentService?method=getProvider(${header.id})")*/
+            .get("/{id}").description("Get department by id").outType(Department.class)
 
+                .to("bean:departmentService?method=get(${header.id})")
+
+            .put().description("Updates a department").type(Department.class)
+                .to("bean:departmentService?method=update")
 /*            .put().description("Updates or create a provider").type(Provider.class)
                 .to("bean:providerService?method=updateProvider")*/
 
             .get().description("List all departments").outTypeList(Department.class)
 
-                .to("bean:departmentService?method=getAll");
-        from("direct://start").bean(myservice, "process");
+                .to("bean:departmentService?method=getAll")
+        ;
+
                 
 /*        	.get("/search").description("Search by Zip").outTypeList(Provider.class)
         		.route().log("Incoming zip: ${header.zip}")

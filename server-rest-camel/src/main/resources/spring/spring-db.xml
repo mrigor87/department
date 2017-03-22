@@ -18,13 +18,21 @@
         <property name="username" value="${database.username}"/>
         <property name="password" value="${database.password}"/>
     </bean>
-    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+
+    <!-- configure the Camel SQL component to use the JDBC data source -->
+    <bean id="sql" class="org.apache.camel.component.sql.SqlComponent">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+<!--    <jdbc:embedded-database id="dataSource" type="HSQL">
+        <jdbc:script location="classpath:db/init_and_populate.sql"/>
+    </jdbc:embedded-database>-->
+<!--    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <constructor-arg ref="dataSource"/>
     </bean>
 
     <bean id="namedJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
         <constructor-arg ref="dataSource"/>
-    </bean>
+    </bean>-->
 
 
 </beans>

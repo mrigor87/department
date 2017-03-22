@@ -10,7 +10,7 @@
         <param-value>
             classpath:spring/spring-db.xml
             classpath:spring/camel-config.xml
-            classpath:spring/spring-app.xml
+<!--            classpath:spring/spring-app.xml-->
         </param-value>
     </context-param>
 
@@ -19,20 +19,75 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
-    <!-- Camel servlet -->
+
     <servlet>
         <servlet-name>CamelServlet</servlet-name>
         <servlet-class>org.apache.camel.component.servlet.CamelHttpTransportServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-    <!-- Camel servlet mapping -->
     <servlet-mapping>
         <servlet-name>CamelServlet</servlet-name>
-        <url-pattern>/rest/*</url-pattern>
-        <!--
-                <url-pattern>/camel/*</url-pattern>
-        -->
+                <url-pattern>/*</url-pattern>
     </servlet-mapping>
+
+
+
+
+
+
+
+
+
+<!--
+    &lt;!&ndash; to setup Camel Swagger api servlet when using Spring &ndash;&gt;
+    <servlet>
+
+
+
+        &lt;!&ndash; Camel 2.15 onwards &ndash;&gt;
+        <servlet-name>ApiDeclarationServlet</servlet-name>
+        <servlet-class>org.apache.camel.component.swagger.DefaultCamelSwaggerServlet</servlet-class>
+
+
+
+        &lt;!&ndash; Camel 2.15 onwards &ndash;&gt;
+        <init-param>
+            &lt;!&ndash; we specify the base.path using relative notation, that means the actual path will be calculated at runtime as
+                 http://server:port/contextpath/rest &ndash;&gt;
+            <param-name>base.path</param-name>
+            <param-value>rest</param-value>
+        </init-param>
+        <init-param>
+            &lt;!&ndash; we specify the api.path using relative notation, that means the actual path will be calculated at runtime as
+                 http://server:port/contextpath/api-docs &ndash;&gt;
+            <param-name>api.path</param-name>
+            <param-value>api-docs</param-value>
+        </init-param>
+
+
+        <init-param>
+            <param-name>api.version</param-name>
+            <param-value>1.2.3</param-value>
+        </init-param>
+        <init-param>
+            <param-name>api.title</param-name>
+            <param-value>User Services</param-value>
+        </init-param>
+        <init-param>
+            <param-name>api.description</param-name>
+            <param-value>Camel Rest Example with Swagger that provides an User REST service</param-value>
+        </init-param>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+
+    &lt;!&ndash; swagger api declaration &ndash;&gt;
+    <servlet-mapping>
+        <servlet-name>ApiDeclarationServlet</servlet-name>
+        <url-pattern>/api-docs/*</url-pattern>
+    </servlet-mapping>-->
+
+
+
 
 </web-app>
