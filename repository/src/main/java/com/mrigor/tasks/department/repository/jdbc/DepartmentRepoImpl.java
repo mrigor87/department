@@ -31,7 +31,8 @@ public class DepartmentRepoImpl implements DepartmentRepo {
                     "GROUP BY d.ID " +
                     "ORDER  BY d.NAME";
 
-    private static final String UPDATE_DEPARTMENT_SQL = "UPDATE DEPARTMENTS SET name=:name WHERE id=:id"; //named parameter
+//    private static final String UPDATE_DEPARTMENT_SQL = "UPDATE DEPARTMENTS SET name=:name WHERE id=:id"; //named parameter
+    private static final String UPDATE_DEPARTMENT_SQL = "UPDATE DEPARTMENTS SET name='blabla' WHERE id=100000"; //named parameter
     private static final String DELETE_DEPARTMENT_BY_ID_SQL = "DELETE FROM DEPARTMENTS WHERE id=?";
     private static final String GET_DEPARTMENT_BY_ID_SQL = "SELECT * FROM DEPARTMENTS WHERE id=?";
     private static final String GET_ALL_DEPARTMENTS_SQL = "SELECT * FROM DEPARTMENTS ORDER BY name";
