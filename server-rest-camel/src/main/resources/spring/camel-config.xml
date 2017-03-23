@@ -14,54 +14,12 @@
 
     <!-- a rest service which uses binding to/from pojos -->
     <bean id="departmentRestRoutes" class="com.mrigor.tasks.department.rest.DepartmentRouteConfig"/>
+    <bean id="employeeRestRoutes" class="com.mrigor.tasks.department.rest.EmployeeRouteConfig"/>
     <camelContext xmlns="http://camel.apache.org/schema/spring">
         <routeBuilder ref="departmentRestRoutes"/>
+        <routeBuilder ref="employeeRestRoutes"/>
 
 
-<!--        <route id="helloRoute">
-            &lt;!&ndash; incoming requests from the servlet is routed &ndash;&gt;
-            <from uri="servlet:hello"/>
-            <choice>
-                <when>
-                    &lt;!&ndash; is there a header with the key name? &ndash;&gt;
-                    <header>name</header>
-                    &lt;!&ndash; yes so return back a message to the user &ndash;&gt;
-                    <transform>
-                        <simple>Hi I am ${sysenv.HOSTNAME}. Hello ${header.name} how are you today?</simple>
-                    </transform>
-                </when>
-                <otherwise>
-                    &lt;!&ndash; if no name parameter then output a syntax to the user &ndash;&gt;
-                    <transform>
-                        <constant>Add a name parameter to uri, eg ?name=foo</constant>
-                    </transform>
-                </otherwise>
-            </choice>
-        </route>-->
-
-<!--          <rest path="/say">
-            <get uri="/hello">
-              <to uri="direct:hello"/>
-            </get>
-            <get uri="/bye" consumes="application/json">
-              <to uri="direct:bye"/>
-            </get>
-            <post uri="/bye">
-              <to uri="mock:update"/>
-            </post>
-          </rest>
-          <route>
-            <from uri="direct:hello"/>
-            <transform>
-              <constant>Hello World</constant>
-            </transform>
-          </route>
-          <route>
-            <from uri="direct:bye"/>
-            <transform>
-              <constant>Bye World</constant>
-            </transform>
-          </route>-->
 
     </camelContext>
 
