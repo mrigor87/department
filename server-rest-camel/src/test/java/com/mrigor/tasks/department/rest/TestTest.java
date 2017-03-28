@@ -16,6 +16,6 @@ public class TestTest extends CamelTestSupport {
     @Test
     public  void test() throws Exception{
         //template = context.createProducerTemplate();
-        template.send("direct://getDepartment",);
+        //template.send("direct://getDepartment",);
     }
 }

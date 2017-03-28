@@ -9,6 +9,7 @@ import org.apache.camel.test.spring.CamelTestContextBootstrapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.BootstrapWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -25,7 +26,7 @@ import static org.junit.Assert.*;
                 "classpath:spring/camel-config.xml",
                 "classpath:spring/spring-db.xml"
                 })
-public class DepartmentRouteConfigTest {
+public class DepartmentRouteConfigTest extends CamelSpringTestSupport{
 
 
 
@@ -72,6 +73,10 @@ camelContext.getRoute("direct://getAllDepartments").getProperties();
        // MockEndpoint.assertIsSatisfied(camelContext);
     }
 
+    @Override
+    protected AbstractApplicationContext createApplicationContext() {
+        return null;
+    }
 }
 
 

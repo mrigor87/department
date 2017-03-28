@@ -18,7 +18,7 @@ public class DepTestData {
     public static final int DEP2_ID = 100001;
     public static final Department DEP1= new Department(DEP1_ID,"Marketing");
     public static final Department DEP2= new Department(DEP2_ID,"Production");
-    public static final List<Department> MEALS = Arrays.asList(DEP1, DEP2);
+    public static final List<Department> DEPS = Arrays.asList(DEP1, DEP2);
     public static final List<DepartmentWithAverageSalary> DEP_WITH_AVG_SALARY=Arrays.asList(
             new DepartmentWithAverageSalary(100000,"Marketing",286),
             new DepartmentWithAverageSalary(100001,"Production",275)
