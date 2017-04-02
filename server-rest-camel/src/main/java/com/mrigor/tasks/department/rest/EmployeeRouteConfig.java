@@ -22,7 +22,7 @@ public class EmployeeRouteConfig extends RouteBuilder {
     private static final String DELETE_EMPLOYEES_BY_ID_SQL = "DELETE FROM EMPLOYEES WHERE id=:#id";
     private static final String GET_EMPLOYEES_BY_ID_SQL = "SELECT * FROM EMPLOYEES WHERE id=:#id";
     private static final String GET_ORDERED_FILTERED_EMPLOYEES_WITH_DEP_SQL = "SELECT * FROM EMPLOYEES  " +
-            " WHERE (BIRTHDAY BETWEEN  :#from AND :#to) AND department_id=:#departmentid";
+            " WHERE (BIRTHDAY BETWEEN  :#from AND :#to) AND department_id=:#departmentid   ORDER BY FULLNAME";
      private static final String GET_ORDERED_FILTERED_EMPLOYEES_WITHOUT_DEP_SQL = "SELECT * FROM EMPLOYEES " +
              "WHERE (BIRTHDAY BETWEEN  :#from AND :#to)  ORDER BY FULLNAME ";
 
@@ -60,6 +60,7 @@ public class EmployeeRouteConfig extends RouteBuilder {
                 .process(new Processor() {
                     @Override
                     public void process(Exchange exchange) throws Exception {
+                        String departmentId = exchange.getIn().getHeader("departmentId", String.class);
                         String from = exchange.getIn().getHeader("from", String.class);
                         String to = exchange.getIn().getHeader("to", String.class);
                         //String dep = exchange.getIn().getHeader("departmentid", String.class);

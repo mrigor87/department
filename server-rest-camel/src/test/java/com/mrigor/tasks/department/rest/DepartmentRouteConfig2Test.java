@@ -10,6 +10,7 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.component.servlet.ServletEndpoint;
 import org.apache.camel.spi.BrowsableEndpoint;
 
+import org.apache.camel.test.spring.CamelSpringJUnit4ClassRunner;
 import org.apache.camel.test.spring.CamelSpringTestSupport;
 import org.apache.camel.test.spring.CamelTestContextBootstrapper;
 import org.junit.Test;
@@ -20,6 +21,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.BootstrapWith;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import scala.util.parsing.combinator.testing.Str;
 
 import java.util.*;
@@ -31,11 +35,14 @@ import static com.mrigor.tasks.department.DepTestData.*;
  */
 /*@RunWith(CamelSpringRunner.class)
 @BootstrapWith(CamelTestContextBootstrapper.class)*/
-/*@ContextConfiguration({
+@ContextConfiguration({
 
                 "classpath:spring/camel-config.xml",
                 "classpath:spring/spring-db.xml"
-                })*/
+                })
+//@BootstrapWith(CamelTestContextBootstrapper.class)
+@RunWith(CamelSpringJUnit4ClassRunner.class)
+@Sql(scripts = "classpath:db/populateDB.sql")
 public class DepartmentRouteConfig2Test extends CamelSpringTestSupport {
 
 
@@ -43,15 +50,16 @@ public class DepartmentRouteConfig2Test extends CamelSpringTestSupport {
 
 
     @Test
-    @DirtiesContext
+   // @DirtiesContext
     public void testGetAll() throws Exception {
+
         assertTrue(checkRestUrl("/rest/departments", "GET"));
         List<Department> list = (List<Department>) template.requestBody("direct:getAllDepartments", "");
         assertEquals(list.toString(), DEPS.toString());
     }
 
     @Test
-    @DirtiesContext
+   // @DirtiesContext
     public void testGetAllWithSalary() throws Exception {
 
         assertTrue(checkRestUrl("/rest/departments/withAvgSalary", "GET"));
@@ -61,7 +69,7 @@ public class DepartmentRouteConfig2Test extends CamelSpringTestSupport {
 
 
     @Test
-    @DirtiesContext
+  //  @DirtiesContext
     public void testById() throws Exception {
         assertTrue(checkRestUrl("/rest/departments/{id}", "GET"));
         Department dep = template.requestBodyAndHeader("direct:getDepartment", "", "id", 100000, Department.class);
@@ -70,7 +78,7 @@ public class DepartmentRouteConfig2Test extends CamelSpringTestSupport {
     }
 
     @Test()
-    @DirtiesContext
+  //  @DirtiesContext
     public void testByIdNotFound() throws Exception {
         String error = template.requestBodyAndHeader("direct:getDepartment", "", "id", 10000, String.class);
         assertEquals(error, "Not found entity id=10000");
@@ -78,7 +86,7 @@ public class DepartmentRouteConfig2Test extends CamelSpringTestSupport {
     }
 
     @Test
-    @DirtiesContext
+   // @DirtiesContext
     public void testDelete() throws Exception {
         assertTrue(checkRestUrl("/rest/departments/{id}", "DELETE"));
         template.requestBodyAndHeader("direct:deleteDepartment", "", "id", 100000, Department.class);
@@ -87,15 +95,19 @@ public class DepartmentRouteConfig2Test extends CamelSpringTestSupport {
     }
 
     @Test
-    @DirtiesContext
+  //  @DirtiesContext
     public void testUpdate() throws Exception {
         assertTrue(checkRestUrl("/rest/departments", "PUT"));
 
         Processor p = new Processor() {
             @Override
             public void process(Exchange exchange) throws Exception {
-                exchange.getIn().setHeader("id", getUpdated().getId());
-                exchange.getIn().setHeader("name", getUpdated().getName());
+                Map<String,Object> m=new HashMap<>();
+                m.put("id", getUpdated().getId());
+                m.put("name", getUpdated().getName());
+                exchange.getIn().setHeaders(m);
+             //   exchange.getIn().setHeader("id", getUpdated().getId());
+             //   exchange.getIn().setHeader("name", getUpdated().getName());
             }
         };
         template.send("direct:updateDepartment", p);
@@ -106,7 +118,7 @@ public class DepartmentRouteConfig2Test extends CamelSpringTestSupport {
 
 
     @Test
-    @DirtiesContext
+   // @DirtiesContext
     public void testCreate() throws Exception {
         assertTrue(checkRestUrl("/rest/departments", "POST"));
         Department expected = getCreated();
