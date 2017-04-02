@@ -2,12 +2,14 @@ package com.mrigor.tasks.department.rest;
 
 import com.mrigor.tasks.department.model.Department;
 import com.mrigor.tasks.department.to.DepartmentWithAverageSalary;
+import com.mrigor.tasks.department.util.exception.NotFoundException;
 import org.apache.camel.*;
 import org.apache.camel.builder.NotifyBuilder;
+import org.apache.camel.builder.ValueBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.component.servlet.ServletEndpoint;
 import org.apache.camel.spi.BrowsableEndpoint;
-import org.apache.camel.test.spring.CamelSpringRunner;
+
 import org.apache.camel.test.spring.CamelSpringTestSupport;
 import org.apache.camel.test.spring.CamelTestContextBootstrapper;
 import org.junit.Test;
@@ -18,20 +20,18 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.BootstrapWith;
 import org.springframework.test.context.ContextConfiguration;
+import scala.util.parsing.combinator.testing.Str;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
-import static com.mrigor.tasks.department.DepTestData.DEPS;
+import static com.mrigor.tasks.department.DepTestData.*;
 
 /**
  * Created by Igor on 24.03.2017.
  */
 /*@RunWith(CamelSpringRunner.class)
-@BootstrapWith(CamelTestContextBootstrapper.class)
-@ContextConfiguration({
+@BootstrapWith(CamelTestContextBootstrapper.class)*/
+/*@ContextConfiguration({
 
                 "classpath:spring/camel-config.xml",
                 "classpath:spring/spring-db.xml"
@@ -39,16 +39,13 @@ import static com.mrigor.tasks.department.DepTestData.DEPS;
 public class DepartmentRouteConfig2Test extends CamelSpringTestSupport {
 
 
-    @Override
-    public String isMockEndpoints() {
-        return "rest*";
-    }
+
 
 
     @Test
     @DirtiesContext
-    public void testGetAll1() throws Exception {
-        assertNotNull(context.getEndpoint("servlet:/rest/departments?httpMethodRestrict=GET"));
+    public void testGetAll() throws Exception {
+        assertTrue(checkRestUrl("/rest/departments", "GET"));
         List<Department> list = (List<Department>) template.requestBody("direct:getAllDepartments", "");
         assertEquals(list.toString(), DEPS.toString());
     }
@@ -56,7 +53,8 @@ public class DepartmentRouteConfig2Test extends CamelSpringTestSupport {
     @Test
     @DirtiesContext
     public void testGetAllWithSalary() throws Exception {
-        assertNotNull(context.getEndpoint("servlet:/rest/departments?httpMethodRestrict=GET"));
+
+        assertTrue(checkRestUrl("/rest/departments/withAvgSalary", "GET"));
         List<DepartmentWithAverageSalary> list = (List<DepartmentWithAverageSalary>) template.requestBody("direct:getAllDepartments", "");
         assertEquals(list.toString(), DEPS.toString());
     }
@@ -64,79 +62,69 @@ public class DepartmentRouteConfig2Test extends CamelSpringTestSupport {
 
     @Test
     @DirtiesContext
-    public void testMocks() throws Exception {
+    public void testById() throws Exception {
+        assertTrue(checkRestUrl("/rest/departments/{id}", "GET"));
+        Department dep = template.requestBodyAndHeader("direct:getDepartment", "", "id", 100000, Department.class);
+        assertEquals(dep.toString(), DEP1.toString());
 
-        ServletEndpoint endpoint = (ServletEndpoint) context.getEndpoint("servlet:/rest/departments?httpMethodRestrict=GET");
-        BrowsableEndpoint be = context.getEndpoint("servlet:/rest/departments?httpMethodRestrict=GET", BrowsableEndpoint.class);
-        template.requestBody(endpoint, "");
-        //  String qqq=endpoint.getHttpUri().;
-        //  template.requestBody(http://localhost:8080/myapp/myserver)
-        template.requestBody("servlet:/rest/departments?httpMethodRestrict=GET", "");
-        Object o = template.requestBody(endpoint, "");
-        //endpoint.
-        //  getMockEndpoint("mock:rest:get:/rest/departments").expectedBodiesReceived(DEPS);
-        // getMockEndpoint("servlet:/rest/departments?httpMethodRestrict=GET").expectedBodiesReceived(DEPS);
-        //assertMockEndpointsSatisfied();
-/*        Endpoint endpoint = context.getEndpoint("mock:rest:get:/rest/departments");
-        Object o = template.requestBody(endpoint,"");
-        System.out.println("");*/
-/*        MockEndpoint mockEndpoint = getMockEndpoint("mock:foo");
-        mockEndpoint.expectedMessageCount(1);
-        template.sendBody("foo","ff");
-        mockEndpoint.assertIsSatisfied();*/
+    }
+
+    @Test()
+    @DirtiesContext
+    public void testByIdNotFound() throws Exception {
+        String error = template.requestBodyAndHeader("direct:getDepartment", "", "id", 10000, String.class);
+        assertEquals(error, "Not found entity id=10000");
 
     }
 
     @Test
     @DirtiesContext
-    public void testMocksAreValid() throws Exception {
+    public void testDelete() throws Exception {
+        assertTrue(checkRestUrl("/rest/departments/{id}", "DELETE"));
+        template.requestBodyAndHeader("direct:deleteDepartment", "", "id", 100000, Department.class);
+        List<Department> list = (List<Department>) template.requestBody("direct:getAllDepartments", "");
+        assertEquals(list.toString(), Collections.singletonList(DEP2).toString());
+    }
 
-        Endpoint endpoint = context.getEndpoint("direct:getAllDepartments");
+    @Test
+    @DirtiesContext
+    public void testUpdate() throws Exception {
+        assertTrue(checkRestUrl("/rest/departments", "PUT"));
 
-        //template.setDefaultEndpoint(endpoint);
-        Object oo = new Object();
-        Object o = template.requestBody(endpoint, "");
-        // template.sendBody(endpoint,);
+        Processor p = new Processor() {
+            @Override
+            public void process(Exchange exchange) throws Exception {
+                exchange.getIn().setHeader("id", getUpdated().getId());
+                exchange.getIn().setHeader("name", getUpdated().getName());
+            }
+        };
+        template.send("direct:updateDepartment", p);
 
-        // consumer.receiveBody("direct:getAllDepartments");
-
-
-        // template.sendBody(endpoint);
-        //   BrowsableEndpoint be=context.getEndpoint("activemq:queue:direct:getAllDepartments",BrowsableEndpoint.class);
-/*        MockEndpoint mock=getMockEndpoint("mock:direct:getAllDepartments");
-        Endpoint endpoint = context.getEndpoint("direct:getAllDepartments");
-        template.sendBody(endpoint,"");
-        Object resultProduct = mock.getExchanges().get(0).getIn().getBody(Object.class);*/
-        // NotifyBuilder nb=new NotifyBuilder(context).whenDone(10).create();
-
-/*        getMockEndpoint("mock:direct:getAllDepartments2").expectedBodiesReceived("k");
-        template.sendBody("direct:getAllDepartments","dfsf");*/
-
-
-/*        NotifyBuilder nb=new NotifyBuilder(context).from("direct:getAllDepartments").whenAnyDoneMatches(
-                body().isEqualTo("fdsfsfd"))
-                .create();*/
+        Department dep = template.requestBodyAndHeader("direct:getDepartment", "", "id", 100000, Department.class);
+        assertEquals(dep.toString(), getUpdated().toString());
+    }
 
 
-//BrowsableEndpoint be=context.getEndpoint("direct:getAllDepartments",BrowsableEndpoint.class);
-        //MockEndpoint mock=getMockEndpoint("mock:foo");
-/*        List<Department>departments=new ArrayList<>(DEPS);
-        Endpoint endpoint = context.getEndpoint("direct:getAllDepartments");
-        template.sendBody(endpoint,"");*/
-        // BrowsableEndpoint e=context.getEndpoint("direct:getAllDepartments",BrowsableEndpoint.class);
+    @Test
+    @DirtiesContext
+    public void testCreate() throws Exception {
+        assertTrue(checkRestUrl("/rest/departments", "POST"));
+        Department expected = getCreated();
+        //template.requestBody("direct:createDepartment",expected);
 
-        // context.getEndpoint("").geE
+        Processor p = new Processor() {
+            @Override
+            public void process(Exchange exchange) throws Exception {
+                exchange.getIn().setHeader("id", expected.getId());
+                exchange.getIn().setHeader("name", expected.getName());
+            }
+        };
+        Exchange request = template.request("direct:createDepartment", p);
+        Department dep = request.getIn().getBody(Department.class);
 
-        //  List<Department> resultProduct1 = mock.getExchanges().get(0).getIn().getBody(List.class);
-        // endpoint.
+        List<Department> list = (List<Department>) template.requestBody("direct:getAllDepartments", "");
+        assertEquals(list.toString(), Arrays.asList(DEP1, dep, DEP2).toString());
 
-        //   List<Department> resultProduct = resultEndpoint.getExchanges().get(0).getIn().getBody(Department.class);
-        //      assertEquals(expectedEANCode, resultProduct.getEANCode());
-        // context.getEndpoint("\"direct:getAllDepartments\"").start();
-
-//context.start();
-        //body().
-        // String content =context.getTypeConverter().convertTo(List<Department>).
 
     }
 
@@ -148,6 +136,16 @@ public class DepartmentRouteConfig2Test extends CamelSpringTestSupport {
                         "classpath:spring/camel-config.xml",
                         "classpath:spring/spring-db.xml"
                 );
+    }
+
+
+    private boolean checkRestUrl(String url, String method) {
+        return context().getEndpoints().stream()
+                .filter(e -> e instanceof ServletEndpoint)
+                .map(e -> (ServletEndpoint) e)
+                .filter(e -> e.getContextPath().equals(url) && e.getHttpMethodRestrict().equals(method))
+                .count()
+                > 0;
     }
 }
 

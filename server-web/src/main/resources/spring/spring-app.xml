@@ -20,7 +20,8 @@
     <beans profile="rest">
         <bean id="prefix" class="java.lang.String">
 <!--            <constructor-arg value="http://localhost:8080/server-rest-1.0-SNAPSHOT/"/>-->
-            <constructor-arg value="http://localhost:8082/department"/>
+<!--            <constructor-arg value="http://localhost:8082/department"/>-->
+            <constructor-arg value="http://localhost:8080"/>
         </bean>
         <context:component-scan base-package="com.mrigor.tasks.department.service"/>
         <bean class="org.springframework.web.client.RestTemplate">

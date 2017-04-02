@@ -3,7 +3,7 @@ package com.mrigor.tasks.department.rest;
 import org.apache.camel.*;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.spring.CamelSpringJUnit4ClassRunner;
-import org.apache.camel.test.spring.CamelSpringRunner;
+
 import org.apache.camel.test.spring.CamelSpringTestSupport;
 import org.apache.camel.test.spring.CamelTestContextBootstrapper;
 import org.junit.Test;
@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 /**
  * Created by Igor on 24.03.2017.
  */
-@RunWith(CamelSpringRunner.class)
+
 @BootstrapWith(CamelTestContextBootstrapper.class)
 @ContextConfiguration({
 

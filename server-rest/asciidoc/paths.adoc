@@ -23,6 +23,37 @@ get all departments
 
 * departments
 
+=== update department
+----
+PUT /rest/departments
+----
+
+==== Description
+:hardbreaks:
+update department
+
+==== Parameters
+[options="header"]
+|===
+|Type|Name|Description|Required|Schema|Default
+|BodyParameter|body|new department|false|<<Department>>|
+|===
+
+==== Responses
+[options="header"]
+|===
+|HTTP Code|Description|Schema
+|default|successful operation|No Content
+|===
+
+==== Consumes
+
+* application/json
+
+==== Tags
+
+* departments
+
 === create new department
 ----
 POST /rest/departments
@@ -51,37 +82,6 @@ create new department
 * application/json
 
 ==== Produces
-
-* application/json
-
-==== Tags
-
-* departments
-
-=== update department
-----
-PUT /rest/departments
-----
-
-==== Description
-:hardbreaks:
-update department
-
-==== Parameters
-[options="header"]
-|===
-|Type|Name|Description|Required|Schema|Default
-|BodyParameter|body|new department|false|<<Department>>|
-|===
-
-==== Responses
-[options="header"]
-|===
-|HTTP Code|Description|Schema
-|default|successful operation|No Content
-|===
-
-==== Consumes
 
 * application/json
 
@@ -228,6 +228,37 @@ get all employees
 
 * employees
 
+=== update employee
+----
+PUT /rest/employees
+----
+
+==== Description
+:hardbreaks:
+update employee
+
+==== Parameters
+[options="header"]
+|===
+|Type|Name|Description|Required|Schema|Default
+|BodyParameter|body|new employee|false|<<Employee>>|
+|===
+
+==== Responses
+[options="header"]
+|===
+|HTTP Code|Description|Schema
+|default|successful operation|No Content
+|===
+
+==== Consumes
+
+* application/json
+
+==== Tags
+
+* employees
+
 === create employee
 ----
 POST /rest/employees
@@ -256,37 +287,6 @@ create employee
 * application/json
 
 ==== Produces
-
-* application/json
-
-==== Tags
-
-* employees
-
-=== update employee
-----
-PUT /rest/employees
-----
-
-==== Description
-:hardbreaks:
-update employee
-
-==== Parameters
-[options="header"]
-|===
-|Type|Name|Description|Required|Schema|Default
-|BodyParameter|body|new employee|false|<<Employee>>|
-|===
-
-==== Responses
-[options="header"]
-|===
-|HTTP Code|Description|Schema
-|default|successful operation|No Content
-|===
-
-==== Consumes
 
 * application/json
 
