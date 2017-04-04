@@ -39,9 +39,8 @@
 
 
 
-<!--
-    &lt;!&ndash; to setup Camel Swagger api servlet when using Spring &ndash;&gt;
-    <servlet>
+    <!-- to setup Camel Swagger api servlet when using Spring -->
+<!--    <servlet>
 
 
 

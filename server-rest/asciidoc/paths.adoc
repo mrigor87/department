@@ -1,28 +1,4 @@
 == Paths
-=== get all departments
-----
-GET /rest/departments
-----
-
-==== Description
-:hardbreaks:
-get all departments
-
-==== Responses
-[options="header"]
-|===
-|HTTP Code|Description|Schema
-|200|successful operation|<<Department>>
-|===
-
-==== Produces
-
-* application/json
-
-==== Tags
-
-* departments
-
 === update department
 ----
 PUT /rest/departments
@@ -47,6 +23,30 @@ update department
 |===
 
 ==== Consumes
+
+* application/json
+
+==== Tags
+
+* departments
+
+=== get all departments
+----
+GET /rest/departments
+----
+
+==== Description
+:hardbreaks:
+get all departments
+
+==== Responses
+[options="header"]
+|===
+|HTTP Code|Description|Schema
+|200|successful operation|<<Department>>
+|===
+
+==== Produces
 
 * application/json
 
@@ -204,30 +204,6 @@ get employee from department
 
 * departments
 
-=== get all employees
-----
-GET /rest/employees
-----
-
-==== Description
-:hardbreaks:
-get all employees
-
-==== Responses
-[options="header"]
-|===
-|HTTP Code|Description|Schema
-|200|successful operation|<<Employee>> array
-|===
-
-==== Produces
-
-* application/json
-
-==== Tags
-
-* employees
-
 === update employee
 ----
 PUT /rest/employees
@@ -252,6 +228,30 @@ update employee
 |===
 
 ==== Consumes
+
+* application/json
+
+==== Tags
+
+* employees
+
+=== get all employees
+----
+GET /rest/employees
+----
+
+==== Description
+:hardbreaks:
+get all employees
+
+==== Responses
+[options="header"]
+|===
+|HTTP Code|Description|Schema
+|200|successful operation|<<Employee>> array
+|===
+
+==== Produces
 
 * application/json
 

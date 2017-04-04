@@ -5,14 +5,11 @@ package com.mrigor.tasks.department.rest;
  */
 
 
-import com.mrigor.tasks.department.util.exception.NotFoundException;
 import org.apache.camel.Exchange;
-import org.apache.camel.Expression;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.rest.RestBindingMode;
 
-import static org.apache.camel.language.spel.SpelExpression.spel;
 
 
 public class DepartmentRouteConfig extends RouteBuilder {
@@ -36,11 +33,10 @@ public class DepartmentRouteConfig extends RouteBuilder {
 
     @Override
     public void configure() {
-
+//rest
+//*******************************************************************************
         restConfiguration().component("servlet").bindingMode(RestBindingMode.json)
-                .dataFormatProperty("prettyPrint", "true")
-
-        ;
+                .dataFormatProperty("prettyPrint", "true");
         rest("/rest/departments").description("Department rest service")
                 .consumes("application/json;charset=UTF-8").produces("application/json;charset=UTF-8")
 
@@ -50,44 +46,30 @@ public class DepartmentRouteConfig extends RouteBuilder {
                 .get("/{id}/employees").to("direct:getEmployeesByDepartment")
                 .get("/withAvgSalary").to("direct:getWithAvgSalary")
                 .put().to("direct:updateDepartment")
-                .delete("/{id}").to("direct:deleteDepartment")
-        ;
-        onException(NotFoundException.class)
-                .transform().constant("ooooooooo")
-                .log("rrrrrrrrrrrrr")
-/*                .process(exchange -> {
-                    exchange.getIn().setBody("Not found entity with id=${in.header.id}");
-                    exchange.getIn().setHeader(Exchange.CONTENT_TYPE,"text/plain");
-                    exchange.getIn().setHeader(Exchange .HTTP_RESPONSE_CODE,404);
-                    exchange.getIn().setHeader(Exchange.HTTP_RESPONSE_TEXT,"Not found entity with id=${in.header.id}");
-                })*/
-        ;
+                .delete("/{id}").to("direct:deleteDepartment");
+//************************************************************************
+
         from("direct:getEmployeesByDepartment")
                 .log(LoggingLevel.INFO, "camel rest get all employees from department")
                 .to("sql:" + GET_EMPLOYEES_BY_DEPARTMENT_SQL + "?outputType=SelectList&outputClass=com.mrigor.tasks.department.model.Employee")
-
-                .log(LoggingLevel.INFO, "get employees from department by camel-sql")
-        ;
+                .log(LoggingLevel.INFO, "get employees from department by camel-sql");
 
 
         from("direct:getAllDepartments")
                 .log(LoggingLevel.INFO, "camel rest get all departments")
                 .to("sql:" + GET_ALL_DEPARTMENTS_SQL + "?outputType=SelectList&outputClass=com.mrigor.tasks.department.model.Department")
-                .log(LoggingLevel.INFO, "get all departments by camel-sql")
-        ;
+                .log(LoggingLevel.INFO, "get all departments by camel-sql");
 
         from("direct:createDepartment")
                 .log(LoggingLevel.INFO, "camel rest create department ")
                 .to("sql:" + CREATE_DEPARTMENT_SQL)
                 .to("sql:" + GET_LAST_DEPARTMENT_SQL + "?outputType=SelectOne&outputClass=com.mrigor.tasks.department.model.Department")
-                .log(LoggingLevel.INFO, "new department: ${body}")
-        ;
+                .log(LoggingLevel.INFO, "new department: ${body}");
 
         from("direct:getWithAvgSalary")
                 .log(LoggingLevel.INFO, "camel rest get all departments with salary")
                 .to("sql:" + GET_DEPARTMENTS_WITH_AVG_SALARY_SQL + "?outputType=SelectList&outputClass=com.mrigor.tasks.department.to.DepartmentWithAverageSalary")
-                .log(LoggingLevel.INFO, "get all departments with salary by camel-sql")
-        ;
+                .log(LoggingLevel.INFO, "get all departments with salary by camel-sql");
 
 
         from("direct:getDepartment")
@@ -98,25 +80,23 @@ public class DepartmentRouteConfig extends RouteBuilder {
                 .when().simple("${body} != null")
                 .log(LoggingLevel.INFO, "get department: ${body}")
                 .otherwise()
-                .to("direct:notFound")
-        ;
+                .to("direct:notFound");
 
         from("direct:updateDepartment")
                 .log(LoggingLevel.INFO, "camel rest uodate department '${body}'")
-                //.log(LoggingLevel.INFO, "camel rest uodate department '${out.body}'")
                 .log(LoggingLevel.INFO, "in.header.name '${in.header.name}'")
                 .log(LoggingLevel.INFO, "in.body.name '${in.body.name}'")
                 .log(LoggingLevel.INFO, "{in.body.id} '${in.body.id}'")
                 .to("sql:" + UPDATE_DEPARTMENT_SQL + "?outputType=SelectOne&outputClass=com.mrigor.tasks.department.model.Department")
-                .log(LoggingLevel.INFO, "updated department: ${body}")
-        ;
+                .log(LoggingLevel.INFO, "updated department: ${body}");
 
         from("direct:deleteDepartment")
                 .log(LoggingLevel.INFO, "camel rest delete department by id")
                 .to("sql:" + DELETE_DEPARTMENT_BY_ID_SQL);
 
-        from("direct:notFound")
 
+        //not found
+        from("direct:notFound")
                 .log("Not found entity id=${in.header.id}")
                 .process(exchange -> {
                     exchange.getIn().setBody(("Not found entity id=" + exchange.getIn().getHeader("id")));

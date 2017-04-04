@@ -23,8 +23,8 @@ public class EmployeeRouteConfig extends RouteBuilder {
     private static final String GET_EMPLOYEES_BY_ID_SQL = "SELECT * FROM EMPLOYEES WHERE id=:#id";
     private static final String GET_ORDERED_FILTERED_EMPLOYEES_WITH_DEP_SQL = "SELECT * FROM EMPLOYEES  " +
             " WHERE (BIRTHDAY BETWEEN  :#from AND :#to) AND department_id=:#departmentid   ORDER BY FULLNAME";
-     private static final String GET_ORDERED_FILTERED_EMPLOYEES_WITHOUT_DEP_SQL = "SELECT * FROM EMPLOYEES " +
-             "WHERE (BIRTHDAY BETWEEN  :#from AND :#to)  ORDER BY FULLNAME ";
+    private static final String GET_ORDERED_FILTERED_EMPLOYEES_WITHOUT_DEP_SQL = "SELECT * FROM EMPLOYEES " +
+            "WHERE (BIRTHDAY BETWEEN  :#from AND :#to)  ORDER BY FULLNAME ";
 
     //   private static final String GET_ORDERED_FILTERED_EMPLOYEES_WITHOUT_DEP_SQL = "SELECT * FROM EMPLOYEES WHERE department_id=:#departmentid";
     private static final String CREATE_EMPLOYEE_SQL = "INSERT INTO EMPLOYEES (fullName, birthDay, salary, department_id) " +
@@ -34,71 +34,53 @@ public class EmployeeRouteConfig extends RouteBuilder {
     //*******************************************************************************************************************
 
 
-
     @Override
     public void configure() throws Exception {
-
-
         restConfiguration().component("servlet").bindingMode(RestBindingMode.json)
-                .dataFormatProperty("prettyPrint", "true")
-        ;
+                .dataFormatProperty("prettyPrint", "true");
         rest("/rest/employees").description("Employee rest service")
                 .consumes("application/json;charset=UTF-8").produces("application/json;charset=UTF-8")
 
-                .get().route()
-                .to("direct:getAllEmployees")
-                .endRest()
-
+                .get().to("direct:getAllEmployees")
                 .post().to("direct:createEmployee")
                 .get("/{id}").to("direct:getEmployee")
                 .get("/filtered").to("direct:getFilteredEmployee")
                 .put().to("direct:updateEmployee")
-                .delete("/{id}").to("direct:deleteEmployee")
-        ;
-        from("direct:getFilteredEmployee")
+                .delete("/{id}").to("direct:deleteEmployee");
 
+        from("direct:getFilteredEmployee")
                 .process(new Processor() {
                     @Override
                     public void process(Exchange exchange) throws Exception {
-                        String departmentId = exchange.getIn().getHeader("departmentId", String.class);
                         String from = exchange.getIn().getHeader("from", String.class);
                         String to = exchange.getIn().getHeader("to", String.class);
-                        //String dep = exchange.getIn().getHeader("departmentid", String.class);
-                        if (from == null)
-                            exchange.getIn().setHeader("from", "1800-01-01");
-                        if (to == null)
-                            exchange.getIn().setHeader("to", "3000-01-01");
+                        if (from == null) exchange.getIn().setHeader("from", "1800-01-01");
+                        if (to == null) exchange.getIn().setHeader("to", "3000-01-01");
                     }
                 })
-                //.setHeader("from",)
                 .log(LoggingLevel.INFO, "camel rest get getFiltere employees    from=${in.header.from}, to=${in.header.from}, departmentId=${in.header.departmentid}")
                 .to("sql:" + GET_ORDERED_FILTERED_EMPLOYEES_WITH_DEP_SQL + "?outputType=SelectList&outputClass=com.mrigor.tasks.department.model.Employee")
-                .log(LoggingLevel.INFO, "get all employees by camel-sql   ${body}")
-        ;
+                .log(LoggingLevel.INFO, "get all employees by camel-sql   ${body}");
         from("direct:getAllEmployees")
                 .log(LoggingLevel.INFO, "camel rest get all employees")
                 .to("sql:" + GET_ALL_EMPLOYEES_SQL + "?outputType=SelectList&outputClass=com.mrigor.tasks.department.model.Employee")
-                .log(LoggingLevel.INFO, "get all employees by camel-sql")
-        ;
+                .log(LoggingLevel.INFO, "get all employees by camel-sql");
         from("direct:createEmployee")
                 .log(LoggingLevel.INFO, "camel rest create employee")
                 .to("sql:" + CREATE_EMPLOYEE_SQL)
                 .to("sql:" + GET_LAST_EMPLOYEE_SQL + "?outputType=SelectOne&outputClass=com.mrigor.tasks.department.model.Employee")
-                .log(LoggingLevel.INFO, "new employee: ${body}")
-        ;
+                .log(LoggingLevel.INFO, "new employee: ${body}");
 
 
         from("direct:getEmployee")
                 .log(LoggingLevel.INFO, "camel rest get employee by id")
                 .to("sql:" + GET_EMPLOYEES_BY_ID_SQL + "?outputType=SelectOne&outputClass=com.mrigor.tasks.department.model.Employee")
-                .log(LoggingLevel.INFO, "get employee: ${body}")
-        ;
+                .log(LoggingLevel.INFO, "get employee: ${body}");
 
         from("direct:updateEmployee")
                 .log(LoggingLevel.INFO, "camel rest uodate employees")
                 .to("sql:" + UPDATE_EMPLOYEE_SQL + "?outputType=SelectOne&outputClass=com.mrigor.tasks.department.model.Employee")
-                .log(LoggingLevel.INFO, "updated employee: ${body}")
-        ;
+                .log(LoggingLevel.INFO, "updated employee: ${body}");
 
         from("direct:deleteEmployee")
                 .log(LoggingLevel.INFO, "camel rest delete employee by id")

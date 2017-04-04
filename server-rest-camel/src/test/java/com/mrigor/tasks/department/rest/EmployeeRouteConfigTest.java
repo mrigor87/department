@@ -2,14 +2,18 @@ package com.mrigor.tasks.department.rest;
 
 import com.mrigor.tasks.department.model.Department;
 import com.mrigor.tasks.department.model.Employee;
-import org.apache.camel.Exchange;
-import org.apache.camel.Processor;
+import org.apache.camel.*;
 import org.apache.camel.component.servlet.ServletEndpoint;
+import org.apache.camel.test.spring.CamelSpringJUnit4ClassRunner;
 import org.apache.camel.test.spring.CamelSpringTestSupport;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,16 +23,33 @@ import static com.mrigor.tasks.department.DepTestData.DEP1_ID;
 import static com.mrigor.tasks.department.DepTestData.DEP2;
 import static com.mrigor.tasks.department.DepTestData.DEP2_ID;
 import static com.mrigor.tasks.department.EmployeeTestData.*;
+import static com.mrigor.tasks.department.rest.util.TestHelper.checkRestUrl;
+import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by igor on 002 02.04.17.
  */
-public class EmployeeRouteConfigTest extends CamelSpringTestSupport {
+@ContextConfiguration({
+
+        "classpath:spring/camel-config.xml",
+        "classpath:spring/spring-db.xml"
+})
+@RunWith(CamelSpringJUnit4ClassRunner.class)
+//@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
+
+@Sql(scripts = "classpath:db/populateDB.sql")
+public class EmployeeRouteConfigTest  {
+    @Autowired
+    protected CamelContext context;
+
+    @Produce()
+    protected ProducerTemplate template;
+
 
     @Test
-    @DirtiesContext
     public void testGetAll() throws Exception {
-        assertTrue(checkRestUrl("/rest/employees", "GET"));
+        assertTrue(checkRestUrl("/rest/employees", "GET",context));
         List<Employee> list = (List<Employee>) template.requestBody("direct:getAllEmployees", "");
         assertEquals(list.toString(), EMPL_ALL.toString());
     }
@@ -37,17 +58,15 @@ public class EmployeeRouteConfigTest extends CamelSpringTestSupport {
 
 
     @Test
-    @DirtiesContext
     public void testById() throws Exception {
-        assertTrue(checkRestUrl("/rest/employees/{id}", "GET"));
+        assertTrue(checkRestUrl("/rest/employees/{id}", "GET",context));
         Employee empl = template.requestBodyAndHeader("direct:getEmployee", "", "id", EMPL1_ID, Employee.class);
         assertEquals(empl.toString(), EMPL1.toString());
     }
 
     @Test
-    @DirtiesContext
     public void testDelete() throws Exception {
-        assertTrue(checkRestUrl("/rest/employees/{id}", "DELETE"));
+        assertTrue(checkRestUrl("/rest/employees/{id}", "DELETE",context));
         template.requestBodyAndHeader("direct:deleteEmployee", "", "id", EMPL1_ID, Employee.class);
         List<Employee> list = (List<Employee>) template.requestBody("direct:getAllEmployees", "");
 
@@ -57,9 +76,8 @@ public class EmployeeRouteConfigTest extends CamelSpringTestSupport {
 
 
     @Test
-    @DirtiesContext
     public void testUpdate() throws Exception {
-        assertTrue(checkRestUrl("/rest/employees", "PUT"));
+        assertTrue(checkRestUrl("/rest/employees", "PUT",context));
 
         Employee updated = getUpdated();
         Processor p = new Processor() {
@@ -82,12 +100,9 @@ public class EmployeeRouteConfigTest extends CamelSpringTestSupport {
 
 
     @Test
-    @DirtiesContext
     public void testCreate() throws Exception {
-        assertTrue(checkRestUrl("/rest/employees", "POST"));
+        assertTrue(checkRestUrl("/rest/employees", "POST",context));
         Employee expected = getCreated();
-        //template.requestBody("direct:createDepartment",expected);
-
         Processor p = new Processor() {
             @Override
             public void process(Exchange exchange) throws Exception {
@@ -105,16 +120,10 @@ public class EmployeeRouteConfigTest extends CamelSpringTestSupport {
 
 
     }
-/*    private static final String GET_ORDERED_FILTERED_EMPLOYEES_WITH_DEP_SQL = "SELECT * FROM EMPLOYEES  " +
-            " WHERE (BIRTHDAY BETWEEN  :#from AND :#to) AND department_id=:#departmentid";*/
 
     @Test
-    @DirtiesContext
     public void testGetBetween() throws Exception {
-        assertTrue(checkRestUrl("/rest/employees/filtered", "GET"));
-      //  Employee expected = getCreated();
-        //template.requestBody("direct:createDepartment",expected);
-
+        assertTrue(checkRestUrl("/rest/employees/filtered", "GET",context));
         Processor p = new Processor() {
             @Override
             public void process(Exchange exchange) throws Exception {
@@ -125,29 +134,7 @@ public class EmployeeRouteConfigTest extends CamelSpringTestSupport {
         };
         Exchange request = template.request("direct:getFilteredEmployee", p);
         List<Employee> list = (List<Employee>) request.getIn().getBody();
-       // List<Employee> list =(List<Employee>) template.requestBodyAndHeader("direct:getEmployeesByDepartment", "", "id", DEP1_ID);
         assertEquals(list.toString(), EMPL_D2.toString());
-
-
     }
 
-
-    @Override
-    protected AbstractApplicationContext createApplicationContext() {
-        return
-                new ClassPathXmlApplicationContext(
-                        "classpath:spring/camel-config.xml",
-                        "classpath:spring/spring-db.xml"
-                );
-    }
-
-
-    private boolean checkRestUrl(String url, String method) {
-        return context().getEndpoints().stream()
-                .filter(e -> e instanceof ServletEndpoint)
-                .map(e -> (ServletEndpoint) e)
-                .filter(e -> e.getContextPath().equals(url) && e.getHttpMethodRestrict().equals(method))
-                .count()
-                > 0;
-    }
 }
