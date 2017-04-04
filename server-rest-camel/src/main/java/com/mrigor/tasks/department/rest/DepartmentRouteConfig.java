@@ -54,7 +54,6 @@ public class DepartmentRouteConfig extends RouteBuilder {
                 .to("sql:" + GET_EMPLOYEES_BY_DEPARTMENT_SQL + "?outputType=SelectList&outputClass=com.mrigor.tasks.department.model.Employee")
                 .log(LoggingLevel.INFO, "get employees from department by camel-sql");
 
-
         from("direct:getAllDepartments")
                 .log(LoggingLevel.INFO, "camel rest get all departments")
                 .to("sql:" + GET_ALL_DEPARTMENTS_SQL + "?outputType=SelectList&outputClass=com.mrigor.tasks.department.model.Department")
@@ -73,7 +72,6 @@ public class DepartmentRouteConfig extends RouteBuilder {
 
 
         from("direct:getDepartment")
-                .log(LoggingLevel.INFO, "  ${body}")
                 .log(LoggingLevel.INFO, "camel rest get department by id     ${in.body}")
                 .to("sql:" + GET_DEPARTMENT_BY_ID_SQL + "?outputType=SelectOne&outputClass=com.mrigor.tasks.department.model.Department")
                 .choice()

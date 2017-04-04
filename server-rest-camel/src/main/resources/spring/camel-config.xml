@@ -1,16 +1,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:camel="http://camel.apache.org/schema/spring" xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-         http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+         http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd         ">
 
-
-    <context:annotation-config/>
-    <context:component-scan base-package="com.mrigor.tasks.department.rest"/>
-<!--    <import resource="spring-db.xml"/>-->
-
-    <!-- use camel-metrics route policy to gather metrics for all routes -->
-    <bean id="metricsRoutePolicyFactory" class="org.apache.camel.component.metrics.routepolicy.MetricsRoutePolicyFactory"/>
 
     <!-- a rest service which uses binding to/from pojos -->
     <bean id="departmentRestRoutes" class="com.mrigor.tasks.department.rest.DepartmentRouteConfig"/>
@@ -18,9 +10,6 @@
     <camelContext xmlns="http://camel.apache.org/schema/spring">
         <routeBuilder ref="departmentRestRoutes"/>
         <routeBuilder ref="employeeRestRoutes"/>
-
-
-
     </camelContext>
 
 </beans>

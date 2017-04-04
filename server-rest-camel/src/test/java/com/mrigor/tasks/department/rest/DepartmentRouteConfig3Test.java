@@ -1,19 +1,12 @@
 package com.mrigor.tasks.department.rest;
 
 import com.mrigor.tasks.department.model.Department;
-import com.mrigor.tasks.department.rest.util.TestHelper;
 import com.mrigor.tasks.department.to.DepartmentWithAverageSalary;
 import org.apache.camel.*;
-import org.apache.camel.component.servlet.ServletEndpoint;
 import org.apache.camel.test.spring.CamelSpringJUnit4ClassRunner;
-import org.apache.camel.test.spring.CamelSpringTestSupport;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 
@@ -69,7 +62,6 @@ public class DepartmentRouteConfig3Test  {//extends CamelSpringTestSupport
 
     @Test()
     public void testByIdNotFound() throws Exception {
-
         String error = template.requestBodyAndHeader("direct:getDepartment", "", "id", 10000, String.class);
         assertEquals(error, "Not found entity id=10000");
     }

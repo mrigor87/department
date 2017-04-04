@@ -10,7 +10,6 @@
         <param-value>
             classpath:spring/spring-db.xml
             classpath:spring/camel-config.xml
-<!--            classpath:spring/spring-app.xml-->
         </param-value>
     </context-param>
 

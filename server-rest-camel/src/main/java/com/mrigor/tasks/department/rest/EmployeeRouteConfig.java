@@ -1,14 +1,13 @@
 package com.mrigor.tasks.department.rest;
 
-import com.mrigor.tasks.department.model.Department;
+
 import org.apache.camel.Exchange;
-import org.apache.camel.Expression;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.rest.RestBindingMode;
 
-import java.util.ArrayList;
+
 
 /**
  * Created by Igor on 23.03.2017.
@@ -23,14 +22,9 @@ public class EmployeeRouteConfig extends RouteBuilder {
     private static final String GET_EMPLOYEES_BY_ID_SQL = "SELECT * FROM EMPLOYEES WHERE id=:#id";
     private static final String GET_ORDERED_FILTERED_EMPLOYEES_WITH_DEP_SQL = "SELECT * FROM EMPLOYEES  " +
             " WHERE (BIRTHDAY BETWEEN  :#from AND :#to) AND department_id=:#departmentid   ORDER BY FULLNAME";
-    private static final String GET_ORDERED_FILTERED_EMPLOYEES_WITHOUT_DEP_SQL = "SELECT * FROM EMPLOYEES " +
-            "WHERE (BIRTHDAY BETWEEN  :#from AND :#to)  ORDER BY FULLNAME ";
-
-    //   private static final String GET_ORDERED_FILTERED_EMPLOYEES_WITHOUT_DEP_SQL = "SELECT * FROM EMPLOYEES WHERE department_id=:#departmentid";
     private static final String CREATE_EMPLOYEE_SQL = "INSERT INTO EMPLOYEES (fullName, birthDay, salary, department_id) " +
             "VALUES (:#fullName, :#birthDay, :#salary, :#departmentId)";
     private static final String GET_LAST_EMPLOYEE_SQL = "SELECT * FROM EMPLOYEES WHERE id IN (SELECT MAX(id) FROM EMPLOYEES)";
-
     //*******************************************************************************************************************
 
 
@@ -75,7 +69,11 @@ public class EmployeeRouteConfig extends RouteBuilder {
         from("direct:getEmployee")
                 .log(LoggingLevel.INFO, "camel rest get employee by id")
                 .to("sql:" + GET_EMPLOYEES_BY_ID_SQL + "?outputType=SelectOne&outputClass=com.mrigor.tasks.department.model.Employee")
-                .log(LoggingLevel.INFO, "get employee: ${body}");
+                .choice()
+                .when().simple("${body} != null")
+                .log(LoggingLevel.INFO, "get employee: ${body}")
+                .otherwise()
+                .to("direct:notFound");
 
         from("direct:updateEmployee")
                 .log(LoggingLevel.INFO, "camel rest uodate employees")
@@ -85,6 +83,7 @@ public class EmployeeRouteConfig extends RouteBuilder {
         from("direct:deleteEmployee")
                 .log(LoggingLevel.INFO, "camel rest delete employee by id")
                 .to("sql:" + DELETE_EMPLOYEES_BY_ID_SQL);
+
     }
 
 }

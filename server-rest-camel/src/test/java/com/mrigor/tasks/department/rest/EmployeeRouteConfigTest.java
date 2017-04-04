@@ -1,26 +1,19 @@
 package com.mrigor.tasks.department.rest;
 
-import com.mrigor.tasks.department.model.Department;
+
 import com.mrigor.tasks.department.model.Employee;
 import org.apache.camel.*;
-import org.apache.camel.component.servlet.ServletEndpoint;
 import org.apache.camel.test.spring.CamelSpringJUnit4ClassRunner;
-import org.apache.camel.test.spring.CamelSpringTestSupport;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static com.mrigor.tasks.department.DepTestData.DEP1_ID;
-import static com.mrigor.tasks.department.DepTestData.DEP2;
 import static com.mrigor.tasks.department.DepTestData.DEP2_ID;
 import static com.mrigor.tasks.department.EmployeeTestData.*;
 import static com.mrigor.tasks.department.rest.util.TestHelper.checkRestUrl;
@@ -36,7 +29,6 @@ import static org.junit.Assert.assertTrue;
         "classpath:spring/spring-db.xml"
 })
 @RunWith(CamelSpringJUnit4ClassRunner.class)
-//@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 
 @Sql(scripts = "classpath:db/populateDB.sql")
 public class EmployeeRouteConfigTest  {
@@ -135,6 +127,12 @@ public class EmployeeRouteConfigTest  {
         Exchange request = template.request("direct:getFilteredEmployee", p);
         List<Employee> list = (List<Employee>) request.getIn().getBody();
         assertEquals(list.toString(), EMPL_D2.toString());
+    }
+
+    @Test()
+    public void testByIdNotFound() throws Exception {
+        String error = template.requestBodyAndHeader("direct:getEmployee", "", "id", 10000, String.class);
+        assertEquals(error, "Not found entity id=10000");
     }
 
 }
