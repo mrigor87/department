@@ -4,6 +4,7 @@ import com.mrigor.tasks.department.model.Department;
 import com.mrigor.tasks.department.to.DepartmentWithAverageSalary;
 import com.mrigor.tasks.department.util.exception.NotFoundException;
 import org.apache.camel.*;
+import org.apache.camel.builder.AdviceWithRouteBuilder;
 import org.apache.camel.builder.NotifyBuilder;
 import org.apache.camel.builder.ValueBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
@@ -13,6 +14,7 @@ import org.apache.camel.spi.BrowsableEndpoint;
 import org.apache.camel.test.spring.CamelSpringJUnit4ClassRunner;
 import org.apache.camel.test.spring.CamelSpringTestSupport;
 import org.apache.camel.test.spring.CamelTestContextBootstrapper;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +43,12 @@ import static com.mrigor.tasks.department.DepTestData.*;
                 "classpath:spring/spring-db.xml"
                 })
 //@BootstrapWith(CamelTestContextBootstrapper.class)
-@RunWith(CamelSpringJUnit4ClassRunner.class)
+//@RunWith(CamelSpringJUnit4ClassRunner.class)
+//@BootstrapWith(CamelTestContextBootstrapper.class)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
+
 @Sql(scripts = "classpath:db/populateDB.sql")
-public class DepartmentRouteConfig2Test extends CamelSpringTestSupport {
+public class DepartmentRouteConfig2Test extends CamelSpringTestSupport {//extends CamelSpringTestSupport
 
 
 
@@ -141,6 +146,18 @@ public class DepartmentRouteConfig2Test extends CamelSpringTestSupport {
     }
 
 
+    @Before
+    public void setUp() throws Exception {
+        super.setUp();
+/*        context.getRouteDefinitions().get(0).adviceWith(context, new AdviceWithRouteBuilder() {
+            @Override
+            public void configure() throws Exception {
+                replaceFromWith("direct:start");
+                mockEndpointsAndSkip("file:*");
+            }
+        })*/;
+    }
+
     @Override
     protected AbstractApplicationContext createApplicationContext() {
         return
@@ -149,6 +166,7 @@ public class DepartmentRouteConfig2Test extends CamelSpringTestSupport {
                         "classpath:spring/spring-db.xml"
                 );
     }
+
 
 
     private boolean checkRestUrl(String url, String method) {
