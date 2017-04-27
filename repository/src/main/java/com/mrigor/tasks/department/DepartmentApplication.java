@@ -1,4 +1,4 @@
-package com.mrigor.tasks.department.repository;
+package com.mrigor.tasks.department;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

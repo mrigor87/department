@@ -1,6 +1,7 @@
 package com.mrigor.tasks.department.service;
 
 import com.mrigor.tasks.department.model.Department;
+
 import com.mrigor.tasks.department.repository.DepartmentRepo;
 import com.mrigor.tasks.department.to.DepartmentWithAverageSalary;
 import com.mrigor.tasks.department.util.exception.ExceptionUtil;

@@ -1,6 +1,8 @@
 package com.mrigor.tasks.department.repository;
 
+import com.mrigor.tasks.department.DepartmentApplication;
 import com.mrigor.tasks.department.model.Department;
+import com.mrigor.tasks.department.repository.DepartmentRepo;
 import com.mrigor.tasks.department.to.DepartmentWithAverageSalary;
 import org.junit.Test;
 import org.junit.runner.RunWith;

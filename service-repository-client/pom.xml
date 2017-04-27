@@ -12,11 +12,16 @@
     <artifactId>service-repository-client</artifactId>
 
     <dependencies>
+
         <dependency>
+            <groupId>com.mrigor.tasks</groupId>
+            <artifactId>repository</artifactId>
+        </dependency>
+
+<!--        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>repository</artifactId>
-            <scope>provided</scope>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>service-api</artifactId>
@@ -24,27 +29,19 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>test-util</artifactId>
-            <scope>test</scope>
         </dependency>
 
-
-
-        <!-- Logging with SLF4J & LogBack -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <scope>runtime</scope>
-        </dependency>
 
     </dependencies>
+
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>

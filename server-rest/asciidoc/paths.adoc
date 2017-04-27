@@ -1,28 +1,4 @@
 == Paths
-=== get all departments
-----
-GET /rest/departments
-----
-
-==== Description
-:hardbreaks:
-get all departments
-
-==== Responses
-[options="header"]
-|===
-|HTTP Code|Description|Schema
-|200|successful operation|<<Department>>
-|===
-
-==== Produces
-
-* application/json
-
-==== Tags
-
-* departments
-
 === update department
 ----
 PUT /rest/departments
@@ -89,6 +65,30 @@ create new department
 
 * departments
 
+=== get all departments
+----
+GET /rest/departments
+----
+
+==== Description
+:hardbreaks:
+get all departments
+
+==== Responses
+[options="header"]
+|===
+|HTTP Code|Description|Schema
+|200|successful operation|<<Department>>
+|===
+
+==== Produces
+
+* application/json
+
+==== Tags
+
+* departments
+
 === get all employees with information about average salary
 ----
 GET /rest/departments/withAvgSalary
@@ -103,38 +103,6 @@ get department's list with information about average salary by each department. 
 |===
 |HTTP Code|Description|Schema
 |200|successful operation|<<DepartmentWithAverageSalary>> array
-|===
-
-==== Produces
-
-* application/json
-
-==== Tags
-
-* departments
-
-=== get department by id
-----
-GET /rest/departments/{id}
-----
-
-==== Description
-:hardbreaks:
-get department by id
-
-==== Parameters
-[options="header"]
-|===
-|Type|Name|Description|Required|Schema|Default
-|PathParameter|id|identifier of department|true|integer (int32)|
-|===
-
-==== Responses
-[options="header"]
-|===
-|HTTP Code|Description|Schema
-|200|successful operation|<<Employee>>
-|404|department with such identifier doesn't exists|No Content
 |===
 
 ==== Produces
@@ -172,6 +140,38 @@ delete department by id
 
 * departments
 
+=== get department by id
+----
+GET /rest/departments/{id}
+----
+
+==== Description
+:hardbreaks:
+get department by id
+
+==== Parameters
+[options="header"]
+|===
+|Type|Name|Description|Required|Schema|Default
+|PathParameter|id|identifier of department|true|integer (int32)|
+|===
+
+==== Responses
+[options="header"]
+|===
+|HTTP Code|Description|Schema
+|200|successful operation|<<Employee>>
+|404|department with such identifier doesn't exists|No Content
+|===
+
+==== Produces
+
+* application/json
+
+==== Tags
+
+* departments
+
 === get employee's list from department
 ----
 GET /rest/departments/{id}/employees
@@ -203,30 +203,6 @@ get employee from department
 ==== Tags
 
 * departments
-
-=== get all employees
-----
-GET /rest/employees
-----
-
-==== Description
-:hardbreaks:
-get all employees
-
-==== Responses
-[options="header"]
-|===
-|HTTP Code|Description|Schema
-|200|successful operation|<<Employee>> array
-|===
-
-==== Produces
-
-* application/json
-
-==== Tags
-
-* employees
 
 === update employee
 ----
@@ -294,6 +270,30 @@ create employee
 
 * employees
 
+=== get all employees
+----
+GET /rest/employees
+----
+
+==== Description
+:hardbreaks:
+get all employees
+
+==== Responses
+[options="header"]
+|===
+|HTTP Code|Description|Schema
+|200|successful operation|<<Employee>> array
+|===
+
+==== Produces
+
+* application/json
+
+==== Tags
+
+* employees
+
 === get filtered list of employees
 ----
 GET /rest/employees/filtered
@@ -327,6 +327,34 @@ get filtered list of employees by params
 
 * employees
 
+=== delete employee by id
+----
+DELETE /rest/employees/{id}
+----
+
+==== Description
+:hardbreaks:
+delete employee by id
+
+==== Parameters
+[options="header"]
+|===
+|Type|Name|Description|Required|Schema|Default
+|PathParameter|id|identifier of employee|true|integer (int32)|
+|===
+
+==== Responses
+[options="header"]
+|===
+|HTTP Code|Description|Schema
+|200|successful operation|<<Employee>>
+|404|employee with such identifier doesn't exists|No Content
+|===
+
+==== Tags
+
+* employees
+
 === get employee by id
 ----
 GET /rest/employees/{id}
@@ -354,34 +382,6 @@ get employee by id
 ==== Produces
 
 * application/json
-
-==== Tags
-
-* employees
-
-=== delete employee by id
-----
-DELETE /rest/employees/{id}
-----
-
-==== Description
-:hardbreaks:
-delete employee by id
-
-==== Parameters
-[options="header"]
-|===
-|Type|Name|Description|Required|Schema|Default
-|PathParameter|id|identifier of employee|true|integer (int32)|
-|===
-
-==== Responses
-[options="header"]
-|===
-|HTTP Code|Description|Schema
-|200|successful operation|<<Employee>>
-|404|employee with such identifier doesn't exists|No Content
-|===
 
 ==== Tags
 

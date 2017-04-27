@@ -1,11 +1,12 @@
 package com.mrigor.tasks.department.service;
 
+import com.mrigor.tasks.department.DepartmentApplication;
 import com.mrigor.tasks.department.model.Department;
 import com.mrigor.tasks.department.util.exception.NotFoundException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -17,12 +18,9 @@ import static com.mrigor.tasks.department.DepTestData.*;
 /**
  * tests
  */
-@ContextConfiguration({
-        "classpath:spring/spring-app-test.xml",
-        "classpath:spring/spring-db-test.xml"
-})
+@SpringBootTest(classes = DepartmentApplication.class)
 @RunWith(SpringJUnit4ClassRunner.class)
-@Sql(scripts = "classpath:db/populateDB.sql")
+@Sql(scripts = "classpath:data.sql")
 public class DepartmentServiceImplTest {
 
     @Autowired
