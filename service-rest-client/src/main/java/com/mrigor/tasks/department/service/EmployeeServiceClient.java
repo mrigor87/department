@@ -29,15 +29,16 @@ public class EmployeeServiceClient implements EmployeeService {
     @Autowired
     private RestTemplate restTemplate;
 
+    private String prefixDepRestUrl="http://localhost:8080"+"/rest/departments/";
 
-    private String prefixDepRestUrl;
-    private String prefixEmplRestUrl;
+    private String prefixEmplRestUrl="http://localhost:8080"+"/rest/employees/";
 
-    @Autowired
-    public EmployeeServiceClient(String prefix) {
+   // @Autowired
+/*    public EmployeeServiceClient(String prefix) {
+
         prefixDepRestUrl = prefix + "/rest/departments/";
         prefixEmplRestUrl = prefix + "/rest/employees/";
-    }
+    }*/
 
 
     @Override

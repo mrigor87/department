@@ -28,12 +28,14 @@ public class DepartmentServiceClient implements DepartmentService {
     private RestTemplate restTemplate;
 
 
-    private String prefixDepRestUrl;
+    private String prefixDepRestUrl="http://localhost:8080"+"/rest/departments/";
 
-    @Autowired
-    public DepartmentServiceClient(String prefix) {
+
+    //@Autowired
+/*    public DepartmentServiceClient(String prefix) {
+        prefix="http://localhost:8080";
         prefixDepRestUrl = prefix + "/rest/departments/";
-    }
+    }*/
 
     @Override
     public Department create(Department department) throws ResourceAccessException {

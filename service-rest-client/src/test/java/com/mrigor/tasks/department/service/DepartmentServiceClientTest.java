@@ -35,8 +35,8 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 
 public class DepartmentServiceClientTest {
 
-    @Autowired
-    private String prefix;
+    //@Autowired
+    private String prefix="http://localhost:8080";
 
     private MockRestServiceServer mockServer;
 

@@ -31,8 +31,8 @@ public class EmployeeServiceClientTest {
 
     private MockRestServiceServer mockServer;
 
-    @Autowired
-    private String prefix;
+  //  @Autowired
+    private String prefix="http://localhost:8080";
 
     @Autowired
     private RestTemplate restTemplate;

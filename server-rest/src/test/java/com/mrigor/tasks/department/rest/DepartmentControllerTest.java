@@ -1,6 +1,7 @@
 package com.mrigor.tasks.department.rest;
 
 
+import com.mrigor.tasks.department.DepartmentApplication;
 import com.mrigor.tasks.department.EmployeeTestData;
 import com.mrigor.tasks.department.matcher.JsonUtil;
 import com.mrigor.tasks.department.model.Department;
@@ -9,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
@@ -36,14 +38,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * tests
  */
 
-@ContextConfiguration({
-        "classpath:spring/spring-app.xml",
-        "classpath:spring/spring-mvc.xml",
-        "classpath:spring/spring-db.xml"
-})
+@SpringBootTest(classes = DepartmentApplication.class)
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
-@Sql(scripts = "classpath:db/populateDB.sql")
+@Sql(scripts = "classpath:data.sql")
 
 public class DepartmentControllerTest {
     @Autowired

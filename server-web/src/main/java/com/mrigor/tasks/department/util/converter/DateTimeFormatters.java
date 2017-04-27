@@ -1,6 +1,7 @@
 package com.mrigor.tasks.department.util.converter;
 
 import org.springframework.format.Formatter;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.text.ParseException;
@@ -13,6 +14,7 @@ import java.util.Locale;
  */
 
 public class DateTimeFormatters {
+    @Component
     public static class LocalDateFormatter implements Formatter<LocalDate> {
 
         @Override

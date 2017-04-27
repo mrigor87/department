@@ -6,6 +6,7 @@ ALTER SEQUENCE global_seq RESTART WITH 100000;
 INSERT INTO departments (name)
 VALUES ('Marketing'),
   ('Production');
+
 INSERT INTO employees (FULLNAME, BIRTHDAY, SALARY, DEPARTMENT_ID)
 VALUES
   ('Ivanov Ivan', '1980-05-17', 400, 100000),

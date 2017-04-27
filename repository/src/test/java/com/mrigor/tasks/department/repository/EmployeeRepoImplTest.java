@@ -6,6 +6,7 @@ import com.mrigor.tasks.department.model.Employee;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
@@ -19,12 +20,9 @@ import static com.mrigor.tasks.department.DepTestData.DEP2_ID;
 /**
  * Created by Igor on 10.12.2016.
  */
-@ContextConfiguration({
-        "classpath:spring/spring-app-test.xml",
-        "classpath:spring/spring-db-test.xml"
-})
+@SpringBootTest(classes = DepartmentApplication.class)
 @RunWith(SpringJUnit4ClassRunner.class)
-@Sql(scripts = "classpath:db/populateDB.sql")
+@Sql(scripts = "classpath:data.sql")
 public class EmployeeRepoImplTest {
 
     @Autowired
