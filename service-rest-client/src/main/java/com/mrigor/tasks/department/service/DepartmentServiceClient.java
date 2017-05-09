@@ -6,6 +6,7 @@ import com.mrigor.tasks.department.util.exception.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -28,14 +29,12 @@ public class DepartmentServiceClient implements DepartmentService {
     private RestTemplate restTemplate;
 
 
-    private String prefixDepRestUrl="http://localhost:8080"+"/rest/departments/";
 
+    private String prefixDepRestUrl;
 
-    //@Autowired
-/*    public DepartmentServiceClient(String prefix) {
-        prefix="http://localhost:8080";
-        prefixDepRestUrl = prefix + "/rest/departments/";
-    }*/
+    public DepartmentServiceClient(@Value("${rest.port}") String restPort, @Value("${rest.host}") String restHost) {
+        prefixDepRestUrl="http://"+restHost+":"+restPort+ "/rest/departments/";
+    }
 
     @Override
     public Department create(Department department) throws ResourceAccessException {

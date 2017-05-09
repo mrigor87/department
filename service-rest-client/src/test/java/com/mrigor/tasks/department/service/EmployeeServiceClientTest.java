@@ -1,14 +1,17 @@
 package com.mrigor.tasks.department.service;
 
 
+import com.mrigor.tasks.department.DepartmentApplication;
 import com.mrigor.tasks.department.EmployeeTestData;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
 
@@ -21,18 +24,18 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 /**
  * Created by Igor on 17.12.2016.
  */
-@ContextConfiguration({
-        "classpath:spring/spring-app-test.xml"
-})
-
-
+@SpringBootTest(classes = DepartmentApplication.class)
+@WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 public class EmployeeServiceClientTest {
 
     private MockRestServiceServer mockServer;
 
-  //  @Autowired
-    private String prefix="http://localhost:8080";
+    @Value("${rest.port}") String restPort;
+    @Value("${rest.host}") String restHost;
+
+
+    private String prefix;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -42,7 +45,7 @@ public class EmployeeServiceClientTest {
 
     @Before
     public void setUp() throws Exception {
-
+        prefix="http://"+restHost+":"+restPort;
         mockServer = MockRestServiceServer.createServer(restTemplate);
 
     }

@@ -22,7 +22,7 @@ public class RootController {
     @ApiOperation(value = "fd", hidden = true)
     public String root() {
         LOG.info("run REST server");
-        return "index";
+        return "redirect:swagger-ui.html";
     }
 
 

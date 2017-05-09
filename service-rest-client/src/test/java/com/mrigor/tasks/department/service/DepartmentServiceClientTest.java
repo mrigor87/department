@@ -1,13 +1,16 @@
 package com.mrigor.tasks.department.service;
 
 
+import com.mrigor.tasks.department.DepartmentApplication;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
 
@@ -24,19 +27,19 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 /**
  * tests
  */
-@ContextConfiguration({
-        "classpath:spring/spring-app-test.xml"
-
-})
-
+@SpringBootTest(classes = DepartmentApplication.class)
+@WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 
 
 
 public class DepartmentServiceClientTest {
 
-    //@Autowired
-    private String prefix="http://localhost:8080";
+    @Value("${rest.port}") String restPort;
+    @Value("${rest.host}") String restHost;
+
+
+    private String prefix;
 
     private MockRestServiceServer mockServer;
 
@@ -49,7 +52,7 @@ public class DepartmentServiceClientTest {
 
     @Before
     public void setUp() throws Exception {
-
+        prefix="http://"+restHost+":"+restPort;
         mockServer = MockRestServiceServer.createServer(restTemplate);
 
     }

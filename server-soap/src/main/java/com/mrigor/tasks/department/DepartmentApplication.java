@@ -28,10 +28,7 @@ public class DepartmentApplication {
     @Autowired
     EmployeeService employeeService;
 
-/*    @Bean(name = Bus.DEFAULT_BUS_ID)
-    public SpringBus springBus() {
-        return new SpringBus();
-    }*/
+
 
 
     @Autowired

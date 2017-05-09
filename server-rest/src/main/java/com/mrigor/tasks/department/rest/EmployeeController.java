@@ -105,7 +105,7 @@ public class EmployeeController {
     })*/
     public List<Employee> filter(
             @ApiParam(name = "from", value = "like '2016-01-01'", example = "2016-01-01") @RequestParam(value = "from", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
-            @ApiParam(value = "like '2016-01-01'",name = "to", example = "2016-01-01") @RequestParam(value = "to", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to,
+            @ApiParam(value = "like '2016-01-01'", name = "to", example = "2016-01-01") @RequestParam(value = "to", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to,
             @RequestParam(value = "departmentid", required = false) Integer departmentId) {
         LOG.info("get filtered employees  departmentId={}  from={} to={}", departmentId, from, to);
         return service.getFiltered(from, to, departmentId);
