@@ -1,10 +1,13 @@
 package com.mrigor.tasks.department.web;
 
 
+import com.mrigor.tasks.department.DepartmentApplication;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
@@ -29,17 +32,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * tests
  */
 
-@ContextConfiguration({
-        "classpath:spring/spring-app.xml",
-        "classpath:spring/spring-mvc.xml"
-
-})
+@SpringBootTest(classes = DepartmentApplication.class)
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
-@ActiveProfiles("rest")
 public abstract class RootControllerTest {
 
-    @Autowired
+    @Value("${rest.port}")    String restPort;
+    @Value("${rest.host}")    String restHost;
+
+
     private String prefix;
 
     private MockRestServiceServer mockServer;
@@ -55,6 +56,7 @@ public abstract class RootControllerTest {
 
     @Before
     public void setUp() {
+        prefix = "http://" + restHost + ":" + restPort;
         mockMvc = MockMvcBuilders
                 .webAppContextSetup(webApplicationContext)
                 .build();
