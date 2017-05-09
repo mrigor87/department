@@ -32,7 +32,7 @@ public class DepartmentServiceClient implements DepartmentService {
 
     private String prefixDepRestUrl;
 
-    public DepartmentServiceClient(@Value("${rest.port}") String restPort, @Value("${rest.host}") String restHost) {
+    public DepartmentServiceClient(@Value("${myrest.port}") String restPort, @Value("${myrest.host}") String restHost) {
         prefixDepRestUrl="http://"+restHost+":"+restPort+ "/rest/departments/";
     }
 

@@ -41,8 +41,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 public class EmployeeControllerTest {
 
-    @Value("${rest.port}")    String restPort;
-    @Value("${rest.host}")    String restHost;
+    @Value("${myrest.port}")    String restPort;
+    @Value("${myrest.host}")    String restHost;
 
 
     private String prefix;

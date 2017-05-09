@@ -43,7 +43,7 @@ public class EmployeeServiceClient implements EmployeeService {
     }*/
 
 
-    public EmployeeServiceClient(@Value("${rest.port}") String restPort, @Value("${rest.host}") String restHost) {
+    public EmployeeServiceClient(@Value("${myrest.port}") String restPort, @Value("${myrest.host}") String restHost) {
         prefixDepRestUrl="http://"+restHost+":"+restPort+ "/rest/departments/";
         prefixEmplRestUrl="http://"+restHost+":"+restPort+ "/rest/employees/";
     }
