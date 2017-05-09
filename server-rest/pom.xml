@@ -10,14 +10,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>server-rest</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
 
     <build>
         <plugins>
 
             <!--  plugins for auto generating documentation            -->
-            <plugin>
+<!--            <plugin>
                 <groupId>com.github.kongchen</groupId>
                 <artifactId>swagger-maven-plugin</artifactId>
                 <version>3.1.4</version>
@@ -129,14 +129,36 @@
                         <generated>src/main/webapp/asciidoc</generated>
                     </attributes>
                 </configuration>
+            </plugin>-->
+
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
 
-                    <plugin>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-maven-plugin</artifactId>
-                    </plugin>
-                </plugins>
+
+
+            <!--            <plugin>
+                            <groupId>com.spotify</groupId>
+                            <artifactId>docker-maven-plugin</artifactId>
+                            <version>0.4.13</version>
+                            <configuration>
+            &lt;!&ndash;                    <dockerHost>tcp://192.168.99.100:2376</dockerHost>&ndash;&gt;
+                                <imageName>${project.artifactId}</imageName>
+                                <dockerDirectory>src/main/docker</dockerDirectory>
+                                <resources>
+                                    <resource>
+            &lt;!&ndash;                            <targetPath>/</targetPath>&ndash;&gt;
+                                        <directory>${project.build.directory}</directory>
+                                        <include>${project.build.finalName}.jar</include>
+                                    </resource>
+                                </resources>
+                            </configuration>
+                        </plugin>-->
+        </plugins>
+
 
     </build>
 
@@ -177,62 +199,13 @@
         </dependency>
 
 
-<!--        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
-        </dependency>-->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-<!--        <dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <scope>runtime</scope>
-        </dependency>-->
 
-<!--        &lt;!&ndash;Spring&ndash;&gt;
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-
-        &lt;!&ndash;Web&ndash;&gt;
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-servlet-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-
-        &lt;!&ndash; Logging with SLF4J & LogBack &ndash;&gt;
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            &lt;!&ndash;        <scope>compile</scope>&ndash;&gt;
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            &lt;!&ndash;        <scope>runtime</scope>&ndash;&gt;
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            &lt;!&ndash;        <scope>runtime</scope>&ndash;&gt;
-        </dependency>-->
 
     </dependencies>
 

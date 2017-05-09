@@ -23,8 +23,13 @@
         </dependency>
 
 
-        <!--Spring-->
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!--Spring-->
+<!--        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <scope>test</scope>
@@ -33,7 +38,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
             <scope>provided</scope>
-        </dependency>
+        </dependency>-->
 
         <!--Test-->
 <!--        <dependency>
@@ -48,7 +53,7 @@
         </dependency>-->
 
         <!-- Logging with SLF4J & LogBack -->
-        <dependency>
+<!--        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <scope>compile</scope>
@@ -62,11 +67,11 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <scope>runtime</scope>
-        </dependency>
+        </dependency>-->
 
-        <dependency>
+<!--        <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-servlet-api</artifactId>
-        </dependency>
+        </dependency>-->
     </dependencies>
 </project>
