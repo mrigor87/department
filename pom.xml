@@ -19,6 +19,7 @@
         <module>test-util</module>
         <module>server-soap</module>
         <module>server-rest-camel</module>
+        <module>dao</module>
 
 
     </modules>

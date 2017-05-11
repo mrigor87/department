@@ -6,7 +6,8 @@ package com.mrigor.tasks.department.to;
 public class DepartmentWithAverageSalary {
     private Integer id;
     private String name;
-    private Integer averageSalary;
+    //default value
+    private Integer averageSalary=0;
 
     public DepartmentWithAverageSalary(Integer id, String name, Integer averageSalary) {
         this.id = id;
