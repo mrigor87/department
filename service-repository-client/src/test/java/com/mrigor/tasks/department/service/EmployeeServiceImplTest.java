@@ -1,5 +1,6 @@
 package com.mrigor.tasks.department.service;
 
+import com.mrigor.tasks.department.model.Department;
 import com.mrigor.tasks.department.model.Employee;
 import com.mrigor.tasks.department.util.exception.NotFoundException;
 import org.junit.Test;
@@ -11,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Arrays;
 
+import static com.mrigor.tasks.department.DepTestData.DEP1;
 import static com.mrigor.tasks.department.DepTestData.DEP1_ID;
 import static com.mrigor.tasks.department.EmployeeTestData.*;
 import static java.time.LocalDate.of;
@@ -33,30 +35,30 @@ public class EmployeeServiceImplTest {
     @Test
     public void update() throws Exception {
         Employee updateEmpl=getUpdated();
-        updateEmpl.setDepartmentId(DEP1_ID);
+        updateEmpl.setDepartment(DEP1);
         service.update(updateEmpl);
-        MATCHER.assertCollectionEquals(Arrays.asList(EMPL2,EMPL3,updateEmpl), service.getByDep(DEP1_ID));
+        MATCHER_LIGHT.assertCollectionEquals(Arrays.asList(EMPL2,EMPL3,updateEmpl), service.getByDep(DEP1_ID));
     }
 
     @Test
     public void create() throws Exception {
         Employee createEmpl=getCreated();
-        createEmpl.setDepartmentId(DEP1_ID);
-        service.create(createEmpl);
-        MATCHER.assertCollectionEquals(Arrays.asList(EMPL1,createEmpl,EMPL2,EMPL3), service.getByDep(DEP1_ID));
+        createEmpl.setDepartment(DEP1);
+        Employee employee = service.create(createEmpl);
+        MATCHER_LIGHT.assertCollectionEquals(Arrays.asList(EMPL1,createEmpl,EMPL2,EMPL3), service.getByDep(DEP1_ID));
     }
 
     @Test(expected = NotFoundException.class)
     public void createException() throws Exception {
         Employee createEmpl=getCreated();
-        createEmpl.setDepartmentId(8);
+        createEmpl.setDepartment(new Department(8,"",null));
         service.create(createEmpl);
     }
 
     @Test(expected = NotFoundException.class)
     public void updateException() throws Exception {
         Employee updateEmpl=getUpdated();
-        updateEmpl.setDepartmentId(8);
+        updateEmpl.setDepartment(new Department(8,"",null));
         service.update(updateEmpl);
     }
 
@@ -65,7 +67,7 @@ public class EmployeeServiceImplTest {
     @Test
     public void delete() throws Exception {
         service.delete(EMPL1_ID);
-        MATCHER.assertCollectionEquals(Arrays.asList(EMPL2,EMPL3), service.getByDep(DEP1_ID));
+        MATCHER_LIGHT.assertCollectionEquals(Arrays.asList(EMPL2,EMPL3), service.getByDep(DEP1_ID));
     }
 
     @Test
@@ -86,7 +88,7 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void getBetweenDates() throws Exception {
-        MATCHER.assertCollectionEquals(Arrays.asList(EMPL5,EMPL4), service.getFiltered(of(1993,1,1),null,null));
+        MATCHER_LIGHT.assertCollectionEquals(Arrays.asList(EMPL5,EMPL4), service.getFiltered(of(1993,1,1),null,null));
     }
 
 

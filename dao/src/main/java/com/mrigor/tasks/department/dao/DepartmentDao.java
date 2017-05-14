@@ -4,6 +4,7 @@ import com.mrigor.tasks.department.model.Department;
 import com.mrigor.tasks.department.to.DepartmentWithAverageSalary;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.mapping.FetchType;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 /**
  * Created by igor on 011 11.05.17.
  */
+@Repository
 public interface DepartmentDao {
 
 
@@ -22,7 +24,8 @@ public interface DepartmentDao {
      */
     @Insert("INSERT INTO departments (name) VALUES (#{name})")
     @Options(useGeneratedKeys = true)
-    void insert(Department department);
+   // @SelectKey(statement="call next value for GLOBAL_SEQ", keyProperty="id", before=true, resultType=int.class)
+    int insert(Department department);
 
 
     /**
@@ -32,7 +35,7 @@ public interface DepartmentDao {
      * @return updated or created entity
      */
     @Update("UPDATE departments SET name=#{name} WHERE id=#{id}")
-    void update(Department department);
+    int update(Department department);
 
     @Delete("DELETE FROM DEPARTMENTS WHERE id=#{id}")
     boolean delete(int id);

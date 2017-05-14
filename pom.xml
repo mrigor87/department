@@ -9,7 +9,6 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
 
-        <module>repository</module>
         <module>service-api</module>
         <module>service-repository-client</module>
         <module>service-rest-client</module>
@@ -83,7 +82,7 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>repository</artifactId>
+                <artifactId>dao</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>

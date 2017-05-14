@@ -5,6 +5,7 @@ import com.mrigor.tasks.department.model.Department;
 import com.mrigor.tasks.department.model.Employee;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.jdbc.SQL;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 /**
  * Created by igor on 011 11.05.17.
  */
+@Repository
 public interface EmployeeDao {
 
     SQL sql = new SQL();
@@ -26,13 +28,13 @@ public interface EmployeeDao {
     // UPDATE EMPLOYEES SET FULLNAME=:fullName, BIRTHDAY=:birthday, SALARY=:salary WHERE id=:id
     @Options(useGeneratedKeys = true)
    // @ResultMap("com.mrigor.tasks.department.dao.EmployeeDao.EmployeeResult")
-    void insert(Employee employee);
+    int insert(Employee employee);
 
     // @Insert(value = "INSERT INTO employees (fullName,birthday,salary,department_id) VALUES (#{fullName},#{birthday},#{salary},#{departmentId})")
     @Update("UPDATE EMPLOYEES SET FULLNAME=#{fullName}, BIRTHDAY=#{birthDay}, SALARY=#{salary} WHERE id=#{id}")
     // UPDATE EMPLOYEES SET FULLNAME=:fullName, BIRTHDAY=:birthday, SALARY=:salary WHERE id=id
    // @ResultMap("com.mrigor.tasks.department.dao.EmployeeDao.EmployeeResult")
-    void update(Employee employee);
+    int update(Employee employee);
 
     /**
      * delete record of employee by id from database

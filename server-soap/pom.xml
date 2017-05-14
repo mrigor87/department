@@ -50,7 +50,7 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>repository</artifactId>
+            <artifactId>dao</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>

@@ -1,9 +1,11 @@
 package com.mrigor.tasks.department.service;
 
 
+import com.mrigor.tasks.department.dao.DepartmentDao;
+import com.mrigor.tasks.department.dao.EmployeeDao;
+import com.mrigor.tasks.department.model.Department;
 import com.mrigor.tasks.department.model.Employee;
-import com.mrigor.tasks.department.repository.DepartmentRepo;
-import com.mrigor.tasks.department.repository.EmployeeRepo;
+
 import com.mrigor.tasks.department.util.exception.ExceptionUtil;
 import com.mrigor.tasks.department.util.exception.NotFoundException;
 import org.slf4j.Logger;
@@ -26,13 +28,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     private static final Logger LOG = LoggerFactory.getLogger(EmployeeService.class);
 
     @Autowired
-    private EmployeeRepo repository;
+    private EmployeeDao repository;
 
     @Autowired
-    private DepartmentRepo departmentRepository;
+    private DepartmentDao departmentRepository;
 
 
-    public void setRepository(EmployeeRepo repository) {
+    public void setRepository(EmployeeDao repository) {
         this.repository = repository;
     }
 
@@ -40,21 +42,25 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee create(Employee employee) {
         LOG.debug("create new employee {}",employee);
         Assert.notNull(employee, "employee must not be null");
-        Employee savedEmployee;
         try {
-            savedEmployee = repository.save(employee);
+            //savedEmployee = repository.save(employee);
+            int insert = repository.insert(employee);
+         //   employee.setId(insert);
         } catch (DataIntegrityViolationException e) {
-            throw new NotFoundException("can't create new employee because department with id=" + employee.getDepartmentId() + " isn't exist");
+            throw new NotFoundException("can't create new employee because department with id=" + employee.getDepartment().getId() + " isn't exist");
         }
-        return savedEmployee;
+
+        return employee;
     }
 
     @Override
     public void update(Employee employee) throws NotFoundException {
         LOG.debug("update employee {}",employee);
         Assert.notNull(employee, "employee must not be null");
-        ExceptionUtil.checkNotFoundWithId(departmentRepository.get(employee.getDepartmentId()), employee.getDepartmentId());
-        ExceptionUtil.checkNotFoundWithId(repository.save(employee), employee.getId());
+       // ExceptionUtil.checkNotFoundWithId(departmentRepository.get(employee.getDepartmentId()), employee.getDepartmentId());
+        ExceptionUtil.checkNotFoundWithId(departmentRepository.get(employee.getDepartment().getId()), employee.getDepartment().getId());
+        int update = repository.update(employee);
+        ExceptionUtil.checkNotFoundWithId(update==1, employee.getId().intValue());
     }
 
     @Override
@@ -79,13 +85,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Employee> getByDep(int departmentId) {
         LOG.debug("get all employees from departmentsId={}",departmentId);
         ExceptionUtil.checkNotFoundWithId(departmentRepository.get(departmentId), departmentId);
-        return repository.getByDep(departmentId);
+        return repository.getByDepWithDepartment(departmentId);
     }
 
     @Override
     public List<Employee> getFiltered(LocalDate from, LocalDate to, Integer departmentId) {
         LOG.debug("get filteted employee, departmentId={}, from={}, to={}",departmentId,from,to);
-        return repository.getFiltered(from, to, departmentId);
+        Department dep=departmentId==null?null: departmentRepository.get(departmentId);
+        return repository.getFiltered(from, to, dep);
     }
 
 }

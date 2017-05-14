@@ -31,8 +31,8 @@ public class DepartmentServiceImplTest {
     @Test
     public void create() throws Exception {
         Department createDep=getCreated();
-        service.create(createDep);
-        MATCHER.assertCollectionEquals(Arrays.asList(DEP1,createDep,DEP2), service.getAll());
+        Department department = service.create(createDep);
+        MATCHER_LIGHT.assertCollectionEquals(Arrays.asList(DEP1,createDep,DEP2), service.getAll());
     }
 
 
@@ -40,14 +40,14 @@ public class DepartmentServiceImplTest {
     public void update() throws Exception {
         Department updateDep=getUpdated();
         service.update(updateDep);
-        MATCHER.assertCollectionEquals(Arrays.asList(DEP2,updateDep), service.getAll());
+        MATCHER_LIGHT.assertCollectionEquals(Arrays.asList(DEP2,updateDep), service.getAll());
     }
 
 
     @Test
     public void delete() throws Exception {
         service.delete(DEP1_ID);
-        MATCHER.assertCollectionEquals(Arrays.asList(DEP2), service.getAll());
+        MATCHER_LIGHT.assertCollectionEquals(Arrays.asList(DEP2), service.getAll());
     }
     @Test(expected = NotFoundException.class)
     public void deleteNotExist() throws Exception {
@@ -66,7 +66,7 @@ public class DepartmentServiceImplTest {
 
     @Test
     public void getAll() throws Exception {
-        MATCHER.assertCollectionEquals(Arrays.asList(DEP1,DEP2), service.getAll());
+        MATCHER_LIGHT.assertCollectionEquals(Arrays.asList(DEP1,DEP2), service.getAll());
     }
 
     @Test

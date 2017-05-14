@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
@@ -23,6 +24,7 @@ public class Department {
 
     private List<Employee> employeeList;
 
+
     public List<Employee> getEmployeeList() {
         return employeeList;
     }
@@ -36,6 +38,12 @@ public class Department {
         this.id = id;
         this.name = name;
     }*/
+    public Department (Department department){
+        this.id=department.id==null?null: new Integer(department.id);
+        this.name=department.name;
+        this.employeeList=department.employeeList==null?null: new ArrayList<>(employeeList);
+    }
+
     public Department(Integer id, String name, List<Employee> employeeList) {
         this.id = id;
         this.name = name;

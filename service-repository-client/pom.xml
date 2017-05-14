@@ -12,9 +12,14 @@
     <artifactId>service-repository-client</artifactId>
 
     <dependencies>
+
+<!--        <dependency>
+            <groupId>com.mrigor.tasks</groupId>
+            <artifactId>dao</artifactId>
+        </dependency>-->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>repository</artifactId>
+            <artifactId>dao</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>

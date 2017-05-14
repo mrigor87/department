@@ -44,7 +44,7 @@ public class EmployeeDaoImplTest {
 
     @Test
     public void create() throws Exception {
-        Employee createEmpl= EmployeeTestData.getCreated();
+        Employee createEmpl= ( EmployeeTestData.getCreated());
         createEmpl.setDepartment(DepTestData.DEP1);
         repository.insert(createEmpl);
         EmployeeTestData.MATCHER.assertCollectionEquals(Arrays.asList(EmployeeTestData.EMPL1,createEmpl, EmployeeTestData.EMPL2, EmployeeTestData.EMPL3), repository.getByDepWithDepartment(DepTestData.DEP1_ID));
@@ -52,7 +52,7 @@ public class EmployeeDaoImplTest {
 
    // @Test(expected = DataIntegrityViolationException.class)
     public void createException() throws Exception {
-        Employee createEmpl= EmployeeTestData.getCreated();
+        Employee createEmpl=new Employee( EmployeeTestData.getCreated());
       //  createEmpl.getDepartment().setId(8);
        // createEmpl.setDepartment(new Department(8,"errored",null));
         repository.insert(createEmpl);

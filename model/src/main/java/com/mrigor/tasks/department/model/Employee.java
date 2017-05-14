@@ -41,6 +41,13 @@ public class Employee {
         this.salary = salary;
         this.department = department;
     }
+public Employee (Employee employee){
+        this.id=employee.id==null?null: new Integer(employee.id);
+        this.fullName=employee.fullName;
+        this.birthDay=employee.birthDay==null?null: LocalDate.from(birthDay);
+        this.salary=employee.salary;
+        this.department=employee.department==null?null: new Department(employee.department);
+}
 
     public Employee(String fullName, LocalDate birthDay, int salary, Department department) {
         this(null, fullName, birthDay, salary, department);
