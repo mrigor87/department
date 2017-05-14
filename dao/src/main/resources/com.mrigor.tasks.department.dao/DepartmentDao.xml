@@ -28,6 +28,27 @@
     </resultMap>
 
 
+<!--    @Results(value = {
+    @Result(property = "id", column = "id"),
+    @Result(property = "name", column = "name"),
+    @Result(property = "employeeList", column = "id",
+    many = @Many(select = "com.mrigor.tasks.department.dao.EmployeeDao.getByDep"))
+    })
+    -->
+
+    <resultMap type="Department" id="DepartmentResult">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <!--        <association property="department"  resultMap="DepartmentResult"/>-->
+        <collection property="employeeList"
+                     column="id"
+                     select="com.mrigor.tasks.department.dao.EmployeeDao.getByDep"/>
+        <!--            <result column="id" property="id"/>
+                    <result column="name" property="name"/>
+                </association>-->
+
+    </resultMap>
+
 
 <!--    <resultMap type="Department" id="DepartmentResult">
         <id property="id" column="id"/>

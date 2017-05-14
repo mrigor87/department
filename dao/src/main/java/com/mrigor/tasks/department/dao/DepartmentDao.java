@@ -47,12 +47,7 @@ public interface DepartmentDao {
     })*/
 
     @Select("SELECT * FROM departments WHERE  id = #{id}")
-    @Results(value = {
-            @Result(property = "id", column = "id"),
-            @Result(property = "name", column = "name"),
-            @Result(property = "employeeList", column = "id",
-                    many = @Many(select = "com.mrigor.tasks.department.dao.EmployeeDao.getByDep2"))
-    })
+    @ResultMap("com.mrigor.tasks.department.dao.DepartmentDao.DepartmentResult")
     Department getWithEmployees(int id);
 
 
@@ -63,6 +58,13 @@ public interface DepartmentDao {
      * @return entity or null if not found
      */
     @Select("SELECT * FROM departments WHERE  id = #{id}")
+    @Results(value = {
+            @Result(property = "id", column = "id"),
+            @Result(property = "name", column = "name")
+/*            ,
+            @Result(property = "employeeList", column = "id",
+                    many = @Many(select = "com.mrigor.tasks.department.dao.EmployeeDao.getByDep"))*/
+    })
     Department get(int id);
 
     /**
@@ -71,6 +73,12 @@ public interface DepartmentDao {
      * @return List all entities
      */
     @Select("SELECT * FROM departments  ORDER BY name")
+/*    @Results(value = {
+            @Result(property = "id", column = "id"),
+            @Result(property = "name", column = "name"),
+            @Result(property = "employeeList", column = "id",
+                    many = @Many(select = "com.mrigor.tasks.department.dao.EmployeeDao.getByDep"))
+    })*/
     List<Department> getAll();
 
     /**

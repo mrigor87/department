@@ -28,7 +28,7 @@ public class ModelMatcher<T> {
     public Comparator<T> comparator;
     private Class<T> entityClass;
 
-    private interface Comparator<T> {
+    public interface Comparator<T> {
         boolean compare(T expected, T actual);
     }
 
@@ -165,5 +165,9 @@ public class ModelMatcher<T> {
                         return expectedList.equals(actualList);
                     }
                 });
+    }
+
+    public static <T> ModelMatcher<T> of(Class<T> entityClass, Comparator<T> comparator) {
+        return new ModelMatcher<>(entityClass, comparator);
     }
 }

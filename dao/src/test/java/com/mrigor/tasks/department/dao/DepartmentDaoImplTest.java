@@ -29,50 +29,51 @@ import static com.mrigor.tasks.department.DepTestData.*;
 public class DepartmentDaoImplTest {
 
     @Autowired
-    private DepartmentDao repository;
+    private DepartmentDao dao;
 
     @Test
     public void update() throws Exception {
         Department updateDep = getUpdated();
-        repository.update(updateDep);
-        MATCHER.assertCollectionEquals(Arrays.asList(DEP2, updateDep), repository.getAll());
+        dao.update(updateDep);
+        MATCHER_LIGHT.assertCollectionEquals(Arrays.asList(DEP2, updateDep), dao.getAll());
     }
 
     @Test
     public void create() throws Exception {
         Department createDep = getCreated();
-        repository.insert(createDep);
-        MATCHER.assertCollectionEquals(Arrays.asList(DEP1, createDep, DEP2), repository.getAll());
+        dao.insert(createDep);
+        MATCHER_LIGHT.assertCollectionEquals(Arrays.asList(DEP1, createDep, DEP2), dao.getAll());
     }
 
     @Test
     public void delete() throws Exception {
-        repository.delete(DEP1_ID);
-        MATCHER.assertCollectionEquals(Arrays.asList(DEP2), repository.getAll());
+        dao.delete(DEP1_ID);
+        MATCHER_LIGHT.assertCollectionEquals(Arrays.asList(DEP2), dao.getAll());
     }
 
     @Test
     public void get() throws Exception {
-        Department dep = repository.get(DEP1_ID);
-        MATCHER.assertEquals(dep, DEP1);
+        Department dep = dao.get(DEP1_ID);
+        MATCHER_LIGHT.assertEquals(dep, DEP1);
 
     }
 
     @Test
     public void getWithEmployees() throws Exception {
-        Department dep = repository.getWithEmployees(DEP1_ID);
-        MATCHER.assertEquals(dep, DEP1);
+        Department dep = dao.getWithEmployees(DEP1_ID);
+
+        MATCHER.assertEquals( DEP1,dep);
 
     }
 
     @Test
     public void getAll() throws Exception {
-        MATCHER.assertCollectionEquals(Arrays.asList(DEP1, DEP2), repository.getAll());
+        MATCHER_LIGHT.assertCollectionEquals(Arrays.asList(DEP1, DEP2), dao.getAll());
     }
 
     @Test
     public void getAllWithAvgSalary() throws Exception {
-        MATCHER_WITH_SALARY.assertCollectionEquals(repository.getAllWithAvgSalary(), DEP_WITH_AVG_SALARY);
+        MATCHER_WITH_SALARY.assertCollectionEquals(dao.getAllWithAvgSalary(), DEP_WITH_AVG_SALARY);
 
     }
 
@@ -82,8 +83,8 @@ public class DepartmentDaoImplTest {
         DepartmentWithAverageSalary newRecord = new DepartmentWithAverageSalary(100007, "test", 0);
         newTestDepWithSal.add(newRecord);
         Department newEmptyDep = new Department("test");
-        repository.insert(newEmptyDep);
-        MATCHER_WITH_SALARY.assertCollectionEquals(repository.getAllWithAvgSalary(), newTestDepWithSal);
+        dao.insert(newEmptyDep);
+        MATCHER_WITH_SALARY.assertCollectionEquals(dao.getAllWithAvgSalary(), newTestDepWithSal);
 
     }
 

@@ -1,7 +1,10 @@
 package com.mrigor.tasks.department.dao;
 
+import com.mrigor.tasks.department.dao.sqlproviders.DynamicSQL;
+import com.mrigor.tasks.department.model.Department;
 import com.mrigor.tasks.department.model.Employee;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.jdbc.SQL;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -10,6 +13,8 @@ import java.util.List;
  * Created by igor on 011 11.05.17.
  */
 public interface EmployeeDao {
+
+    SQL sql = new SQL();
 
     /**
      * update or create new record of employee in database
@@ -47,14 +52,6 @@ public interface EmployeeDao {
      */
     @Select("SELECT * FROM employees WHERE  id=#{id}")
     @ResultMap("com.mrigor.tasks.department.dao.EmployeeDao.EmployeeResult")
-/*    @Results({
-            @Result(id=true, column="id", property="id"),
-            @Result(column="fullname", property="fullName"),
-            @Result(column="birthday", property="birthDay"),
-            @Result(column="salary", property="salary"),
-            @Result(property="department", column="department_id",
-                    one=@One(select="com.mrigor.tasks.department.dao.DepartmentDao.get"))
-    })*/
     Employee get(int id);
 
     /**
@@ -64,12 +61,18 @@ public interface EmployeeDao {
      */
     @Select("SELECT * FROM employees  ORDER BY FULLNAME")
     @ResultMap("com.mrigor.tasks.department.dao.EmployeeDao.EmployeeResult")
-
     List<Employee> getAll();
 
 
     @Select("SELECT * FROM EMPLOYEES WHERE EMPLOYEES.DEPARTMENT_ID=#{departmentId} ORDER BY FULLNAME")
-    List<Employee> getByDep2(int departmentId);
+    @Results({
+            @Result(id = true, column = "id", property = "id"),
+            @Result(column = "fullname", property = "fullName"),
+            @Result(column = "birthday", property = "birthDay"),
+            @Result(column = "salary", property = "salary")
+    })
+    List<Employee> getByDep(int departmentId);
+
     /**
      * get all employees by department from database
      *
@@ -86,13 +89,15 @@ public interface EmployeeDao {
      *
      * @param from         day of birth
      * @param to           day of birth
-     * @param departmentId identifier of department
+   //  * @param departmentId identifier of department
      * @return employee's list or empty list if missing
      */
-    @Select("SELECT * FROM EMPLOYEES WHERE (BIRTHDAY BETWEEN  #{from} AND #{to})  ORDER BY FULLNAME")
+    // @Select("SELECT * FROM EMPLOYEES WHERE (BIRTHDAY BETWEEN  #{from} AND #{to})  ORDER BY FULLNAME")
     //@Select("SELECT * FROM EMPLOYEES WHERE birthday=#{from}  ORDER BY FULLNAME")
     //@Select("SELECT * FROM EMPLOYEES WHERE birthday BETWEEN  #{from} and #{from}  ORDER BY FULLNAME")
     //@Select("SELECT * FROM EMPLOYEES WHERE (BIRTHDAY BETWEEN WHERE birthday= #{to,jdbcType = DATE}")
-    List<Employee> getFiltered(@Param("from") LocalDate from, @Param("to") LocalDate to, @Param("departmentid") Integer departmentId);
+    @SelectProvider(type = DynamicSQL.class, method = "selectFilteredEmployees")
+    //@ResultMap("com.mrigor.tasks.department.dao.EmployeeDao.EmployeeResult")
+    List<Employee> getFiltered(LocalDate from,LocalDate to, Department department);
 
 }
