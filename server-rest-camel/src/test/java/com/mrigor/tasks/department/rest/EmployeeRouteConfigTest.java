@@ -77,7 +77,7 @@ public class EmployeeRouteConfigTest  {
             public void process(Exchange exchange) throws Exception {
                 exchange.getIn().setHeader("id", updated.getId());
                 exchange.getIn().setHeader("birthDay", updated.getBirthDay().toString());
-                exchange.getIn().setHeader("departmentId", updated.getDepartmentId());
+       //         exchange.getIn().setHeader("departmentId", updated.getDepartmentId());
                 exchange.getIn().setHeader("fullName", updated.getFullName());
                 exchange.getIn().setHeader("salary", updated.getSalary());
             }
@@ -100,7 +100,7 @@ public class EmployeeRouteConfigTest  {
             public void process(Exchange exchange) throws Exception {
                 exchange.getIn().setHeader("id", expected.getId());
                 exchange.getIn().setHeader("birthDay", expected.getBirthDay().toString());
-                exchange.getIn().setHeader("departmentId", expected.getDepartmentId());
+              //  exchange.getIn().setHeader("departmentId", expected.getDepartmentId());
                 exchange.getIn().setHeader("fullName", expected.getFullName());
                 exchange.getIn().setHeader("salary", expected.getSalary());
             }

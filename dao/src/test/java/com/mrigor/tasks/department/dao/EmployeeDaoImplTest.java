@@ -2,6 +2,7 @@ package com.mrigor.tasks.department.dao;
 
 import com.mrigor.tasks.department.DepTestData;
 import com.mrigor.tasks.department.EmployeeTestData;
+import com.mrigor.tasks.department.model.Department;
 import com.mrigor.tasks.department.model.Employee;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,7 +34,7 @@ public class EmployeeDaoImplTest {
     @Test
     public void update() throws Exception {
         Employee updateEmpl= EmployeeTestData.getUpdated();
-        updateEmpl.setDepartmentId(DepTestData.DEP1_ID);
+        updateEmpl.setDepartment(DepTestData.DEP1);
         repository.update(updateEmpl);
         EmployeeTestData.MATCHER.assertCollectionEquals(Arrays.asList(EmployeeTestData.EMPL2, EmployeeTestData.EMPL3,updateEmpl), repository.getByDep(DepTestData.DEP1_ID));
     }
@@ -41,7 +42,7 @@ public class EmployeeDaoImplTest {
     @Test
     public void create() throws Exception {
         Employee createEmpl= EmployeeTestData.getCreated();
-        createEmpl.setDepartmentId(DepTestData.DEP1_ID);
+        createEmpl.setDepartment(DepTestData.DEP1);
         repository.insert(createEmpl);
         EmployeeTestData.MATCHER.assertCollectionEquals(Arrays.asList(EmployeeTestData.EMPL1,createEmpl, EmployeeTestData.EMPL2, EmployeeTestData.EMPL3), repository.getByDep(DepTestData.DEP1_ID));
     }
@@ -49,7 +50,8 @@ public class EmployeeDaoImplTest {
     @Test(expected = DataIntegrityViolationException.class)
     public void createException() throws Exception {
         Employee createEmpl= EmployeeTestData.getCreated();
-        createEmpl.setDepartmentId(8);
+        createEmpl.getDepartment().setId(8);
+       // createEmpl.setDepartment(new Department(8,"errored",null));
         repository.insert(createEmpl);
     }
 

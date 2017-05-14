@@ -27,8 +27,12 @@
         <result property="averageSalary" column="averagesalary"/>
     </resultMap>
 
-    <resultMap type="Department" id="DepartmentResult">
-        <id 	property="id" column="id"/>
+
+
+<!--    <resultMap type="Department" id="DepartmentResult">
+        <id property="id" column="id"/>
         <result property="name" column="name"/>
-    </resultMap>
+        <collection property="employeeList" select="com.mrigor.tasks.department.dao.EmployeeDao.get"
+    </resultMap>-->
+
 </mapper>

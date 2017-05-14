@@ -3,7 +3,9 @@ package com.mrigor.tasks.department.dao;
 import com.mrigor.tasks.department.model.Department;
 import com.mrigor.tasks.department.to.DepartmentWithAverageSalary;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.mapping.FetchType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,6 +16,7 @@ public interface DepartmentDao {
 
     /**
      * update or create new record of department in database
+     *
      * @param department
      * @return updated or created entity
      */
@@ -22,9 +25,9 @@ public interface DepartmentDao {
     void insert(Department department);
 
 
-
     /**
      * update or create new record of department in database
+     *
      * @param department
      * @return updated or created entity
      */
@@ -34,8 +37,28 @@ public interface DepartmentDao {
     @Delete("DELETE FROM DEPARTMENTS WHERE id=#{id}")
     boolean delete(int id);
 
+/*               @Results({
+            @Result(id=true, column="id", property="id"),
+            @Result(column="fullname", property="fullName"),
+            @Result(column="birthday", property="birthDay"),
+            @Result(column="salary", property="salary"),
+            @Result(property="department", column="department_id",
+                    one=@One(select="com.mrigor.tasks.department.dao.DepartmentDao.get"))
+    })*/
+
+    @Select("SELECT * FROM departments WHERE  id = #{id}")
+    @Results(value = {
+            @Result(property = "id", column = "id"),
+            @Result(property = "name", column = "name"),
+            @Result(property = "employeeList", column = "id",
+                    many = @Many(select = "com.mrigor.tasks.department.dao.EmployeeDao.getByDep2"))
+    })
+    Department getWithEmployees(int id);
+
+
     /**
      * get record of department by id from database
+     *
      * @param id entity identifier
      * @return entity or null if not found
      */
@@ -44,6 +67,7 @@ public interface DepartmentDao {
 
     /**
      * get all departments from database
+     *
      * @return List all entities
      */
     @Select("SELECT * FROM departments  ORDER BY name")
@@ -51,6 +75,7 @@ public interface DepartmentDao {
 
     /**
      * get all entity with information about average salary
+     *
      * @return List all entities
      */
     @Select(

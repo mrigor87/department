@@ -23,33 +23,36 @@ public class Employee {
     private Integer id;
     private String fullName;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd" )
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
 /*@ApiModelProperty(dataType ="string",example = "2016-01-01")*/
     private LocalDate birthDay;
     private int salary;
     //@JsonIgnore
-    private Integer departmentId;
+    //private Integer departmentId;
+    private Department department;
 
-    public Employee(Integer id, String fullName, LocalDate birthDay, int salary, Integer departmentId) {
+    public Employee(Integer id, String fullName, LocalDate birthDay, int salary, Department department) {
         this.id = id;
         this.fullName = fullName;
         this.birthDay = birthDay;
         this.salary = salary;
-        this.departmentId = departmentId;
+        this.department = department;
     }
 
-    public Employee(String fullName, LocalDate birthDay, int salary, Integer departmentId) {
-        this(null, fullName, birthDay, salary, departmentId);
+    public Employee(String fullName, LocalDate birthDay, int salary, Department department) {
+        this(null, fullName, birthDay, salary, department);
     }
-    public Employee(Integer id,String fullName, LocalDate birthDay, int salary) {
+
+    public Employee(Integer id, String fullName, LocalDate birthDay, int salary) {
         this(id, fullName, birthDay, salary, null);
     }
 
     public Employee(String fullName, LocalDate birthDay, int salary) {
         this(null, fullName, birthDay, salary, null);
     }
+
     public Integer getId() {
         return id;
     }
@@ -84,18 +87,19 @@ public class Employee {
         this.salary = salary;
     }
 
-    public Integer getDepartmentId() {
-        return departmentId;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setDepartmentId(Integer departmentId) {
-        this.departmentId = departmentId;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public Employee() {
     }
-    public boolean isNew(){
-        return id==null;
+
+    public boolean isNew() {
+        return id == null;
     }
 
     @Override
@@ -105,6 +109,7 @@ public class Employee {
                 ", fullName='" + fullName + '\'' +
                 ", birthDay=" + birthDay +
                 ", salary=" + salary +
+                ", department=" + department +
                 '}';
     }
 }

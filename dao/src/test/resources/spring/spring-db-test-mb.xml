@@ -40,7 +40,7 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="typeAliasesPackage" value="com.mrigor.tasks.department.model"/>
-<!--        <property name="mapperLocations" value="classpath*:com.mrigor.tasks.department.dao/**/*.xml" />-->
+        <property name="mapperLocations" value="classpath*:com.mrigor.tasks.department.dao/**/*.xml" />
     </bean>
 
     <!-- scan for mappers and let them be autowired -->

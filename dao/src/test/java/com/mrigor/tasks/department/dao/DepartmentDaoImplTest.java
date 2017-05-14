@@ -59,6 +59,13 @@ public class DepartmentDaoImplTest {
     }
 
     @Test
+    public void getWithEmployees() throws Exception {
+        Department dep = repository.getWithEmployees(DEP1_ID);
+        MATCHER.assertEquals(dep, DEP1);
+
+    }
+
+    @Test
     public void getAll() throws Exception {
         MATCHER.assertCollectionEquals(Arrays.asList(DEP1, DEP2), repository.getAll());
     }

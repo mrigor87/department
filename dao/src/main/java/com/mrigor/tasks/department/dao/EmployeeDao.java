@@ -17,14 +17,16 @@ public interface EmployeeDao {
      * @param employee
      * @return updated or created entity
      */
-    @Insert(value = "INSERT INTO employees (fullName,birthday,salary,department_id) VALUES (#{fullName},#{birthDay},#{salary},#{departmentId})")
+    @Insert(value = "INSERT INTO employees (fullName,birthday,salary,department_id) VALUES (#{fullName},#{birthDay},#{salary},#{department.id})")
     // UPDATE EMPLOYEES SET FULLNAME=:fullName, BIRTHDAY=:birthday, SALARY=:salary WHERE id=:id
     @Options(useGeneratedKeys = true)
+    @ResultMap("com.mrigor.tasks.department.dao.EmployeeDao.EmployeeResult")
     void insert(Employee employee);
 
     // @Insert(value = "INSERT INTO employees (fullName,birthday,salary,department_id) VALUES (#{fullName},#{birthday},#{salary},#{departmentId})")
     @Update("UPDATE EMPLOYEES SET FULLNAME=#{fullName}, BIRTHDAY=#{birthDay}, SALARY=#{salary} WHERE id=#{id}")
     // UPDATE EMPLOYEES SET FULLNAME=:fullName, BIRTHDAY=:birthday, SALARY=:salary WHERE id=id
+    @ResultMap("com.mrigor.tasks.department.dao.EmployeeDao.EmployeeResult")
     void update(Employee employee);
 
     /**
@@ -34,6 +36,7 @@ public interface EmployeeDao {
      * @return false if not found
      */
     @Delete("DELETE FROM employees WHERE id=#{id}")
+    @ResultMap("com.mrigor.tasks.department.dao.EmployeeDao.EmployeeResult")
     boolean delete(int id);
 
     /**
@@ -43,6 +46,15 @@ public interface EmployeeDao {
      * @return entity or null if not found
      */
     @Select("SELECT * FROM employees WHERE  id=#{id}")
+    @ResultMap("com.mrigor.tasks.department.dao.EmployeeDao.EmployeeResult")
+/*    @Results({
+            @Result(id=true, column="id", property="id"),
+            @Result(column="fullname", property="fullName"),
+            @Result(column="birthday", property="birthDay"),
+            @Result(column="salary", property="salary"),
+            @Result(property="department", column="department_id",
+                    one=@One(select="com.mrigor.tasks.department.dao.DepartmentDao.get"))
+    })*/
     Employee get(int id);
 
     /**
@@ -51,8 +63,13 @@ public interface EmployeeDao {
      * @return List all entities
      */
     @Select("SELECT * FROM employees  ORDER BY FULLNAME")
+    @ResultMap("com.mrigor.tasks.department.dao.EmployeeDao.EmployeeResult")
+
     List<Employee> getAll();
 
+
+    @Select("SELECT * FROM EMPLOYEES WHERE EMPLOYEES.DEPARTMENT_ID=#{departmentId} ORDER BY FULLNAME")
+    List<Employee> getByDep2(int departmentId);
     /**
      * get all employees by department from database
      *
@@ -60,7 +77,8 @@ public interface EmployeeDao {
      * @return employee's list, or empty list if missing
      */
     @Select("SELECT * FROM EMPLOYEES WHERE EMPLOYEES.DEPARTMENT_ID=#{departmentId} ORDER BY FULLNAME")
-    List<Employee> getByDep(int departmentId);
+    @ResultMap("com.mrigor.tasks.department.dao.EmployeeDao.EmployeeResult")
+    List<Employee> getByDepWithDepartment(int departmentId);
 
     /**
      * get all employees by filter from database
