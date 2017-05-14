@@ -37,14 +37,6 @@ public interface DepartmentDao {
     @Delete("DELETE FROM DEPARTMENTS WHERE id=#{id}")
     boolean delete(int id);
 
-/*               @Results({
-            @Result(id=true, column="id", property="id"),
-            @Result(column="fullname", property="fullName"),
-            @Result(column="birthday", property="birthDay"),
-            @Result(column="salary", property="salary"),
-            @Result(property="department", column="department_id",
-                    one=@One(select="com.mrigor.tasks.department.dao.DepartmentDao.get"))
-    })*/
 
     @Select("SELECT * FROM departments WHERE  id = #{id}")
     @ResultMap("com.mrigor.tasks.department.dao.DepartmentDao.DepartmentResult")
@@ -61,9 +53,6 @@ public interface DepartmentDao {
     @Results(value = {
             @Result(property = "id", column = "id"),
             @Result(property = "name", column = "name")
-/*            ,
-            @Result(property = "employeeList", column = "id",
-                    many = @Many(select = "com.mrigor.tasks.department.dao.EmployeeDao.getByDep"))*/
     })
     Department get(int id);
 
@@ -73,12 +62,6 @@ public interface DepartmentDao {
      * @return List all entities
      */
     @Select("SELECT * FROM departments  ORDER BY name")
-/*    @Results(value = {
-            @Result(property = "id", column = "id"),
-            @Result(property = "name", column = "name"),
-            @Result(property = "employeeList", column = "id",
-                    many = @Many(select = "com.mrigor.tasks.department.dao.EmployeeDao.getByDep"))
-    })*/
     List<Department> getAll();
 
     /**
@@ -93,6 +76,5 @@ public interface DepartmentDao {
                     "GROUP BY d.ID " +
                     "ORDER  BY d.NAME"
     )
-    //@ResultMap("com.mrigor.tasks.department.dao.DepartmentDao.DepartmentWithAverageSalaryResult")
     List<DepartmentWithAverageSalary> getAllWithAvgSalary();
 }

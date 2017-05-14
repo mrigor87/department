@@ -25,13 +25,13 @@ public interface EmployeeDao {
     @Insert(value = "INSERT INTO employees (fullName,birthday,salary,department_id) VALUES (#{fullName},#{birthDay},#{salary},#{department.id})")
     // UPDATE EMPLOYEES SET FULLNAME=:fullName, BIRTHDAY=:birthday, SALARY=:salary WHERE id=:id
     @Options(useGeneratedKeys = true)
-    @ResultMap("com.mrigor.tasks.department.dao.EmployeeDao.EmployeeResult")
+   // @ResultMap("com.mrigor.tasks.department.dao.EmployeeDao.EmployeeResult")
     void insert(Employee employee);
 
     // @Insert(value = "INSERT INTO employees (fullName,birthday,salary,department_id) VALUES (#{fullName},#{birthday},#{salary},#{departmentId})")
     @Update("UPDATE EMPLOYEES SET FULLNAME=#{fullName}, BIRTHDAY=#{birthDay}, SALARY=#{salary} WHERE id=#{id}")
     // UPDATE EMPLOYEES SET FULLNAME=:fullName, BIRTHDAY=:birthday, SALARY=:salary WHERE id=id
-    @ResultMap("com.mrigor.tasks.department.dao.EmployeeDao.EmployeeResult")
+   // @ResultMap("com.mrigor.tasks.department.dao.EmployeeDao.EmployeeResult")
     void update(Employee employee);
 
     /**
@@ -41,7 +41,7 @@ public interface EmployeeDao {
      * @return false if not found
      */
     @Delete("DELETE FROM employees WHERE id=#{id}")
-    @ResultMap("com.mrigor.tasks.department.dao.EmployeeDao.EmployeeResult")
+  //  @ResultMap("com.mrigor.tasks.department.dao.EmployeeDao.EmployeeResult")
     boolean delete(int id);
 
     /**
@@ -92,12 +92,7 @@ public interface EmployeeDao {
    //  * @param departmentId identifier of department
      * @return employee's list or empty list if missing
      */
-    // @Select("SELECT * FROM EMPLOYEES WHERE (BIRTHDAY BETWEEN  #{from} AND #{to})  ORDER BY FULLNAME")
-    //@Select("SELECT * FROM EMPLOYEES WHERE birthday=#{from}  ORDER BY FULLNAME")
-    //@Select("SELECT * FROM EMPLOYEES WHERE birthday BETWEEN  #{from} and #{from}  ORDER BY FULLNAME")
-    //@Select("SELECT * FROM EMPLOYEES WHERE (BIRTHDAY BETWEEN WHERE birthday= #{to,jdbcType = DATE}")
     @SelectProvider(type = DynamicSQL.class, method = "selectFilteredEmployees")
-    //@ResultMap("com.mrigor.tasks.department.dao.EmployeeDao.EmployeeResult")
     List<Employee> getFiltered(LocalDate from,LocalDate to, Department department);
 
 }
