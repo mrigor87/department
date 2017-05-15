@@ -91,14 +91,14 @@ public class EmployeeDaoImplTest {
 
     @Test
     public void getByDep() throws Exception {
-        EmployeeTestData.MATCHER_LIGHT.assertCollectionEquals(EmployeeTestData.EMPL_D1, repository.getByDep(DepTestData.DEP1_ID));
+        EmployeeTestData.MATCHER.assertCollectionEquals(EmployeeTestData.EMPL_D1_WITHOUT_DEP, repository.getByDep(DepTestData.DEP1_ID));
     }
 
     @Test
     public void getBetweenDates() throws Exception {
         //DynamicSQL dynamicSQL=new DynamicSQL();
         //String s = dynamicSQL.selectFilteredEmployees(of(1993, 1, 1), null, DEP1);
-        EmployeeTestData.MATCHER_LIGHT.assertCollectionEquals(Arrays.asList(EmployeeTestData.EMPL5, EmployeeTestData.EMPL4), repository.getFiltered(of(1993,1,1),null,null));
+        EmployeeTestData.MATCHER.assertCollectionEquals(Arrays.asList(EmployeeTestData.EMPL5, EmployeeTestData.EMPL4), repository.getFiltered(of(1993,1,1),null,null));
     }
 
 /*    @Test

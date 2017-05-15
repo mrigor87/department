@@ -14,6 +14,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.mrigor.tasks.department.DepTestData.*;
+import static com.mrigor.tasks.department.EmployeeTestData.EMPL_D1;
+import static com.mrigor.tasks.department.EmployeeTestData.EMPL_D1_WITHOUT_DEP;
 
 
 /**
@@ -21,55 +23,56 @@ import static com.mrigor.tasks.department.DepTestData.*;
  */
 
 @ContextConfiguration({
-      //  "classpath:spring/spring-app-test.xml",
+        //  "classpath:spring/spring-app-test.xml",
         "classpath:spring/spring-db-test-mb.xml"
 })
 @RunWith(SpringJUnit4ClassRunner.class)
-//@Sql(scripts = "classpath:db/populateDB.sql")
+@Sql(scripts = "classpath:db/populateDB.sql")
 public class DepartmentDaoImplTest {
 
     @Autowired
     private DepartmentDao dao;
 
-  //  @Test
+      @Test
     public void update() throws Exception {
-        Department updateDep =new Department(getUpdated());
+        Department updateDep = new Department(getUpdated());
         int update = dao.update(updateDep);
-        MATCHER_LIGHT.assertCollectionEquals(Arrays.asList(DEP2, updateDep), dao.getAll());
+        MATCHER.assertCollectionEquals(Arrays.asList(DEP2, updateDep), dao.getAll());
     }
 
-   // @Test
+    // @Test
 /*    public void updateError() throws Exception {
         Department updateDep = getCreated();
         int update = dao.update(updateDep);
         MATCHER_LIGHT.assertCollectionEquals(Arrays.asList(DEP2, updateDep), dao.getAll());
     }*/
 
-  //  @Test
+      @Test
     public void create() throws Exception {
-        Department createDep =new Department( getCreated());
+        Department createDep = getCreated();
         int insert = dao.insert(createDep);
-        MATCHER_LIGHT.assertCollectionEquals(Arrays.asList(DEP1, createDep, DEP2), dao.getAll());
+        MATCHER.assertCollectionEquals(Arrays.asList(DEP1, createDep, DEP2), dao.getAll());
     }
 
- //   @Test
+    //   @Test
     public void delete() throws Exception {
         dao.delete(DEP1_ID);
-        MATCHER_LIGHT.assertCollectionEquals(Arrays.asList(DEP2), dao.getAll());
+        MATCHER.assertCollectionEquals(Arrays.asList(DEP2), dao.getAll());
     }
 
- //   @Test
+    @Test
     public void get() throws Exception {
         Department dep = dao.get(DEP1_ID);
-        MATCHER_LIGHT.assertEquals(dep, DEP1);
+        MATCHER.assertEquals(dep, DEP1);
 
     }
 
- //   @Test
+    @Test
     public void getWithEmployees() throws Exception {
         Department dep = dao.getWithEmployees(DEP1_ID);
-
-        MATCHER.assertEquals( DEP1,dep);
+        Department testDep=new Department(DEP1);
+        testDep.setEmployeeList(EMPL_D1_WITHOUT_DEP);
+        MATCHER.assertEquals(testDep, dep);
 
     }
 
@@ -77,16 +80,16 @@ public class DepartmentDaoImplTest {
     public void getAll() throws Exception {
         dao.getAll();
         Arrays.asList(DEP1, DEP2);
-       // MATCHER_LIGHT.assertCollectionEquals(Arrays.asList(DEP1, DEP2), dao.getAll());
+         MATCHER.assertCollectionEquals(Arrays.asList(DEP1, DEP2), dao.getAll());
     }
 
- //   @Test
+       @Test
     public void getAllWithAvgSalary() throws Exception {
         MATCHER_WITH_SALARY.assertCollectionEquals(dao.getAllWithAvgSalary(), DEP_WITH_AVG_SALARY);
 
     }
 
-   // @Test
+    // @Test
     public void getAllWithAvgSalaryWithEmptyDep() throws Exception {
         List<DepartmentWithAverageSalary> newTestDepWithSal = new ArrayList<>(DEP_WITH_AVG_SALARY);
         DepartmentWithAverageSalary newRecord = new DepartmentWithAverageSalary(100007, "test", 0);
@@ -96,8 +99,9 @@ public class DepartmentDaoImplTest {
         MATCHER_WITH_SALARY.assertCollectionEquals(dao.getAllWithAvgSalary(), newTestDepWithSal);
 
     }
+
     @Test
-    public void tt(){
+    public void tt() {
         dao.getAll();
     }
 

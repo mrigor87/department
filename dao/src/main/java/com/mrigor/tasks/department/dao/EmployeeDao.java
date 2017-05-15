@@ -95,6 +95,7 @@ public interface EmployeeDao {
      * @return employee's list or empty list if missing
      */
     @SelectProvider(type = DynamicSQL.class, method = "selectFilteredEmployees")
+    @ResultMap("com.mrigor.tasks.department.dao.EmployeeDao.EmployeeResult")
     List<Employee> getFiltered(LocalDate from,LocalDate to, Department department);
 
 }
