@@ -356,6 +356,12 @@
         },
         "name" : {
           "type" : "string"
+        },
+        "employeeList" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Employee"
+          }
         }
       }
     },
@@ -393,9 +399,8 @@
           "type" : "integer",
           "format" : "int32"
         },
-        "departmentId" : {
-          "type" : "integer",
-          "format" : "int32"
+        "department" : {
+          "$ref" : "#/definitions/Department"
         }
       }
     }

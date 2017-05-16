@@ -5,6 +5,7 @@
 |Name|Description|Required|Schema|Default
 |id||false|integer (int32)|
 |name||false|string|
+|employeeList||false|<<Employee>> array|
 |===
 
 === DepartmentWithAverageSalary
@@ -24,6 +25,6 @@
 |fullName||false|string|
 |birthDay||false|string (date)|
 |salary||false|integer (int32)|
-|departmentId||false|integer (int32)|
+|department||false|<<Department>>|
 |===
 

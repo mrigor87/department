@@ -1,16 +1,22 @@
 package com.mrigor.tasks.department.web;
 
+import com.mrigor.tasks.department.model.Department;
 import com.mrigor.tasks.department.model.Employee;
 import com.mrigor.tasks.department.service.EmployeeService;
+import org.omg.CORBA.portable.ResponseHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
@@ -70,12 +76,16 @@ public class EmployeeController {
      * @return  entity with response
      */
     @PostMapping
-    public ResponseEntity<String> createOrUpdate(Employee employee, BindingResult result) {
+   // @RequestMapping
+    public ResponseEntity<String>  createOrUpdate(HttpSession session, Employee employee, BindingResult result) {
         if (result.hasErrors()) {
             StringBuilder sb = new StringBuilder();
             result.getFieldErrors().forEach(fe -> sb.append(fe.getField()).append(" ").append(fe.getDefaultMessage()).append("<br>"));
             return new ResponseEntity<>(sb.toString(), HttpStatus.UNPROCESSABLE_ENTITY);
         }
+        Department department=(Department) session.getAttribute("department");
+        department.setEmployeeList(null);
+        employee.setDepartment(department);
         if (employee.isNew()) {
             LOG.debug("create or update employee {}",employee);
             service.create(employee);

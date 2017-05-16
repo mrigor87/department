@@ -49,7 +49,7 @@ public class EmployeeTestData {
 
 
     public static Employee getCreated() {
-        return new Employee("New employee", of(1960, 10, 10), 100, null);
+        return new Employee("New employee", of(1960, 10, 10), 100, DEP1);
     }
 
     public static Employee getUpdated() {

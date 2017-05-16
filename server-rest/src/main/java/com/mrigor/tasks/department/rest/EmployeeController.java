@@ -92,7 +92,7 @@ public class EmployeeController {
      *
      * @param from         day of birth
      * @param to           day of birth
-     * @param departmentId identifier of department
+   //  * @param departmentId identifier of department
      * @return list of employees or empty id not found
      */
     //@GetMapping(value = "/filtered", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -123,7 +123,7 @@ public class EmployeeController {
     )
     public void update(@ApiParam(value = "new employee") @RequestBody Employee employee) {
 
-        LOG.info("update employee {} from department id={}", employee, employee.getDepartmentId());
+        LOG.info("update employee {} from department id={}", employee, employee.getDepartment().getId());
         service.update(employee);
     }
 

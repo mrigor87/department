@@ -91,8 +91,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<Employee> getFiltered(LocalDate from, LocalDate to, Integer departmentId) {
         LOG.debug("get filteted employee, departmentId={}, from={}, to={}",departmentId,from,to);
-        Department dep=departmentId==null?null: departmentRepository.get(departmentId);
-        return repository.getFiltered(from, to, dep);
+       // Department dep=departmentId==null?null: departmentRepository.get(departmentId);
+        return repository.getFiltered(from, to, departmentId);
     }
 
 }

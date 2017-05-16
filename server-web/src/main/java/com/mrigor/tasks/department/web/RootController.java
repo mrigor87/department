@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
+
 
 /**
  * Created by Igor on 17.12.2016.
@@ -39,9 +41,11 @@ public class RootController {
     }
 
     @GetMapping(value = "/department/{departmentid}/employees")
-    String employees(Model model, @PathVariable("departmentid") int departmentid) {
+    String employees(HttpSession session, @PathVariable("departmentid") int departmentid) {
         LOG.debug("go to employee's jsp-page, departmentId={}", departmentid);
-        model.addAttribute("department", departmentService.get(departmentid));
+
+        session.setAttribute("department", departmentService.get(departmentid));
+
         return "employeePage";
     }
 

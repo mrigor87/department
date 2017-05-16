@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.Arrays;
 
 import static com.mrigor.tasks.department.DepTestData.*;
+import static com.mrigor.tasks.department.EmployeeTestData.EMPL_D1_WITHOUT_DEP;
 
 
 /**
@@ -57,7 +58,9 @@ public class DepartmentServiceImplTest {
     @Test
     public void get() throws Exception {
         Department dep=service.get(DEP1_ID);
-        MATCHER.assertEquals(dep,DEP1);
+        Department testDep=new Department(DEP1);
+        testDep.setEmployeeList(EMPL_D1_WITHOUT_DEP);
+        MATCHER.assertEquals(testDep,dep);
     }
     @Test(expected = NotFoundException.class)
     public void getNotExist() throws Exception {

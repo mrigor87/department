@@ -25,6 +25,7 @@ import java.util.Collections;
 
 import static com.mrigor.tasks.department.DepTestData.*;
 import static com.mrigor.tasks.department.EmployeeTestData.EMPL_D1;
+import static com.mrigor.tasks.department.EmployeeTestData.EMPL_D1_WITHOUT_DEP;
 import static com.mrigor.tasks.department.TestUtil.printContent;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -85,18 +86,17 @@ public class DepartmentControllerTest {
 
     @Test
     public void testGetAll1() throws Exception {
-        printContent(mockMvc.perform(get(REST_URL+DEP1_ID+"/employees"))
+        printContent(mockMvc.perform(get(REST_URL + DEP1_ID + "/employees"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(EmployeeTestData. MATCHER.contentListMatcher(EMPL_D1)));
+                .andExpect(EmployeeTestData.MATCHER.contentListMatcher(EMPL_D1)));
 
     }
 
 
-
     @Test
     public void testGetAllWithSalary() throws Exception {
-        printContent(mockMvc.perform(get(REST_URL+"withAvgSalary"))
+        printContent(mockMvc.perform(get(REST_URL + "withAvgSalary"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(MATCHER_WITH_SALARY.contentListMatcher(DEP_WITH_AVG_SALARY)));
@@ -105,14 +105,14 @@ public class DepartmentControllerTest {
 
     @Test
     public void testGet() throws Exception {
+        Department testDep = new Department(DEP1);
+        testDep.setEmployeeList(EMPL_D1_WITHOUT_DEP);
         printContent(mockMvc.perform(get(REST_URL + DEP1_ID))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER.contentMatcher(DEP1))
+                .andExpect(MATCHER.contentMatcher(testDep))
         );
     }
-
-
 
 
     @Test
@@ -126,7 +126,7 @@ public class DepartmentControllerTest {
     @Test
     public void testUpdate() throws Exception {
         Department updated = getUpdated();
-
+        updated.setEmployeeList(EMPL_D1_WITHOUT_DEP);
         mockMvc.perform(put(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(updated)))

@@ -22,6 +22,7 @@
     </appender>
 
     <logger name="com.mrigor.tasks.department" level="debug"/>
+    <logger name="org.springframework.web.client.RestTemplate" level="debug"/>
 
 
 

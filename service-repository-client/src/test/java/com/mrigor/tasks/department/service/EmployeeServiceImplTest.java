@@ -91,5 +91,9 @@ public class EmployeeServiceImplTest {
         MATCHER_LIGHT.assertCollectionEquals(Arrays.asList(EMPL5,EMPL4), service.getFiltered(of(1993,1,1),null,null));
     }
 
+    @Test
+    public void getFilter() throws Exception {
+        MATCHER_LIGHT.assertCollectionEquals(EMPL_D1, service.getFiltered(null,null,DEP1_ID));
+    }
 
 }

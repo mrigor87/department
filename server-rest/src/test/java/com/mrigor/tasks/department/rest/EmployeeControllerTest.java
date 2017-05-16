@@ -1,5 +1,6 @@
 package com.mrigor.tasks.department.rest;
 
+import com.mrigor.tasks.department.DepTestData;
 import com.mrigor.tasks.department.matcher.JsonUtil;
 import com.mrigor.tasks.department.model.Employee;
 import com.mrigor.tasks.department.service.EmployeeService;
@@ -89,11 +90,14 @@ public class EmployeeControllerTest {
     @Test
     public void testUpdate() throws Exception {
         Employee updated = getUpdated();
+        updated.setDepartment(DepTestData.DEP1);
+        String s = JsonUtil.writeValue(updated);
 
         mockMvc.perform(put(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.writeValue(updated)))
-            //    .andDo(print())
+                .content(JsonUtil.writeValue(updated))
+        )
+              .andDo(print())
                 .andExpect(status().isOk());
         MATCHER.assertCollectionEquals(Arrays.asList(EMPL2,EMPL3,updated), service.getByDep(DEP1_ID));
     }
@@ -116,6 +120,7 @@ public class EmployeeControllerTest {
 
 @Test
 public void testGetAllbyDepartment() throws Exception {
+
     printContent(mockMvc.perform(get(REST_URL+"/filtered?departmentid="+DEP1_ID))
             .andExpect(status().isOk())
             .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
