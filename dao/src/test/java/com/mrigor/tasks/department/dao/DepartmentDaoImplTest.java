@@ -40,12 +40,7 @@ public class DepartmentDaoImplTest {
         MATCHER.assertCollectionEquals(Arrays.asList(DEP2, updateDep), dao.getAll());
     }
 
-    // @Test
-/*    public void updateError() throws Exception {
-        Department updateDep = getCreated();
-        int update = dao.update(updateDep);
-        MATCHER_LIGHT.assertCollectionEquals(Arrays.asList(DEP2, updateDep), dao.getAll());
-    }*/
+
 
       @Test
     public void create() throws Exception {

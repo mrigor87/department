@@ -14,8 +14,6 @@ import java.util.Map;
 public class DynamicSQL {
 
     public String selectFilteredEmployees(Map<String, Object> map) {
-      //  Date fromDate = Date.valueOf(LocalDate.of(1800, 1, 1));
-      //  Date toDate = Date.valueOf(LocalDate.of(3000, 1, 1) );
         LocalDate from=(LocalDate) map.get("from");
         LocalDate to=(LocalDate) map.get("to");
         Integer depId=(Integer)map.get("departmentid");

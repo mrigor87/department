@@ -34,10 +34,7 @@ public class Department {
     }
 
 
-/*    public Department(Integer id, String name) {
-        this.id = id;
-        this.name = name;
-    }*/
+
     public Department (Department department){
         this.id=department.id==null?null: new Integer(department.id);
         this.name=department.name;
