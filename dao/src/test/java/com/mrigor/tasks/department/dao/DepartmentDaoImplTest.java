@@ -9,9 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static com.mrigor.tasks.department.DepTestData.*;
 import static com.mrigor.tasks.department.EmployeeTestData.EMPL_D1;
@@ -35,6 +33,14 @@ public class DepartmentDaoImplTest {
 
       @Test
     public void update() throws Exception {
+          String n="";
+          String s1[]=n.split(" ");
+          Map<String, Double> map = new TreeMap<>();
+          String s="1.35";
+          map.put(s, Double.parseDouble(s));
+          map.put(s, map.get(s)+Double.parseDouble(s));
+
+
         Department updateDep = new Department(getUpdated());
         int update = dao.update(updateDep);
         MATCHER.assertCollectionEquals(Arrays.asList(DEP2, updateDep), dao.getAll());
