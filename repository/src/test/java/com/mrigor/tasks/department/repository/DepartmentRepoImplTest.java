@@ -26,6 +26,7 @@ import static com.mrigor.tasks.department.DepTestData.*;
 })
 @RunWith(SpringJUnit4ClassRunner.class)
 @Sql(scripts = "classpath:db/populateDB.sql")
+
 public class DepartmentRepoImplTest {
 
     @Autowired

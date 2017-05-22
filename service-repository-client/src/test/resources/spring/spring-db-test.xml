@@ -7,7 +7,10 @@
 
 
 
-    <context:property-placeholder location="classpath:db/hsqldb.properties" system-properties-mode="OVERRIDE"/>
+    <context:property-placeholder
+            location="classpath:db/hsqldb.properties,
+                      classpath:expressions.properties"
+            system-properties-mode="OVERRIDE"/>
 
 
         <jdbc:initialize-database data-source="dataSource" enabled="${database.init}">

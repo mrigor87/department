@@ -13,8 +13,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Arrays;
 
-import static java.time.LocalDate.of;
 import static com.mrigor.tasks.department.DepTestData.DEP2_ID;
+import static java.time.LocalDate.of;
 
 /**
  * Created by Igor on 10.12.2016.
