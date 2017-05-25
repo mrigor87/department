@@ -1,16 +1,13 @@
 package com.mrigor.tasks.department.model;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.mrigor.tasks.department.model.adapters.LocalDateAdapter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
+import javax.persistence.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
@@ -19,19 +16,54 @@ import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 /**
  * Created by Igor on 10.12.2016.
  */
+/*
+
+String INSERT_SQL="INSERT INTO employees (fullName,birthday,salary,department_id) VALUES (#{fullName},#{birthDay},#{salary},#{department.id})";
+        String UPDATE_SQL="UPDATE EMPLOYEES SET FULLNAME=#{fullName}, BIRTHDAY=#{birthDay}, SALARY=#{salary} WHERE id=#{id}";
+        String DELETE_SQL="DELETE FROM employees WHERE id=#{id}";
+        String SELECT_BY_ID="SELECT * FROM employees WHERE  id=#{id}";
+        String SELECT_ALL="SELECT * FROM employees  ORDER BY FULLNAME";
+        String SELECT_BY_DEPARTMENT="SELECT * FROM EMPLOYEES WHERE EMPLOYEES.DEPARTMENT_ID=#{departmentId} ORDER BY FULLNAME";
+*/
+
+@SuppressWarnings("JpaQlInspection")
+@NamedQueries({
+        @NamedQuery(name = Employee.GET_ALL, query = "SELECT e FROM Employee e  ORDER BY e.fullName"),
+        @NamedQuery(name = Employee.DELETE, query = "DELETE FROM Employee e WHERE e.id=:id")
+})
+
+
 @JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, isGetterVisibility = NONE, setterVisibility = NONE)
-public class Employee {
+
+@Table(name = "employees")
+@Entity
+public class Employee implements Serializable {
+    public static final String GET_ALL = "Employee.getAll";
+    public static final String DELETE = "Employee.delete";
+
+    @Id
+    @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
     private Integer id;
+
+    @Column(name = "fullname")
     private String fullName;
 
+/*
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
-/*@ApiModelProperty(dataType ="string",example = "2016-01-01")*/
+*/
+
+    @Column(name = "birthday")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDay;
+
+    @Column(name = "salary")
     private int salary;
-    //@JsonIgnore
-    //private Integer departmentId;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "department_id")
     private Department department;
 
     public Employee(Integer id, String fullName, LocalDate birthDay, int salary, Department department) {

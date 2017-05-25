@@ -23,8 +23,8 @@ import static com.mrigor.tasks.department.EmployeeTestData.EMPL_D1_WITHOUT_DEP;
  */
 
 @ContextConfiguration({
-        //  "classpath:spring/spring-app-test.xml",
-        "classpath:spring/spring-db-test-mb.xml"
+        "classpath:spring/spring-app-test.xml",
+        "classpath:spring/spring-db-test.xml"
 })
 @RunWith(SpringJUnit4ClassRunner.class)
 @Sql(scripts = "classpath:db/populateDB.sql")
