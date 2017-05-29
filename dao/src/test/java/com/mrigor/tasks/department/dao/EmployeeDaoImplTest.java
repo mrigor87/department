@@ -2,7 +2,7 @@ package com.mrigor.tasks.department.dao;
 
 import com.mrigor.tasks.department.DepTestData;
 import com.mrigor.tasks.department.EmployeeTestData;
-import com.mrigor.tasks.department.dao.sqlproviders.DynamicSQL;
+
 import com.mrigor.tasks.department.model.Department;
 import com.mrigor.tasks.department.model.Employee;
 import org.junit.Test;

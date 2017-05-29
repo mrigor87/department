@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd"
+                 version="1.0">
+    <description>My First JPA XML Application</description>
+    <package>com.mrigor.tasks.department.model</package>
+    <sequence-generator name="globalGenerator" sequence-name="GLOBAL_SEQ" allocation-size="100" initial-value="100000" />
+    <entity class="com.mrigor.tasks.department.model.Department" name="Department" access="FIELD">
+        <table name="DEPARTMENTS"/>
+        <attributes>
+            <id name="id">
+                <generated-value generator="globalGenerator"/>
+            </id>
+            <basic name="name">
+                <column name="NAME"/>
+            </basic>
+<!--            <transient name="employeeList"/>-->
+            <one-to-many name="employeeList" mapped-by="department">
+            </one-to-many>
+
+        </attributes>
+    </entity>
+
+    <entity class="Employee" name="Employee" access="FIELD">
+        <table name="EMPLOYEES"/>
+        <attributes>
+            <id name="id">
+                <generated-value strategy="AUTO"/>
+            </id>
+            <basic name="fullName">
+                <column name="FULLNAME"/>
+            </basic>
+            <basic name="birthDay">
+                <column name="birthday"/>
+            </basic>
+            <basic name="salary">
+                <column name="salary"/>
+            </basic>
+            <many-to-one name="department">
+                <join-column name="department_id"/>
+            </many-to-one>
+
+        </attributes>
+    </entity>
+
+
+<!--    <named-query name="ExampleRepository.findInformationBasedOnCreator">
+        <query>
+            select d from Department d order by d.name
+        </query>
+    </named-query>-->
+</entity-mappings>

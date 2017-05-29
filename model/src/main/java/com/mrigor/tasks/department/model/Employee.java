@@ -11,6 +11,7 @@ import com.mrigor.tasks.department.model.adapters.LocalDateAdapter;
 
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
@@ -20,7 +21,7 @@ import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
  * Created by Igor on 10.12.2016.
  */
 @JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, isGetterVisibility = NONE, setterVisibility = NONE)
-public class Employee {
+public class Employee implements Serializable {
     private Integer id;
     private String fullName;
 

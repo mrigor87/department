@@ -38,13 +38,13 @@ public class Department {
     public Department (Department department){
         this.id=department.id==null?null: new Integer(department.id);
         this.name=department.name;
-        this.employeeList=department.employeeList==null?null: new ArrayList<>(employeeList);
+        //this.employeeList=department.employeeList==null?null: new ArrayList<>(employeeList);
     }
 
     public Department(Integer id, String name, List<Employee> employeeList) {
         this.id = id;
         this.name = name;
-        this.employeeList=employeeList;
+        //this.employeeList=employeeList;
     }
 
     public Department(String name) {

@@ -2,6 +2,9 @@ package com.mrigor.tasks.department.dao;
 
 import com.mrigor.tasks.department.model.Department;
 import com.mrigor.tasks.department.to.DepartmentWithAverageSalary;
+
+import org.hibernate.cfg.Configuration;
+import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+
+import javax.persistence.*;
 import java.util.*;
 
 import static com.mrigor.tasks.department.DepTestData.*;
@@ -21,14 +26,18 @@ import static com.mrigor.tasks.department.EmployeeTestData.EMPL_D1_WITHOUT_DEP;
  */
 
 @ContextConfiguration({
-        //  "classpath:spring/spring-app-test.xml",
-        "classpath:spring/spring-db-test-mb.xml"
+          "classpath:spring/spring-app-test.xml",
+        "classpath:spring/spring-db-test.xml"
 })
 @RunWith(SpringJUnit4ClassRunner.class)
 @Sql(scripts = "classpath:db/populateDB.sql")
 public class DepartmentDaoImplTest {
 
-    @Autowired
+     @PersistenceContext
+   // @Autowired
+     EntityManager em;
+
+   // @Autowired
     private DepartmentDao dao;
 
       @Test
@@ -63,6 +72,13 @@ public class DepartmentDaoImplTest {
 
     @Test
     public void get() throws Exception {
+/*        EntityManager entityManager = emf.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+transaction.begin();
+entityManager.persist(new Department("fdsfsd"));
+transaction.commit();
+entityManager.close();*/
+
         Department dep = dao.get(DEP1_ID);
         MATCHER.assertEquals(dep, DEP1);
 
@@ -72,7 +88,7 @@ public class DepartmentDaoImplTest {
     public void getWithEmployees() throws Exception {
         Department dep = dao.getWithEmployees(DEP1_ID);
         Department testDep=new Department(DEP1);
-        testDep.setEmployeeList(EMPL_D1_WITHOUT_DEP);
+      //  testDep.setEmployeeList(EMPL_D1_WITHOUT_DEP);
         MATCHER.assertEquals(testDep, dep);
 
     }

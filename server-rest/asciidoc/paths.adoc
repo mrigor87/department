@@ -1,4 +1,59 @@
 == Paths
+=== update department
+----
+PUT /rest/departments
+----
+
+==== Description
+:hardbreaks:
+update department
+
+==== Parameters
+[options="header"]
+|===
+|Type|Name|Description|Required|Schema|Default
+|BodyParameter|body|new department|false|<<Department>>|
+|===
+
+==== Responses
+[options="header"]
+|===
+|HTTP Code|Description|Schema
+|default|successful operation|No Content
+|===
+
+==== Consumes
+
+* application/json
+
+==== Tags
+
+* departments
+
+=== get all departments
+----
+GET /rest/departments
+----
+
+==== Description
+:hardbreaks:
+get all departments
+
+==== Responses
+[options="header"]
+|===
+|HTTP Code|Description|Schema
+|200|successful operation|<<Department>>
+|===
+
+==== Produces
+
+* application/json
+
+==== Tags
+
+* departments
+
 === create new department
 ----
 POST /rest/departments
@@ -34,61 +89,6 @@ create new department
 
 * departments
 
-=== get all departments
-----
-GET /rest/departments
-----
-
-==== Description
-:hardbreaks:
-get all departments
-
-==== Responses
-[options="header"]
-|===
-|HTTP Code|Description|Schema
-|200|successful operation|<<Department>>
-|===
-
-==== Produces
-
-* application/json
-
-==== Tags
-
-* departments
-
-=== update department
-----
-PUT /rest/departments
-----
-
-==== Description
-:hardbreaks:
-update department
-
-==== Parameters
-[options="header"]
-|===
-|Type|Name|Description|Required|Schema|Default
-|BodyParameter|body|new department|false|<<Department>>|
-|===
-
-==== Responses
-[options="header"]
-|===
-|HTTP Code|Description|Schema
-|default|successful operation|No Content
-|===
-
-==== Consumes
-
-* application/json
-
-==== Tags
-
-* departments
-
 === get all employees with information about average salary
 ----
 GET /rest/departments/withAvgSalary
@@ -108,33 +108,6 @@ get department's list with information about average salary by each department. 
 ==== Produces
 
 * application/json
-
-==== Tags
-
-* departments
-
-=== delete department by id
-----
-DELETE /rest/departments/{id}
-----
-
-==== Description
-:hardbreaks:
-delete department by id
-
-==== Parameters
-[options="header"]
-|===
-|Type|Name|Description|Required|Schema|Default
-|PathParameter|id|identifier of department|true|integer (int32)|
-|===
-
-==== Responses
-[options="header"]
-|===
-|HTTP Code|Description|Schema
-|404|department with such identifier doesn't exists|No Content
-|===
 
 ==== Tags
 
@@ -172,6 +145,33 @@ get department by id
 
 * departments
 
+=== delete department by id
+----
+DELETE /rest/departments/{id}
+----
+
+==== Description
+:hardbreaks:
+delete department by id
+
+==== Parameters
+[options="header"]
+|===
+|Type|Name|Description|Required|Schema|Default
+|PathParameter|id|identifier of department|true|integer (int32)|
+|===
+
+==== Responses
+[options="header"]
+|===
+|HTTP Code|Description|Schema
+|404|department with such identifier doesn't exists|No Content
+|===
+
+==== Tags
+
+* departments
+
 === get employee's list from department
 ----
 GET /rest/departments/{id}/employees
@@ -204,34 +204,30 @@ get employee from department
 
 * departments
 
-=== create employee
+=== update employee
 ----
-POST /rest/employees
+PUT /rest/employees
 ----
 
 ==== Description
 :hardbreaks:
-create employee
+update employee
 
 ==== Parameters
 [options="header"]
 |===
 |Type|Name|Description|Required|Schema|Default
-|BodyParameter|body||false|<<Employee>>|
+|BodyParameter|body|new employee|false|<<Employee>>|
 |===
 
 ==== Responses
 [options="header"]
 |===
 |HTTP Code|Description|Schema
-|200|successful operation|<<Employee>>
+|default|successful operation|No Content
 |===
 
 ==== Consumes
-
-* application/json
-
-==== Produces
 
 * application/json
 
@@ -263,30 +259,34 @@ get all employees
 
 * employees
 
-=== update employee
+=== create employee
 ----
-PUT /rest/employees
+POST /rest/employees
 ----
 
 ==== Description
 :hardbreaks:
-update employee
+create employee
 
 ==== Parameters
 [options="header"]
 |===
 |Type|Name|Description|Required|Schema|Default
-|BodyParameter|body|new employee|false|<<Employee>>|
+|BodyParameter|body||false|<<Employee>>|
 |===
 
 ==== Responses
 [options="header"]
 |===
 |HTTP Code|Description|Schema
-|default|successful operation|No Content
+|200|successful operation|<<Employee>>
 |===
 
 ==== Consumes
+
+* application/json
+
+==== Produces
 
 * application/json
 
@@ -327,34 +327,6 @@ get filtered list of employees by params
 
 * employees
 
-=== delete employee by id
-----
-DELETE /rest/employees/{id}
-----
-
-==== Description
-:hardbreaks:
-delete employee by id
-
-==== Parameters
-[options="header"]
-|===
-|Type|Name|Description|Required|Schema|Default
-|PathParameter|id|identifier of employee|true|integer (int32)|
-|===
-
-==== Responses
-[options="header"]
-|===
-|HTTP Code|Description|Schema
-|200|successful operation|<<Employee>>
-|404|employee with such identifier doesn't exists|No Content
-|===
-
-==== Tags
-
-* employees
-
 === get employee by id
 ----
 GET /rest/employees/{id}
@@ -382,6 +354,34 @@ get employee by id
 ==== Produces
 
 * application/json
+
+==== Tags
+
+* employees
+
+=== delete employee by id
+----
+DELETE /rest/employees/{id}
+----
+
+==== Description
+:hardbreaks:
+delete employee by id
+
+==== Parameters
+[options="header"]
+|===
+|Type|Name|Description|Required|Schema|Default
+|PathParameter|id|identifier of employee|true|integer (int32)|
+|===
+
+==== Responses
+[options="header"]
+|===
+|HTTP Code|Description|Schema
+|200|successful operation|<<Employee>>
+|404|employee with such identifier doesn't exists|No Content
+|===
 
 ==== Tags
 
