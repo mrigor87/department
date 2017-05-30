@@ -1,13 +1,29 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<entity-mappings>-->
+<entity-mappings
+        xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd"
-                 version="1.0">
+                 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd"
+                 version="2.1"
+>
+
+
     <description>My First JPA XML Application</description>
     <package>com.mrigor.tasks.department.model</package>
-    <sequence-generator name="globalGenerator" sequence-name="GLOBAL_SEQ" allocation-size="100" initial-value="100000" />
+    <sequence-generator name="globalGenerator" sequence-name="GLOBAL_SEQ" allocation-size="100" initial-value="100000"/>
+
     <entity class="com.mrigor.tasks.department.model.Department" name="Department" access="FIELD">
+        <named-entity-graph name="withEmployees">
+            <named-attribute-node name="employeeList"/>
+        </named-entity-graph>
+        <named-query name="getAllSorted">
+            <query>select d from Department d order by d.name</query>
+        </named-query>
+
         <table name="DEPARTMENTS"/>
+        <named-entiyt-graph>
+
+        </named-entiyt-graph>
         <attributes>
             <id name="id">
                 <generated-value generator="globalGenerator"/>
@@ -15,7 +31,7 @@
             <basic name="name">
                 <column name="NAME"/>
             </basic>
-<!--            <transient name="employeeList"/>-->
+            <!--            <transient name="employeeList"/>-->
             <one-to-many name="employeeList" mapped-by="department">
             </one-to-many>
 
@@ -45,9 +61,9 @@
     </entity>
 
 
-<!--    <named-query name="ExampleRepository.findInformationBasedOnCreator">
-        <query>
-            select d from Department d order by d.name
-        </query>
-    </named-query>-->
+    <!--    <named-query name="ExampleRepository.findInformationBasedOnCreator">
+            <query>
+                select d from Department d order by d.name
+            </query>
+        </named-query>-->
 </entity-mappings>

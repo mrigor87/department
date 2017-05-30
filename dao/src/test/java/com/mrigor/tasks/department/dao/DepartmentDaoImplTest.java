@@ -1,6 +1,8 @@
 package com.mrigor.tasks.department.dao;
 
+import com.mrigor.tasks.department.EmployeeTestData;
 import com.mrigor.tasks.department.model.Department;
+import com.mrigor.tasks.department.model.Employee;
 import com.mrigor.tasks.department.to.DepartmentWithAverageSalary;
 
 import org.hibernate.cfg.Configuration;
@@ -25,19 +27,18 @@ import static com.mrigor.tasks.department.EmployeeTestData.EMPL_D1_WITHOUT_DEP;
  * Created by Igor on 10.12.2016.
  */
 
+
 @ContextConfiguration({
-          "classpath:spring/spring-app-test.xml",
+        "classpath:spring/spring-app-test.xml",
         "classpath:spring/spring-db-test.xml"
 })
 @RunWith(SpringJUnit4ClassRunner.class)
 @Sql(scripts = "classpath:db/populateDB.sql")
 public class DepartmentDaoImplTest {
 
-     @PersistenceContext
-   // @Autowired
-     EntityManager em;
 
-   // @Autowired
+
+    @Autowired
     private DepartmentDao dao;
 
       @Test
@@ -64,7 +65,7 @@ public class DepartmentDaoImplTest {
         MATCHER.assertCollectionEquals(Arrays.asList(DEP1, createDep, DEP2), dao.getAll());
     }
 
-    //   @Test
+       @Test
     public void delete() throws Exception {
         dao.delete(DEP1_ID);
         MATCHER.assertCollectionEquals(Arrays.asList(DEP2), dao.getAll());
@@ -72,12 +73,7 @@ public class DepartmentDaoImplTest {
 
     @Test
     public void get() throws Exception {
-/*        EntityManager entityManager = emf.createEntityManager();
-        EntityTransaction transaction = entityManager.getTransaction();
-transaction.begin();
-entityManager.persist(new Department("fdsfsd"));
-transaction.commit();
-entityManager.close();*/
+
 
         Department dep = dao.get(DEP1_ID);
         MATCHER.assertEquals(dep, DEP1);
@@ -87,15 +83,16 @@ entityManager.close();*/
     @Test
     public void getWithEmployees() throws Exception {
         Department dep = dao.getWithEmployees(DEP1_ID);
-        Department testDep=new Department(DEP1);
-      //  testDep.setEmployeeList(EMPL_D1_WITHOUT_DEP);
-        MATCHER.assertEquals(testDep, dep);
+        List<Employee> employeeList = dep.getEmployeeList();
+        EmployeeTestData.MATCHER.assertCollectionEquals(employeeList,EmployeeTestData.EMPL_D1);
+        MATCHER.assertEquals(DEP1, dep);
+
 
     }
 
     @Test
     public void getAll() throws Exception {
-        dao.getAll();
+
         Arrays.asList(DEP1, DEP2);
          MATCHER.assertCollectionEquals(Arrays.asList(DEP1, DEP2), dao.getAll());
     }

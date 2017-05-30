@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
+import javax.persistence.NamedEntityGraph;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +76,7 @@ public class Department {
         return "Department{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", employees='" + employeeList +
+               // ", employees='" + employeeList +
                 '}';
     }
 
