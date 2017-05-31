@@ -3,6 +3,7 @@ package com.mrigor.tasks.department.dao;
 import com.mrigor.tasks.department.DepTestData;
 import com.mrigor.tasks.department.EmployeeTestData;
 
+import com.mrigor.tasks.department.model.Department;
 import com.mrigor.tasks.department.model.Employee;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,8 +22,8 @@ import static java.time.LocalDate.of;
  * Created by Igor on 10.12.2016.
  */
 @ContextConfiguration({
-        "classpath:spring/spring-app-test.xml",
-        "classpath:spring/spring-db-test.xml"
+    //    "classpath:spring/spring-app-test.xml",
+        "classpath:spring/spring-db-test-mb.xml"
 })
 @RunWith(SpringJUnit4ClassRunner.class)
 @Sql(scripts = "classpath:db/populateDB.sql")

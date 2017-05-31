@@ -13,12 +13,6 @@ import java.util.List;
  */
 @Repository
 public interface EmployeeDao {
-/*String INSERT_SQL="INSERT INTO employees (fullName,birthday,salary,department_id) VALUES (#{fullName},#{birthDay},#{salary},#{department.id})";
-String UPDATE_SQL="UPDATE EMPLOYEES SET FULLNAME=#{fullName}, BIRTHDAY=#{birthDay}, SALARY=#{salary} WHERE id=#{id}";
-String DELETE_SQL="DELETE FROM employees WHERE id=#{id}";
-String SELECT_BY_ID="SELECT * FROM employees WHERE  id=#{id}";
-String SELECT_ALL="SELECT * FROM employees  ORDER BY FULLNAME";
-String SELECT_BY_DEPARTMENT="SELECT * FROM EMPLOYEES WHERE EMPLOYEES.DEPARTMENT_ID=#{departmentId} ORDER BY FULLNAME";*/
 
 
 
@@ -39,13 +33,7 @@ String SELECT_BY_DEPARTMENT="SELECT * FROM EMPLOYEES WHERE EMPLOYEES.DEPARTMENT_
 
 
 
-/*    @Results({
-            @Result(id = true, column = "id", property = "id"),
-            @Result(column = "fullname", property = "fullName"),
-            @Result(column = "birthday", property = "birthDay"),
-            @Result(column = "salary", property = "salary")})*/
     List<Employee> getByDep(int departmentId);
-
 
 
     List<Employee> getByDepWithDepartment(int departmentId);
@@ -59,8 +47,7 @@ String SELECT_BY_DEPARTMENT="SELECT * FROM EMPLOYEES WHERE EMPLOYEES.DEPARTMENT_
      * @param departmentid identifier of department
      * @return employee's list or empty list if missing
      */
-   // @SelectProvider(type = DynamicSQL.class, method = "selectFilteredEmployees")
 
-    List<Employee> getFiltered(LocalDate from,LocalDate to,Integer departmentid);
+    List<Employee> getFiltered(LocalDate from,LocalDate to,  Integer departmentid);
 
 }
