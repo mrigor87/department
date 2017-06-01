@@ -2,7 +2,6 @@ package com.mrigor.tasks.department.dao.jpa;
 
 import com.mrigor.tasks.department.dao.DepartmentDao;
 import com.mrigor.tasks.department.model.Department;
-import com.mrigor.tasks.department.model.Employee;
 import com.mrigor.tasks.department.to.DepartmentWithAverageSalary;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

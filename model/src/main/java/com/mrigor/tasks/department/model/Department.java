@@ -15,7 +15,7 @@ import java.util.List;
 @NamedQueries({
         @NamedQuery(name = Department.GET_ALL_JPQL, query = "select d from Department d order by d.name"),
         @NamedQuery(name = Department.GET_ALL_WITH_AVG_SALARY_JPQL,
-                query = "SELECT NEW com.mrigor.tasks.department.to.DepartmentWithAverageSalary (d.id, d.name, CAST ( AVG(e.salary) as integer)) " +
+                query = "SELECT NEW com.mrigor.tasks.department.to.DepartmentWithAverageSalary (d.id, d.name, CAST (AVG(e.salary) as integer)) " +
                         "FROM Department d LEFT JOIN FETCH Employee e ON d.id=e.department.id " +
                         "GROUP BY d.id ORDER BY d.name")
 })
