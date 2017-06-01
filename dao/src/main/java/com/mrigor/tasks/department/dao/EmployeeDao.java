@@ -1,6 +1,7 @@
 package com.mrigor.tasks.department.dao;
 
 
+
 import com.mrigor.tasks.department.model.Employee;
 
 import org.springframework.stereotype.Repository;
@@ -16,25 +17,17 @@ public interface EmployeeDao {
 
 
 
-    int insert(Employee employee);
+    Employee insert(Employee employee);
 
-
-    int update(Employee employee);
-
+    Employee update(Employee employee);
 
     boolean delete(int id);
 
-
-
     Employee get(int id);
-
 
     List<Employee> getAll();
 
-
-
     List<Employee> getByDep(int departmentId);
-
 
     List<Employee> getByDepWithDepartment(int departmentId);
 

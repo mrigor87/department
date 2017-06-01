@@ -14,26 +14,17 @@ import java.util.List;
 public interface DepartmentDao {
 
 
-    int insert(Department department);
+    Department insert(Department department);
 
-
-
-    int update(Department department);
-
-
+    Department update(Department department);
 
     boolean delete(int id);
 
-
     Department getWithEmployees(int id);
-
-
 
     Department get(int id);
 
-
     List<Department> getAll();
-
 
     List<DepartmentWithAverageSalary> getAllWithAvgSalary();
 }

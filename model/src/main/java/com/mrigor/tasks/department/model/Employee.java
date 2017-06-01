@@ -1,8 +1,6 @@
 package com.mrigor.tasks.department.model;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
@@ -10,29 +8,48 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.mrigor.tasks.department.model.adapters.LocalDateAdapter;
 
 
+import javax.persistence.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
-
 /**
  * Created by Igor on 10.12.2016.
  */
-@JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, isGetterVisibility = NONE, setterVisibility = NONE)
-public class Employee implements Serializable {
-    private Integer id;
+@NamedQueries({
+        @NamedQuery(name = Employee.GET_ALL_JPQL, query = "SELECT e FROM Employee e order by e.fullName"),
+        @NamedQuery(name = Employee.GET_BY_DEPARTMENT_ID_JPQL, query = "SELECT  e FROM Employee e WHERE  e.department.id=:departmentId ORDER BY e.fullName"),
+        @NamedQuery(name = Employee.GET_BY_DEPARTMENT_ID_WITH_EMPLOYYES_JPQL,
+                query = "SELECT  e FROM Employee e  JOIN FETCH e.department WHERE  e.department.id=:departmentId ORDER BY e.fullName"),
+        @NamedQuery(name = Employee.GET_FILTERED,
+                query = "SELECT e FROM Employee e " +
+                        "WHERE ((:departmentId is null) or (:departmentId=e.department.id)) AND (e.birthDay BETWEEN :from AND :to) " +
+                        "ORDER BY e.fullName"),
+
+}
+)
+@Entity
+@Table(name = "EMPLOYEES")
+public class Employee extends BaseEntity implements Serializable {
+    public static final String GET_ALL_JPQL = "Employee.getAll";
+    public static final String GET_BY_DEPARTMENT_ID_JPQL = "Employee.getByDepartmentId";
+    public static final String GET_BY_DEPARTMENT_ID_WITH_EMPLOYYES_JPQL = "Employee.getByDepartmentIdWithEmployees";
+    public static final String GET_FILTERED = "Employee.getFiltered";
+
+    @Column
     private String fullName;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
-/*@ApiModelProperty(dataType ="string",example = "2016-01-01")*/
+
+    @Column
     private LocalDate birthDay;
+
+    @Column
     private int salary;
-    //@JsonIgnore
-    //private Integer departmentId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private Department department;
 
     public Employee(Integer id, String fullName, LocalDate birthDay, int salary, Department department) {
@@ -61,14 +78,6 @@ public class Employee implements Serializable {
 
     public Employee(String fullName, LocalDate birthDay, int salary) {
         this(null, fullName, birthDay, salary, null);
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getFullName() {
@@ -108,10 +117,6 @@ public class Employee implements Serializable {
     public Employee() {
     }
 
-    public boolean isNew() {
-        return id == null;
-    }
-
     @Override
     public String toString() {
         return "Employee{" +
@@ -119,7 +124,6 @@ public class Employee implements Serializable {
                 ", fullName='" + fullName + '\'' +
                 ", birthDay=" + birthDay +
                 ", salary=" + salary +
-             //   ", department=" + department +
                 '}';
     }
 }

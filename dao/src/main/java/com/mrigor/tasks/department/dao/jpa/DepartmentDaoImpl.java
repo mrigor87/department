@@ -2,14 +2,12 @@ package com.mrigor.tasks.department.dao.jpa;
 
 import com.mrigor.tasks.department.dao.DepartmentDao;
 import com.mrigor.tasks.department.model.Department;
+import com.mrigor.tasks.department.model.Employee;
 import com.mrigor.tasks.department.to.DepartmentWithAverageSalary;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityGraph;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,16 +23,16 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     @Override
     @Transactional
-    public int insert(Department department) {
+    public Department insert(Department department) {
         em.persist(department);
-        return department.getId();
+        return department;
     }
 
     @Override
     @Transactional
-    public int update(Department department) {
-        em.merge(department);
-        return department.getId();
+    public Department update(Department department) {
+
+        return em.merge(department);
     }
 
     @Override
@@ -48,14 +46,12 @@ public class DepartmentDaoImpl implements DepartmentDao {
     @Override
     public Department getWithEmployees(int id) {
 
-        EntityGraph graph = this.em.getEntityGraph("withEmployees");
+        EntityGraph graph = this.em.getEntityGraph(Department.GRAPH_WITH_EMMPLOYEES);
         Map hints = new HashMap();
         hints.put("javax.persistence.fetchgraph", graph);
         Department department = this.em.find(Department.class, id,hints);
 
         return department;
-
-        //return null;
     }
 
     @Override
@@ -66,13 +62,14 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     @Override
     public List<Department> getAll() {
-        return em.createNamedQuery("getAllSorted", Department.class).getResultList();
+        return em.createNamedQuery(Department.GET_ALL_JPQL, Department.class).getResultList();
 
 
     }
 
     @Override
     public List<DepartmentWithAverageSalary> getAllWithAvgSalary() {
-        return null;
+        List<DepartmentWithAverageSalary> resultList = em.createNamedQuery(Department.GET_ALL_WITH_AVG_SALARY_JPQL, DepartmentWithAverageSalary.class).getResultList();
+        return resultList;
     }
 }

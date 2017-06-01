@@ -12,14 +12,13 @@ public class DepartmentWithAverageSalary {
     public DepartmentWithAverageSalary(Integer id, String name, Integer averageSalary) {
         this.id = id;
         this.name = name;
-        this.averageSalary = averageSalary;
+        this.averageSalary = averageSalary==null?0:averageSalary;
     }
     public DepartmentWithAverageSalary(String name, int averageSalary) {
         this(null,name,averageSalary);
     }
 
-    public DepartmentWithAverageSalary() {
-    }
+    public DepartmentWithAverageSalary() {}
 
     public Integer getId() {
         return id;

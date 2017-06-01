@@ -71,7 +71,7 @@ public class DepartmentController {
      *
      * @return department's list or empty if not found
      */
-   // @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)   //swagger-maven-plugin doesn't understand that
+    // @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)   //swagger-maven-plugin doesn't understand that
     @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @ApiOperation(value = "get all departments",
             response = Department.class, notes = "get all departments")
@@ -87,8 +87,8 @@ public class DepartmentController {
      * @return department or exception if not found
      */
 
-   // @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)  //swagger-maven-plugin doesn't understand that
-    @RequestMapping (value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    // @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)  //swagger-maven-plugin doesn't understand that
+    @RequestMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @ApiOperation(value = "get department by id",
             response = Employee.class, notes = "get department by id")
     @ApiResponses({
@@ -120,8 +120,8 @@ public class DepartmentController {
      *
      * @param id identifier of department
      */
-   // @DeleteMapping(value = "/{id}")
-    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    // @DeleteMapping(value = "/{id}")
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ApiOperation(value = "delete department by id",
             notes = "delete department by id"
     )
@@ -140,7 +140,7 @@ public class DepartmentController {
      * @param department
      */
     //@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    @RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE,method = RequestMethod.PUT)
+    @RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.PUT)
     @ApiOperation(value = "update department",
             notes = "update department"
     )
@@ -156,7 +156,7 @@ public class DepartmentController {
      * @return entity with response body
      */
     //@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE,method = RequestMethod.POST)
+    @RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     @ApiOperation(value = "create new department",
             notes = "create new department")
     public ResponseEntity<Department> createWithLocation(@ApiParam(value = "new department") @RequestBody Department department) {

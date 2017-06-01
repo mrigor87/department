@@ -35,17 +35,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!--Test-->
-<!--        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <scope>test</scope>
-        </dependency>-->
+
 
         <!-- Logging with SLF4J & LogBack -->
         <dependency>

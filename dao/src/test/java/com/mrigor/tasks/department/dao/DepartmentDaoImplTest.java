@@ -30,7 +30,7 @@ import static com.mrigor.tasks.department.EmployeeTestData.EMPL_D1_WITHOUT_DEP;
 
 @ContextConfiguration({
         "classpath:spring/spring-app-test.xml",
-        "classpath:spring/spring-db-test.xml"
+        "classpath:spring/spring-db.xml"
 })
 @RunWith(SpringJUnit4ClassRunner.class)
 @Sql(scripts = "classpath:db/populateDB.sql")
@@ -52,8 +52,8 @@ public class DepartmentDaoImplTest {
 
 
         Department updateDep = new Department(getUpdated());
-        int update = dao.update(updateDep);
-        MATCHER.assertCollectionEquals(Arrays.asList(DEP2, updateDep), dao.getAll());
+          Department update = dao.update(updateDep);
+          MATCHER.assertCollectionEquals(Arrays.asList(DEP2, updateDep), dao.getAll());
     }
 
 
@@ -61,8 +61,8 @@ public class DepartmentDaoImplTest {
       @Test
     public void create() throws Exception {
         Department createDep = getCreated();
-        int insert = dao.insert(createDep);
-        MATCHER.assertCollectionEquals(Arrays.asList(DEP1, createDep, DEP2), dao.getAll());
+          Department insert = dao.insert(createDep);
+          MATCHER.assertCollectionEquals(Arrays.asList(DEP1, createDep, DEP2), dao.getAll());
     }
 
        @Test
@@ -103,7 +103,7 @@ public class DepartmentDaoImplTest {
 
     }
 
-    // @Test
+     @Test
     public void getAllWithAvgSalaryWithEmptyDep() throws Exception {
         List<DepartmentWithAverageSalary> newTestDepWithSal = new ArrayList<>(DEP_WITH_AVG_SALARY);
         DepartmentWithAverageSalary newRecord = new DepartmentWithAverageSalary(100007, "test", 0);
@@ -114,9 +114,5 @@ public class DepartmentDaoImplTest {
 
     }
 
-    @Test
-    public void tt() {
-        dao.getAll();
-    }
 
 }

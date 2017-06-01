@@ -15,6 +15,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import javax.persistence.EntityNotFoundException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Assert.notNull(employee, "employee must not be null");
         try {
             //savedEmployee = repository.save(employee);
-            int insert = repository.insert(employee);
+            repository.insert(employee);
          //   employee.setId(insert);
         } catch (DataIntegrityViolationException e) {
             throw new NotFoundException("can't create new employee because department with id=" + employee.getDepartment().getId() + " isn't exist");
@@ -57,16 +58,18 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void update(Employee employee) throws NotFoundException {
         LOG.debug("update employee {}",employee);
         Assert.notNull(employee, "employee must not be null");
-       // ExceptionUtil.checkNotFoundWithId(departmentRepository.get(employee.getDepartmentId()), employee.getDepartmentId());
-        ExceptionUtil.checkNotFoundWithId(departmentRepository.get(employee.getDepartment().getId()), employee.getDepartment().getId());
-        int update = repository.update(employee);
-        ExceptionUtil.checkNotFoundWithId(update==1, employee.getId().intValue());
+        Employee update = repository.update(employee);
+        ExceptionUtil.checkNotFoundWithId(update!=null, employee.getId().intValue());
     }
 
     @Override
     public void delete(int id) throws NotFoundException {
         LOG.debug("delete employee, id={}",id);
-        ExceptionUtil.checkNotFoundWithId(repository.delete(id), id);
+        try{
+            ExceptionUtil.checkNotFoundWithId(repository.delete(id), id);
+        }catch (EntityNotFoundException e){
+            ExceptionUtil.checkNotFoundWithId(false, id);
+        }
     }
 
     @Override

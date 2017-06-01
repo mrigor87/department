@@ -14,6 +14,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static com.mrigor.tasks.department.DepTestData.*;
 import static java.time.LocalDate.of;
@@ -21,10 +22,12 @@ import static java.time.LocalDate.of;
 /**
  * Created by Igor on 10.12.2016.
  */
+
 @ContextConfiguration({
-    //    "classpath:spring/spring-app-test.xml",
-        "classpath:spring/spring-db-test-mb.xml"
+        "classpath:spring/spring-app-test.xml",
+        "classpath:spring/spring-db.xml"
 })
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @Sql(scripts = "classpath:db/populateDB.sql")
 public class EmployeeDaoImplTest {
@@ -45,30 +48,17 @@ public class EmployeeDaoImplTest {
         Employee createEmpl= ( EmployeeTestData.getCreated());
         createEmpl.setDepartment(DepTestData.DEP1);
         repository.insert(createEmpl);
-        EmployeeTestData.MATCHER.assertCollectionEquals(Arrays.asList(EmployeeTestData.EMPL1,createEmpl, EmployeeTestData.EMPL2, EmployeeTestData.EMPL3), repository.getByDepWithDepartment(DepTestData.DEP1_ID));
+        EmployeeTestData.MATCHER.assertCollectionEquals(Arrays.asList(EmployeeTestData.EMPL1,createEmpl, EmployeeTestData.EMPL2, EmployeeTestData.EMPL3), repository.getByDep(DepTestData.DEP1_ID));
     }
 
-   // @Test(expected = DataIntegrityViolationException.class)
-    public void createException() throws Exception {
-        Employee createEmpl=new Employee( EmployeeTestData.getCreated());
-      //  createEmpl.getDepartment().setId(8);
-       // createEmpl.setDepartment(new Department(8,"errored",null));
-        repository.insert(createEmpl);
-    }
 
-/*    @Test()
-    public void updateException() throws Exception {
-        Employee updateEmpl=getUpdated();
-        updateEmpl.setDepartmentId(8);
-        repository.save(updateEmpl);
-        MATCHER.assertCollectionEquals(Arrays.asList(EMPL2,EMPL3,updateEmpl), repository.getByDep(DEP1_ID));
 
-    }*/
+
 
     @Test
     public void delete() throws Exception {
         repository.delete(EmployeeTestData.EMPL1_ID);
-        EmployeeTestData.MATCHER.assertCollectionEquals(Arrays.asList(EmployeeTestData.EMPL2, EmployeeTestData.EMPL3), repository.getByDepWithDepartment(DepTestData.DEP1_ID));
+        EmployeeTestData.MATCHER.assertCollectionEquals(Arrays.asList(EmployeeTestData.EMPL2, EmployeeTestData.EMPL3), repository.getByDep(DepTestData.DEP1_ID));
     }
 
     @Test
@@ -84,7 +74,10 @@ public class EmployeeDaoImplTest {
 
     @Test
     public void getByDepWitDepartment() throws Exception {
-        EmployeeTestData.MATCHER.assertCollectionEquals(EmployeeTestData.EMPL_D1, repository.getByDepWithDepartment(DepTestData.DEP1_ID));
+        List<Employee> byDepWithDepartment = repository.getByDepWithDepartment(DepTestData.DEP1_ID);
+        Department department = byDepWithDepartment.get(0).getDepartment();
+        EmployeeTestData.MATCHER.assertCollectionEquals(EmployeeTestData.EMPL_D1, byDepWithDepartment);
+        DepTestData.MATCHER.assertEquals(DEP1,department);
     }
 
     @Test
@@ -94,9 +87,14 @@ public class EmployeeDaoImplTest {
 
     @Test
     public void getBetweenDates() throws Exception {
-        //DynamicSQL dynamicSQL=new DynamicSQL();
-        //String s = dynamicSQL.selectFilteredEmployees(of(1993, 1, 1), null, DEP1);
+
         EmployeeTestData.MATCHER.assertCollectionEquals(Arrays.asList(EmployeeTestData.EMPL5, EmployeeTestData.EMPL4), repository.getFiltered(of(1993,1,1),null,null));
+    }
+
+    @Test
+    public void getBetweenDates2() throws Exception {
+
+        EmployeeTestData.MATCHER.assertCollectionEquals(Arrays.asList(EmployeeTestData.EMPL5, EmployeeTestData.EMPL4), repository.getFiltered(of(1993,1,1),null,DEP2_ID));
     }
 
     @Test
