@@ -1,8 +1,6 @@
 package com.mrigor.tasks.department.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
 
 import javax.persistence.*;
 import java.util.List;
