@@ -113,33 +113,6 @@ get department's list with information about average salary by each department. 
 
 * departments
 
-=== delete department by id
-----
-DELETE /rest/departments/{id}
-----
-
-==== Description
-:hardbreaks:
-delete department by id
-
-==== Parameters
-[options="header"]
-|===
-|Type|Name|Description|Required|Schema|Default
-|PathParameter|id|identifier of department|true|integer (int32)|
-|===
-
-==== Responses
-[options="header"]
-|===
-|HTTP Code|Description|Schema
-|404|department with such identifier doesn't exists|No Content
-|===
-
-==== Tags
-
-* departments
-
 === get department by id
 ----
 GET /rest/departments/{id}
@@ -167,6 +140,33 @@ get department by id
 ==== Produces
 
 * application/json
+
+==== Tags
+
+* departments
+
+=== delete department by id
+----
+DELETE /rest/departments/{id}
+----
+
+==== Description
+:hardbreaks:
+delete department by id
+
+==== Parameters
+[options="header"]
+|===
+|Type|Name|Description|Required|Schema|Default
+|PathParameter|id|identifier of department|true|integer (int32)|
+|===
+
+==== Responses
+[options="header"]
+|===
+|HTTP Code|Description|Schema
+|404|department with such identifier doesn't exists|No Content
+|===
 
 ==== Tags
 
@@ -327,34 +327,6 @@ get filtered list of employees by params
 
 * employees
 
-=== delete employee by id
-----
-DELETE /rest/employees/{id}
-----
-
-==== Description
-:hardbreaks:
-delete employee by id
-
-==== Parameters
-[options="header"]
-|===
-|Type|Name|Description|Required|Schema|Default
-|PathParameter|id|identifier of employee|true|integer (int32)|
-|===
-
-==== Responses
-[options="header"]
-|===
-|HTTP Code|Description|Schema
-|200|successful operation|<<Employee>>
-|404|employee with such identifier doesn't exists|No Content
-|===
-
-==== Tags
-
-* employees
-
 === get employee by id
 ----
 GET /rest/employees/{id}
@@ -382,6 +354,34 @@ get employee by id
 ==== Produces
 
 * application/json
+
+==== Tags
+
+* employees
+
+=== delete employee by id
+----
+DELETE /rest/employees/{id}
+----
+
+==== Description
+:hardbreaks:
+delete employee by id
+
+==== Parameters
+[options="header"]
+|===
+|Type|Name|Description|Required|Schema|Default
+|PathParameter|id|identifier of employee|true|integer (int32)|
+|===
+
+==== Responses
+[options="header"]
+|===
+|HTTP Code|Description|Schema
+|200|successful operation|<<Employee>>
+|404|employee with such identifier doesn't exists|No Content
+|===
 
 ==== Tags
 
