@@ -1,4 +1,39 @@
 == Paths
+=== create new department
+----
+POST /rest/departments
+----
+
+==== Description
+:hardbreaks:
+create new department
+
+==== Parameters
+[options="header"]
+|===
+|Type|Name|Description|Required|Schema|Default
+|BodyParameter|body|new department|false|<<Department>>|
+|===
+
+==== Responses
+[options="header"]
+|===
+|HTTP Code|Description|Schema
+|200|successful operation|<<Department>>
+|===
+
+==== Consumes
+
+* application/json
+
+==== Produces
+
+* application/json
+
+==== Tags
+
+* departments
+
 === update department
 ----
 PUT /rest/departments
@@ -45,41 +80,6 @@ get all departments
 |HTTP Code|Description|Schema
 |200|successful operation|<<Department>>
 |===
-
-==== Produces
-
-* application/json
-
-==== Tags
-
-* departments
-
-=== create new department
-----
-POST /rest/departments
-----
-
-==== Description
-:hardbreaks:
-create new department
-
-==== Parameters
-[options="header"]
-|===
-|Type|Name|Description|Required|Schema|Default
-|BodyParameter|body|new department|false|<<Department>>|
-|===
-
-==== Responses
-[options="header"]
-|===
-|HTTP Code|Description|Schema
-|200|successful operation|<<Department>>
-|===
-
-==== Consumes
-
-* application/json
 
 ==== Produces
 
@@ -204,6 +204,41 @@ get employee from department
 
 * departments
 
+=== create employee
+----
+POST /rest/employees
+----
+
+==== Description
+:hardbreaks:
+create employee
+
+==== Parameters
+[options="header"]
+|===
+|Type|Name|Description|Required|Schema|Default
+|BodyParameter|body||false|<<Employee>>|
+|===
+
+==== Responses
+[options="header"]
+|===
+|HTTP Code|Description|Schema
+|200|successful operation|<<Employee>>
+|===
+
+==== Consumes
+
+* application/json
+
+==== Produces
+
+* application/json
+
+==== Tags
+
+* employees
+
 === update employee
 ----
 PUT /rest/employees
@@ -250,41 +285,6 @@ get all employees
 |HTTP Code|Description|Schema
 |200|successful operation|<<Employee>> array
 |===
-
-==== Produces
-
-* application/json
-
-==== Tags
-
-* employees
-
-=== create employee
-----
-POST /rest/employees
-----
-
-==== Description
-:hardbreaks:
-create employee
-
-==== Parameters
-[options="header"]
-|===
-|Type|Name|Description|Required|Schema|Default
-|BodyParameter|body||false|<<Employee>>|
-|===
-
-==== Responses
-[options="header"]
-|===
-|HTTP Code|Description|Schema
-|200|successful operation|<<Employee>>
-|===
-
-==== Consumes
-
-* application/json
 
 ==== Produces
 

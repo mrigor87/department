@@ -66,16 +66,7 @@ public class DepartmentControllerTest {
 
     @Test
     public void testGetAll() throws Exception {
-        System.out.println("");
-        System.out.println("*************************************************************");
-        System.out.println("");
 
-        Arrays.stream(webApplicationContext.getBeanDefinitionNames()).forEach(System.out::println);
-        System.out.println("");
-        System.out.println("*************************************************************");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
         printContent(mockMvc.perform(get(REST_URL))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -85,6 +76,10 @@ public class DepartmentControllerTest {
 
     @Test
     public void testGetAll1() throws Exception {
+
+
+
+
         printContent(mockMvc.perform(get(REST_URL+DEP1_ID+"/employees"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
