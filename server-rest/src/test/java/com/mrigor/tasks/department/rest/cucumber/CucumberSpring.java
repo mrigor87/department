@@ -1,6 +1,8 @@
-package com.mrigor.tasks.department.rest;
+package com.mrigor.tasks.department.rest.cucumber;
 
 import com.mrigor.tasks.department.service.EmployeeService;
+import com.mrigor.tasks.department.util.DbPopulator;
+import cucumber.api.java.en.Given;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -22,20 +25,18 @@ import org.springframework.web.context.WebApplicationContext;
 })
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
-@Sql(scripts = "classpath:db/populateDB.sql")
-public class CucumberRunner {
+
+public abstract class CucumberSpring {
     @Autowired
-    private WebApplicationContext webApplicationContext;
-
+    WebApplicationContext webApplicationContext;
     @Autowired
-    EmployeeService service;
+    DbPopulator dbPopulator;
 
-    static final String REST_URL = EmployeeController.REST_URL + '/';
+    static MockMvc mockMvc;
 
-    MockMvc mockMvc;
+    static ResultActions ra;
 
-    @Before
-    public void setUp() {
 
-    }
+
+
 }
