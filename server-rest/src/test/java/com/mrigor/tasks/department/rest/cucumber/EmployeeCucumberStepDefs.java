@@ -25,8 +25,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 /**
  * Created by Igor on 20.06.2017.
  */
-@Ignore
-public  class EmployeeCucumberTest extends CucumberSpring {
+@Ignore //for junit
+public  class EmployeeCucumberStepDefs extends CucumberSpring {
     @Autowired
     private EmployeeService service;
     @Autowired

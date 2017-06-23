@@ -22,8 +22,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
  * Created by Игорь on 19.06.2017.
  */
 
-@Ignore
-public  class DepartmentCucumberTest extends CucumberSpring {
+@Ignore //for junit
+public  class DepartmentCucumberStepDefs extends CucumberSpring {
 
     @Autowired
     private DepartmentService service;
@@ -31,7 +31,7 @@ public  class DepartmentCucumberTest extends CucumberSpring {
     private static final String REST_URL = DepartmentController.REST_URL + '/';
 
 
-    public DepartmentCucumberTest(){
+    public DepartmentCucumberStepDefs(){
         super();
     }
 

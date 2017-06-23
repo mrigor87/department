@@ -12,4 +12,4 @@ import org.junit.runner.RunWith;
         format = "pretty",
         features = "src/test/resources/features"  //refer to Feature file
 )
-public class CucumberIT {  }
+public class CucumberITest {  }
