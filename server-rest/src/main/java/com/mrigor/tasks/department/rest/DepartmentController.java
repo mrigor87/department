@@ -4,6 +4,7 @@ import com.mrigor.tasks.department.model.Department;
 import com.mrigor.tasks.department.model.Employee;
 import com.mrigor.tasks.department.service.DepartmentService;
 import com.mrigor.tasks.department.service.EmployeeService;
+import com.mrigor.tasks.department.service.Serv1;
 import com.mrigor.tasks.department.to.DepartmentWithAverageSalary;
 
 import io.swagger.annotations.*;
@@ -30,12 +31,14 @@ import static com.mrigor.tasks.department.rest.DepartmentController.REST_URL;
  * Exceptions is handled with ExceptionInfoHandler
  */
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(REST_URL)
 @Api(value = "departments", description = "Endpoint for Department specific operations")
 
 public class DepartmentController {
+
+
     private static final Logger LOG = LoggerFactory.getLogger(DepartmentController.class);
     @Autowired
     private DepartmentService service;
