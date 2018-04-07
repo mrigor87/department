@@ -1,4 +1,4 @@
-# Staff accounting.
+# Staff accounting. test
 
 ## Description
  This is Maven multi-module project on Java 8, which contains two main parts. The first part is RESTful service (in-memory HSQLDB, Spring JDBC, Spring MVC). The second one is web-application which uses this REST API and provides UI (Spring RestTemplate, Spring MVC, Bootstrap, jQuery)
